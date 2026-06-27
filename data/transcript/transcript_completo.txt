@@ -1,0 +1,1222 @@
+[00:00:00] PQR localidades y el informe de PQR página web.
+[00:00:05] Lo primero, el archivo que recibimos de la Secretaría General denominado informes PQR Secretaría de Gobierno Vigencia o correspondiente al periodo mayo 2026, tal cual como se genera, se descarga y es copiado en la hoja de Excel, informes PQR localidades, mes de mayo 2026, hoja reporte PQR mayo 2026.
+[00:00:34] Entonces lo copio, lo selecciono y lo copio tal cual el contenido y me lo llevo a la hoja completa que tiene la base de datos PPT localidades mayo 2026.
+[00:00:48] Inserto una columna entre número de petición y sector para colocar allí lo que son los números duplicados, los datos duplicados.
+[00:00:56] duplicados. Siguiendo el procedimiento definido en el decreto 371, reordeno toda la base de datos
+[00:01:06] con primero un número de petición de menor a mayor, luego un segundo filtro o nivel por
+[00:01:14] dependencia de la A a la Z y un tercer filtro por transacción entidad de mayor a menor.
+[00:01:20] aceptamos y aquí vamos a colocar en la
+[00:01:24] columna B, primera fila con datos de la
+[00:01:28] sabana, es decir la B11, de que A10 es
+[00:01:37] igual a A11.
+[00:01:41] El resultado que nos arroja lo vamos a
+[00:01:43] arrastrar hasta el último dato arrojándonos
+[00:01:46] que aquellos que tengan datos verdaderos
+[00:01:48] Los que están duplicados y los que tengan datos falsos son datos únicos.
+[00:01:52] Ahora sí nos vamos a la hoja que dice informes localidades PPT.
+[00:01:57] En la hoja de informes localidades PPT vamos a actualizar todas y cada una de las tablas dinámicas allí definidas
+[00:02:03] que corresponden a lo que está en el decreto 371 de control de PQRs.
+[00:02:11] Le damos actualizar el origen de los datos de las PQRs.
+[00:02:17] Y me dice que tengo un total de 1.618 PQRs registradas.
+[00:02:23] No cambio ninguno de los filtros ni nada, tal cual los tiene cada una de las tablas dinámicas.
+[00:02:29] Se actualizan y se va haciendo el registro por cada tabla dinámica.
+[00:02:38] Es necesario que se tomen los datos de cada una de estas tablas dinámicas, ya que hacen parte del informe de PQRs localidades.
+[00:02:46] no solamente para alimentar la tabla de resumen, sino también porque cada una de estas tablas dinámicas es tomada por la compañera Angie Barrero para realizar el informe de localidades del mes.
+[00:03:06] Eso no toma gran tiempo actualizarles.
+[00:03:16] Gracias.
+[00:03:46] listo una vez actualizada toda la informaci
+[00:03:50] nos vamos a la última hoja que se llama
+[00:03:52] resumen cifras
+[00:03:53] borramos el contenido anterior
+[00:03:56] ese contenido desde el mes de abril
+[00:03:58] traigo siempre el formato predefinido
+[00:04:00] de cada mes
+[00:04:01] borro el contenido desde la
+[00:04:04] fila B
+[00:04:06] columna B
+[00:04:08] fila 4
+[00:04:09] hasta la B26 y así lo arrastro hasta la columna K.
+[00:04:17] Elimino todos los datos que me queden efectivamente en ceros
+[00:04:20] y empiezo a traerme primero las PQRs sesionadas y las pendientes.
+[00:04:25] Aquí en una de las tablas dinámicas de infolocalidades PPT
+[00:04:28] encuentro esta tabla de datos,
+[00:04:31] donde dice diapositiva 3, cuadro 1 de 2,
+[00:04:34] solicitudes sesionadas y solicitudes en trámite.
+[00:04:38] Traigo toda la información hasta la alcaldía local de Usme, lo copio en su totalidad y me traigo los datos correspondientes.
+[00:04:48] Aquí hay que tener en cuenta algo. La tabla dinámica ordena a la alcaldía local de la Candelaria por orden alfabético empezando por la C.
+[00:04:58] En algunos de los datos, Candelaria aparece como la Candelaria, entonces no figurará en tercer lugar, sino que aparecerá después de Mártires o antes de Mártires por ese orden alfabético.
+[00:05:11] una vez ya tengo los datos de cada una de las alcaldías locales
+[00:05:16] y teniendo en cuenta que el Bogotá te escucha no maneja ni supercades
+[00:05:20] ni un detalle de nivel central de las dependencias
+[00:05:23] estos tres datos que quedaron inferiores, el de dependencias nivel central
+[00:05:28] oficina de centros disciplinarios y oficina de atención a la ciudadanía
+[00:05:31] los voy a llevar en suma a la hoja de resumen CIFLES
+[00:05:35] entonces me dice que en gestionados tengo una suma de 8.484
+[00:05:41] cifra que voy a escribir en la pila B24.
+[00:05:47] Y lo mismo voy a hacer con las pendientes.
+[00:05:50] Voy a tomar estas tres últimas datos de la columna C, pila 226, 227 y 228,
+[00:05:57] que me da un total de 497 y lo voy a escribir en la hoja resumen cifra en PQR pendiente.
+[00:06:05] Al resto le voy a escribir 000 y 0.
+[00:06:08] Hasta ahí llevo la primera parte.
+[00:06:38] encuestas en el mes de mayo, pero que de esas 65 encuestas, solo 60 tienen respuestas completas.
+[00:06:47] Quiere decir que la calificación es por estas 60 completas. Pudo haber obtenido una calificación
+[00:06:52] de 4.5, que tiene un peso del 85% sobre el 100% si hubiera sacado 5 de 5. Entonces, haciendo
+[00:07:06] una suposición de que 4.5
+[00:07:08] representa ese 85% de la
+[00:07:10] nota ideal que hubiera sido, de la
+[00:07:12] calificación ideal que hubiera sido 5.
+[00:07:15] Borro ese dato porque este era
+[00:07:16] solamente de ejemplo. Entonces,
+[00:07:19] como su nombre lo indica,
+[00:07:20] debo traerme la información de documentos
+[00:07:22] extraviados del mes. Entonces, ya
+[00:07:24] una vez siendo descargados de los archivos que generan los compa me voy a documentos extraviados 2026 Siempre guardo una copia de esos archivos por cualquier posible consulta que se tenga que hacer y no se tenga acceso a la aplicaci
+[00:07:43] Aquí, al costado derecho de esa tabla de registro SIDE, voy a insertar una tabla dinámica.
+[00:07:55] En esta tabla dinámica le voy a decir que efectivamente es desde los datos que tengo de la columna D hasta la columna total.
+[00:08:06] Y que me lo deje en el espacio que seleccione.
+[00:08:09] Ya una vez dispuesto allí, la tabla dinámica empiezo a colocar que lo primero que me debe traer es localidad en filas.
+[00:08:17] Y que me debe traer del total la información y me la coloque en valores.
+[00:08:22] ¿Qué elimino de este filtro? De este filtro voy a eliminar las que dicen no aplica y me debe dar el total correspondiente al periodo, es decir, 1723 datos registrados, documentos registrados en el mes de mayo.
+[00:08:43] ¿Listo? Entonces esta información es la que me voy a llevar al otro lado
+[00:08:47] ¿Qué hago? Selecciono la hoja
+[00:08:49] le doy mover o copiar y me la llevo a PQR localidades
+[00:08:53] ¿En dónde? En la hoja que dice registrado SIDE
+[00:08:56] lo creo como una copia porque siempre lo llevo allá
+[00:09:00] para que cualquier ejercicio de validación
+[00:09:03] que requiera hacer la compañera que hace el informe
+[00:09:05] lo encuentro fácilmente. Elimino el anterior
+[00:09:08] y me quedo con el dato
+[00:09:12] de la sabana que acabo de copiar.
+[00:09:15] Entonces, ya sé que documentos extraviados,
+[00:09:17] este corresponde al mes de mayo 2026.
+[00:09:22] Y esta información la dejo acá.
+[00:09:26] Listo.
+[00:09:27] Voy grabando.
+[00:09:29] Y lo mismo en el anterior,
+[00:09:32] en donde viene el origen de la información
+[00:09:34] para que no se me haya perdido nada.
+[00:09:36] Cierro el archivo de reportes,
+[00:09:38] por resumen, sí de mayo 2026.
+[00:09:40] y ahora me voy con el de atenciones.
+[00:09:43] Voy a atenciones, 2026 y abro el archivo correspondiente a mayo.
+[00:09:51] En este archivo correspondiente a mayo encuentro una información
+[00:09:54] que ya está generada en tablas y que es de gran utilidad
+[00:09:58] para la información del DPQRS.
+[00:10:00] Entonces me voy a buscar atenciones.
+[00:10:03] En el DPQRS localidades se llama registro atenciones
+[00:10:06] y lo voy a traer tal cual está aquí resumido.
+[00:10:09] ¿Qué necesito principalmente? El nombre de la localidad y los grupos poblacionales a los que hace referencia.
+[00:10:39] Gracias.
+[00:11:09] Entonces verifico que efectivamente aparezcan las localidades y los grupos poblacionales que debo dar informaci
+[00:11:28] Voy a mover esto aquí.
+[00:11:32] Entonces, aquí me aparecen los grupos poblacionales y efectivamente me aparecen las localidades.
+[00:11:38] Entonces, esta hoja llamada tablas la voy a llevar al DPQ de las localidades y la voy a colocar en donde dice registro de atenciones, le creo una copia y elimino la anterior sin antes cambiar el nombre para que se mantenga la información tal cual como está construida en el catálogo de activos de la información en la DT.
+[00:12:04] No hay problema con que yo elimine las que están antes porque no está amarrado o atado la fórmula a los datos que tiene cada una de estas hojas. Recuerden, estas hojas las dejo solamente para validación y ejercicio de la compañera que hace el informe para que pueda hacer el cruce por si encuentra alguna irregularidad.
+[00:12:27] en este caso la hoja de registros por punto de atención
+[00:12:30] está organizada de mayor a menor
+[00:12:33] la necesito más bien en un orden de la A a la Z
+[00:12:36] para que me traiga el mismo orden de las alcaldías
+[00:12:40] recuerden lo que siempre les he dicho ahorita hace un rato
+[00:12:43] de la Candelaria, entonces es válido que Candelaria
+[00:12:46] está efectivamente después de Bosa y ya ahí me puedo ir con los datos
+[00:12:48] confiadamente
+[00:12:49] evidencio que tengo
+[00:12:54] dos localidades Ciudad Bolívar
+[00:12:57] alcaldía local Ciudad Bolívar.
+[00:12:59] Entonces lo que hago es que tomo hasta la primera alcaldía local Ciudad Bolívar,
+[00:13:04] le agrego el 2, que es el que sigue del otro dato de Ciudad Bolívar,
+[00:13:09] y lo llevo a orientaciones.
+[00:13:13] ¿Por qué no he traído todavía el de documentos extraviados?
+[00:13:16] Porque en el de documentos extraviados no salieron todas las localidades,
+[00:13:20] entonces solamente voy a traer la información de los que ya aparecen.
+[00:13:25] Me devuelvo.
+[00:13:27] Ya copié el 2 de Ciudad Bolívar y ahora voy a copiar las otras localidades.
+[00:13:32] Tengo hasta Usme.
+[00:13:35] Bueno, aquí me aparece un 1 de Kennedy.
+[00:13:37] Entonces, asumo que es de la alcaldía local de Kennedy.
+[00:13:39] Entonces, lo vamos a sumar.
+[00:13:44] Pego la información.
+[00:13:46] Ya encontramos que tenía uno más de Kennedy.
+[00:13:49] Si lo agrego acá.
+[00:13:51] Lo coloco de esta manera en suma para que cuando se haga el cruce de la información
+[00:13:54] se pueda validar que efectivamente lo traje de lo que está contenido en la tabla de datos de las atenciones.
+[00:14:02] Aquí sí me separa nivel central y supercades, pero supercades lo tengo como un solo campo.
+[00:14:08] Entonces, sumo cuánto me da supercades, 406.
+[00:14:11] ¿Por qué si el informe de PQRC es de localidades tengo que separar lo que corresponde a localidades y a nivel central?
+[00:14:18] Porque en algún momento en los informes nos han pedido que por favor le discrimine
+[00:14:22] de ese total de atenciones, cuántas se hicieron en localidades
+[00:14:27] y cuántas se hicieron en puntos supercades y en el punto principal.
+[00:14:31] A raíz de ese informe que nos pidieron, es que vengo ya hace dos años
+[00:14:35] separando los datos correspondientes.
+[00:14:39] Pero es que me dice que debo tener 4,328 registros de atenciones.
+[00:14:44] Vamos y validamos. Efectivamente, tengo 4,328.
+[00:14:49] Todavía aquí en ese dato no voy a tomar...
+[00:14:52] No voy a tomar la discriminación de los grupos poblacionales, ya les voy a explicar por qué se usan.
+[00:15:00] En el de PQR es página web.
+[00:15:03] Ahora, sí, en lo que estábamos haciendo de documentos extraviados.
+[00:15:07] Entonces, en registrado.
+[00:15:09] Dice que Candelaria tiene 96 y Engativá 98.
+[00:15:14] Candelaria.
+[00:15:15] Lo escribo.
+[00:15:18] 96.
+[00:15:21] ¿Por qué no está formulado?
+[00:15:23] Porque en alguna ocasión me aparecía, por ejemplo, Candelaria, así como está escrito.
+[00:15:30] Y nuevamente enseguida me aparecía la candelaria.
+[00:15:33] Entonces él me asumía que eran diferentes y eran lo mismo.
+[00:15:37] Entonces prefería hacer la verificación uno a uno para poder llevar el conteo correcto de los datos.
+[00:15:45] N18.
+[00:15:50] N70.
+[00:15:51] N70.
+[00:15:54] Estos son los documentos, la cantidad de documentos que ingresaron.
+[00:15:58] 693
+[00:16:00] Santa Fe 15, Suba 19
+[00:16:08] y Teusaquillo 666
+[00:16:17] Esta información es útil para las localidades
+[00:16:23] en el sentido que se les muestra a ellos
+[00:16:26] cómo está el ejercicio de recuperación de esos documentos de identidad
+[00:16:31] para que puedan reposar en el sistema de información de documentos extraviados
+[00:16:35] y de alguna manera el ciudadano cuando reconozca o le llegue su mensaje
+[00:16:41] de que ha sido encontrado su documento pueda fácilmente recuperarlo,
+[00:16:45] acercarse al nivel central y poder reclamarlo.
+[00:16:50] Entonces ya recuerden que solamente me he traído PQR del Bogotá te escucha,
+[00:16:55] documentos extraviados y registro de atenciones.
+[00:16:59] El mismo ejercicio voy a hacer para certificado de residencia y propio horizontal.
+[00:17:02] Entonces voy a abrir el archivo que previamente ha sido generado por la compañera encargada de Visage.
+[00:17:25] Gracias.
+[00:17:55] Gracias.
+[00:18:25] Listo, entonces ya con el archivo.
+[00:18:37] Arranc primero con el de certificado de residencia Espero que el archivo que es clave en este informe o en estas abanatos generada de Visayi La productividad por el tipo de CR de certificado de residencia y la productividad por cada uno de los temas para asuntos para los cuales es requerido el certificado de residencia
+[00:19:00] nuevamente me dirijo a el archivo de
+[00:19:05] este de PECORRE, ya lo puedo cerrar
+[00:19:11] al archivo de localidades
+[00:19:13] y miro que me dice certificado de residencia
+[00:19:20] me dice que necesita por la productividad de los que fueron aprobados, cerrados
+[00:19:24] pendientes, rechazados, entonces miro aquí, esos se encuentran
+[00:19:28] en la hoja productividad CR
+[00:19:30] y esta información es la que me voy a ir a llevar
+[00:19:33] sin modificar absolutamente nada.
+[00:19:36] Me la voy a ir a llevar a base de datos localidades
+[00:19:38] y la copio.
+[00:19:41] ¿Qué hago? Cambio nuevamente el nombre.
+[00:19:47] El ejercicio de cambiar el nombre
+[00:19:49] es porque así está definido
+[00:19:50] en el catálogo de activos de la información.
+[00:19:56] Listo.
+[00:19:56] ¿qué me dice certificado de residencia?
+[00:20:00] que yo tengo aquí unos datos
+[00:20:02] de inscripción realizada, actualización realizada, extensión realizada
+[00:20:08] y certificados generados
+[00:20:10] aquí en certificado de residencia, tengo aprobados, pendientes
+[00:20:16] rechazados, cerrados y total general, me voy a ir con la
+[00:20:20] columna de aprobados, eso es lo que me voy a llevar al otro lado
+[00:20:23] Entonces, lo que hago es grabar y reordenar de acuerdo a la primera etiqueta.
+[00:20:41] Y me llevo esta información tal cual está, donde me muestra las 20 alcaldías locales.
+[00:20:48] y las llevo a resumen
+[00:20:53] y las copio acá
+[00:20:55] aquí nuevamente me devuelvo
+[00:20:57] solamente para validar
+[00:20:59] que candelaria sean 36
+[00:21:01] y no vaya a pronto
+[00:21:03] cruzar información
+[00:21:04] listo
+[00:21:07] para nivel central coloco 0
+[00:21:09] supercadre 0 y en blanco 0
+[00:21:11] me dice que debo tener 6863
+[00:21:14] certificados aprobados
+[00:21:16] efectivamente ese es el dato que me aparece
+[00:21:17] en el archivo original generado desde el Visage.
+[00:21:22] ¿Listo?
+[00:21:23] Entonces, recuerden, el archivo original no lo modifique,
+[00:21:25] el que toque es el que está copiado en la hoja de Excel
+[00:21:30] denominada Certificado de Residencia Productividad Mayo,
+[00:21:34] que es soporte para el informe de PQR localidades.
+[00:21:40] ¿Listo?
+[00:21:41] Como este archivo lo va a necesitar la compañera,
+[00:21:45] entonces yo nuevamente me voy a datos
+[00:21:47] y le voy a pedir que ordene la información de acuerdo a este porcentaje.
+[00:21:57] Entonces estaba por el porcentaje, estaba de mayor a menor.
+[00:22:11] De menor a mayor.
+[00:22:14] Listo.
+[00:22:15] Ese es el orden en el que estaba.
+[00:22:16] ya una vez organizado como estaba
+[00:22:18] el original, lo grabo
+[00:22:20] y lo dejo así tal cual, ahora me voy
+[00:22:23] a ir a traer el de propio horizontal
+[00:22:24] cierro momento productividad DCR me dice que si deseo guardar los cambios no no hice ning cambio entonces ahora me voy a traer el de propio horizontal
+[00:22:36] hago el mismo ejercicio
+[00:22:40] entonces miro cuál es la información que debo
+[00:22:42] llevarme y recuerden que
+[00:22:44] estábamos hablando entonces de
+[00:22:46] lo que estaba
+[00:22:47] en bandeja
+[00:22:49] lo que estaba actualizado
+[00:22:54] lo que estaba inscrito
+[00:22:55] y ese resumen
+[00:22:58] entonces me voy al informe
+[00:22:59] PQR localidades y que me dice
+[00:23:02] necesita la sábana de datos
+[00:23:04] que diga de inscripción, actualización
+[00:23:06] y extensión y que debajo
+[00:23:08] está por bandeja de correspondiente
+[00:23:10] a cada una
+[00:23:11] me devuelvo al archivo original de propio horizontal
+[00:23:14] miro que la primera tabla
+[00:23:16] que está es la de inscripción, actualización
+[00:23:18] y extensión
+[00:23:19] entonces me voy a llevar esta hoja
+[00:23:21] tal cual
+[00:23:23] a el de PQR localidades.
+[00:23:27] Y lo registro en el orden que le correspondería a propio horizontal.
+[00:23:32] Cambio el nombre del anterior.
+[00:23:34] y ese es el que le voy a colocar
+[00:23:53] a la nueva hoja
+[00:23:55] bueno, no le voy a dejar abril
+[00:23:56] sino le voy a dejar mayo
+[00:23:58] elimino la del mes anterior
+[00:24:04] no me afecta nada
+[00:24:06] y la información que está aquí
+[00:24:08] yo no me voy a llevar la de la primera
+[00:24:10] columna, la descripción, sino que me voy a llevar
+[00:24:12] al contrario del propio certificado de residencia
+[00:24:15] en este caso la totalidad
+[00:24:16] de certificados generados
+[00:24:18] entonces nuevamente hago el mismo ejercicio
+[00:24:21] lo selecciono
+[00:24:22] reordeno, le digo que necesito
+[00:24:24] que por etiquetas vaya de A
+[00:24:26] a la Z
+[00:24:27] ya una vez tengo la información
+[00:24:29] me llevo la columna de certificados generados
+[00:24:32] Candelaria está después de vos
+[00:24:34] así que estamos bien
+[00:24:35] verifico aquí me dice que hay 19 datos
+[00:24:38] o sea que me falta Sumapaz
+[00:24:40] entonces tomo hasta Suba
+[00:24:42] me lo llevo al resumen
+[00:24:44] en el caso de Sumapaz
+[00:24:52] voy a colocarle 0
+[00:24:53] y termino de copiar los otros datos que me faltan,
+[00:24:59] que son tenso, aquello, tunjuelito, usa, ken y usbe.
+[00:25:07] ¿Por qué su mapa aparece en cero?
+[00:25:10] Es porque no tiene propio horizontal.
+[00:25:12] Entonces, nivel central cero, supercada de cero y en blanco cero.
+[00:25:17] Es decir, me dice que debió haber atendido 809 certificados de propio horizontal.
+[00:25:22] Miramos, efectivamente hay 809. Nuevamente reordeno como estaba. Este está ordenado por porcentaje de menos la mayor y me queda el archivo tal cual como lo tenía.
+[00:25:37] listo, entonces hasta aquí
+[00:25:40] que llevo en el informe
+[00:25:42] de PQR localidades
+[00:25:44] llevo todo hasta
+[00:25:46] la información de certificado
+[00:25:48] de residencia, de aquí para allá me faltan
+[00:25:50] lo que son encuestas
+[00:25:51] entonces ya eso es una parte complementaria
+[00:25:54] que ya les voy a mostrar cómo se realiza
+[00:26:07] Gracias.
+[00:26:10] you
+[00:26:40] you
+[00:27:10] you
+[00:27:40] you
+[00:28:10] you
+[00:28:40] you
+[00:29:10] you
+[00:29:40] you
+[00:30:00] you
+[00:30:30] you
+[00:31:00] you
+[00:31:30] you
+[00:32:00] you
+[00:32:30] you
+[00:33:00] you
+[00:33:30] you
+[00:33:40] you
+[00:34:10] you
+[00:34:40] you
+[00:35:10] you
+[00:35:40] you
+[00:36:10] you
+[00:36:40] you
+[00:37:10] you
+[00:37:25] you
+[00:37:55] you
+[00:38:25] you
+[00:38:55] you
+[00:39:25] you
+[00:39:55] you
+[00:40:25] you
+[00:40:55] you
+[00:41:10] you
+[00:41:40] you
+[00:42:10] you
+[00:42:40] you
+[00:43:10] you
+[00:43:40] you
+[00:44:10] you
+[00:44:40] you
+[00:45:00] you
+[00:45:30] you
+[00:46:00] you
+[00:46:30] you
+[00:47:00] you
+[00:47:30] you
+[00:48:00] you
+[00:48:30] you
+[00:48:40] you
+[00:49:10] you
+[00:49:40] you
+[00:50:10] you
+[00:50:40] you
+[00:51:10] you
+[00:51:40] you
+[00:52:10] you
+[00:52:25] you
+[00:52:55] you
+[00:53:25] you
+[00:53:55] you
+[00:54:25] you
+[00:54:55] you
+[00:55:25] you
+[00:55:55] you
+[00:56:10] you
+[00:56:40] you
+[00:57:10] you
+[00:57:40] you
+[00:58:10] you
+[00:58:40] you
+[00:59:10] you
+[00:59:40] you
+[01:00:00] you
+[01:00:30] you
+[01:01:00] you
+[01:01:30] you
+[01:02:00] you
+[01:02:30] you
+[01:03:00] you
+[01:03:30] you
+[01:03:40] you
+[01:04:10] you
+[01:04:40] you
+[01:05:10] you
+[01:05:40] you
+[01:06:10] you
+[01:06:40] you
+[01:07:10] you
+[01:07:25] you
+[01:07:55] you
+[01:08:25] you
+[01:08:55] you
+[01:09:25] you
+[01:09:55] you
+[01:10:25] you
+[01:10:55] you
+[01:11:10] you
+[01:11:40] you
+[01:12:10] you
+[01:12:40] you
+[01:13:10] you
+[01:13:40] you
+[01:14:10] you
+[01:14:40] you
+[01:15:00] you
+[01:15:30] you
+[01:16:00] Well, we continue then with the information of the surveys.
+[01:16:24] updated the monthly survey report in that monthly report comes out an information of the
+[01:16:30] more incomplete complete answers which we are going to take into account the total general to be able to
+[01:16:37] make a difference with those that had completely complete answers then that we have
+[01:16:42] brought the report of the surveys of the period and those of the total of the period between more incomplete
+[01:16:48] more incomplete we can see that in the row that says in white the h 26 row we have brought the
+[01:16:55] total number of the surveys that are totally blank that is why we did not bring the
+[01:17:04] others from the other locations because they will be added at the time that we make the difference
+[01:17:08] for each one and once we have brought the three complete surveys now we are going to bring the
+[01:17:14] surveys with a complete answer. So we are going to go to the localities report where the total is
+[01:17:23] per locality that is in order. So we have the first table that corresponds to the
+[01:17:30] virtual channel, the second to the face-to-face channel and the third to the telephone channel, but we are going to stay in the one that
+[01:17:36] brings together the three, face-to-face, virtual and telephone. We are going to bring the information of all the
+[01:17:41] Remember what I told you that after Bosa followed the Candelaria, then here in the surveys we see that first is Chapinero because in the Candelaria surveys it is registered as the Candelaria.
+[01:17:53] We are going to bring the information of the localities in the order, keeping in mind that the Candelaria is in fourth place.
+[01:18:06] we bring not only the amount but also we bring the qualification
+[01:18:14] in this four summary we have everything not only the amount the qualification but also
+[01:18:21] the percentage then we are going to bring all this information that is useful for what we are doing
+[01:18:30] as in this order it follows first black chapinero leaves a space for the candelaria
+[01:18:35] to bring the information and I am bringing what are the quantities the qualifications and the percentage lo que son las cantidades las calificaciones y el porcentaje as de un momento candelaria porque tiene orden est
+[01:18:55] porque lo traigo de esta manera para que precisamente asegurarme de que traiga la
+[01:19:00] información que corresponde y evitar los errores de registros no correctos.
+[01:19:11] Listo.
+[01:19:12] Entonces seguimos.
+[01:19:12] Ya de mártires hacia abajo ya están los datos normales.
+[01:19:17] Entonces los traigo hasta nivel central.
+[01:19:18] ¿Por qué los traigo hasta nivel central?
+[01:19:20] Recordemos que SuperCAD es en la tabla resumen.
+[01:19:23] Solamente lo tengo como un dato informativo.
+[01:19:25] así que allí lo que voy a traer es como las cifras generales de los 7 supercades.
+[01:19:32] Si se tienen en cuenta precisamente para poder hacer un control sobre los registros que se llevan de los supercades.
+[01:19:44] Entonces, ¿cómo hago para el de supercades?
+[01:19:47] Ahora en la parte superior de estas tablas tenemos por puntos y por canales
+[01:19:55] Divido, entonces por ejemplo aquí está SuperCADES en la fila 15.
+[01:20:00] Vamos a traer que son 139 las encuestas aplicadas en SuperCADES con una calificación de 5.
+[01:20:06] Entonces escribimos la 139 y pegamos la cifra que es de 5.
+[01:20:15] Y esto al obtener 5 sobre 5 pues me da el 100%.
+[01:20:20] En blanco no tenemos información y colocamos 0.
+[01:20:25] listo
+[01:20:28] y de esta manera ha quedado el informe
+[01:20:31] de PQR localidades
+[01:20:32] finalizado
+[01:20:34] con todo lo que se necesita
+[01:20:37] actualizado y
+[01:20:39] las hojas de verificación
+[01:20:41] que en su momento
+[01:20:43] llegase a necesitar la compañera para
+[01:20:45] validar todo lo que
+[01:20:47] hemos venido hablando, bueno yo
+[01:20:49] dije hace un momento que el de
+[01:20:51] atenciones íbamos a tener presente
+[01:20:52] la tipicidad
+[01:20:55] de la atención preferencial.
+[01:20:57] Ese es para el informe de PQR
+[01:20:59] sitio web. Entonces vamos a ir
+[01:21:01] cerrando el de localidades porque lo hemos
+[01:21:03] completado y lo que
+[01:21:05] hacemos es alistarlo para que la compañera
+[01:21:07] que se encarga de hacer el informe
+[01:21:09] ya pueda trabajarlo.
+[01:21:11] Voy a cerrar esta parte
+[01:21:12] y me voy a quedar con
+[01:21:15] el de PQR
+[01:21:16] página web. Cierro este
+[01:21:19] también, le digo que no guardo
+[01:21:20] y voy a irme al de PQR
+[01:21:24] página web que es mucho más robusto, más completo
+[01:21:29] y lo vamos a crear de cero.
+[01:21:35] Entonces aquí yo tengo hasta abril, yo lo que hago es simplemente que duplico el último mes
+[01:21:40] le cambio el nombre
+[01:21:47] y le coloco mayo 2026
+[01:21:55] y empiezo a cambiar
+[01:21:56] cada uno de los datos que tiene
+[01:22:00] el informe de PQRS.
+[01:22:07] Deje abierto el de PQRS
+[01:22:09] en encuestas porque
+[01:22:11] vamos a hacer ahorita una validación de información.
+[01:22:14] Entonces,
+[01:22:15] recuerden, aquí vamos a empezar
+[01:22:19] ya el de PQRs página web.
+[01:22:22] Entonces, no sucede lo mismo
+[01:22:23] que el de localidades. Tengo una hoja que se llama
+[01:22:24] reporte PQRs abril 2026 que es la que voy a reemplazar por los datos que tengo de PQRs mayo 2026 Elimino todo lo que tengo en esta hoja y me voy a traer mi archivo de PQRs como lleg tal cual como lleg de la Secretar General
+[01:22:47] Entonces aquí lo tengo, fue mi PQRs mayo.
+[01:22:51] Lo traigo.
+[01:22:52] se puede notar el informe original no tiene los duplicados.
+[01:22:59] Entonces coloco mi sabana de datos allí, cambio el nombre.
+[01:23:07] Mayo 2026 y agrego mi fila de duplicados.
+[01:23:16] Y lo bautizo tal cual, duplicados.
+[01:23:19] hago el mismo ejercicio
+[01:23:22] lo repito en este caso
+[01:23:24] para que precisamente no se nos olvide
+[01:23:26] que este es un paso obligatorio
+[01:23:28] de que nos pide
+[01:23:30] el decreto 371
+[01:23:32] entonces no es cuestión
+[01:23:34] de que si lo hago o no lo hago
+[01:23:36] sino que toca hacerlo
+[01:23:37] listo una vez
+[01:23:39] ya puesto aquí
+[01:23:41] entonces vamos a decirle que la
+[01:23:43] celda A10 es
+[01:23:46] igual a la A11
+[01:23:47] ¿Por qué no se hace eliminando los duplicados que se podría hacer aquí en datos?
+[01:23:54] Quitando duplicados.
+[01:23:55] Porque necesitamos la información de los datos duplicados para poder sacar un análisis.
+[01:24:03] Bueno, entonces aquí acabamos de copiar la sábana de datos de mayo.
+[01:24:08] Voy a renombrar.
+[01:24:09] Voy a grabar porque ya se ha renombrado.
+[01:24:12] Y voy a eliminar aquí unas hojas que eran del análisis anterior, del mes anterior.
+[01:24:17] listo
+[01:24:20] este informe web de abril
+[01:24:22] es el más importante que tenemos precisamente
+[01:24:24] para poder hacer nuestro
+[01:24:26] reporte
+[01:24:27] y tengo una hoja adicional que se llama
+[01:24:30] seguimiento en días
+[01:24:31] aquí en seguimiento en días voy a colocar
+[01:24:34] aquí le hago monitoreo por cada mes
+[01:24:37] para mostrar ese comportamiento
+[01:24:39] de los días de gestión
+[01:24:42] estos días de gestión es por toda la entidad
+[01:24:45] donde me muestra las extemporáneas, las oportunas, las pendientes en términos, las pendientes vencidas por cada mes,
+[01:24:53] el porcentaje de descongestión, las extemporáneas que fueron vencidas y las oportunas en términos.
+[01:25:01] Las traigo de nuevo en esta tabla inferior para poder sacar el porcentaje de extemporaneidad y el porcentaje de oportunidad.
+[01:25:09] ¿Listo? Pero esto es algo que no va en el informe, solamente que lo saco para poder a final de semestre o a final de año poder hacer el comparativo. Esto es algo que nos piden desde alguna de las IAS o a veces desde la misma Secretaría General.
+[01:25:26] Y abajo tengo una gráfica que me muestra como ese comportamiento de las PQRs.
+[01:25:33] Entonces, anterior a la hoja de reporte PQRs, tengo lo mismo que hicimos con el de PQRs localidades.
+[01:25:41] Entonces, me traigo lo de propiedad horizontal, residencia.
+[01:25:44] Aquí en certificado de residencia no solamente está la productividad por el estado del trámite, sino también por los tipos de trámite.
+[01:25:51] el registro de atenciones, lo de las
+[01:25:54] encuestas, lo registrado en
+[01:25:55] documentos extraviados y
+[01:25:57] lo entregado en documentos extraviados
+[01:25:59] aquí recuerden que yo les decía que
+[01:26:01] teníamos algo clave, era el registro
+[01:26:04] de las atenciones y era la
+[01:26:06] cantidad de personas
+[01:26:08] por grupo poblacional de valor
+[01:26:09] y vamos aqu voy a hacer con el informe web de abril el copiar y pegar las hojas de los otros reportes es lo de menos Pero tengo que actualizar todas las tablas din que est en esta sabana de datos Entonces lo que voy a hacer es decirle que por favor me actualice todo
+[01:26:27] cuando yo hago el ejercicio que me actualice todo
+[01:26:31] me va a decir que algunos campos de las tablas dinámicas
+[01:26:34] no son válidas y que debo crear un informe para la tabla dinámica
+[01:26:38] usando los datos organizados
+[01:26:40] entonces en ese caso no me está dejando hacerlo
+[01:26:43] porque debe haber un cambio de campos de análisis
+[01:26:46] entonces me voy a decirle que cambie los campos
+[01:26:49] que me voy a dirigir
+[01:26:50] y voy a seleccionar todo lo que necesito
+[01:26:55] de las tablas dinámicas.
+[01:27:02] Entonces aquí me eliminó el filtro de duplicados en filas.
+[01:27:05] Entonces lo que hago es tomarlo y llevarlo a filas
+[01:27:07] y me va a mostrar cuántos son registros únicos,
+[01:27:12] que serían 983,
+[01:27:14] y cuántos son registros duplicados, que serían 1636,
+[01:27:18] según la sábana de datos asunta.
+[01:27:21] La siguiente es cuántos fueron registrados por el ciudadano
+[01:27:24] y cuántos fueron registrados por propios.
+[01:27:26] Entonces, nuevamente hago lo mismo, selecciono toda la información y actualizo.
+[01:27:31] Debo tener 2,619 peticiones para este periodo.
+[01:27:36] Distribución por sexo, esta es una información que se coloca verificando una a una de las peticiones.
+[01:27:44] y lo mismo la distribución por grupo
+[01:27:54] poblacional, entonces nos saltamos
+[01:27:57] a la tabla dinámica que dice distribución de PECORRES por identidad
+[01:28:00] ciudadana, que se me arroja de manera automática
+[01:28:03] la información, la sabana de datos
+[01:28:05] y sigo trayendo
+[01:28:08] la información que me están pidiendo
+[01:28:10] Aquí me están diciendo que por cédula de ciudadanía yo tengo 1.393 registros que corresponden a personas naturales, que por cédula de extranjería tengo 6 que corresponden a personas migrantes internacionales,
+[01:28:25] que por NID tengo 145 personas que son personas jurídicas, que por ciudadanía con nacionalidad venezolana, en este caso los PPTI, tengo 5.
+[01:28:39] entonces lo que voy a hacer es traerlos
+[01:28:43] de acá y decir aquí están mis cinco
+[01:28:48] nacionales venezolanos que por menores de edad
+[01:28:52] corresponden a dos que tienen tarjeta de identidad
+[01:28:55] y por pasaporte tengo dos, estos pasaportes pueden ser
+[01:29:00] migrantes internacionales, no especificas
+[01:29:04] cuando no tenemos una información, este corresponde al que está en blanco
+[01:29:08] entonces no especifica como un tipo de identidad ciudadana.
+[01:29:12] Entonces ya dijimos que por pasaporte vamos a agregar dos más al de cede de la extranjería,
+[01:29:19] es decir, al migrante internacional.
+[01:29:21] Entonces vamos a tener más seis, más dos, y vamos a tener en total ocho.
+[01:29:26] Los otros están anclados a la tabla dinámica,
+[01:29:28] a tener que si yo hago un cambio sobre la tabla dinámica,
+[01:29:32] pues voy a verlo reflejado en esta tabla pequeña.
+[01:29:35] este cuadro resumen se hace para poder colocar unos grupos de información que nos piden desde
+[01:29:42] la secretaría general y la secretaría de la mujer quienes es principalmente que nos piden
+[01:29:48] estos de información paso a la siguiente tabla hago exactamente el mismo ejercicio
+[01:29:54] voy a tolera y saldo las tablas dinámicas
+[01:30:00] cada tabla dinámica tiene un título correspondiente a donde va agregado esa información dentro de la diapositiva.
+[01:30:12] Aquí vemos que este cuadro está desactualizado, entonces yo lo que hago es simplemente copiarlo, los datos, y me los traigo tal cual.
+[01:30:22] ¿Por qué me los traigo tal cual? Para que la tabla gráfica me quede actualizada con la información.
+[01:30:27] y pueda ser tomada o capturada para el informe.
+[01:30:32] Recuerden, son 2.619 peticiones de esta vigencia,
+[01:30:35] entonces llevo esa misma información en todos los cuadros.
+[01:30:41] Y aquí voy mirando uno a uno cómo me van cambiando los datos
+[01:30:45] al actualizar cada tabla.
+[01:30:48] En esta tabla dinámica que estamos actualizando,
+[01:30:50] que son solicitudes de información,
+[01:30:52] dice que en total fueron 156.
+[01:30:54] Hago un cambio aquí manual.
+[01:30:55] Le digo que tengo 156 solicitudes, pero solo las que están resaltadas en amarillo son las solicitudes de información que fueron trasladadas a otras entidades.
+[01:31:05] Escojo 28 más 1, es decir, en total tuve 29 solicitudes solucionadas con un traslado que correspondían a solicitudes de información.
+[01:31:16] Sigo con mis datos actualizando tablas.
+[01:31:25] Así lo hago con cada una de las tablas dinámicas que tiene este informe.
+[01:31:32] ¿Por qué hago primero las tablas dinámicas?
+[01:31:36] Y dejo de últimas traerme la información de las otras datos que van incluidos en el informe general de la página web.
+[01:31:46] Precisamente porque esto me demanda más tiempo ya que tengo que verificar que traiga la información del periodo.
+[01:31:52] Entonces, aquí actualicé en la capítulo 6, subtema más reiterados, actualicé la tabla dinámica, pero no he actualizado esta tabla pequeña que está en la fila H y fila, perdón, columna H y columna I.
+[01:32:07] Aquí, ¿qué voy a hacer? Me voy a traer el total de esta fila que es 12.904, de esta tabla dinámica.
+[01:32:16] Escribo solamente el total, 12.904.
+[01:32:22] Y me voy a traer los cinco más representativos.
+[01:32:25] Entonces aquí me dice que en blanco tengo 3,079 peticiones.
+[01:32:29] Eso no es un tema que me permita la veeduría identificar.
+[01:32:34] Entonces debo traer los que sí tienen un nombre plenamente identificado.
+[01:32:39] El hecho de que aparezca en blanco significa que hay algo que revisar,
+[01:32:43] que en la clasificación está haciéndose mal
+[01:32:46] y que puede estar generando interpretaciones erróneas de información.
+[01:32:54] La que está resaltada en naranja corresponde a información de trámites y servicios que según el decreto 371
+[01:33:00] no debería tomarse en este reporte de PQR, ya que corresponde, entre comillas, a lo que son solamente trámites y servicios
+[01:33:09] y que son manejados o de alguna manera gestionados por el servicio de atención a la ciudadanía.
+[01:33:15] Sin embargo los copios los pego ac voy a mirar la mayor ingresaron por web service corresponden a un tipo de derecho de petici de inter general
+[01:33:53] preclasificado,
+[01:33:56] y que de acuerdo, por ejemplo, a la solicitud,
+[01:33:59] puede evidenciarse que ni es un acto de corrupción,
+[01:34:03] ni tampoco es un otro común y corriente.
+[01:34:06] Por ejemplo, en este caso que estoy mostrando,
+[01:34:08] En la fila 2 dice solicitud por este medio de certificado de contrato de prestación de servicios. Esto no debería ser un otro sino una solicitud precisamente de certificación contractual y que no debería estar ingresando por el Bogotá te escucho.
+[01:34:24] No debería tener Bogotá te escucha.
+[01:34:27] El siguiente, CARC, Cundinamarca, Alcaldía Local de Kennedy.
+[01:34:31] no dice nada más
+[01:34:33] luego dice respuesta número radicado
+[01:34:36] 2575722
+[01:34:38] tampoco dice nada más
+[01:34:40] posiblemente sea algún derecho de petición
+[01:34:42] luego dice la fila 5
+[01:34:44] solicitud préstamo 7 carpas
+[01:34:46] 3x3 para el día sábado 13 de junio
+[01:34:48] 2026 de 11 de la mañana
+[01:34:50] a 7 pm
+[01:34:51] de seguro fue una solicitud hecha a la alcaldía local
+[01:34:54] pero pues tampoco
+[01:34:56] debería estar en este otro relaciones
+[01:34:58] que es porque
+[01:34:59] recuerden que la categoría es la primera ramificación, luego viene el subtema, es decir, el subtema va muy de la mano con la categoría.
+[01:35:08] Si yo le digo que es un posible acto de corrupción y que el subtema es otro relacionado, cual en el campo de observaciones,
+[01:35:17] cuando yo miro el asunto y dice solicitud préstamo siete carpas, en una lectura como lo hace la abeudoría dirá o pensará
+[01:35:26] que la solicitud del préstamo de las carpas fue posiblemente denunciado como un acto de corrupción.
+[01:35:33] Entonces, esto es algo que toca ver con los compañeros que están haciendo la clasificación,
+[01:35:39] qué está pasando, cómo está ingresando, por qué se mantiene en la categoría de actos de corrupción.
+[01:35:47] Derecho de petición a la alcaldía de Ulme, información de esterilización de animales, solicitud certificada laboral.
+[01:35:52] Entonces hay un mal uso del sistema precisamente por este tipo de ingresos que no deberían estar acá.
+[01:36:02] Certificaciones contractuales, administración de copropiedades, estudios y diseños para la intervención de una vía,
+[01:36:11] apoyo a la gestión, derecho de petición, reparación y mantenimiento de andenes, traslados por competencia,
+[01:36:17] pavimento de la calle
+[01:36:21] dando una dirección
+[01:36:23] solicitud
+[01:36:26] solucionar el problema causado por falta de mantenimiento
+[01:36:29] del espacio afectado al parque
+[01:36:30] ubicado y dando una dirección
+[01:36:32] es decir
+[01:36:33] cuando uno lee el contenido
+[01:36:36] del asunto
+[01:36:37] puede evidenciar claramente
+[01:36:40] que hay un mal uso
+[01:36:42] de la clasificación
+[01:36:43] restauración a Doquín
+[01:36:46] parque bolsillo en fin pero pues en este caso estamos haciendo un informe de un espejo ver es
+[01:36:54] que ya se cumplieron durante la vigencia del mes del primero al 31 de mayo bueno entonces ya una
+[01:37:03] vez colocado los cinco que corresponden a los cinco subtemas más demandados por la ciudadanía
+[01:37:08] si aquí no tenemos los que tuvieron solución o gestión solamente como el total y más abajo
+[01:37:15] Podemos encontrar otra tabla exactamente igual, pero estos fueron los que ya tuvieron una respuesta definitiva.
+[01:37:21] Nuevamente, hago la selección de la información.
+[01:37:26] Ya cuando la trae todo hago el mismo ejercicio entonces tengo en total tengo 4 es el valor que voy a colocar
+[01:37:36] en este total en amarillito
+[01:37:39] y borro
+[01:37:41] los 5
+[01:37:41] más
+[01:37:45] demandados para poder
+[01:37:46] copiar esos 5
+[01:37:48] temas
+[01:37:49] de mayor
+[01:37:52] interés por parte de la ciudadanía
+[01:37:54] listo
+[01:38:02] seguimos
+[01:38:04] ah bueno aquí
+[01:38:05] el otro
+[01:38:07] no está resaltado en naranja
+[01:38:10] y el de servicios
+[01:38:12] me aparecía en otro color
+[01:38:15] listo
+[01:38:16] seguimos
+[01:38:19] es muy amplio el espacio que hay
+[01:38:22] en esta tabla con la otra
+[01:38:23] porque a veces la tabla de los subtemas es mucho más extensa
+[01:38:28] y suele sobreponer, quedar sobrepuesta a la otra tabla.
+[01:38:35] Entonces en esta tabla número 5, peticiones trasladadas,
+[01:38:37] aquí enseguida hay a mano derecha un cuadro resumen.
+[01:38:41] El cuadro resumen me dice total de peticiones,
+[01:38:43] entonces primero me voy al total de la petición,
+[01:38:46] pero veo que aquí hay un filtro del estado final de la petición.
+[01:38:50] libero el filtro primero
+[01:38:52] 10.599
+[01:38:56] esa es la cifra que voy a traer aquí
+[01:38:58] la voy a colocar
+[01:38:59] y luego nuevamente voy a aplicar
+[01:39:04] el filtro que tenía que son todas
+[01:39:06] las que hayan sido solucionadas por traslado
+[01:39:09] cuando ya tengo todas
+[01:39:14] las solucionadas y que aplico el filtro
+[01:39:16] el porcentaje automáticamente se cambió
+[01:39:18] solamente tuve que cambiar el total
+[01:39:20] que fueron 10.599.
+[01:39:23] Sigo mirando hacia abajo.
+[01:39:26] Actualizando tablas dinámicas.
+[01:39:29] Esos son subtemas para abedurías.
+[01:39:36] Peticiones cerradas en el periodo actual,
+[01:39:39] que tiene un cuadro enseguida para análisis.
+[01:39:47] Lo actualizo y una vez lo actualizo
+[01:39:49] me traigo toda la información de gestionados,
+[01:39:52] columna de pendientes gestionados,
+[01:39:53] hasta total de cuenta que incluya hasta un mes,
+[01:39:58] es decir, las 20 filas,
+[01:39:59] y esa información la voy a traer, la voy a pegar aquí enseguida.
+[01:40:05] Tanto las tres últimas que corresponden a en blanco,
+[01:40:10] que por lo general suelen ser las de nivel central,
+[01:40:13] o todo lo que llamamos nivel central,
+[01:40:15] está formulado, es decir, ya él lo trae.
+[01:40:19] Entonces yo voy a traer aquí como nivel central, como lo teníamos en PQR localidades.
+[01:40:28] Y en la tabla de seguida hago lo mismo.
+[01:40:30] Esta es la de periodos anteriores.
+[01:40:35] Actualizo.
+[01:40:37] Selecciono todo.
+[01:40:39] Hasta USME.
+[01:40:45] Y aquello que me aparezca en cero simplemente va a decir que me lo reemplace.
+[01:40:49] que me parezca vacío para que no me queden
+[01:40:52] las cerzas
+[01:40:53] la última como lo dije ya está
+[01:40:56] mencionada entonces aquí lo que voy a hacer es
+[01:40:58] colocarle
+[01:41:00] el nombre nivel central
+[01:41:02] seguimos a los días de gestión
+[01:41:09] en d de gesti yo tengo resaltado en amarillo los que sobrepasan estos d de gesti Le quito el relleno ese resaltado y nuevamente hago la actualizaci Al hacer la actualizaci me pongo en el ejercicio de validar
+[01:41:25] Entonces, por ejemplo, en consulta, que son 30 días, ¿cuáles superan los 30 días?
+[01:41:29] En denuncias aptos de corrupción, ¿cuáles superan los 15 días?
+[01:41:33] Y así sucesivamente por cada uno.
+[01:41:35] resaltando cuáles son aquellos que están por encima del tiempo ley dados para ser respondidos.
+[01:41:42] Derechos de petición de interés particular.
+[01:41:44] Hago el mismo ejercicio, identifico aquellas que identifico que están por encima, las resalto.
+[01:41:52] Y las voy teniendo en cuenta.
+[01:41:55] Entonces tengo aquí quejas.
+[01:41:56] ya sé que no puedo pasarme los 15 días
+[01:42:04] lo que hago es resaltarlo
+[01:42:05] lo mismo en reclamo
+[01:42:10] a lo
+[01:42:11] espérame
+[01:42:16] espérame
+[01:42:18] espérame
+[01:42:26] Gracias.
+[01:42:56] Gracias.
+[01:43:26] Terminé de seleccionar todos los que superan los días de gestión definidos por ley, que están en la parte superior, escritos, para poder evidenciar cuáles son los que cedieron ese tiempo.
+[01:43:42] Entonces podemos ver que para el primer mes de mayo lo que fueron solicitudes de copia, solicitudes de información, fueron los que más incumplimiento tuvieron.
+[01:43:51] quejas, reclamos, derechos de inspección de interés particular.
+[01:43:57] Y eso debe ser coherente con lo que la medición que hace la Secretaría de la Vida y la Existencia.
+[01:44:02] En el siguiente, que es muy parecido al anterior,
+[01:44:05] en el primero teníamos el número de días de gestión, promedio de días de gestión.
+[01:44:11] Y en el siguiente lo que tengo es la cantidad de PQRs que tuvieron respuesta,
+[01:44:17] que fueron gestionadas
+[01:44:21] y que de acuerdo pues a lo que se resaltó
+[01:44:24] de los días de gestión
+[01:44:27] tendría como la misma coherencia
+[01:44:29] el mismo resalte
+[01:44:31] a la tabla superior
+[01:44:33] entonces lo que hago es como copiar el formato
+[01:44:35] y me lo llevo abajo
+[01:44:39] entonces simplemente me trae los que yo ya había resaltado arriba
+[01:44:43] en la misma ubicación y posición
+[01:44:45] para la cantidad
+[01:44:46] Entonces, recuerden, mientras arriba estoy viendo día de gestión, en la siguiente tabla estoy viendo cantidad de pecuarios. Eso está explicado en el título de cada una de las tablas.
+[01:45:00] sigo bajando, esta tabla se sacó manualmente porque es algo que nos estaban pidiendo,
+[01:45:07] entonces elimino el contenido, lo que voy a hacer es traerme los días promedio de gestión total,
+[01:45:13] es decir, de esta primera tabla, me traigo este total, recuerden que los tres últimos no los tomo
+[01:45:20] porque los tres últimos son tomados o calculados como, leídos como nivel central, perdón.
+[01:45:30] Y lo voy a pegar acá en promedio de gestión.
+[01:45:35] Listo.
+[01:45:39] Y estos tres últimos.
+[01:45:43] Si yo los tomo, aquí en la parte inferior me dice promedio, recuento y suma.
+[01:45:49] Promedio me da 7.
+[01:45:50] Entonces ese es el valor que voy a colocar en la tabla.
+[01:45:57] Aquí voy a colocar 7.
+[01:45:58] Este valor también se quita.
+[01:46:04] Para traer el que me arroja la tabla que dice 5.
+[01:46:08] Voy a resaltarlo aquí.
+[01:46:09] Este.
+[01:46:10] Espero que lo puedan ver.
+[01:46:13] Ese es el que me llevó para allá para la tabla.
+[01:46:15] ¿Listo?
+[01:46:17] Ya ahora, hecho eso, me devuelvo a los dos cuadros anteriores.
+[01:46:20] El de peticiones cerradas en periodos anteriores y peticiones cerradas en periodo actual.
+[01:46:26] ¿Qué voy a hacer?
+[01:46:27] Aquí llevo las tablas solamente para alimentar el cuadro que estoy haciendo.
+[01:46:32] Están tal cual.
+[01:46:33] Aquí voy a seleccionar solamente los que tuvieron respuesta definitiva.
+[01:46:37] Y voy a arrastrar los que son gestionados para copiarlos en la parte inferior.
+[01:46:45] ¿Por qué en la parte inferior?
+[01:46:47] Porque es donde estoy haciendo el comparativo.
+[01:46:49] Entonces traigo periodo actual primero.
+[01:46:51] miro cuántos son los de nivel central
+[01:46:57] o los que se cuentan como nivel central
+[01:46:59] me dice 3028 la suma
+[01:47:07] listo
+[01:47:08] y sigo trayendo información
+[01:47:10] pero antes de traer la del periodo anterior
+[01:47:13] libero el filtro que le hice
+[01:47:16] al periodo actual
+[01:47:18] traigame todas
+[01:47:20] aquí nuevamente le digo traigame
+[01:47:23] ya en el periodo anterior
+[01:47:25] traigo
+[01:47:25] las de respuesta definitiva
+[01:47:28] y selecciono las gestionadas
+[01:47:33] esto es para mostrar
+[01:47:41] ese cierre que tuvo el mes de mayo
+[01:47:43] en cuanto a las peticiones que pudieron ser
+[01:47:47] del periodo actual y del periodo anterior
+[01:47:49] nuevamente sumo las tres de nivel central
+[01:47:51] me dice que da 458
+[01:47:54] y ese es el valor que le voy a colocar aquí
+[01:47:55] recuerden después de copiados
+[01:48:04] libero el filtro
+[01:48:05] y ya me ha quedado
+[01:48:13] el cuadro inferior comparativo
+[01:48:15] entonces
+[01:48:17] en el mes de mayo
+[01:48:18] se gestionaron 4.933 peticiones con respuesta definitiva.
+[01:48:25] No trasladadas, no asignadas, no en pendientes, sino total respuesta definitiva.
+[01:48:31] ¿Qué pudo haber sido oportuna o extemporánea?
+[01:48:33] Igual están aquí ya incluidas todas.
+[01:48:37] Y lo que hago es diferenciar cu de esas PQR correspond al mes anterior o periodos anteriores y cu correspond al periodo vigente o al periodo actual es decir que se recibieron en mayo
+[01:48:50] Una vez hecho esto, si vemos aquí enseguida tengo una pequeña suma,
+[01:48:56] esa pequeña suma es del periodo anterior más el periodo actual.
+[01:49:01] No la quito, la dejo ahí para información de mi compañera.
+[01:49:06] Llego al cuadro resumen de lo que pasa en mayo.
+[01:49:08] Entonces ya sabemos que en mayo fueron 7 días. Actualizo esta última tabla, esta tabla que está al frente, esta tabla dinámica, con la información que me arroje. Así que tengo 10.202 días. Eso lo voy a escribir aquí en la columna H.
+[01:49:27] y entre peticiones del periodo actual y los PQR duplicados voy a traer la cifra de la primera tabla que vimos.
+[01:49:34] ¿Cuántos eran verdaderos? ¿Cuántos eran falsos?
+[01:49:37] Entonces me dice que tengo 983 y 1636.
+[01:49:43] Entonces escribo 983 y 1636.
+[01:49:52] Ahí me equivoqué.
+[01:49:54] Listo.
+[01:49:55] Y ahí ya queda escrito para el mes de mayo lo que se tuvo en el movimiento de PQRs.
+[01:50:05] Se me va a acabar la batería.
+[01:50:09] Ya vamos para finalizar esta tabla.
+[01:50:12] Actualizo nuevamente las siguientes tablas dinámicas.
+[01:50:17] Saco la información netamente de las alcaldías para hacer un ranking.
+[01:50:20] en este caso le digo que por favor
+[01:50:25] me reemplace en el contenido de esta tabla
+[01:50:30] lo que diga alcaldía local de me lo reemplace por nada
+[01:50:35] y con eso de esta manera me quedan ya
+[01:50:41] escrito solamente el nombre
+[01:50:43] me voy a ordenar
+[01:50:44] le digo que ordene por la columna E
+[01:50:46] valores de celda de menor a mayor
+[01:50:48] y ya tengo la gráfica para participación por localidad.
+[01:50:54] Me voy a esta otra tabla.
+[01:50:56] Tengo la tabla dinámica entre las columnas ABC y la que está en las columnas EFGHI.
+[01:51:02] Esta información la voy a borrar el contenido.
+[01:51:06] Este es un cuadro resumen muy parecido al que hicimos en el de PQR localidades.
+[01:51:10] aquí lo que voy a hacer es simplemente
+[01:51:13] tener presente
+[01:51:15] la información que quiero mostrar
+[01:51:19] y aquí va en ese detalle
+[01:51:21] pues un poco más
+[01:51:22] descrito
+[01:51:24] lo que se quiera hacer
+[01:51:26] voy a actualizar mis tablas dinámicas
+[01:51:29] después de haber borrado el contenido
+[01:51:31] de la tabla resumen
+[01:51:32] y así lo hago
+[01:51:35] para
+[01:51:35] las dos siguientes
+[01:51:38] se necesitan actualizar esas dos
+[01:51:42] para poder sacar la información
+[01:51:44] que corresponde a
+[01:51:45] para el cuadro resumen
+[01:51:48] listo
+[01:51:50] entonces arranco con supercades
+[01:51:53] me dice que en K30
+[01:51:55] tengo 162 PQRs
+[01:51:59] que en supercade K13 es 1
+[01:52:01] eso no es nuestro
+[01:52:02] y en supercade negativa tengo 1
+[01:52:05] listo
+[01:52:07] De resto no tengo más, así que el resto lo dejo con esa rayita o ese guión que me dicen que están vacíos.
+[01:52:16] Y traigo tanto la cantidad como el porcentaje de todas y cada una de las localidades,
+[01:52:22] incluido nivel central, a este cuadro.
+[01:52:25] Ah lo que hice fue como copiarlo y pegarlo y lo tengo listo Y no me voy a ir a buscar uno por uno sino que va a traer la informaci que ya traje en el cuadro resumen de localidades para
+[01:52:37] pegarlo en estas filas exactamente el mismo orden que cambia con el cuadro resumen que tanto
+[01:52:43] orientaciones como encuestas si va a ir detallado la cantidad por supercar es eso eso es lo que
+[01:52:50] que cambia un poco con este cuadro.
+[01:52:53] Pero antes de quedarme en ese detalle,
+[01:52:54] quiero actualizar las otras tablas dinámicas
+[01:52:57] para que sea completo el ejercicio,
+[01:53:02] porque se va a morir mi batería.
+[01:53:06] Me traigo solamente el porcentaje,
+[01:53:07] una vez ya lo actualizado.
+[01:53:10] Listo, eso me cambia la gráfica,
+[01:53:13] la dejo ahí,
+[01:53:15] cambio esta otra tabla.
+[01:53:20] Me traigo los tres primeros, no me traigo la que está en blanco porque esa no me da la representación que quiero mostrar en la gráfica.
+[01:53:30] Y recuerdan cuando les hablé de documentos, estaban ya los entregados, entonces cambio el título.
+[01:53:37] Mayo, y voy a escribir aquí cuánto fueron entregados a ciudadanos y cuánto fueron entregados a entidades.
+[01:53:43] Y lo mismo lo de los grupos poblacionales de valor.
+[01:53:48] entonces como yo tengo ya eso hecho en localidades
+[01:53:52] me voy a traer el informe de PQRs
+[01:53:54] localidades para ahorrar tiempo
+[01:53:57] mientras copio y pego el resto de información
+[01:54:05] entonces lo primero que me dice es el registro de documentos
+[01:54:09] documentos, documentos
+[01:54:12] el registro de atenciones y el registro de documentos
+[01:54:17] Aquí en atenciones ya tengo este cuadro. Me lo voy a llevar tal cual para esta hoja.
+[01:54:32] Dice que no debo superponerla. Olvidé que debo eliminarla primero.
+[01:54:40] Ahora sí me traigo la información. Listo. Aquí lo que hice fue un copy y pegue.
+[01:54:45] Ahora sí me voy a traer los de mayo. Entonces tengo mis atenciones de mayo.
+[01:54:59] Perdón, no eran las atenciones de mayo, eran documentos estableados de mayo.
+[01:55:02] y aquí me dice que tengo 23 entregados a la ciudadanía
+[01:55:13] y 1.269 devueltos a las entidades.
+[01:55:17] Entonces escribo 23 y 1.269.
+[01:55:22] Esa cifra no la requiere detallada para el informe, solamente el total.
+[01:55:26] Es como para un seguimiento, un control.
+[01:55:28] hasta ahí hemos completado
+[01:55:32] lo que corresponde a
+[01:55:34] el informe de PQR
+[01:55:37] salta empiezo a migrar todo lo de las hojas
+[01:55:39] reporte para validación de la información
+[01:55:41] y me voy a traer la información
+[01:55:44] de certificados de residencia
+[01:55:45] propio horizontal y orientaciones
+[01:55:47] en el orden que corresponde a esta tabla
+[01:55:50] voy a dejar de compartir un momento
+[01:55:54] mientras pongo a cargar la batería
+[01:55:58] Gracias.
+[01:56:10] you
+[01:56:40] you
+[01:57:10] you
+[01:57:40] So, let's go back.
+[01:58:06] I have the information of the documents so as not to close the file without being copied in the PQRS.
+[01:58:25] I am going to bring it to the file that corresponds to it in the PQRS report.
+[01:58:34] I have registered and delivered.
+[01:58:37] I am going to bring this delivery summary.
+[01:58:41] I am going to copy it to the PQRS website.
+[01:58:47] I'm going to put it where it says delivered.
+[01:58:59] I create a copy, delete the previous one and change the name of the one that is in force.
+[01:59:08] Here I don't put May, so there's no problem.
+[01:59:15] I delete the one of registration and I take the one I just made.
+[01:59:22] I always have a copy to leave as traceable.
+[01:59:29] So, what have I done so far?
+[01:59:33] Bring me the information from the PQR report, which is the support of these last figures that I placed as informative,
+[01:59:42] as data in documents
+[01:59:44] extradited May.
+[01:59:46] And I'm going to update.
+[01:59:50] The table. This table summarizes that it is on
+[01:59:54] the website, so the order changes a little because
+[01:59:57] here first the residence certificate,
+[01:59:58] then the horizontal property,
+[02:00:00] Yo les decía, yo tomo la información que ya está en el de localidades para no perder tiempo, para ganar tiempo.
+[02:00:07] Entonces me traigo primero certificado de residencia.
+[02:00:15] No están en el mismo orden aquí las alcaldías, entonces por esa razón lo copio a un lado.
+[02:00:30] Listo, entonces ahora debo traerme propiedad horizontal.
+[02:00:42] Luego las orientaciones.
+[02:00:46] luego sigue las encuestas
+[02:00:56] pero aquí no va a traer las encuestas del periodo
+[02:00:58] sino las encuestas con respuestas
+[02:00:59] completas
+[02:01:00] y ahora si los documentos
+[02:01:08] extraviados debería estar en el mismo
+[02:01:10] orden se supone
+[02:01:12] pero recuerden que uno
+[02:01:14] el de la página web obedece a lo como está estructurado a la veeduría distrital y el de
+[02:01:20] localidades está estructurado de acuerdo a como lo necesitan en cada una de las alcaldías locales
+[02:01:25] listo entonces ya me traje la información recuerden que aquí tengo parte de los datos
+[02:01:31] que debo llevarme allá al sitio web entonces por ejemplo que tengo en sitio web tengo el
+[02:01:37] Propiedad horizontal, que ya puedo eliminar de la página web.
+[02:01:42] Certificado de residencia, que ya puedo eliminar de la página web.
+[02:01:47] Y me va a traer esos dos que los tengo aquí.
+[02:01:54] Tal cual los voy a llevar.
+[02:01:56] entonces en este caso
+[02:02:03] muevo para que me quede
+[02:02:05] certificado de residencia acerca tipo de trámite
+[02:02:07] recuerden que tengo
+[02:02:09] ya este lo puedo eliminar
+[02:02:11] tengo el de certificado
+[02:02:13] de residencia el Excel
+[02:02:15] el que viene original
+[02:02:21] para traerme
+[02:02:24] el de la productividad por el tipo de CR, es decir, este.
+[02:02:31] ¿Para qué lo necesite?
+[02:02:33] Entonces lo voy a copiar, me lo voy a llevar a PQR,
+[02:02:37] lo coloco aquí en CR tipo trámite, copio, cambio el nombre
+[02:02:43] y ya puedo eliminar este.
+[02:02:50] listo, ya
+[02:02:53] ya sé que se la actualiza, ahora me faltan
+[02:02:55] indicadores
+[02:02:57] calificaciones de las encuestas
+[02:02:59] ya puedo cerrar
+[02:03:00] este
+[02:03:02] y me voy a ir al de
+[02:03:04] localidades para traerme indicadores
+[02:03:07] y calificaciones totales
+[02:03:10] modelo copiar
+[02:03:11] PQR
+[02:03:13] eliminó los
+[02:03:19] anteriores
+[02:03:20] Y simplemente lo que hago es tener en cuenta.
+[02:03:30] Los nombres.
+[02:03:35] Se registr entregados pco rs info de abril seguimiento d a bueno quien seguimiento d yo les dec que tra la informaci Entonces en el informe web en el resumen de d de gesti recuerden que lo tomamos aqu en un cuadrito resumen lo voy a traer tal cual
+[02:03:54] y lo voy a colocar aquí en el seguimiento
+[02:03:57] días, mayo
+[02:03:58] ah bueno, aquí
+[02:04:01] una pequeña aclaración
+[02:04:03] y es que dependencia de nivel central
+[02:04:05] si debo traerla
+[02:04:06] como está detallado
+[02:04:09] en el cuadro
+[02:04:10] entonces me traigo esto
+[02:04:18] con el 5
+[02:04:20] listo y
+[02:04:31] de donde saco estos otros
+[02:04:34] estos otros los saco de aquí
+[02:04:36] en la parte superior de la hoja
+[02:04:38] de informe de web de abril
+[02:04:39] aquí a mano derecha
+[02:04:41] tengo estos cuatro cuadros
+[02:04:43] o tablas dinámicas y lo que hago
+[02:04:46] simplemente actualizarlas
+[02:04:48] las actualizo para poder llevar la cifra que necesito
+[02:04:54] en ese cuadro resumen.
+[02:05:01] Y me falta esta última.
+[02:05:11] Entonces, lo que está resaltado en amarillito
+[02:05:13] son los datos que me va a llevar.
+[02:05:14] Aquí me dice, es temporáneas y oportunas.
+[02:05:16] esto me lo llevo al seguimiento de días
+[02:05:19] y lo mismo
+[02:05:23] pendientes y en términos
+[02:05:26] me lo llevo, esto lo hago para cada mes
+[02:05:29] listo, y aquí ya lo copié
+[02:05:33] ya lo tengo
+[02:05:33] me arrojó las cifras de lo que quería ver
+[02:05:39] grabo
+[02:05:40] y ya me tiene la información total
+[02:05:42] aquí me va haciendo un conteo
+[02:05:44] o una operación
+[02:05:45] de lo que es el recorrido del año.
+[02:05:49] Listo, entonces tengo esta información aquí, esto es más estadístico
+[02:05:52] y aquí tengo este comportamiento del porcentaje de descongestión
+[02:05:56] que debe figurar hasta junio.
+[02:06:00] Entonces aquí está hasta abril, miramos por qué no está hasta junio
+[02:06:04] y lo que hacemos es actualizarlo.
+[02:06:06] Efectivamente está a falta arrastrar.
+[02:06:16] Perdón, está mayo.
+[02:06:18] Y eso es lo que me muestra el comportamiento.
+[02:06:20] Entonces debo agregar la etiqueta de este último punto.
+[02:06:36] y ya me mostró el valor
+[02:06:45] pero aquí se me duplican algunos
+[02:07:05] listo
+[02:07:06] es decir, porque
+[02:07:12] pareciera el mismo de acá
+[02:07:16] muy seguramente este
+[02:07:17] este dato
+[02:07:19] tenía decimales
+[02:07:22] pero al redondearlo me parece como si fuera una sola cifra
+[02:07:55] Esto es más algo de
+[02:08:15] de forma
+[02:08:17] que no de fondo.
+[02:08:19] ¿Qué está pasando en este punto?
+[02:08:25] Muy seguramente necesito ampliar
+[02:08:27] los decimales, lo que yo les estaba diciendo
+[02:08:29] porque no es lo mismo
+[02:08:31] el 90 que me dan
+[02:08:33] abril
+[02:08:34] al 90 que me dan mayo
+[02:08:37] Si lo notan
+[02:08:41] es 89.9, 89.6
+[02:08:43] Y seguramente si yo a los otros
+[02:08:47] les agrego también un decimal
+[02:08:48] ahí voy a tener
+[02:08:50] esa explicación
+[02:08:52] listo entonces
+[02:08:56] este es mi comportamiento
+[02:08:57] el porcentaje de descongestión
+[02:08:59] bueno ahí ya grabo
+[02:09:01] y sigo en mi página
+[02:09:03] de el informe web
+[02:09:05] que es lo que trabaja
+[02:09:07] la compañera para el informe
+[02:09:09] escrito
+[02:09:12] el web
+[02:09:12] el PPT
+[02:09:13] entonces una vez ya aquí
+[02:09:18] que está en el orden que necesito,
+[02:09:23] 1, 2, 3, 4, 5,
+[02:09:26] me llevo esto,
+[02:09:30] el nombre de cada una,
+[02:09:35] en el orden que lo traje de allá del resumen,
+[02:09:39] para que me sea más fácil de ubicar.
+[02:09:41] si habría una forma mucho más eficiente
+[02:09:49] de hacerlo, claro que la hay
+[02:09:52] y es que cada una
+[02:09:54] sea simplemente buscar el valor y traerlo
+[02:09:57] pero no me voy a poner a formular esto
+[02:10:01] ¿Qué pasa?
+[02:10:31] Gracias.
+[02:11:01] Gracias.
+[02:11:10] Un momento.
+[02:11:40] Gracias.
+[02:12:10] Gracias.
+[02:12:40] Gracias.
+[02:13:10] Gracias.
+[02:13:40] Bueno, seguimos mostrando una copia de la información.
+[02:13:51] Vamos con San Cristóbal.
+[02:14:07] Santa Fe.
+[02:14:10] Su mapa.
+[02:14:24] Su mapa.
+[02:14:24] aquí yo
+[02:14:34] un bolito
+[02:14:40] ¿Cómo se hace?
+[02:15:00] y aquí es donde abrimos supercades
+[02:15:13] y
+[02:15:14] tanto para orientaciones como para
+[02:15:19] como para
+[02:15:23] encuestas
+[02:15:24] es decir, estas dos
+[02:15:27] listo
+[02:15:30] me voy a orientaciones
+[02:15:35] y me voy a traer supercabezas
+[02:15:39] entonces 20 de julio dice 16
+[02:15:41] 16 orientaciones
+[02:15:46] américas 40
+[02:15:49] bolsa 70
+[02:16:00] Busa 70
+[02:16:05] K3013
+[02:16:08] Negativa 11
+[02:16:12] Manitas 143
+[02:16:15] Suba 113
+[02:16:20] Pues cae virtual 0
+[02:16:22] Ahora hacemos lo mismo con encuestas
+[02:16:26] Entonces nos vamos al total el total dice entonces
+[02:16:38] 20 de julio 4
+[02:16:41] américa 11
+[02:16:45] bosa 3
+[02:16:48] k 30 31
+[02:16:53] negativo a 12
+[02:16:57] manitas
+[02:16:59] 78
+[02:17:02] 78
+[02:17:05] subo a 0
+[02:17:07] y visto al 0
+[02:17:09] listo
+[02:17:12] ha quedado totalmente
+[02:17:15] diligenciado
+[02:17:15] el informe de PQR
+[02:17:19] localidades
+[02:17:23] Aquí una pequeña verificación
+[02:17:33] porque debería
+[02:17:35] darme 3915.
+[02:17:41] Entonces todo hasta
+[02:17:43] un nivel central
+[02:17:44] entre 1776.
+[02:17:51] Muy bien.
+[02:17:53] Y supercades media 124.
+[02:18:02] Y son 139 entonces algo fall 4 11 3 31
+[02:18:09] 12, 7, 8
+[02:18:12] 0 y 0
+[02:18:14] un número no me lo está contando
+[02:18:27] 124
+[02:18:27] 124
+[02:18:28] entonces que pasa con
+[02:18:31] si yo lo sumo solo
+[02:18:45] me da 3900
+[02:18:47] 3776
+[02:18:50] me da solamente
+[02:18:51] 3776
+[02:19:07] 3780
+[02:19:10] 3770
+[02:19:21] Muy bien es algo en el formato 11 3 31
+[02:19:40] 12
+[02:19:43] 78
+[02:19:47] ahora sí
+[02:19:51] listo
+[02:19:52] y para verificar orientaciones
+[02:19:54] que esté ok
+[02:20:00] me debe dar
+[02:20:04] 4.328 invitaciones me están dando 3.922
+[02:20:12] lo mismo no está contando las cosas entonces aquí 16 40 70 13 11 143
+[02:20:30] 113.
+[02:20:33] Perfecto.
+[02:20:34] Ahora sí, ya me las contó.
+[02:20:37] Este es un ejercicio de verificación.
+[02:20:40] Solo por saber que todo está bien.
+[02:20:44] ¿Listo?
+[02:20:45] Entonces, de esta manera se ha terminado el informe de PQRs página web.
+[02:20:53] Grabamos.
+[02:20:53] y lo tenemos listo para remitir a la compañera.

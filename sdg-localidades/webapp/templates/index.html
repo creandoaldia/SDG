@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG Localidades — Sistema de Informes PQRS</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- ============================================================ -->
+    <!-- HEADER                                                        -->
+    <!-- ============================================================ -->
+    <header class="bg-gradient-to-r from-[#1F4E79] to-[#2E75B6] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white/20 rounded-lg p-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">SDG Localidades</h1>
+                        <p class="text-sm text-blue-100 hidden sm:block">Sistema de Informes PQRS — Secretaría Distrital de Gobierno</p>
+                    </div>
+                </div>
+                <div class="hidden sm:flex items-center space-x-2 text-sm">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-400/20 text-green-200">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        Local
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ============================================================ -->
+        <!-- PANEL SUPERIOR: MES / AÑO                                     -->
+        <!-- ============================================================ -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-700">Período del informe:</span>
+                </div>
+                <select id="selectMonth" class="rounded-lg border-gray-300 text-sm shadow-sm focus:border-[#1F4E79] focus:ring-[#1F4E79]">
+                    <option value="ENERO">Enero</option>
+                    <option value="FEBRERO">Febrero</option>
+                    <option value="MARZO">Marzo</option>
+                    <option value="ABRIL">Abril</option>
+                    <option value="MAYO" selected>Mayo</option>
+                    <option value="JUNIO">Junio</option>
+                    <option value="JULIO">Julio</option>
+                    <option value="AGOSTO">Agosto</option>
+                    <option value="SEPTIEMBRE">Septiembre</option>
+                    <option value="OCTUBRE">Octubre</option>
+                    <option value="NOVIEMBRE">Noviembre</option>
+                    <option value="DICIEMBRE">Diciembre</option>
+                </select>
+                <select id="selectYear" class="rounded-lg border-gray-300 text-sm shadow-sm focus:border-[#1F4E79] focus:ring-[#1F4E79]">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026" selected>2026</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ZONA DE CARGA (DRAG & DROP)                                   -->
+        <!-- ============================================================ -->
+        <div id="dropZone"
+             class="relative bg-white rounded-xl border-2 border-dashed border-gray-300 p-8 mb-6
+                    transition-all duration-300 ease-in-out cursor-pointer
+                    hover:border-[#2E75B6] hover:bg-blue-50/30">
+            <div class="text-center">
+                <!-- Icono de carga -->
+                <div id="uploadIcon" class="mx-auto w-16 h-16 mb-4 rounded-full bg-blue-50 flex items-center justify-center transition-all duration-500">
+                    <svg class="w-8 h-8 text-[#2E75B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">
+                    Arrastra los archivos fuente aquí
+                </h3>
+                <p class="text-sm text-gray-500 mb-4">
+                    o haz clic para seleccionarlos (Excel .xlsx)
+                </p>
+
+                <!-- Lista de archivos requeridos -->
+                <div class="inline-flex flex-wrap gap-2 justify-center mb-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                        BD PQRS Bogotá
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        SAC Atención
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700">
+                        Resumen SIDE
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                        Productividad CR
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-700">
+                        Productividad PH
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-700">
+                        Encuestas
+                    </span>
+                </div>
+
+                <input type="file" id="fileInput" multiple accept=".xlsx,.xls" class="hidden">
+                <button id="selectFilesBtn" class="inline-flex items-center px-4 py-2 bg-[#1F4E79] text-white rounded-lg text-sm font-medium hover:bg-[#163b5e] transition-colors">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                    </svg>
+                    Seleccionar archivos
+                </button>
+            </div>
+
+            <!-- Overlay de carga (aparece cuando hay archivos) -->
+            <div id="filesPreview" class="hidden mt-6 border-t border-gray-200 pt-4">
+                <h4 class="text-sm font-semibold text-gray-700 mb-3">Archivos cargados:</h4>
+                <div id="fileList" class="space-y-2"></div>
+                <div class="mt-4 flex items-center justify-between">
+                    <span id="fileCount" class="text-sm text-gray-500">0 archivos</span>
+                    <button id="clearFilesBtn" class="text-sm text-red-500 hover:text-red-700 font-medium">
+                        Limpiar todo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- BOTÓN DE PROCESAR                                             -->
+        <!-- ============================================================ -->
+        <div class="flex justify-center mb-6">
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <button id="processBtn"
+                        class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#1F4E79] to-[#2E75B6]
+                               text-white text-lg font-bold rounded-xl shadow-lg
+                               hover:shadow-xl hover:from-[#163b5e] hover:to-[#1F4E79]
+                               disabled:opacity-50 disabled:cursor-not-allowed
+                               transform transition-all duration-300 ease-in-out
+                               active:scale-95">
+                    <svg id="processIcon" class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span id="processBtnText">PROCESAR INFORME</span>
+                </button>
+                <button id="quickProcessBtn"
+                        class="inline-flex items-center px-4 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium
+                               hover:bg-gray-200 transition-all border border-gray-300"
+                        title="Procesa los archivos que ya están en la carpeta input/">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    Modo rápido
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PIPELINE VISUAL - ANIMACIÓN DEL PROCESO                       -->
+        <!-- ============================================================ -->
+        <div id="pipelineContainer" class="hidden bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                <span class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse" id="pipelineStatusDot"></span>
+                <span id="pipelineTitle">Procesando informe...</span>
+            </h3>
+
+            <!-- Barra de progreso principal -->
+            <div class="mb-6">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                    <span id="progressLabel">Preparando...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div id="progressBar"
+                         class="h-full bg-gradient-to-r from-[#2E75B6] to-[#4A9BDB] rounded-full
+                                transition-all duration-700 ease-out"
+                         style="width: 0%">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline de fases -->
+            <div class="space-y-3" id="phasesTimeline">
+                <!-- Cada fase se renderiza dinámicamente desde JS -->
+            </div>
+
+            <!-- Detalle del proceso -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="flex items-start">
+                    <svg class="w-5 h-5 text-gray-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div id="detailLog" class="text-sm text-gray-600 font-mono leading-relaxed max-h-40 overflow-y-auto">
+                        Esperando inicio del proceso...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- RESULTADO - ARCHIVO GENERADO                                  -->
+        <!-- ============================================================ -->
+        <div id="resultContainer" class="hidden bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="text-center py-6">
+                <!-- Icono de éxito animado -->
+                <div class="mx-auto w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-4 animate-bounce-in">
+                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">¡Informe Generado!</h3>
+                <p class="text-gray-600 mb-2" id="resultMessage">El archivo está listo para descargar.</p>
+                <p class="text-sm text-gray-500 mb-6" id="resultDetails"></p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a id="downloadBtn"
+                       class="inline-flex items-center px-6 py-3 bg-[#1F4E79] text-white rounded-xl text-sm font-bold
+                              hover:bg-[#163b5e] transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        DESCARGAR INFORME EXCEL
+                    </a>
+                    <button id="newProcessBtn"
+                            class="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium
+                                   hover:bg-gray-200 transition-all border border-gray-300">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Nuevo informe
+                    </button>
+                </div>
+
+                <!-- Power BI -->
+                <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-yellow-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div class="text-sm text-yellow-800">
+                            <p class="font-semibold">📊 Compatible con Power BI</p>
+                            <p class="mt-1">Este archivo está diseñado para conectarse directamente desde Power BI.
+                               Las tablas de datos tienen encabezados en fila 1 para que Power Query las reconozca automáticamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- FOOTER                                                        -->
+        <!-- ============================================================ -->
+        <footer class="text-center text-sm text-gray-400 py-6 border-t border-gray-200">
+            <p>SDG Localidades — Secretaría Distrital de Gobierno</p>
+            <p class="mt-1">Los datos permanecen en este computador. No se transmiten a servidores externos.</p>
+        </footer>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "video": "assets/video/Trabajar Informes PQRS Localidades y sitio WEB-20260608_144645-Grabación de la reunión.mp4",
+  "total_duration_sec": 8467.78,
+  "descripcion": "Tutorial de generación de informes PQRS — Localidades y Sitio Web",
+  "autora": "Yesenia Patino Figueroa",
+  "segmentos": [
+    {
+      "id": 1,
+      "nombre": "01-apertura-copia-datos",
+      "start_sec": 0,
+      "end_sec": 368,
+      "titulo": "Apertura, copia de datos y ordenamiento Decreto 371",
+      "descripcion": "Copia datos de Secretaría General a Excel PPT Localidades, inserta columna duplicados, ordena por Decreto 371, actualiza tablas dinámicas"
+    },
+    {
+      "id": 2,
+      "nombre": "02-documentos-extraviados-tabla-dinamica",
+      "start_sec": 368,
+      "end_sec": 580,
+      "titulo": "Documentos extraviados — tabla dinámica",
+      "descripcion": "Inserta tabla dinámica en registro CIDE, filtra 'no aplica', mueve/copia hoja a PQR localidades"
+    },
+    {
+      "id": 3,
+      "nombre": "03-atenciones-registro",
+      "start_sec": 580,
+      "end_sec": 900,
+      "titulo": "Registro de atenciones y grupos poblacionales",
+      "descripcion": "Abre archivo atenciones 2026, trae registro con grupos poblacionales, ordena A-Z, maneja Ciudad Bolívar duplicada, separa nivel central y supercades"
+    },
+    {
+      "id": 4,
+      "nombre": "04-documentos-extraviados-manual",
+      "start_sec": 900,
+      "end_sec": 1020,
+      "titulo": "Documentos extraviados — registro manual uno a uno",
+      "descripcion": "Copia manual de datos de documentos extraviados por localidad, verificación por Candelaria/La Candelaria"
+    },
+    {
+      "id": 5,
+      "nombre": "05-certificado-residencia",
+      "start_sec": 1020,
+      "end_sec": 1355,
+      "titulo": "Certificado de residencia — productividad",
+      "descripcion": "Abre archivo Visage, trae productividad CR (aprobados, pendientes, rechazados, cerrados), reordena, copia a resumen, valida 6863 certificados"
+    },
+    {
+      "id": 6,
+      "nombre": "06-propiedad-horizontal",
+      "start_sec": 1355,
+      "end_sec": 1800,
+      "titulo": "Propiedad horizontal — certificados generados",
+      "descripcion": "Mismo ejercicio con PH: inscripción, actualización, extensión, copia certificados generados, valida 809 certificados"
+    },
+    {
+      "id": 7,
+      "nombre": "07-encuestas",
+      "start_sec": 1800,
+      "end_sec": 2730,
+      "titulo": "Encuestas — procesamiento completo",
+      "descripcion": "Reporte mensual de encuestas, respuestas completas vs incompletas, calificación, porcentaje, tabla por canales (virtual, presencial, telefónico)"
+    },
+    {
+      "id": 8,
+      "nombre": "08-pqrs-web-setup",
+      "start_sec": 2730,
+      "end_sec": 3600,
+      "titulo": "Informe PQRS página web — setup inicial",
+      "descripcion": "Duplica mes anterior, copia sábana de datos, agrega columna duplicados, elimina hojas anteriores, renombra"
+    },
+    {
+      "id": 9,
+      "nombre": "09-tablas-dinamicas-web",
+      "start_sec": 3600,
+      "end_sec": 4800,
+      "titulo": "Tablas dinámicas y subtemas más reiterados",
+      "descripcion": "Actualiza TODAS las tablas dinámicas (distribución por sexo, grupo poblacional, subtemas, peticiones trasladadas), verificación de clasificación incorrecta"
+    },
+    {
+      "id": 10,
+      "nombre": "10-dias-gestion",
+      "start_sec": 4800,
+      "end_sec": 6000,
+      "titulo": "Días de gestión y vencimientos",
+      "descripcion": "Monitoreo días de gestión, extemporáneas, oportunas, pendientes vencidas, porcentaje de descongestión, resaltado de casos que sobrepasan términos legales"
+    },
+    {
+      "id": 11,
+      "nombre": "11-ranking-localidades-supercades",
+      "start_sec": 6000,
+      "end_sec": 7200,
+      "titulo": "Ranking por localidad y datos de supercades",
+      "descripcion": "Ranking de PQRS por localidad, datos de supercades (20 de Julio, Américas, Bosa, etc.), orientaciones y encuestas por punto"
+    },
+    {
+      "id": 12,
+      "nombre": "12-cierre-verificacion",
+      "start_sec": 7200,
+      "end_sec": 8467,
+      "titulo": "Cuadros comparativos, verificación final y cierre",
+      "descripcion": "Comparativo periodo actual vs anterior, verificación de cifras totales, documentos extraviados entregados, cierre y grabación"
+    }
+  ]
+}

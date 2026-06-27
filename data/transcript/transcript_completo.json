@@ -1,0 +1,7337 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.66,
+      "text": "PQR localidades y el informe de PQR página web.",
+      "chunk": 0
+    },
+    {
+      "start": 5.66,
+      "end": 34.64,
+      "text": "Lo primero, el archivo que recibimos de la Secretaría General denominado informes PQR Secretaría de Gobierno Vigencia o correspondiente al periodo mayo 2026, tal cual como se genera, se descarga y es copiado en la hoja de Excel, informes PQR localidades, mes de mayo 2026, hoja reporte PQR mayo 2026.",
+      "chunk": 0
+    },
+    {
+      "start": 34.64,
+      "end": 48.0,
+      "text": "Entonces lo copio, lo selecciono y lo copio tal cual el contenido y me lo llevo a la hoja completa que tiene la base de datos PPT localidades mayo 2026.",
+      "chunk": 0
+    },
+    {
+      "start": 48.66,
+      "end": 56.64,
+      "text": "Inserto una columna entre número de petición y sector para colocar allí lo que son los números duplicados, los datos duplicados.",
+      "chunk": 0
+    },
+    {
+      "start": 56.64,
+      "end": 66.02,
+      "text": "duplicados. Siguiendo el procedimiento definido en el decreto 371, reordeno toda la base de datos",
+      "chunk": 0
+    },
+    {
+      "start": 66.02,
+      "end": 74.06,
+      "text": "con primero un número de petición de menor a mayor, luego un segundo filtro o nivel por",
+      "chunk": 0
+    },
+    {
+      "start": 74.06,
+      "end": 80.24,
+      "text": "dependencia de la A a la Z y un tercer filtro por transacción entidad de mayor a menor.",
+      "chunk": 0
+    },
+    {
+      "start": 80.24,
+      "end": 84.28,
+      "text": "aceptamos y aquí vamos a colocar en la",
+      "chunk": 0
+    },
+    {
+      "start": 84.28,
+      "end": 88.72,
+      "text": "columna B, primera fila con datos de la",
+      "chunk": 0
+    },
+    {
+      "start": 88.72,
+      "end": 97.16,
+      "text": "sabana, es decir la B11, de que A10 es",
+      "chunk": 0
+    },
+    {
+      "start": 97.16,
+      "end": 99.88,
+      "text": "igual a A11.",
+      "chunk": 0
+    },
+    {
+      "start": 101.22,
+      "end": 103.98,
+      "text": "El resultado que nos arroja lo vamos a",
+      "chunk": 0
+    },
+    {
+      "start": 103.98,
+      "end": 106.28,
+      "text": "arrastrar hasta el último dato arrojándonos",
+      "chunk": 0
+    },
+    {
+      "start": 106.28,
+      "end": 108.46,
+      "text": "que aquellos que tengan datos verdaderos",
+      "chunk": 0
+    },
+    {
+      "start": 108.46,
+      "end": 111.72,
+      "text": "Los que están duplicados y los que tengan datos falsos son datos únicos.",
+      "chunk": 0
+    },
+    {
+      "start": 112.72,
+      "end": 116.64,
+      "text": "Ahora sí nos vamos a la hoja que dice informes localidades PPT.",
+      "chunk": 0
+    },
+    {
+      "start": 117.42,
+      "end": 123.9,
+      "text": "En la hoja de informes localidades PPT vamos a actualizar todas y cada una de las tablas dinámicas allí definidas",
+      "chunk": 0
+    },
+    {
+      "start": 123.9,
+      "end": 130.36,
+      "text": "que corresponden a lo que está en el decreto 371 de control de PQRs.",
+      "chunk": 0
+    },
+    {
+      "start": 131.02,
+      "end": 137.32,
+      "text": "Le damos actualizar el origen de los datos de las PQRs.",
+      "chunk": 0
+    },
+    {
+      "start": 137.32,
+      "end": 142.76,
+      "text": "Y me dice que tengo un total de 1.618 PQRs registradas.",
+      "chunk": 0
+    },
+    {
+      "start": 143.38,
+      "end": 149.62,
+      "text": "No cambio ninguno de los filtros ni nada, tal cual los tiene cada una de las tablas dinámicas.",
+      "chunk": 0
+    },
+    {
+      "start": 149.96,
+      "end": 156.08,
+      "text": "Se actualizan y se va haciendo el registro por cada tabla dinámica.",
+      "chunk": 0
+    },
+    {
+      "start": 158.54,
+      "end": 166.66,
+      "text": "Es necesario que se tomen los datos de cada una de estas tablas dinámicas, ya que hacen parte del informe de PQRs localidades.",
+      "chunk": 0
+    },
+    {
+      "start": 166.66,
+      "end": 181.96,
+      "text": "no solamente para alimentar la tabla de resumen, sino también porque cada una de estas tablas dinámicas es tomada por la compañera Angie Barrero para realizar el informe de localidades del mes.",
+      "chunk": 0
+    },
+    {
+      "start": 186.06,
+      "end": 189.5,
+      "text": "Eso no toma gran tiempo actualizarles.",
+      "chunk": 0
+    },
+    {
+      "start": 196.66,
+      "end": 197.66,
+      "text": "Gracias.",
+      "chunk": 0
+    },
+    {
+      "start": 226.66,
+      "end": 230.34,
+      "text": "listo una vez actualizada toda la informaci",
+      "chunk": 0
+    },
+    {
+      "start": 230.34,
+      "end": 232.38,
+      "text": "nos vamos a la última hoja que se llama",
+      "chunk": 0
+    },
+    {
+      "start": 232.38,
+      "end": 233.82,
+      "text": "resumen cifras",
+      "chunk": 0
+    },
+    {
+      "start": 233.82,
+      "end": 236.26,
+      "text": "borramos el contenido anterior",
+      "chunk": 0
+    },
+    {
+      "start": 236.26,
+      "end": 238.1,
+      "text": "ese contenido desde el mes de abril",
+      "chunk": 0
+    },
+    {
+      "start": 238.1,
+      "end": 240.68,
+      "text": "traigo siempre el formato predefinido",
+      "chunk": 0
+    },
+    {
+      "start": 240.68,
+      "end": 241.5,
+      "text": "de cada mes",
+      "chunk": 0
+    },
+    {
+      "start": 241.5,
+      "end": 244.24,
+      "text": "borro el contenido desde la",
+      "chunk": 0
+    },
+    {
+      "start": 244.24,
+      "end": 246.62,
+      "text": "fila B",
+      "chunk": 0
+    },
+    {
+      "start": 246.62,
+      "end": 248.62,
+      "text": "columna B",
+      "chunk": 0
+    },
+    {
+      "start": 248.62,
+      "end": 249.48,
+      "text": "fila 4",
+      "chunk": 0
+    },
+    {
+      "start": 249.48,
+      "end": 256.52,
+      "text": "hasta la B26 y así lo arrastro hasta la columna K.",
+      "chunk": 0
+    },
+    {
+      "start": 257.22,
+      "end": 260.66,
+      "text": "Elimino todos los datos que me queden efectivamente en ceros",
+      "chunk": 0
+    },
+    {
+      "start": 260.66,
+      "end": 264.6,
+      "text": "y empiezo a traerme primero las PQRs sesionadas y las pendientes.",
+      "chunk": 0
+    },
+    {
+      "start": 265.48,
+      "end": 268.8,
+      "text": "Aquí en una de las tablas dinámicas de infolocalidades PPT",
+      "chunk": 0
+    },
+    {
+      "start": 268.8,
+      "end": 271.12,
+      "text": "encuentro esta tabla de datos,",
+      "chunk": 0
+    },
+    {
+      "start": 271.84,
+      "end": 274.72,
+      "text": "donde dice diapositiva 3, cuadro 1 de 2,",
+      "chunk": 0
+    },
+    {
+      "start": 274.84,
+      "end": 277.74,
+      "text": "solicitudes sesionadas y solicitudes en trámite.",
+      "chunk": 0
+    },
+    {
+      "start": 278.44,
+      "end": 287.74,
+      "text": "Traigo toda la información hasta la alcaldía local de Usme, lo copio en su totalidad y me traigo los datos correspondientes.",
+      "chunk": 0
+    },
+    {
+      "start": 288.56,
+      "end": 298.1,
+      "text": "Aquí hay que tener en cuenta algo. La tabla dinámica ordena a la alcaldía local de la Candelaria por orden alfabético empezando por la C.",
+      "chunk": 0
+    },
+    {
+      "start": 298.1,
+      "end": 311.18,
+      "text": "En algunos de los datos, Candelaria aparece como la Candelaria, entonces no figurará en tercer lugar, sino que aparecerá después de Mártires o antes de Mártires por ese orden alfabético.",
+      "chunk": 0
+    },
+    {
+      "start": 311.18,
+      "end": 316.1,
+      "text": "una vez ya tengo los datos de cada una de las alcaldías locales",
+      "chunk": 0
+    },
+    {
+      "start": 316.1,
+      "end": 320.14,
+      "text": "y teniendo en cuenta que el Bogotá te escucha no maneja ni supercades",
+      "chunk": 0
+    },
+    {
+      "start": 320.14,
+      "end": 323.42,
+      "text": "ni un detalle de nivel central de las dependencias",
+      "chunk": 0
+    },
+    {
+      "start": 323.42,
+      "end": 328.22,
+      "text": "estos tres datos que quedaron inferiores, el de dependencias nivel central",
+      "chunk": 0
+    },
+    {
+      "start": 328.22,
+      "end": 331.36,
+      "text": "oficina de centros disciplinarios y oficina de atención a la ciudadanía",
+      "chunk": 0
+    },
+    {
+      "start": 331.36,
+      "end": 335.54,
+      "text": "los voy a llevar en suma a la hoja de resumen CIFLES",
+      "chunk": 0
+    },
+    {
+      "start": 335.54,
+      "end": 340.26,
+      "text": "entonces me dice que en gestionados tengo una suma de 8.484",
+      "chunk": 0
+    },
+    {
+      "start": 341.18,
+      "end": 346.8,
+      "text": "cifra que voy a escribir en la pila B24.",
+      "chunk": 0
+    },
+    {
+      "start": 347.42,
+      "end": 349.76,
+      "text": "Y lo mismo voy a hacer con las pendientes.",
+      "chunk": 0
+    },
+    {
+      "start": 350.24,
+      "end": 356.78,
+      "text": "Voy a tomar estas tres últimas datos de la columna C, pila 226, 227 y 228,",
+      "chunk": 0
+    },
+    {
+      "start": 357.24,
+      "end": 363.94,
+      "text": "que me da un total de 497 y lo voy a escribir en la hoja resumen cifra en PQR pendiente.",
+      "chunk": 0
+    },
+    {
+      "start": 365.16,
+      "end": 368.84,
+      "text": "Al resto le voy a escribir 000 y 0.",
+      "chunk": 0
+    },
+    {
+      "start": 368.84,
+      "end": 398.82,
+      "text": "Hasta ahí llevo la primera parte.",
+      "chunk": 0
+    },
+    {
+      "start": 398.84,
+      "end": 406.92,
+      "text": "encuestas en el mes de mayo, pero que de esas 65 encuestas, solo 60 tienen respuestas completas.",
+      "chunk": 0
+    },
+    {
+      "start": 407.02,
+      "end": 412.74,
+      "text": "Quiere decir que la calificación es por estas 60 completas. Pudo haber obtenido una calificación",
+      "chunk": 0
+    },
+    {
+      "start": 412.74,
+      "end": 426.66,
+      "text": "de 4.5, que tiene un peso del 85% sobre el 100% si hubiera sacado 5 de 5. Entonces, haciendo",
+      "chunk": 0
+    },
+    {
+      "start": 426.66,
+      "end": 428.72,
+      "text": "una suposición de que 4.5",
+      "chunk": 0
+    },
+    {
+      "start": 428.72,
+      "end": 430.84,
+      "text": "representa ese 85% de la",
+      "chunk": 0
+    },
+    {
+      "start": 430.84,
+      "end": 432.88,
+      "text": "nota ideal que hubiera sido, de la",
+      "chunk": 0
+    },
+    {
+      "start": 432.88,
+      "end": 434.4,
+      "text": "calificación ideal que hubiera sido 5.",
+      "chunk": 0
+    },
+    {
+      "start": 435.52,
+      "end": 436.8,
+      "text": "Borro ese dato porque este era",
+      "chunk": 0
+    },
+    {
+      "start": 436.8,
+      "end": 439.0,
+      "text": "solamente de ejemplo. Entonces,",
+      "chunk": 0
+    },
+    {
+      "start": 439.42,
+      "end": 440.46,
+      "text": "como su nombre lo indica,",
+      "chunk": 0
+    },
+    {
+      "start": 440.88,
+      "end": 442.68,
+      "text": "debo traerme la información de documentos",
+      "chunk": 0
+    },
+    {
+      "start": 442.68,
+      "end": 444.78,
+      "text": "extraviados del mes. Entonces, ya",
+      "chunk": 0
+    },
+    {
+      "start": 444.78,
+      "end": 463.14,
+      "text": "una vez siendo descargados de los archivos que generan los compa me voy a documentos extraviados 2026 Siempre guardo una copia de esos archivos por cualquier posible consulta que se tenga que hacer y no se tenga acceso a la aplicaci",
+      "chunk": 0
+    },
+    {
+      "start": 463.8,
+      "end": 474.0,
+      "text": "Aquí, al costado derecho de esa tabla de registro SIDE, voy a insertar una tabla dinámica.",
+      "chunk": 0
+    },
+    {
+      "start": 475.0,
+      "end": 485.38,
+      "text": "En esta tabla dinámica le voy a decir que efectivamente es desde los datos que tengo de la columna D hasta la columna total.",
+      "chunk": 0
+    },
+    {
+      "start": 486.58,
+      "end": 489.1,
+      "text": "Y que me lo deje en el espacio que seleccione.",
+      "chunk": 0
+    },
+    {
+      "start": 489.84,
+      "end": 496.64,
+      "text": "Ya una vez dispuesto allí, la tabla dinámica empiezo a colocar que lo primero que me debe traer es localidad en filas.",
+      "chunk": 0
+    },
+    {
+      "start": 497.08,
+      "end": 502.5,
+      "text": "Y que me debe traer del total la información y me la coloque en valores.",
+      "chunk": 0
+    },
+    {
+      "start": 502.5,
+      "end": 523.5,
+      "text": "¿Qué elimino de este filtro? De este filtro voy a eliminar las que dicen no aplica y me debe dar el total correspondiente al periodo, es decir, 1723 datos registrados, documentos registrados en el mes de mayo.",
+      "chunk": 0
+    },
+    {
+      "start": 523.5,
+      "end": 527.06,
+      "text": "¿Listo? Entonces esta información es la que me voy a llevar al otro lado",
+      "chunk": 0
+    },
+    {
+      "start": 527.06,
+      "end": 529.56,
+      "text": "¿Qué hago? Selecciono la hoja",
+      "chunk": 0
+    },
+    {
+      "start": 529.56,
+      "end": 533.98,
+      "text": "le doy mover o copiar y me la llevo a PQR localidades",
+      "chunk": 0
+    },
+    {
+      "start": 533.98,
+      "end": 536.76,
+      "text": "¿En dónde? En la hoja que dice registrado SIDE",
+      "chunk": 0
+    },
+    {
+      "start": 536.76,
+      "end": 540.28,
+      "text": "lo creo como una copia porque siempre lo llevo allá",
+      "chunk": 0
+    },
+    {
+      "start": 540.28,
+      "end": 543.5,
+      "text": "para que cualquier ejercicio de validación",
+      "chunk": 0
+    },
+    {
+      "start": 543.5,
+      "end": 545.96,
+      "text": "que requiera hacer la compañera que hace el informe",
+      "chunk": 0
+    },
+    {
+      "start": 545.96,
+      "end": 548.98,
+      "text": "lo encuentro fácilmente. Elimino el anterior",
+      "chunk": 0
+    },
+    {
+      "start": 548.98,
+      "end": 552.6,
+      "text": "y me quedo con el dato",
+      "chunk": 0
+    },
+    {
+      "start": 552.6,
+      "end": 554.86,
+      "text": "de la sabana que acabo de copiar.",
+      "chunk": 0
+    },
+    {
+      "start": 555.64,
+      "end": 557.8,
+      "text": "Entonces, ya sé que documentos extraviados,",
+      "chunk": 0
+    },
+    {
+      "start": 557.98,
+      "end": 561.68,
+      "text": "este corresponde al mes de mayo 2026.",
+      "chunk": 0
+    },
+    {
+      "start": 562.56,
+      "end": 564.68,
+      "text": "Y esta información la dejo acá.",
+      "chunk": 0
+    },
+    {
+      "start": 566.22,
+      "end": 566.6,
+      "text": "Listo.",
+      "chunk": 0
+    },
+    {
+      "start": 567.48,
+      "end": 568.26,
+      "text": "Voy grabando.",
+      "chunk": 0
+    },
+    {
+      "start": 569.92,
+      "end": 572.62,
+      "text": "Y lo mismo en el anterior,",
+      "chunk": 0
+    },
+    {
+      "start": 572.96,
+      "end": 574.58,
+      "text": "en donde viene el origen de la información",
+      "chunk": 0
+    },
+    {
+      "start": 574.58,
+      "end": 576.04,
+      "text": "para que no se me haya perdido nada.",
+      "chunk": 0
+    },
+    {
+      "start": 576.8,
+      "end": 578.6,
+      "text": "Cierro el archivo de reportes,",
+      "chunk": 0
+    },
+    {
+      "start": 578.6,
+      "end": 580.7,
+      "text": "por resumen, sí de mayo 2026.",
+      "chunk": 0
+    },
+    {
+      "start": 580.7,
+      "end": 582.96,
+      "text": "y ahora me voy con el de atenciones.",
+      "chunk": 0
+    },
+    {
+      "start": 583.86,
+      "end": 589.58,
+      "text": "Voy a atenciones, 2026 y abro el archivo correspondiente a mayo.",
+      "chunk": 0
+    },
+    {
+      "start": 591.28,
+      "end": 594.74,
+      "text": "En este archivo correspondiente a mayo encuentro una información",
+      "chunk": 0
+    },
+    {
+      "start": 594.74,
+      "end": 598.06,
+      "text": "que ya está generada en tablas y que es de gran utilidad",
+      "chunk": 0
+    },
+    {
+      "start": 598.06,
+      "end": 600.16,
+      "text": "para la información del DPQRS.",
+      "chunk": 0
+    },
+    {
+      "start": 600.88,
+      "end": 603.2,
+      "text": "Entonces me voy a buscar atenciones.",
+      "chunk": 0
+    },
+    {
+      "start": 603.74,
+      "end": 606.34,
+      "text": "En el DPQRS localidades se llama registro atenciones",
+      "chunk": 0
+    },
+    {
+      "start": 606.34,
+      "end": 609.68,
+      "text": "y lo voy a traer tal cual está aquí resumido.",
+      "chunk": 0
+    },
+    {
+      "start": 609.68,
+      "end": 618.18,
+      "text": "¿Qué necesito principalmente? El nombre de la localidad y los grupos poblacionales a los que hace referencia.",
+      "chunk": 0
+    },
+    {
+      "start": 639.68,
+      "end": 640.68,
+      "text": "Gracias.",
+      "chunk": 0
+    },
+    {
+      "start": 669.68,
+      "end": 688.52,
+      "text": "Entonces verifico que efectivamente aparezcan las localidades y los grupos poblacionales que debo dar informaci",
+      "chunk": 0
+    },
+    {
+      "start": 688.52,
+      "end": 690.02,
+      "text": "Voy a mover esto aquí.",
+      "chunk": 0
+    },
+    {
+      "start": 692.82,
+      "end": 698.38,
+      "text": "Entonces, aquí me aparecen los grupos poblacionales y efectivamente me aparecen las localidades.",
+      "chunk": 0
+    },
+    {
+      "start": 698.38,
+      "end": 724.02,
+      "text": "Entonces, esta hoja llamada tablas la voy a llevar al DPQ de las localidades y la voy a colocar en donde dice registro de atenciones, le creo una copia y elimino la anterior sin antes cambiar el nombre para que se mantenga la información tal cual como está construida en el catálogo de activos de la información en la DT.",
+      "chunk": 0
+    },
+    {
+      "start": 724.02,
+      "end": 747.28,
+      "text": "No hay problema con que yo elimine las que están antes porque no está amarrado o atado la fórmula a los datos que tiene cada una de estas hojas. Recuerden, estas hojas las dejo solamente para validación y ejercicio de la compañera que hace el informe para que pueda hacer el cruce por si encuentra alguna irregularidad.",
+      "chunk": 0
+    },
+    {
+      "start": 747.28,
+      "end": 750.82,
+      "text": "en este caso la hoja de registros por punto de atención",
+      "chunk": 0
+    },
+    {
+      "start": 750.82,
+      "end": 753.0,
+      "text": "está organizada de mayor a menor",
+      "chunk": 0
+    },
+    {
+      "start": 753.0,
+      "end": 756.84,
+      "text": "la necesito más bien en un orden de la A a la Z",
+      "chunk": 0
+    },
+    {
+      "start": 756.84,
+      "end": 760.34,
+      "text": "para que me traiga el mismo orden de las alcaldías",
+      "chunk": 0
+    },
+    {
+      "start": 760.34,
+      "end": 763.12,
+      "text": "recuerden lo que siempre les he dicho ahorita hace un rato",
+      "chunk": 0
+    },
+    {
+      "start": 763.12,
+      "end": 766.04,
+      "text": "de la Candelaria, entonces es válido que Candelaria",
+      "chunk": 0
+    },
+    {
+      "start": 766.04,
+      "end": 768.88,
+      "text": "está efectivamente después de Bosa y ya ahí me puedo ir con los datos",
+      "chunk": 0
+    },
+    {
+      "start": 768.88,
+      "end": 769.68,
+      "text": "confiadamente",
+      "chunk": 0
+    },
+    {
+      "start": 769.68,
+      "end": 774.46,
+      "text": "evidencio que tengo",
+      "chunk": 0
+    },
+    {
+      "start": 774.46,
+      "end": 777.24,
+      "text": "dos localidades Ciudad Bolívar",
+      "chunk": 0
+    },
+    {
+      "start": 777.28,
+      "end": 779.28,
+      "text": "alcaldía local Ciudad Bolívar.",
+      "chunk": 0
+    },
+    {
+      "start": 779.66,
+      "end": 783.54,
+      "text": "Entonces lo que hago es que tomo hasta la primera alcaldía local Ciudad Bolívar,",
+      "chunk": 0
+    },
+    {
+      "start": 784.1,
+      "end": 788.04,
+      "text": "le agrego el 2, que es el que sigue del otro dato de Ciudad Bolívar,",
+      "chunk": 0
+    },
+    {
+      "start": 789.18,
+      "end": 792.64,
+      "text": "y lo llevo a orientaciones.",
+      "chunk": 0
+    },
+    {
+      "start": 793.74,
+      "end": 796.44,
+      "text": "¿Por qué no he traído todavía el de documentos extraviados?",
+      "chunk": 0
+    },
+    {
+      "start": 796.44,
+      "end": 800.3,
+      "text": "Porque en el de documentos extraviados no salieron todas las localidades,",
+      "chunk": 0
+    },
+    {
+      "start": 800.84,
+      "end": 804.4,
+      "text": "entonces solamente voy a traer la información de los que ya aparecen.",
+      "chunk": 0
+    },
+    {
+      "start": 805.76,
+      "end": 806.72,
+      "text": "Me devuelvo.",
+      "chunk": 0
+    },
+    {
+      "start": 807.28,
+      "end": 811.12,
+      "text": "Ya copié el 2 de Ciudad Bolívar y ahora voy a copiar las otras localidades.",
+      "chunk": 0
+    },
+    {
+      "start": 812.38,
+      "end": 814.12,
+      "text": "Tengo hasta Usme.",
+      "chunk": 0
+    },
+    {
+      "start": 815.12,
+      "end": 816.82,
+      "text": "Bueno, aquí me aparece un 1 de Kennedy.",
+      "chunk": 0
+    },
+    {
+      "start": 817.06,
+      "end": 819.7,
+      "text": "Entonces, asumo que es de la alcaldía local de Kennedy.",
+      "chunk": 0
+    },
+    {
+      "start": 819.86,
+      "end": 820.88,
+      "text": "Entonces, lo vamos a sumar.",
+      "chunk": 0
+    },
+    {
+      "start": 824.54,
+      "end": 825.72,
+      "text": "Pego la información.",
+      "chunk": 0
+    },
+    {
+      "start": 826.16,
+      "end": 828.42,
+      "text": "Ya encontramos que tenía uno más de Kennedy.",
+      "chunk": 0
+    },
+    {
+      "start": 829.56,
+      "end": 830.38,
+      "text": "Si lo agrego acá.",
+      "chunk": 0
+    },
+    {
+      "start": 831.3,
+      "end": 834.88,
+      "text": "Lo coloco de esta manera en suma para que cuando se haga el cruce de la información",
+      "chunk": 0
+    },
+    {
+      "start": 834.88,
+      "end": 841.5,
+      "text": "se pueda validar que efectivamente lo traje de lo que está contenido en la tabla de datos de las atenciones.",
+      "chunk": 0
+    },
+    {
+      "start": 842.2,
+      "end": 848.18,
+      "text": "Aquí sí me separa nivel central y supercades, pero supercades lo tengo como un solo campo.",
+      "chunk": 0
+    },
+    {
+      "start": 848.36,
+      "end": 851.02,
+      "text": "Entonces, sumo cuánto me da supercades, 406.",
+      "chunk": 0
+    },
+    {
+      "start": 851.58,
+      "end": 857.52,
+      "text": "¿Por qué si el informe de PQRC es de localidades tengo que separar lo que corresponde a localidades y a nivel central?",
+      "chunk": 0
+    },
+    {
+      "start": 858.0,
+      "end": 862.7,
+      "text": "Porque en algún momento en los informes nos han pedido que por favor le discrimine",
+      "chunk": 0
+    },
+    {
+      "start": 862.7,
+      "end": 867.34,
+      "text": "de ese total de atenciones, cuántas se hicieron en localidades",
+      "chunk": 0
+    },
+    {
+      "start": 867.34,
+      "end": 871.48,
+      "text": "y cuántas se hicieron en puntos supercades y en el punto principal.",
+      "chunk": 0
+    },
+    {
+      "start": 871.88,
+      "end": 875.78,
+      "text": "A raíz de ese informe que nos pidieron, es que vengo ya hace dos años",
+      "chunk": 0
+    },
+    {
+      "start": 875.78,
+      "end": 878.26,
+      "text": "separando los datos correspondientes.",
+      "chunk": 0
+    },
+    {
+      "start": 879.24,
+      "end": 884.14,
+      "text": "Pero es que me dice que debo tener 4,328 registros de atenciones.",
+      "chunk": 0
+    },
+    {
+      "start": 884.32,
+      "end": 888.34,
+      "text": "Vamos y validamos. Efectivamente, tengo 4,328.",
+      "chunk": 0
+    },
+    {
+      "start": 889.18,
+      "end": 892.3,
+      "text": "Todavía aquí en ese dato no voy a tomar...",
+      "chunk": 0
+    },
+    {
+      "start": 892.7,
+      "end": 899.84,
+      "text": "No voy a tomar la discriminación de los grupos poblacionales, ya les voy a explicar por qué se usan.",
+      "chunk": 0
+    },
+    {
+      "start": 900.0,
+      "end": 901.6,
+      "text": "En el de PQR es página web.",
+      "chunk": 1
+    },
+    {
+      "start": 903.22,
+      "end": 906.48,
+      "text": "Ahora, sí, en lo que estábamos haciendo de documentos extraviados.",
+      "chunk": 1
+    },
+    {
+      "start": 907.98,
+      "end": 909.36,
+      "text": "Entonces, en registrado.",
+      "chunk": 1
+    },
+    {
+      "start": 909.96,
+      "end": 914.02,
+      "text": "Dice que Candelaria tiene 96 y Engativá 98.",
+      "chunk": 1
+    },
+    {
+      "start": 914.56,
+      "end": 915.28,
+      "text": "Candelaria.",
+      "chunk": 1
+    },
+    {
+      "start": 915.92,
+      "end": 917.0,
+      "text": "Lo escribo.",
+      "chunk": 1
+    },
+    {
+      "start": 918.76,
+      "end": 919.48,
+      "text": "96.",
+      "chunk": 1
+    },
+    {
+      "start": 921.1,
+      "end": 923.06,
+      "text": "¿Por qué no está formulado?",
+      "chunk": 1
+    },
+    {
+      "start": 923.06,
+      "end": 929.52,
+      "text": "Porque en alguna ocasión me aparecía, por ejemplo, Candelaria, así como está escrito.",
+      "chunk": 1
+    },
+    {
+      "start": 930.0,
+      "end": 933.16,
+      "text": "Y nuevamente enseguida me aparecía la candelaria.",
+      "chunk": 1
+    },
+    {
+      "start": 933.82,
+      "end": 937.08,
+      "text": "Entonces él me asumía que eran diferentes y eran lo mismo.",
+      "chunk": 1
+    },
+    {
+      "start": 937.54,
+      "end": 944.7,
+      "text": "Entonces prefería hacer la verificación uno a uno para poder llevar el conteo correcto de los datos.",
+      "chunk": 1
+    },
+    {
+      "start": 945.88,
+      "end": 946.88,
+      "text": "N18.",
+      "chunk": 1
+    },
+    {
+      "start": 950.08,
+      "end": 951.36,
+      "text": "N70.",
+      "chunk": 1
+    },
+    {
+      "start": 951.36,
+      "end": 951.7,
+      "text": "N70.",
+      "chunk": 1
+    },
+    {
+      "start": 954.76,
+      "end": 958.56,
+      "text": "Estos son los documentos, la cantidad de documentos que ingresaron.",
+      "chunk": 1
+    },
+    {
+      "start": 958.56,
+      "end": 960.92,
+      "text": "693",
+      "chunk": 1
+    },
+    {
+      "start": 960.92,
+      "end": 968.46,
+      "text": "Santa Fe 15, Suba 19",
+      "chunk": 1
+    },
+    {
+      "start": 968.46,
+      "end": 977.84,
+      "text": "y Teusaquillo 666",
+      "chunk": 1
+    },
+    {
+      "start": 977.84,
+      "end": 983.8,
+      "text": "Esta información es útil para las localidades",
+      "chunk": 1
+    },
+    {
+      "start": 983.8,
+      "end": 986.48,
+      "text": "en el sentido que se les muestra a ellos",
+      "chunk": 1
+    },
+    {
+      "start": 986.48,
+      "end": 991.44,
+      "text": "cómo está el ejercicio de recuperación de esos documentos de identidad",
+      "chunk": 1
+    },
+    {
+      "start": 991.44,
+      "end": 995.96,
+      "text": "para que puedan reposar en el sistema de información de documentos extraviados",
+      "chunk": 1
+    },
+    {
+      "start": 995.96,
+      "end": 1001.0,
+      "text": "y de alguna manera el ciudadano cuando reconozca o le llegue su mensaje",
+      "chunk": 1
+    },
+    {
+      "start": 1001.0,
+      "end": 1004.7,
+      "text": "de que ha sido encontrado su documento pueda fácilmente recuperarlo,",
+      "chunk": 1
+    },
+    {
+      "start": 1005.7,
+      "end": 1009.16,
+      "text": "acercarse al nivel central y poder reclamarlo.",
+      "chunk": 1
+    },
+    {
+      "start": 1010.14,
+      "end": 1015.02,
+      "text": "Entonces ya recuerden que solamente me he traído PQR del Bogotá te escucha,",
+      "chunk": 1
+    },
+    {
+      "start": 1015.02,
+      "end": 1018.88,
+      "text": "documentos extraviados y registro de atenciones.",
+      "chunk": 1
+    },
+    {
+      "start": 1019.26,
+      "end": 1022.6,
+      "text": "El mismo ejercicio voy a hacer para certificado de residencia y propio horizontal.",
+      "chunk": 1
+    },
+    {
+      "start": 1022.9,
+      "end": 1030.1,
+      "text": "Entonces voy a abrir el archivo que previamente ha sido generado por la compañera encargada de Visage.",
+      "chunk": 1
+    },
+    {
+      "start": 1045.02,
+      "end": 1046.02,
+      "text": "Gracias.",
+      "chunk": 1
+    },
+    {
+      "start": 1075.02,
+      "end": 1076.02,
+      "text": "Gracias.",
+      "chunk": 1
+    },
+    {
+      "start": 1105.02,
+      "end": 1117.78,
+      "text": "Listo, entonces ya con el archivo.",
+      "chunk": 1
+    },
+    {
+      "start": 1117.78,
+      "end": 1140.78,
+      "text": "Arranc primero con el de certificado de residencia Espero que el archivo que es clave en este informe o en estas abanatos generada de Visayi La productividad por el tipo de CR de certificado de residencia y la productividad por cada uno de los temas para asuntos para los cuales es requerido el certificado de residencia",
+      "chunk": 1
+    },
+    {
+      "start": 1140.78,
+      "end": 1145.1,
+      "text": "nuevamente me dirijo a el archivo de",
+      "chunk": 1
+    },
+    {
+      "start": 1145.1,
+      "end": 1151.56,
+      "text": "este de PECORRE, ya lo puedo cerrar",
+      "chunk": 1
+    },
+    {
+      "start": 1151.56,
+      "end": 1153.92,
+      "text": "al archivo de localidades",
+      "chunk": 1
+    },
+    {
+      "start": 1153.92,
+      "end": 1160.66,
+      "text": "y miro que me dice certificado de residencia",
+      "chunk": 1
+    },
+    {
+      "start": 1160.66,
+      "end": 1164.64,
+      "text": "me dice que necesita por la productividad de los que fueron aprobados, cerrados",
+      "chunk": 1
+    },
+    {
+      "start": 1164.64,
+      "end": 1168.76,
+      "text": "pendientes, rechazados, entonces miro aquí, esos se encuentran",
+      "chunk": 1
+    },
+    {
+      "start": 1168.76,
+      "end": 1170.94,
+      "text": "en la hoja productividad CR",
+      "chunk": 1
+    },
+    {
+      "start": 1170.94,
+      "end": 1173.84,
+      "text": "y esta información es la que me voy a ir a llevar",
+      "chunk": 1
+    },
+    {
+      "start": 1173.84,
+      "end": 1175.76,
+      "text": "sin modificar absolutamente nada.",
+      "chunk": 1
+    },
+    {
+      "start": 1176.26,
+      "end": 1178.3,
+      "text": "Me la voy a ir a llevar a base de datos localidades",
+      "chunk": 1
+    },
+    {
+      "start": 1178.3,
+      "end": 1181.12,
+      "text": "y la copio.",
+      "chunk": 1
+    },
+    {
+      "start": 1181.68,
+      "end": 1183.66,
+      "text": "¿Qué hago? Cambio nuevamente el nombre.",
+      "chunk": 1
+    },
+    {
+      "start": 1187.24,
+      "end": 1189.0,
+      "text": "El ejercicio de cambiar el nombre",
+      "chunk": 1
+    },
+    {
+      "start": 1189.0,
+      "end": 1190.68,
+      "text": "es porque así está definido",
+      "chunk": 1
+    },
+    {
+      "start": 1190.68,
+      "end": 1194.64,
+      "text": "en el catálogo de activos de la información.",
+      "chunk": 1
+    },
+    {
+      "start": 1196.2,
+      "end": 1196.54,
+      "text": "Listo.",
+      "chunk": 1
+    },
+    {
+      "start": 1196.54,
+      "end": 1200.38,
+      "text": "¿qué me dice certificado de residencia?",
+      "chunk": 1
+    },
+    {
+      "start": 1200.86,
+      "end": 1202.12,
+      "text": "que yo tengo aquí unos datos",
+      "chunk": 1
+    },
+    {
+      "start": 1202.12,
+      "end": 1208.36,
+      "text": "de inscripción realizada, actualización realizada, extensión realizada",
+      "chunk": 1
+    },
+    {
+      "start": 1208.36,
+      "end": 1210.48,
+      "text": "y certificados generados",
+      "chunk": 1
+    },
+    {
+      "start": 1210.48,
+      "end": 1216.62,
+      "text": "aquí en certificado de residencia, tengo aprobados, pendientes",
+      "chunk": 1
+    },
+    {
+      "start": 1216.62,
+      "end": 1220.4,
+      "text": "rechazados, cerrados y total general, me voy a ir con la",
+      "chunk": 1
+    },
+    {
+      "start": 1220.4,
+      "end": 1223.7,
+      "text": "columna de aprobados, eso es lo que me voy a llevar al otro lado",
+      "chunk": 1
+    },
+    {
+      "start": 1223.7,
+      "end": 1234.36,
+      "text": "Entonces, lo que hago es grabar y reordenar de acuerdo a la primera etiqueta.",
+      "chunk": 1
+    },
+    {
+      "start": 1241.4,
+      "end": 1248.26,
+      "text": "Y me llevo esta información tal cual está, donde me muestra las 20 alcaldías locales.",
+      "chunk": 1
+    },
+    {
+      "start": 1248.26,
+      "end": 1253.04,
+      "text": "y las llevo a resumen",
+      "chunk": 1
+    },
+    {
+      "start": 1253.04,
+      "end": 1255.62,
+      "text": "y las copio acá",
+      "chunk": 1
+    },
+    {
+      "start": 1255.62,
+      "end": 1257.92,
+      "text": "aquí nuevamente me devuelvo",
+      "chunk": 1
+    },
+    {
+      "start": 1257.92,
+      "end": 1259.46,
+      "text": "solamente para validar",
+      "chunk": 1
+    },
+    {
+      "start": 1259.46,
+      "end": 1261.86,
+      "text": "que candelaria sean 36",
+      "chunk": 1
+    },
+    {
+      "start": 1261.86,
+      "end": 1263.66,
+      "text": "y no vaya a pronto",
+      "chunk": 1
+    },
+    {
+      "start": 1263.66,
+      "end": 1264.8,
+      "text": "cruzar información",
+      "chunk": 1
+    },
+    {
+      "start": 1264.8,
+      "end": 1267.26,
+      "text": "listo",
+      "chunk": 1
+    },
+    {
+      "start": 1267.26,
+      "end": 1269.5,
+      "text": "para nivel central coloco 0",
+      "chunk": 1
+    },
+    {
+      "start": 1269.5,
+      "end": 1271.44,
+      "text": "supercadre 0 y en blanco 0",
+      "chunk": 1
+    },
+    {
+      "start": 1271.44,
+      "end": 1273.86,
+      "text": "me dice que debo tener 6863",
+      "chunk": 1
+    },
+    {
+      "start": 1274.6,
+      "end": 1276.0,
+      "text": "certificados aprobados",
+      "chunk": 1
+    },
+    {
+      "start": 1276.0,
+      "end": 1277.98,
+      "text": "efectivamente ese es el dato que me aparece",
+      "chunk": 1
+    },
+    {
+      "start": 1277.98,
+      "end": 1281.54,
+      "text": "en el archivo original generado desde el Visage.",
+      "chunk": 1
+    },
+    {
+      "start": 1282.66,
+      "end": 1282.9,
+      "text": "¿Listo?",
+      "chunk": 1
+    },
+    {
+      "start": 1283.1,
+      "end": 1285.14,
+      "text": "Entonces, recuerden, el archivo original no lo modifique,",
+      "chunk": 1
+    },
+    {
+      "start": 1285.36,
+      "end": 1290.66,
+      "text": "el que toque es el que está copiado en la hoja de Excel",
+      "chunk": 1
+    },
+    {
+      "start": 1290.66,
+      "end": 1294.3,
+      "text": "denominada Certificado de Residencia Productividad Mayo,",
+      "chunk": 1
+    },
+    {
+      "start": 1294.3,
+      "end": 1298.1,
+      "text": "que es soporte para el informe de PQR localidades.",
+      "chunk": 1
+    },
+    {
+      "start": 1300.08,
+      "end": 1300.36,
+      "text": "¿Listo?",
+      "chunk": 1
+    },
+    {
+      "start": 1301.16,
+      "end": 1305.08,
+      "text": "Como este archivo lo va a necesitar la compañera,",
+      "chunk": 1
+    },
+    {
+      "start": 1305.54,
+      "end": 1307.52,
+      "text": "entonces yo nuevamente me voy a datos",
+      "chunk": 1
+    },
+    {
+      "start": 1307.52,
+      "end": 1314.52,
+      "text": "y le voy a pedir que ordene la información de acuerdo a este porcentaje.",
+      "chunk": 1
+    },
+    {
+      "start": 1317.56,
+      "end": 1327.02,
+      "text": "Entonces estaba por el porcentaje, estaba de mayor a menor.",
+      "chunk": 1
+    },
+    {
+      "start": 1331.56,
+      "end": 1333.02,
+      "text": "De menor a mayor.",
+      "chunk": 1
+    },
+    {
+      "start": 1334.08,
+      "end": 1334.38,
+      "text": "Listo.",
+      "chunk": 1
+    },
+    {
+      "start": 1335.22,
+      "end": 1336.56,
+      "text": "Ese es el orden en el que estaba.",
+      "chunk": 1
+    },
+    {
+      "start": 1336.56,
+      "end": 1338.98,
+      "text": "ya una vez organizado como estaba",
+      "chunk": 1
+    },
+    {
+      "start": 1338.98,
+      "end": 1340.92,
+      "text": "el original, lo grabo",
+      "chunk": 1
+    },
+    {
+      "start": 1340.92,
+      "end": 1343.06,
+      "text": "y lo dejo así tal cual, ahora me voy",
+      "chunk": 1
+    },
+    {
+      "start": 1343.06,
+      "end": 1344.64,
+      "text": "a ir a traer el de propio horizontal",
+      "chunk": 1
+    },
+    {
+      "start": 1344.64,
+      "end": 1356.76,
+      "text": "cierro momento productividad DCR me dice que si deseo guardar los cambios no no hice ning cambio entonces ahora me voy a traer el de propio horizontal",
+      "chunk": 1
+    },
+    {
+      "start": 1356.76,
+      "end": 1360.68,
+      "text": "hago el mismo ejercicio",
+      "chunk": 1
+    },
+    {
+      "start": 1360.68,
+      "end": 1362.7,
+      "text": "entonces miro cuál es la información que debo",
+      "chunk": 1
+    },
+    {
+      "start": 1362.7,
+      "end": 1364.62,
+      "text": "llevarme y recuerden que",
+      "chunk": 1
+    },
+    {
+      "start": 1364.62,
+      "end": 1366.26,
+      "text": "estábamos hablando entonces de",
+      "chunk": 1
+    },
+    {
+      "start": 1366.26,
+      "end": 1367.62,
+      "text": "lo que estaba",
+      "chunk": 1
+    },
+    {
+      "start": 1367.62,
+      "end": 1369.82,
+      "text": "en bandeja",
+      "chunk": 1
+    },
+    {
+      "start": 1369.82,
+      "end": 1374.32,
+      "text": "lo que estaba actualizado",
+      "chunk": 1
+    },
+    {
+      "start": 1374.32,
+      "end": 1375.68,
+      "text": "lo que estaba inscrito",
+      "chunk": 1
+    },
+    {
+      "start": 1375.68,
+      "end": 1378.12,
+      "text": "y ese resumen",
+      "chunk": 1
+    },
+    {
+      "start": 1378.12,
+      "end": 1379.56,
+      "text": "entonces me voy al informe",
+      "chunk": 1
+    },
+    {
+      "start": 1379.56,
+      "end": 1382.44,
+      "text": "PQR localidades y que me dice",
+      "chunk": 1
+    },
+    {
+      "start": 1382.44,
+      "end": 1384.64,
+      "text": "necesita la sábana de datos",
+      "chunk": 1
+    },
+    {
+      "start": 1384.64,
+      "end": 1386.92,
+      "text": "que diga de inscripción, actualización",
+      "chunk": 1
+    },
+    {
+      "start": 1386.92,
+      "end": 1388.72,
+      "text": "y extensión y que debajo",
+      "chunk": 1
+    },
+    {
+      "start": 1388.72,
+      "end": 1390.94,
+      "text": "está por bandeja de correspondiente",
+      "chunk": 1
+    },
+    {
+      "start": 1390.94,
+      "end": 1391.46,
+      "text": "a cada una",
+      "chunk": 1
+    },
+    {
+      "start": 1391.46,
+      "end": 1394.56,
+      "text": "me devuelvo al archivo original de propio horizontal",
+      "chunk": 1
+    },
+    {
+      "start": 1394.56,
+      "end": 1396.68,
+      "text": "miro que la primera tabla",
+      "chunk": 1
+    },
+    {
+      "start": 1396.68,
+      "end": 1398.86,
+      "text": "que está es la de inscripción, actualización",
+      "chunk": 1
+    },
+    {
+      "start": 1398.86,
+      "end": 1399.82,
+      "text": "y extensión",
+      "chunk": 1
+    },
+    {
+      "start": 1399.82,
+      "end": 1401.98,
+      "text": "entonces me voy a llevar esta hoja",
+      "chunk": 1
+    },
+    {
+      "start": 1401.98,
+      "end": 1403.06,
+      "text": "tal cual",
+      "chunk": 1
+    },
+    {
+      "start": 1403.06,
+      "end": 1407.04,
+      "text": "a el de PQR localidades.",
+      "chunk": 1
+    },
+    {
+      "start": 1407.48,
+      "end": 1411.52,
+      "text": "Y lo registro en el orden que le correspondería a propio horizontal.",
+      "chunk": 1
+    },
+    {
+      "start": 1412.54,
+      "end": 1414.44,
+      "text": "Cambio el nombre del anterior.",
+      "chunk": 1
+    },
+    {
+      "start": 1414.44,
+      "end": 1433.2,
+      "text": "y ese es el que le voy a colocar",
+      "chunk": 1
+    },
+    {
+      "start": 1433.2,
+      "end": 1435.0,
+      "text": "a la nueva hoja",
+      "chunk": 1
+    },
+    {
+      "start": 1435.0,
+      "end": 1436.52,
+      "text": "bueno, no le voy a dejar abril",
+      "chunk": 1
+    },
+    {
+      "start": 1436.52,
+      "end": 1438.04,
+      "text": "sino le voy a dejar mayo",
+      "chunk": 1
+    },
+    {
+      "start": 1438.04,
+      "end": 1444.96,
+      "text": "elimino la del mes anterior",
+      "chunk": 1
+    },
+    {
+      "start": 1444.96,
+      "end": 1446.3,
+      "text": "no me afecta nada",
+      "chunk": 1
+    },
+    {
+      "start": 1446.3,
+      "end": 1448.44,
+      "text": "y la información que está aquí",
+      "chunk": 1
+    },
+    {
+      "start": 1448.44,
+      "end": 1450.78,
+      "text": "yo no me voy a llevar la de la primera",
+      "chunk": 1
+    },
+    {
+      "start": 1450.78,
+      "end": 1452.82,
+      "text": "columna, la descripción, sino que me voy a llevar",
+      "chunk": 1
+    },
+    {
+      "start": 1452.82,
+      "end": 1455.06,
+      "text": "al contrario del propio certificado de residencia",
+      "chunk": 1
+    },
+    {
+      "start": 1455.06,
+      "end": 1456.88,
+      "text": "en este caso la totalidad",
+      "chunk": 1
+    },
+    {
+      "start": 1456.88,
+      "end": 1458.6,
+      "text": "de certificados generados",
+      "chunk": 1
+    },
+    {
+      "start": 1458.6,
+      "end": 1461.22,
+      "text": "entonces nuevamente hago el mismo ejercicio",
+      "chunk": 1
+    },
+    {
+      "start": 1461.22,
+      "end": 1462.4,
+      "text": "lo selecciono",
+      "chunk": 1
+    },
+    {
+      "start": 1462.4,
+      "end": 1464.88,
+      "text": "reordeno, le digo que necesito",
+      "chunk": 1
+    },
+    {
+      "start": 1464.88,
+      "end": 1466.86,
+      "text": "que por etiquetas vaya de A",
+      "chunk": 1
+    },
+    {
+      "start": 1466.86,
+      "end": 1467.58,
+      "text": "a la Z",
+      "chunk": 1
+    },
+    {
+      "start": 1467.58,
+      "end": 1469.72,
+      "text": "ya una vez tengo la información",
+      "chunk": 1
+    },
+    {
+      "start": 1469.72,
+      "end": 1472.44,
+      "text": "me llevo la columna de certificados generados",
+      "chunk": 1
+    },
+    {
+      "start": 1472.44,
+      "end": 1474.12,
+      "text": "Candelaria está después de vos",
+      "chunk": 1
+    },
+    {
+      "start": 1474.12,
+      "end": 1475.1,
+      "text": "así que estamos bien",
+      "chunk": 1
+    },
+    {
+      "start": 1475.1,
+      "end": 1478.18,
+      "text": "verifico aquí me dice que hay 19 datos",
+      "chunk": 1
+    },
+    {
+      "start": 1478.18,
+      "end": 1480.02,
+      "text": "o sea que me falta Sumapaz",
+      "chunk": 1
+    },
+    {
+      "start": 1480.02,
+      "end": 1482.12,
+      "text": "entonces tomo hasta Suba",
+      "chunk": 1
+    },
+    {
+      "start": 1482.12,
+      "end": 1484.72,
+      "text": "me lo llevo al resumen",
+      "chunk": 1
+    },
+    {
+      "start": 1484.72,
+      "end": 1492.56,
+      "text": "en el caso de Sumapaz",
+      "chunk": 1
+    },
+    {
+      "start": 1492.56,
+      "end": 1493.82,
+      "text": "voy a colocarle 0",
+      "chunk": 1
+    },
+    {
+      "start": 1493.82,
+      "end": 1499.26,
+      "text": "y termino de copiar los otros datos que me faltan,",
+      "chunk": 1
+    },
+    {
+      "start": 1499.36,
+      "end": 1502.76,
+      "text": "que son tenso, aquello, tunjuelito, usa, ken y usbe.",
+      "chunk": 1
+    },
+    {
+      "start": 1507.98,
+      "end": 1510.44,
+      "text": "¿Por qué su mapa aparece en cero?",
+      "chunk": 1
+    },
+    {
+      "start": 1510.5,
+      "end": 1512.12,
+      "text": "Es porque no tiene propio horizontal.",
+      "chunk": 1
+    },
+    {
+      "start": 1512.9,
+      "end": 1516.98,
+      "text": "Entonces, nivel central cero, supercada de cero y en blanco cero.",
+      "chunk": 1
+    },
+    {
+      "start": 1517.42,
+      "end": 1522.54,
+      "text": "Es decir, me dice que debió haber atendido 809 certificados de propio horizontal.",
+      "chunk": 1
+    },
+    {
+      "start": 1522.54,
+      "end": 1537.16,
+      "text": "Miramos, efectivamente hay 809. Nuevamente reordeno como estaba. Este está ordenado por porcentaje de menos la mayor y me queda el archivo tal cual como lo tenía.",
+      "chunk": 1
+    },
+    {
+      "start": 1537.16,
+      "end": 1540.52,
+      "text": "listo, entonces hasta aquí",
+      "chunk": 1
+    },
+    {
+      "start": 1540.52,
+      "end": 1542.6,
+      "text": "que llevo en el informe",
+      "chunk": 1
+    },
+    {
+      "start": 1542.6,
+      "end": 1544.36,
+      "text": "de PQR localidades",
+      "chunk": 1
+    },
+    {
+      "start": 1544.36,
+      "end": 1546.52,
+      "text": "llevo todo hasta",
+      "chunk": 1
+    },
+    {
+      "start": 1546.52,
+      "end": 1548.92,
+      "text": "la información de certificado",
+      "chunk": 1
+    },
+    {
+      "start": 1548.92,
+      "end": 1550.68,
+      "text": "de residencia, de aquí para allá me faltan",
+      "chunk": 1
+    },
+    {
+      "start": 1550.68,
+      "end": 1551.66,
+      "text": "lo que son encuestas",
+      "chunk": 1
+    },
+    {
+      "start": 1551.66,
+      "end": 1554.6,
+      "text": "entonces ya eso es una parte complementaria",
+      "chunk": 1
+    },
+    {
+      "start": 1554.6,
+      "end": 1556.92,
+      "text": "que ya les voy a mostrar cómo se realiza",
+      "chunk": 1
+    },
+    {
+      "start": 1567.16,
+      "end": 1568.16,
+      "text": "Gracias.",
+      "chunk": 1
+    },
+    {
+      "start": 1570.0,
+      "end": 1570.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1600.0,
+      "end": 1600.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1630.0,
+      "end": 1630.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1660.0,
+      "end": 1660.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1690.0,
+      "end": 1690.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1720.0,
+      "end": 1720.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1750.0,
+      "end": 1750.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1780.0,
+      "end": 1780.62,
+      "text": "you",
+      "chunk": 1
+    },
+    {
+      "start": 1800.0,
+      "end": 1800.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1830.0,
+      "end": 1830.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1860.0,
+      "end": 1860.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1890.0,
+      "end": 1890.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1920.0,
+      "end": 1920.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1950.0,
+      "end": 1950.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 1980.0,
+      "end": 1980.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2010.0,
+      "end": 2010.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2020.0,
+      "end": 2020.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2050.0,
+      "end": 2050.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2080.0,
+      "end": 2080.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2110.0,
+      "end": 2110.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2140.0,
+      "end": 2140.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2170.0,
+      "end": 2170.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2200.0,
+      "end": 2200.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2230.0,
+      "end": 2230.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2245.0,
+      "end": 2245.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2275.0,
+      "end": 2275.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2305.0,
+      "end": 2305.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2335.0,
+      "end": 2335.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2365.0,
+      "end": 2365.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2395.0,
+      "end": 2395.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2425.0,
+      "end": 2425.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2455.0,
+      "end": 2455.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2470.0,
+      "end": 2470.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2500.0,
+      "end": 2500.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2530.0,
+      "end": 2530.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2560.0,
+      "end": 2560.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2590.0,
+      "end": 2590.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2620.0,
+      "end": 2620.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2650.0,
+      "end": 2650.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2680.0,
+      "end": 2680.62,
+      "text": "you",
+      "chunk": 2
+    },
+    {
+      "start": 2700.0,
+      "end": 2700.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2730.0,
+      "end": 2730.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2760.0,
+      "end": 2760.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2790.0,
+      "end": 2790.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2820.0,
+      "end": 2820.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2850.0,
+      "end": 2850.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2880.0,
+      "end": 2880.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2910.0,
+      "end": 2910.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2920.0,
+      "end": 2920.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2950.0,
+      "end": 2950.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 2980.0,
+      "end": 2980.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3010.0,
+      "end": 3010.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3040.0,
+      "end": 3040.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3070.0,
+      "end": 3070.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3100.0,
+      "end": 3100.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3130.0,
+      "end": 3130.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3145.0,
+      "end": 3145.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3175.0,
+      "end": 3175.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3205.0,
+      "end": 3205.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3235.0,
+      "end": 3235.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3265.0,
+      "end": 3265.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3295.0,
+      "end": 3295.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3325.0,
+      "end": 3325.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3355.0,
+      "end": 3355.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3370.0,
+      "end": 3370.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3400.0,
+      "end": 3400.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3430.0,
+      "end": 3430.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3460.0,
+      "end": 3460.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3490.0,
+      "end": 3490.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3520.0,
+      "end": 3520.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3550.0,
+      "end": 3550.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3580.0,
+      "end": 3580.62,
+      "text": "you",
+      "chunk": 3
+    },
+    {
+      "start": 3600.0,
+      "end": 3600.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3630.0,
+      "end": 3630.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3660.0,
+      "end": 3660.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3690.0,
+      "end": 3690.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3720.0,
+      "end": 3720.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3750.0,
+      "end": 3750.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3780.0,
+      "end": 3780.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3810.0,
+      "end": 3810.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3820.0,
+      "end": 3820.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3850.0,
+      "end": 3850.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3880.0,
+      "end": 3880.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3910.0,
+      "end": 3910.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3940.0,
+      "end": 3940.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 3970.0,
+      "end": 3970.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4000.0,
+      "end": 4000.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4030.0,
+      "end": 4030.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4045.0,
+      "end": 4045.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4075.0,
+      "end": 4075.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4105.0,
+      "end": 4105.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4135.0,
+      "end": 4135.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4165.0,
+      "end": 4165.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4195.0,
+      "end": 4195.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4225.0,
+      "end": 4225.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4255.0,
+      "end": 4255.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4270.0,
+      "end": 4270.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4300.0,
+      "end": 4300.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4330.0,
+      "end": 4330.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4360.0,
+      "end": 4360.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4390.0,
+      "end": 4390.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4420.0,
+      "end": 4420.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4450.0,
+      "end": 4450.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4480.0,
+      "end": 4480.62,
+      "text": "you",
+      "chunk": 4
+    },
+    {
+      "start": 4500.0,
+      "end": 4500.62,
+      "text": "you",
+      "chunk": 5
+    },
+    {
+      "start": 4530.0,
+      "end": 4530.62,
+      "text": "you",
+      "chunk": 5
+    },
+    {
+      "start": 4560.0,
+      "end": 4584.76,
+      "text": "Well, we continue then with the information of the surveys.",
+      "chunk": 5
+    },
+    {
+      "start": 4584.76,
+      "end": 4590.88,
+      "text": "updated the monthly survey report in that monthly report comes out an information of the",
+      "chunk": 5
+    },
+    {
+      "start": 4590.88,
+      "end": 4597.06,
+      "text": "more incomplete complete answers which we are going to take into account the total general to be able to",
+      "chunk": 5
+    },
+    {
+      "start": 4597.06,
+      "end": 4602.76,
+      "text": "make a difference with those that had completely complete answers then that we have",
+      "chunk": 5
+    },
+    {
+      "start": 4602.76,
+      "end": 4608.38,
+      "text": "brought the report of the surveys of the period and those of the total of the period between more incomplete",
+      "chunk": 5
+    },
+    {
+      "start": 4608.38,
+      "end": 4615.76,
+      "text": "more incomplete we can see that in the row that says in white the h 26 row we have brought the",
+      "chunk": 5
+    },
+    {
+      "start": 4615.76,
+      "end": 4624.04,
+      "text": "total number of the surveys that are totally blank that is why we did not bring the",
+      "chunk": 5
+    },
+    {
+      "start": 4624.04,
+      "end": 4628.82,
+      "text": "others from the other locations because they will be added at the time that we make the difference",
+      "chunk": 5
+    },
+    {
+      "start": 4628.82,
+      "end": 4634.3,
+      "text": "for each one and once we have brought the three complete surveys now we are going to bring the",
+      "chunk": 5
+    },
+    {
+      "start": 4634.3,
+      "end": 4643.06,
+      "text": "surveys with a complete answer. So we are going to go to the localities report where the total is",
+      "chunk": 5
+    },
+    {
+      "start": 4643.06,
+      "end": 4650.3,
+      "text": "per locality that is in order. So we have the first table that corresponds to the",
+      "chunk": 5
+    },
+    {
+      "start": 4650.3,
+      "end": 4656.18,
+      "text": "virtual channel, the second to the face-to-face channel and the third to the telephone channel, but we are going to stay in the one that",
+      "chunk": 5
+    },
+    {
+      "start": 4656.18,
+      "end": 4661.48,
+      "text": "brings together the three, face-to-face, virtual and telephone. We are going to bring the information of all the",
+      "chunk": 5
+    },
+    {
+      "start": 4661.48,
+      "end": 4673.48,
+      "text": "Remember what I told you that after Bosa followed the Candelaria, then here in the surveys we see that first is Chapinero because in the Candelaria surveys it is registered as the Candelaria.",
+      "chunk": 5
+    },
+    {
+      "start": 4673.48,
+      "end": 4686.48,
+      "text": "We are going to bring the information of the localities in the order, keeping in mind that the Candelaria is in fourth place.",
+      "chunk": 5
+    },
+    {
+      "start": 4686.48,
+      "end": 4690.5,
+      "text": "we bring not only the amount but also we bring the qualification",
+      "chunk": 5
+    },
+    {
+      "start": 4694.66,
+      "end": 4701.12,
+      "text": "in this four summary we have everything not only the amount the qualification but also",
+      "chunk": 5
+    },
+    {
+      "start": 4701.12,
+      "end": 4708.24,
+      "text": "the percentage then we are going to bring all this information that is useful for what we are doing",
+      "chunk": 5
+    },
+    {
+      "start": 4710.52,
+      "end": 4715.08,
+      "text": "as in this order it follows first black chapinero leaves a space for the candelaria",
+      "chunk": 5
+    },
+    {
+      "start": 4715.08,
+      "end": 4733.34,
+      "text": "to bring the information and I am bringing what are the quantities the qualifications and the percentage lo que son las cantidades las calificaciones y el porcentaje as de un momento candelaria porque tiene orden est",
+      "chunk": 5
+    },
+    {
+      "start": 4735.62,
+      "end": 4740.44,
+      "text": "porque lo traigo de esta manera para que precisamente asegurarme de que traiga la",
+      "chunk": 5
+    },
+    {
+      "start": 4740.44,
+      "end": 4749.68,
+      "text": "información que corresponde y evitar los errores de registros no correctos.",
+      "chunk": 5
+    },
+    {
+      "start": 4751.12,
+      "end": 4751.36,
+      "text": "Listo.",
+      "chunk": 5
+    },
+    {
+      "start": 4752.02,
+      "end": 4752.82,
+      "text": "Entonces seguimos.",
+      "chunk": 5
+    },
+    {
+      "start": 4752.94,
+      "end": 4756.94,
+      "text": "Ya de mártires hacia abajo ya están los datos normales.",
+      "chunk": 5
+    },
+    {
+      "start": 4757.06,
+      "end": 4758.84,
+      "text": "Entonces los traigo hasta nivel central.",
+      "chunk": 5
+    },
+    {
+      "start": 4758.96,
+      "end": 4760.16,
+      "text": "¿Por qué los traigo hasta nivel central?",
+      "chunk": 5
+    },
+    {
+      "start": 4760.16,
+      "end": 4763.14,
+      "text": "Recordemos que SuperCAD es en la tabla resumen.",
+      "chunk": 5
+    },
+    {
+      "start": 4763.3,
+      "end": 4765.2,
+      "text": "Solamente lo tengo como un dato informativo.",
+      "chunk": 5
+    },
+    {
+      "start": 4765.2,
+      "end": 4770.6,
+      "text": "así que allí lo que voy a traer es como las cifras generales de los 7 supercades.",
+      "chunk": 5
+    },
+    {
+      "start": 4772.5,
+      "end": 4782.3,
+      "text": "Si se tienen en cuenta precisamente para poder hacer un control sobre los registros que se llevan de los supercades.",
+      "chunk": 5
+    },
+    {
+      "start": 4784.76,
+      "end": 4787.26,
+      "text": "Entonces, ¿cómo hago para el de supercades?",
+      "chunk": 5
+    },
+    {
+      "start": 4787.92,
+      "end": 4793.68,
+      "text": "Ahora en la parte superior de estas tablas tenemos por puntos y por canales",
+      "chunk": 5
+    },
+    {
+      "start": 4795.2,
+      "end": 4799.36,
+      "text": "Divido, entonces por ejemplo aquí está SuperCADES en la fila 15.",
+      "chunk": 5
+    },
+    {
+      "start": 4800.26,
+      "end": 4805.78,
+      "text": "Vamos a traer que son 139 las encuestas aplicadas en SuperCADES con una calificación de 5.",
+      "chunk": 5
+    },
+    {
+      "start": 4806.92,
+      "end": 4813.72,
+      "text": "Entonces escribimos la 139 y pegamos la cifra que es de 5.",
+      "chunk": 5
+    },
+    {
+      "start": 4815.76,
+      "end": 4820.12,
+      "text": "Y esto al obtener 5 sobre 5 pues me da el 100%.",
+      "chunk": 5
+    },
+    {
+      "start": 4820.12,
+      "end": 4825.12,
+      "text": "En blanco no tenemos información y colocamos 0.",
+      "chunk": 5
+    },
+    {
+      "start": 4825.2,
+      "end": 4828.76,
+      "text": "listo",
+      "chunk": 5
+    },
+    {
+      "start": 4828.76,
+      "end": 4831.4,
+      "text": "y de esta manera ha quedado el informe",
+      "chunk": 5
+    },
+    {
+      "start": 4831.4,
+      "end": 4832.96,
+      "text": "de PQR localidades",
+      "chunk": 5
+    },
+    {
+      "start": 4832.96,
+      "end": 4834.5,
+      "text": "finalizado",
+      "chunk": 5
+    },
+    {
+      "start": 4834.5,
+      "end": 4837.48,
+      "text": "con todo lo que se necesita",
+      "chunk": 5
+    },
+    {
+      "start": 4837.48,
+      "end": 4839.18,
+      "text": "actualizado y",
+      "chunk": 5
+    },
+    {
+      "start": 4839.18,
+      "end": 4841.24,
+      "text": "las hojas de verificación",
+      "chunk": 5
+    },
+    {
+      "start": 4841.24,
+      "end": 4843.16,
+      "text": "que en su momento",
+      "chunk": 5
+    },
+    {
+      "start": 4843.16,
+      "end": 4845.22,
+      "text": "llegase a necesitar la compañera para",
+      "chunk": 5
+    },
+    {
+      "start": 4845.22,
+      "end": 4847.42,
+      "text": "validar todo lo que",
+      "chunk": 5
+    },
+    {
+      "start": 4847.42,
+      "end": 4849.18,
+      "text": "hemos venido hablando, bueno yo",
+      "chunk": 5
+    },
+    {
+      "start": 4849.18,
+      "end": 4851.08,
+      "text": "dije hace un momento que el de",
+      "chunk": 5
+    },
+    {
+      "start": 4851.08,
+      "end": 4852.96,
+      "text": "atenciones íbamos a tener presente",
+      "chunk": 5
+    },
+    {
+      "start": 4852.96,
+      "end": 4855.06,
+      "text": "la tipicidad",
+      "chunk": 5
+    },
+    {
+      "start": 4855.06,
+      "end": 4857.18,
+      "text": "de la atención preferencial.",
+      "chunk": 5
+    },
+    {
+      "start": 4857.54,
+      "end": 4859.08,
+      "text": "Ese es para el informe de PQR",
+      "chunk": 5
+    },
+    {
+      "start": 4859.08,
+      "end": 4861.22,
+      "text": "sitio web. Entonces vamos a ir",
+      "chunk": 5
+    },
+    {
+      "start": 4861.22,
+      "end": 4863.08,
+      "text": "cerrando el de localidades porque lo hemos",
+      "chunk": 5
+    },
+    {
+      "start": 4863.08,
+      "end": 4865.06,
+      "text": "completado y lo que",
+      "chunk": 5
+    },
+    {
+      "start": 4865.06,
+      "end": 4867.36,
+      "text": "hacemos es alistarlo para que la compañera",
+      "chunk": 5
+    },
+    {
+      "start": 4867.36,
+      "end": 4869.2,
+      "text": "que se encarga de hacer el informe",
+      "chunk": 5
+    },
+    {
+      "start": 4869.2,
+      "end": 4870.6,
+      "text": "ya pueda trabajarlo.",
+      "chunk": 5
+    },
+    {
+      "start": 4871.32,
+      "end": 4872.9,
+      "text": "Voy a cerrar esta parte",
+      "chunk": 5
+    },
+    {
+      "start": 4872.9,
+      "end": 4875.0,
+      "text": "y me voy a quedar con",
+      "chunk": 5
+    },
+    {
+      "start": 4875.0,
+      "end": 4876.22,
+      "text": "el de PQR",
+      "chunk": 5
+    },
+    {
+      "start": 4876.22,
+      "end": 4879.04,
+      "text": "página web. Cierro este",
+      "chunk": 5
+    },
+    {
+      "start": 4879.04,
+      "end": 4880.6,
+      "text": "también, le digo que no guardo",
+      "chunk": 5
+    },
+    {
+      "start": 4880.6,
+      "end": 4884.74,
+      "text": "y voy a irme al de PQR",
+      "chunk": 5
+    },
+    {
+      "start": 4884.74,
+      "end": 4889.36,
+      "text": "página web que es mucho más robusto, más completo",
+      "chunk": 5
+    },
+    {
+      "start": 4889.36,
+      "end": 4894.88,
+      "text": "y lo vamos a crear de cero.",
+      "chunk": 5
+    },
+    {
+      "start": 4895.08,
+      "end": 4900.48,
+      "text": "Entonces aquí yo tengo hasta abril, yo lo que hago es simplemente que duplico el último mes",
+      "chunk": 5
+    },
+    {
+      "start": 4900.48,
+      "end": 4907.74,
+      "text": "le cambio el nombre",
+      "chunk": 5
+    },
+    {
+      "start": 4907.74,
+      "end": 4915.2,
+      "text": "y le coloco mayo 2026",
+      "chunk": 5
+    },
+    {
+      "start": 4915.2,
+      "end": 4916.96,
+      "text": "y empiezo a cambiar",
+      "chunk": 5
+    },
+    {
+      "start": 4916.96,
+      "end": 4920.42,
+      "text": "cada uno de los datos que tiene",
+      "chunk": 5
+    },
+    {
+      "start": 4920.42,
+      "end": 4922.52,
+      "text": "el informe de PQRS.",
+      "chunk": 5
+    },
+    {
+      "start": 4927.32,
+      "end": 4929.02,
+      "text": "Deje abierto el de PQRS",
+      "chunk": 5
+    },
+    {
+      "start": 4929.02,
+      "end": 4931.08,
+      "text": "en encuestas porque",
+      "chunk": 5
+    },
+    {
+      "start": 4931.08,
+      "end": 4933.98,
+      "text": "vamos a hacer ahorita una validación de información.",
+      "chunk": 5
+    },
+    {
+      "start": 4934.84,
+      "end": 4935.0,
+      "text": "Entonces,",
+      "chunk": 5
+    },
+    {
+      "start": 4935.0,
+      "end": 4939.16,
+      "text": "recuerden, aquí vamos a empezar",
+      "chunk": 5
+    },
+    {
+      "start": 4939.16,
+      "end": 4941.0,
+      "text": "ya el de PQRs página web.",
+      "chunk": 5
+    },
+    {
+      "start": 4942.02,
+      "end": 4943.0,
+      "text": "Entonces, no sucede lo mismo",
+      "chunk": 5
+    },
+    {
+      "start": 4943.0,
+      "end": 4944.96,
+      "text": "que el de localidades. Tengo una hoja que se llama",
+      "chunk": 5
+    },
+    {
+      "start": 4944.96,
+      "end": 4965.4,
+      "text": "reporte PQRs abril 2026 que es la que voy a reemplazar por los datos que tengo de PQRs mayo 2026 Elimino todo lo que tengo en esta hoja y me voy a traer mi archivo de PQRs como lleg tal cual como lleg de la Secretar General",
+      "chunk": 5
+    },
+    {
+      "start": 4967.56,
+      "end": 4969.6,
+      "text": "Entonces aquí lo tengo, fue mi PQRs mayo.",
+      "chunk": 5
+    },
+    {
+      "start": 4971.28,
+      "end": 4972.14,
+      "text": "Lo traigo.",
+      "chunk": 5
+    },
+    {
+      "start": 4972.14,
+      "end": 4977.78,
+      "text": "se puede notar el informe original no tiene los duplicados.",
+      "chunk": 5
+    },
+    {
+      "start": 4979.32,
+      "end": 4983.82,
+      "text": "Entonces coloco mi sabana de datos allí, cambio el nombre.",
+      "chunk": 5
+    },
+    {
+      "start": 4987.82,
+      "end": 4992.98,
+      "text": "Mayo 2026 y agrego mi fila de duplicados.",
+      "chunk": 5
+    },
+    {
+      "start": 4996.34,
+      "end": 4999.64,
+      "text": "Y lo bautizo tal cual, duplicados.",
+      "chunk": 5
+    },
+    {
+      "start": 4999.64,
+      "end": 5002.06,
+      "text": "hago el mismo ejercicio",
+      "chunk": 5
+    },
+    {
+      "start": 5002.06,
+      "end": 5004.58,
+      "text": "lo repito en este caso",
+      "chunk": 5
+    },
+    {
+      "start": 5004.58,
+      "end": 5006.56,
+      "text": "para que precisamente no se nos olvide",
+      "chunk": 5
+    },
+    {
+      "start": 5006.56,
+      "end": 5008.26,
+      "text": "que este es un paso obligatorio",
+      "chunk": 5
+    },
+    {
+      "start": 5008.26,
+      "end": 5010.26,
+      "text": "de que nos pide",
+      "chunk": 5
+    },
+    {
+      "start": 5010.26,
+      "end": 5012.24,
+      "text": "el decreto 371",
+      "chunk": 5
+    },
+    {
+      "start": 5012.24,
+      "end": 5014.4,
+      "text": "entonces no es cuestión",
+      "chunk": 5
+    },
+    {
+      "start": 5014.4,
+      "end": 5016.08,
+      "text": "de que si lo hago o no lo hago",
+      "chunk": 5
+    },
+    {
+      "start": 5016.08,
+      "end": 5017.64,
+      "text": "sino que toca hacerlo",
+      "chunk": 5
+    },
+    {
+      "start": 5017.64,
+      "end": 5019.88,
+      "text": "listo una vez",
+      "chunk": 5
+    },
+    {
+      "start": 5019.88,
+      "end": 5021.0,
+      "text": "ya puesto aquí",
+      "chunk": 5
+    },
+    {
+      "start": 5021.0,
+      "end": 5023.32,
+      "text": "entonces vamos a decirle que la",
+      "chunk": 5
+    },
+    {
+      "start": 5023.32,
+      "end": 5026.06,
+      "text": "celda A10 es",
+      "chunk": 5
+    },
+    {
+      "start": 5026.06,
+      "end": 5027.78,
+      "text": "igual a la A11",
+      "chunk": 5
+    },
+    {
+      "start": 5027.78,
+      "end": 5033.58,
+      "text": "¿Por qué no se hace eliminando los duplicados que se podría hacer aquí en datos?",
+      "chunk": 5
+    },
+    {
+      "start": 5034.08,
+      "end": 5035.1,
+      "text": "Quitando duplicados.",
+      "chunk": 5
+    },
+    {
+      "start": 5035.52,
+      "end": 5042.64,
+      "text": "Porque necesitamos la información de los datos duplicados para poder sacar un análisis.",
+      "chunk": 5
+    },
+    {
+      "start": 5043.74,
+      "end": 5047.1,
+      "text": "Bueno, entonces aquí acabamos de copiar la sábana de datos de mayo.",
+      "chunk": 5
+    },
+    {
+      "start": 5048.0,
+      "end": 5049.0,
+      "text": "Voy a renombrar.",
+      "chunk": 5
+    },
+    {
+      "start": 5049.52,
+      "end": 5052.3,
+      "text": "Voy a grabar porque ya se ha renombrado.",
+      "chunk": 5
+    },
+    {
+      "start": 5052.3,
+      "end": 5057.28,
+      "text": "Y voy a eliminar aquí unas hojas que eran del análisis anterior, del mes anterior.",
+      "chunk": 5
+    },
+    {
+      "start": 5057.78,
+      "end": 5060.2,
+      "text": "listo",
+      "chunk": 5
+    },
+    {
+      "start": 5060.2,
+      "end": 5062.04,
+      "text": "este informe web de abril",
+      "chunk": 5
+    },
+    {
+      "start": 5062.04,
+      "end": 5064.44,
+      "text": "es el más importante que tenemos precisamente",
+      "chunk": 5
+    },
+    {
+      "start": 5064.44,
+      "end": 5066.12,
+      "text": "para poder hacer nuestro",
+      "chunk": 5
+    },
+    {
+      "start": 5066.12,
+      "end": 5067.78,
+      "text": "reporte",
+      "chunk": 5
+    },
+    {
+      "start": 5067.78,
+      "end": 5070.04,
+      "text": "y tengo una hoja adicional que se llama",
+      "chunk": 5
+    },
+    {
+      "start": 5070.04,
+      "end": 5071.3,
+      "text": "seguimiento en días",
+      "chunk": 5
+    },
+    {
+      "start": 5071.3,
+      "end": 5074.82,
+      "text": "aquí en seguimiento en días voy a colocar",
+      "chunk": 5
+    },
+    {
+      "start": 5074.82,
+      "end": 5077.14,
+      "text": "aquí le hago monitoreo por cada mes",
+      "chunk": 5
+    },
+    {
+      "start": 5077.14,
+      "end": 5079.38,
+      "text": "para mostrar ese comportamiento",
+      "chunk": 5
+    },
+    {
+      "start": 5079.38,
+      "end": 5082.56,
+      "text": "de los días de gestión",
+      "chunk": 5
+    },
+    {
+      "start": 5082.56,
+      "end": 5085.62,
+      "text": "estos días de gestión es por toda la entidad",
+      "chunk": 5
+    },
+    {
+      "start": 5085.62,
+      "end": 5092.64,
+      "text": "donde me muestra las extemporáneas, las oportunas, las pendientes en términos, las pendientes vencidas por cada mes,",
+      "chunk": 5
+    },
+    {
+      "start": 5093.3,
+      "end": 5101.0,
+      "text": "el porcentaje de descongestión, las extemporáneas que fueron vencidas y las oportunas en términos.",
+      "chunk": 5
+    },
+    {
+      "start": 5101.0,
+      "end": 5109.5,
+      "text": "Las traigo de nuevo en esta tabla inferior para poder sacar el porcentaje de extemporaneidad y el porcentaje de oportunidad.",
+      "chunk": 5
+    },
+    {
+      "start": 5109.5,
+      "end": 5126.44,
+      "text": "¿Listo? Pero esto es algo que no va en el informe, solamente que lo saco para poder a final de semestre o a final de año poder hacer el comparativo. Esto es algo que nos piden desde alguna de las IAS o a veces desde la misma Secretaría General.",
+      "chunk": 5
+    },
+    {
+      "start": 5126.44,
+      "end": 5132.56,
+      "text": "Y abajo tengo una gráfica que me muestra como ese comportamiento de las PQRs.",
+      "chunk": 5
+    },
+    {
+      "start": 5133.52,
+      "end": 5141.1,
+      "text": "Entonces, anterior a la hoja de reporte PQRs, tengo lo mismo que hicimos con el de PQRs localidades.",
+      "chunk": 5
+    },
+    {
+      "start": 5141.32,
+      "end": 5144.62,
+      "text": "Entonces, me traigo lo de propiedad horizontal, residencia.",
+      "chunk": 5
+    },
+    {
+      "start": 5144.92,
+      "end": 5151.3,
+      "text": "Aquí en certificado de residencia no solamente está la productividad por el estado del trámite, sino también por los tipos de trámite.",
+      "chunk": 5
+    },
+    {
+      "start": 5151.3,
+      "end": 5154.04,
+      "text": "el registro de atenciones, lo de las",
+      "chunk": 5
+    },
+    {
+      "start": 5154.04,
+      "end": 5155.96,
+      "text": "encuestas, lo registrado en",
+      "chunk": 5
+    },
+    {
+      "start": 5155.96,
+      "end": 5157.96,
+      "text": "documentos extraviados y",
+      "chunk": 5
+    },
+    {
+      "start": 5157.96,
+      "end": 5159.9,
+      "text": "lo entregado en documentos extraviados",
+      "chunk": 5
+    },
+    {
+      "start": 5159.9,
+      "end": 5161.84,
+      "text": "aquí recuerden que yo les decía que",
+      "chunk": 5
+    },
+    {
+      "start": 5161.84,
+      "end": 5164.16,
+      "text": "teníamos algo clave, era el registro",
+      "chunk": 5
+    },
+    {
+      "start": 5164.16,
+      "end": 5166.12,
+      "text": "de las atenciones y era la",
+      "chunk": 5
+    },
+    {
+      "start": 5166.12,
+      "end": 5168.14,
+      "text": "cantidad de personas",
+      "chunk": 5
+    },
+    {
+      "start": 5168.14,
+      "end": 5169.7,
+      "text": "por grupo poblacional de valor",
+      "chunk": 5
+    },
+    {
+      "start": 5169.7,
+      "end": 5187.96,
+      "text": "y vamos aqu voy a hacer con el informe web de abril el copiar y pegar las hojas de los otros reportes es lo de menos Pero tengo que actualizar todas las tablas din que est en esta sabana de datos Entonces lo que voy a hacer es decirle que por favor me actualice todo",
+      "chunk": 5
+    },
+    {
+      "start": 5187.96,
+      "end": 5191.98,
+      "text": "cuando yo hago el ejercicio que me actualice todo",
+      "chunk": 5
+    },
+    {
+      "start": 5191.98,
+      "end": 5194.8,
+      "text": "me va a decir que algunos campos de las tablas dinámicas",
+      "chunk": 5
+    },
+    {
+      "start": 5194.8,
+      "end": 5198.06,
+      "text": "no son válidas y que debo crear un informe para la tabla dinámica",
+      "chunk": 5
+    },
+    {
+      "start": 5198.06,
+      "end": 5200.12,
+      "text": "usando los datos organizados",
+      "chunk": 5
+    },
+    {
+      "start": 5200.12,
+      "end": 5203.52,
+      "text": "entonces en ese caso no me está dejando hacerlo",
+      "chunk": 5
+    },
+    {
+      "start": 5203.52,
+      "end": 5206.02,
+      "text": "porque debe haber un cambio de campos de análisis",
+      "chunk": 5
+    },
+    {
+      "start": 5206.02,
+      "end": 5209.38,
+      "text": "entonces me voy a decirle que cambie los campos",
+      "chunk": 5
+    },
+    {
+      "start": 5209.38,
+      "end": 5210.98,
+      "text": "que me voy a dirigir",
+      "chunk": 5
+    },
+    {
+      "start": 5210.98,
+      "end": 5215.68,
+      "text": "y voy a seleccionar todo lo que necesito",
+      "chunk": 5
+    },
+    {
+      "start": 5215.68,
+      "end": 5222.16,
+      "text": "de las tablas dinámicas.",
+      "chunk": 5
+    },
+    {
+      "start": 5222.38,
+      "end": 5225.06,
+      "text": "Entonces aquí me eliminó el filtro de duplicados en filas.",
+      "chunk": 5
+    },
+    {
+      "start": 5225.24,
+      "end": 5227.92,
+      "text": "Entonces lo que hago es tomarlo y llevarlo a filas",
+      "chunk": 5
+    },
+    {
+      "start": 5227.92,
+      "end": 5232.24,
+      "text": "y me va a mostrar cuántos son registros únicos,",
+      "chunk": 5
+    },
+    {
+      "start": 5232.52,
+      "end": 5234.04,
+      "text": "que serían 983,",
+      "chunk": 5
+    },
+    {
+      "start": 5234.18,
+      "end": 5237.66,
+      "text": "y cuántos son registros duplicados, que serían 1636,",
+      "chunk": 5
+    },
+    {
+      "start": 5238.28,
+      "end": 5240.2,
+      "text": "según la sábana de datos asunta.",
+      "chunk": 5
+    },
+    {
+      "start": 5241.9,
+      "end": 5244.36,
+      "text": "La siguiente es cuántos fueron registrados por el ciudadano",
+      "chunk": 5
+    },
+    {
+      "start": 5244.36,
+      "end": 5246.06,
+      "text": "y cuántos fueron registrados por propios.",
+      "chunk": 5
+    },
+    {
+      "start": 5246.24,
+      "end": 5251.14,
+      "text": "Entonces, nuevamente hago lo mismo, selecciono toda la información y actualizo.",
+      "chunk": 5
+    },
+    {
+      "start": 5251.46,
+      "end": 5255.56,
+      "text": "Debo tener 2,619 peticiones para este periodo.",
+      "chunk": 5
+    },
+    {
+      "start": 5256.22,
+      "end": 5264.16,
+      "text": "Distribución por sexo, esta es una información que se coloca verificando una a una de las peticiones.",
+      "chunk": 5
+    },
+    {
+      "start": 5264.16,
+      "end": 5274.24,
+      "text": "y lo mismo la distribución por grupo",
+      "chunk": 5
+    },
+    {
+      "start": 5274.24,
+      "end": 5277.3,
+      "text": "poblacional, entonces nos saltamos",
+      "chunk": 5
+    },
+    {
+      "start": 5277.3,
+      "end": 5280.38,
+      "text": "a la tabla dinámica que dice distribución de PECORRES por identidad",
+      "chunk": 5
+    },
+    {
+      "start": 5280.38,
+      "end": 5283.0,
+      "text": "ciudadana, que se me arroja de manera automática",
+      "chunk": 5
+    },
+    {
+      "start": 5283.0,
+      "end": 5285.9,
+      "text": "la información, la sabana de datos",
+      "chunk": 5
+    },
+    {
+      "start": 5285.9,
+      "end": 5288.48,
+      "text": "y sigo trayendo",
+      "chunk": 5
+    },
+    {
+      "start": 5288.48,
+      "end": 5290.6,
+      "text": "la información que me están pidiendo",
+      "chunk": 5
+    },
+    {
+      "start": 5290.6,
+      "end": 5305.6,
+      "text": "Aquí me están diciendo que por cédula de ciudadanía yo tengo 1.393 registros que corresponden a personas naturales, que por cédula de extranjería tengo 6 que corresponden a personas migrantes internacionales,",
+      "chunk": 5
+    },
+    {
+      "start": 5305.6,
+      "end": 5319.8,
+      "text": "que por NID tengo 145 personas que son personas jurídicas, que por ciudadanía con nacionalidad venezolana, en este caso los PPTI, tengo 5.",
+      "chunk": 5
+    },
+    {
+      "start": 5319.8,
+      "end": 5323.46,
+      "text": "entonces lo que voy a hacer es traerlos",
+      "chunk": 5
+    },
+    {
+      "start": 5323.46,
+      "end": 5328.1,
+      "text": "de acá y decir aquí están mis cinco",
+      "chunk": 5
+    },
+    {
+      "start": 5328.1,
+      "end": 5332.64,
+      "text": "nacionales venezolanos que por menores de edad",
+      "chunk": 5
+    },
+    {
+      "start": 5332.64,
+      "end": 5335.72,
+      "text": "corresponden a dos que tienen tarjeta de identidad",
+      "chunk": 5
+    },
+    {
+      "start": 5335.72,
+      "end": 5340.44,
+      "text": "y por pasaporte tengo dos, estos pasaportes pueden ser",
+      "chunk": 5
+    },
+    {
+      "start": 5340.44,
+      "end": 5344.78,
+      "text": "migrantes internacionales, no especificas",
+      "chunk": 5
+    },
+    {
+      "start": 5344.78,
+      "end": 5348.12,
+      "text": "cuando no tenemos una información, este corresponde al que está en blanco",
+      "chunk": 5
+    },
+    {
+      "start": 5348.12,
+      "end": 5352.2,
+      "text": "entonces no especifica como un tipo de identidad ciudadana.",
+      "chunk": 5
+    },
+    {
+      "start": 5352.94,
+      "end": 5358.12,
+      "text": "Entonces ya dijimos que por pasaporte vamos a agregar dos más al de cede de la extranjería,",
+      "chunk": 5
+    },
+    {
+      "start": 5359.2,
+      "end": 5361.08,
+      "text": "es decir, al migrante internacional.",
+      "chunk": 5
+    },
+    {
+      "start": 5361.7,
+      "end": 5365.12,
+      "text": "Entonces vamos a tener más seis, más dos, y vamos a tener en total ocho.",
+      "chunk": 5
+    },
+    {
+      "start": 5366.04,
+      "end": 5368.34,
+      "text": "Los otros están anclados a la tabla dinámica,",
+      "chunk": 5
+    },
+    {
+      "start": 5368.46,
+      "end": 5371.12,
+      "text": "a tener que si yo hago un cambio sobre la tabla dinámica,",
+      "chunk": 5
+    },
+    {
+      "start": 5372.9,
+      "end": 5375.64,
+      "text": "pues voy a verlo reflejado en esta tabla pequeña.",
+      "chunk": 5
+    },
+    {
+      "start": 5375.64,
+      "end": 5382.54,
+      "text": "este cuadro resumen se hace para poder colocar unos grupos de información que nos piden desde",
+      "chunk": 5
+    },
+    {
+      "start": 5382.54,
+      "end": 5388.0,
+      "text": "la secretaría general y la secretaría de la mujer quienes es principalmente que nos piden",
+      "chunk": 5
+    },
+    {
+      "start": 5388.0,
+      "end": 5392.76,
+      "text": "estos de información paso a la siguiente tabla hago exactamente el mismo ejercicio",
+      "chunk": 5
+    },
+    {
+      "start": 5394.94,
+      "end": 5396.98,
+      "text": "voy a tolera y saldo las tablas dinámicas",
+      "chunk": 5
+    },
+    {
+      "start": 5400.0,
+      "end": 5410.98,
+      "text": "cada tabla dinámica tiene un título correspondiente a donde va agregado esa información dentro de la diapositiva.",
+      "chunk": 6
+    },
+    {
+      "start": 5412.5,
+      "end": 5421.44,
+      "text": "Aquí vemos que este cuadro está desactualizado, entonces yo lo que hago es simplemente copiarlo, los datos, y me los traigo tal cual.",
+      "chunk": 6
+    },
+    {
+      "start": 5422.44,
+      "end": 5427.4,
+      "text": "¿Por qué me los traigo tal cual? Para que la tabla gráfica me quede actualizada con la información.",
+      "chunk": 6
+    },
+    {
+      "start": 5427.4,
+      "end": 5431.36,
+      "text": "y pueda ser tomada o capturada para el informe.",
+      "chunk": 6
+    },
+    {
+      "start": 5432.1,
+      "end": 5435.14,
+      "text": "Recuerden, son 2.619 peticiones de esta vigencia,",
+      "chunk": 6
+    },
+    {
+      "start": 5435.14,
+      "end": 5440.86,
+      "text": "entonces llevo esa misma información en todos los cuadros.",
+      "chunk": 6
+    },
+    {
+      "start": 5441.94,
+      "end": 5445.24,
+      "text": "Y aquí voy mirando uno a uno cómo me van cambiando los datos",
+      "chunk": 6
+    },
+    {
+      "start": 5445.24,
+      "end": 5446.88,
+      "text": "al actualizar cada tabla.",
+      "chunk": 6
+    },
+    {
+      "start": 5448.18,
+      "end": 5450.8,
+      "text": "En esta tabla dinámica que estamos actualizando,",
+      "chunk": 6
+    },
+    {
+      "start": 5450.92,
+      "end": 5452.2,
+      "text": "que son solicitudes de información,",
+      "chunk": 6
+    },
+    {
+      "start": 5452.42,
+      "end": 5454.36,
+      "text": "dice que en total fueron 156.",
+      "chunk": 6
+    },
+    {
+      "start": 5454.5,
+      "end": 5455.88,
+      "text": "Hago un cambio aquí manual.",
+      "chunk": 6
+    },
+    {
+      "start": 5455.88,
+      "end": 5464.38,
+      "text": "Le digo que tengo 156 solicitudes, pero solo las que están resaltadas en amarillo son las solicitudes de información que fueron trasladadas a otras entidades.",
+      "chunk": 6
+    },
+    {
+      "start": 5465.56,
+      "end": 5474.2,
+      "text": "Escojo 28 más 1, es decir, en total tuve 29 solicitudes solucionadas con un traslado que correspondían a solicitudes de información.",
+      "chunk": 6
+    },
+    {
+      "start": 5476.5,
+      "end": 5481.6,
+      "text": "Sigo con mis datos actualizando tablas.",
+      "chunk": 6
+    },
+    {
+      "start": 5485.88,
+      "end": 5490.0,
+      "text": "Así lo hago con cada una de las tablas dinámicas que tiene este informe.",
+      "chunk": 6
+    },
+    {
+      "start": 5492.06,
+      "end": 5495.5,
+      "text": "¿Por qué hago primero las tablas dinámicas?",
+      "chunk": 6
+    },
+    {
+      "start": 5496.12,
+      "end": 5506.04,
+      "text": "Y dejo de últimas traerme la información de las otras datos que van incluidos en el informe general de la página web.",
+      "chunk": 6
+    },
+    {
+      "start": 5506.6,
+      "end": 5512.84,
+      "text": "Precisamente porque esto me demanda más tiempo ya que tengo que verificar que traiga la información del periodo.",
+      "chunk": 6
+    },
+    {
+      "start": 5512.84,
+      "end": 5527.06,
+      "text": "Entonces, aquí actualicé en la capítulo 6, subtema más reiterados, actualicé la tabla dinámica, pero no he actualizado esta tabla pequeña que está en la fila H y fila, perdón, columna H y columna I.",
+      "chunk": 6
+    },
+    {
+      "start": 5527.62,
+      "end": 5534.24,
+      "text": "Aquí, ¿qué voy a hacer? Me voy a traer el total de esta fila que es 12.904, de esta tabla dinámica.",
+      "chunk": 6
+    },
+    {
+      "start": 5536.0,
+      "end": 5540.0,
+      "text": "Escribo solamente el total, 12.904.",
+      "chunk": 6
+    },
+    {
+      "start": 5542.84,
+      "end": 5545.56,
+      "text": "Y me voy a traer los cinco más representativos.",
+      "chunk": 6
+    },
+    {
+      "start": 5545.78,
+      "end": 5549.08,
+      "text": "Entonces aquí me dice que en blanco tengo 3,079 peticiones.",
+      "chunk": 6
+    },
+    {
+      "start": 5549.78,
+      "end": 5553.88,
+      "text": "Eso no es un tema que me permita la veeduría identificar.",
+      "chunk": 6
+    },
+    {
+      "start": 5554.54,
+      "end": 5558.68,
+      "text": "Entonces debo traer los que sí tienen un nombre plenamente identificado.",
+      "chunk": 6
+    },
+    {
+      "start": 5559.4,
+      "end": 5563.32,
+      "text": "El hecho de que aparezca en blanco significa que hay algo que revisar,",
+      "chunk": 6
+    },
+    {
+      "start": 5563.32,
+      "end": 5566.5,
+      "text": "que en la clasificación está haciéndose mal",
+      "chunk": 6
+    },
+    {
+      "start": 5566.5,
+      "end": 5573.42,
+      "text": "y que puede estar generando interpretaciones erróneas de información.",
+      "chunk": 6
+    },
+    {
+      "start": 5574.26,
+      "end": 5580.44,
+      "text": "La que está resaltada en naranja corresponde a información de trámites y servicios que según el decreto 371",
+      "chunk": 6
+    },
+    {
+      "start": 5580.44,
+      "end": 5589.82,
+      "text": "no debería tomarse en este reporte de PQR, ya que corresponde, entre comillas, a lo que son solamente trámites y servicios",
+      "chunk": 6
+    },
+    {
+      "start": 5589.82,
+      "end": 5595.44,
+      "text": "y que son manejados o de alguna manera gestionados por el servicio de atención a la ciudadanía.",
+      "chunk": 6
+    },
+    {
+      "start": 5595.44,
+      "end": 5632.48,
+      "text": "Sin embargo los copios los pego ac voy a mirar la mayor ingresaron por web service corresponden a un tipo de derecho de petici de inter general",
+      "chunk": 6
+    },
+    {
+      "start": 5633.54,
+      "end": 5634.78,
+      "text": "preclasificado,",
+      "chunk": 6
+    },
+    {
+      "start": 5636.52,
+      "end": 5639.12,
+      "text": "y que de acuerdo, por ejemplo, a la solicitud,",
+      "chunk": 6
+    },
+    {
+      "start": 5639.62,
+      "end": 5643.02,
+      "text": "puede evidenciarse que ni es un acto de corrupción,",
+      "chunk": 6
+    },
+    {
+      "start": 5643.78,
+      "end": 5646.36,
+      "text": "ni tampoco es un otro común y corriente.",
+      "chunk": 6
+    },
+    {
+      "start": 5646.82,
+      "end": 5648.76,
+      "text": "Por ejemplo, en este caso que estoy mostrando,",
+      "chunk": 6
+    },
+    {
+      "start": 5648.76,
+      "end": 5663.76,
+      "text": "En la fila 2 dice solicitud por este medio de certificado de contrato de prestación de servicios. Esto no debería ser un otro sino una solicitud precisamente de certificación contractual y que no debería estar ingresando por el Bogotá te escucho.",
+      "chunk": 6
+    },
+    {
+      "start": 5664.82,
+      "end": 5666.68,
+      "text": "No debería tener Bogotá te escucha.",
+      "chunk": 6
+    },
+    {
+      "start": 5667.58,
+      "end": 5671.38,
+      "text": "El siguiente, CARC, Cundinamarca, Alcaldía Local de Kennedy.",
+      "chunk": 6
+    },
+    {
+      "start": 5671.38,
+      "end": 5673.44,
+      "text": "no dice nada más",
+      "chunk": 6
+    },
+    {
+      "start": 5673.44,
+      "end": 5676.24,
+      "text": "luego dice respuesta número radicado",
+      "chunk": 6
+    },
+    {
+      "start": 5676.24,
+      "end": 5678.26,
+      "text": "2575722",
+      "chunk": 6
+    },
+    {
+      "start": 5678.26,
+      "end": 5680.16,
+      "text": "tampoco dice nada más",
+      "chunk": 6
+    },
+    {
+      "start": 5680.16,
+      "end": 5682.1,
+      "text": "posiblemente sea algún derecho de petición",
+      "chunk": 6
+    },
+    {
+      "start": 5682.1,
+      "end": 5684.62,
+      "text": "luego dice la fila 5",
+      "chunk": 6
+    },
+    {
+      "start": 5684.62,
+      "end": 5686.36,
+      "text": "solicitud préstamo 7 carpas",
+      "chunk": 6
+    },
+    {
+      "start": 5686.36,
+      "end": 5688.44,
+      "text": "3x3 para el día sábado 13 de junio",
+      "chunk": 6
+    },
+    {
+      "start": 5688.44,
+      "end": 5690.4,
+      "text": "2026 de 11 de la mañana",
+      "chunk": 6
+    },
+    {
+      "start": 5690.4,
+      "end": 5691.18,
+      "text": "a 7 pm",
+      "chunk": 6
+    },
+    {
+      "start": 5691.18,
+      "end": 5694.6,
+      "text": "de seguro fue una solicitud hecha a la alcaldía local",
+      "chunk": 6
+    },
+    {
+      "start": 5694.6,
+      "end": 5696.18,
+      "text": "pero pues tampoco",
+      "chunk": 6
+    },
+    {
+      "start": 5696.18,
+      "end": 5698.56,
+      "text": "debería estar en este otro relaciones",
+      "chunk": 6
+    },
+    {
+      "start": 5698.56,
+      "end": 5699.46,
+      "text": "que es porque",
+      "chunk": 6
+    },
+    {
+      "start": 5699.46,
+      "end": 5708.92,
+      "text": "recuerden que la categoría es la primera ramificación, luego viene el subtema, es decir, el subtema va muy de la mano con la categoría.",
+      "chunk": 6
+    },
+    {
+      "start": 5708.92,
+      "end": 5716.1,
+      "text": "Si yo le digo que es un posible acto de corrupción y que el subtema es otro relacionado, cual en el campo de observaciones,",
+      "chunk": 6
+    },
+    {
+      "start": 5717.12,
+      "end": 5726.02,
+      "text": "cuando yo miro el asunto y dice solicitud préstamo siete carpas, en una lectura como lo hace la abeudoría dirá o pensará",
+      "chunk": 6
+    },
+    {
+      "start": 5726.02,
+      "end": 5732.94,
+      "text": "que la solicitud del préstamo de las carpas fue posiblemente denunciado como un acto de corrupción.",
+      "chunk": 6
+    },
+    {
+      "start": 5733.96,
+      "end": 5739.72,
+      "text": "Entonces, esto es algo que toca ver con los compañeros que están haciendo la clasificación,",
+      "chunk": 6
+    },
+    {
+      "start": 5739.72,
+      "end": 5746.4,
+      "text": "qué está pasando, cómo está ingresando, por qué se mantiene en la categoría de actos de corrupción.",
+      "chunk": 6
+    },
+    {
+      "start": 5747.26,
+      "end": 5752.86,
+      "text": "Derecho de petición a la alcaldía de Ulme, información de esterilización de animales, solicitud certificada laboral.",
+      "chunk": 6
+    },
+    {
+      "start": 5752.86,
+      "end": 5760.5,
+      "text": "Entonces hay un mal uso del sistema precisamente por este tipo de ingresos que no deberían estar acá.",
+      "chunk": 6
+    },
+    {
+      "start": 5762.16,
+      "end": 5770.42,
+      "text": "Certificaciones contractuales, administración de copropiedades, estudios y diseños para la intervención de una vía,",
+      "chunk": 6
+    },
+    {
+      "start": 5771.62,
+      "end": 5777.7,
+      "text": "apoyo a la gestión, derecho de petición, reparación y mantenimiento de andenes, traslados por competencia,",
+      "chunk": 6
+    },
+    {
+      "start": 5777.7,
+      "end": 5781.22,
+      "text": "pavimento de la calle",
+      "chunk": 6
+    },
+    {
+      "start": 5781.22,
+      "end": 5783.26,
+      "text": "dando una dirección",
+      "chunk": 6
+    },
+    {
+      "start": 5783.26,
+      "end": 5786.08,
+      "text": "solicitud",
+      "chunk": 6
+    },
+    {
+      "start": 5786.08,
+      "end": 5789.08,
+      "text": "solucionar el problema causado por falta de mantenimiento",
+      "chunk": 6
+    },
+    {
+      "start": 5789.08,
+      "end": 5790.9,
+      "text": "del espacio afectado al parque",
+      "chunk": 6
+    },
+    {
+      "start": 5790.9,
+      "end": 5792.42,
+      "text": "ubicado y dando una dirección",
+      "chunk": 6
+    },
+    {
+      "start": 5792.42,
+      "end": 5793.48,
+      "text": "es decir",
+      "chunk": 6
+    },
+    {
+      "start": 5793.48,
+      "end": 5796.76,
+      "text": "cuando uno lee el contenido",
+      "chunk": 6
+    },
+    {
+      "start": 5796.76,
+      "end": 5797.6,
+      "text": "del asunto",
+      "chunk": 6
+    },
+    {
+      "start": 5797.6,
+      "end": 5800.46,
+      "text": "puede evidenciar claramente",
+      "chunk": 6
+    },
+    {
+      "start": 5800.46,
+      "end": 5802.78,
+      "text": "que hay un mal uso",
+      "chunk": 6
+    },
+    {
+      "start": 5802.78,
+      "end": 5803.64,
+      "text": "de la clasificación",
+      "chunk": 6
+    },
+    {
+      "start": 5803.64,
+      "end": 5806.52,
+      "text": "restauración a Doquín",
+      "chunk": 6
+    },
+    {
+      "start": 5806.52,
+      "end": 5814.64,
+      "text": "parque bolsillo en fin pero pues en este caso estamos haciendo un informe de un espejo ver es",
+      "chunk": 6
+    },
+    {
+      "start": 5814.64,
+      "end": 5823.1,
+      "text": "que ya se cumplieron durante la vigencia del mes del primero al 31 de mayo bueno entonces ya una",
+      "chunk": 6
+    },
+    {
+      "start": 5823.1,
+      "end": 5828.92,
+      "text": "vez colocado los cinco que corresponden a los cinco subtemas más demandados por la ciudadanía",
+      "chunk": 6
+    },
+    {
+      "start": 5828.92,
+      "end": 5835.5,
+      "text": "si aquí no tenemos los que tuvieron solución o gestión solamente como el total y más abajo",
+      "chunk": 6
+    },
+    {
+      "start": 5835.5,
+      "end": 5840.28,
+      "text": "Podemos encontrar otra tabla exactamente igual, pero estos fueron los que ya tuvieron una respuesta definitiva.",
+      "chunk": 6
+    },
+    {
+      "start": 5841.5,
+      "end": 5844.46,
+      "text": "Nuevamente, hago la selección de la información.",
+      "chunk": 6
+    },
+    {
+      "start": 5846.06,
+      "end": 5856.94,
+      "text": "Ya cuando la trae todo hago el mismo ejercicio entonces tengo en total tengo 4 es el valor que voy a colocar",
+      "chunk": 6
+    },
+    {
+      "start": 5856.94,
+      "end": 5859.12,
+      "text": "en este total en amarillito",
+      "chunk": 6
+    },
+    {
+      "start": 5859.12,
+      "end": 5861.06,
+      "text": "y borro",
+      "chunk": 6
+    },
+    {
+      "start": 5861.06,
+      "end": 5861.64,
+      "text": "los 5",
+      "chunk": 6
+    },
+    {
+      "start": 5861.64,
+      "end": 5865.0,
+      "text": "más",
+      "chunk": 6
+    },
+    {
+      "start": 5865.0,
+      "end": 5866.88,
+      "text": "demandados para poder",
+      "chunk": 6
+    },
+    {
+      "start": 5866.88,
+      "end": 5868.92,
+      "text": "copiar esos 5",
+      "chunk": 6
+    },
+    {
+      "start": 5868.92,
+      "end": 5869.46,
+      "text": "temas",
+      "chunk": 6
+    },
+    {
+      "start": 5869.46,
+      "end": 5872.88,
+      "text": "de mayor",
+      "chunk": 6
+    },
+    {
+      "start": 5872.88,
+      "end": 5874.64,
+      "text": "interés por parte de la ciudadanía",
+      "chunk": 6
+    },
+    {
+      "start": 5874.64,
+      "end": 5882.68,
+      "text": "listo",
+      "chunk": 6
+    },
+    {
+      "start": 5882.68,
+      "end": 5884.76,
+      "text": "seguimos",
+      "chunk": 6
+    },
+    {
+      "start": 5884.76,
+      "end": 5885.52,
+      "text": "ah bueno aquí",
+      "chunk": 6
+    },
+    {
+      "start": 5885.52,
+      "end": 5887.06,
+      "text": "el otro",
+      "chunk": 6
+    },
+    {
+      "start": 5887.06,
+      "end": 5890.72,
+      "text": "no está resaltado en naranja",
+      "chunk": 6
+    },
+    {
+      "start": 5890.72,
+      "end": 5892.26,
+      "text": "y el de servicios",
+      "chunk": 6
+    },
+    {
+      "start": 5892.26,
+      "end": 5895.1,
+      "text": "me aparecía en otro color",
+      "chunk": 6
+    },
+    {
+      "start": 5895.1,
+      "end": 5896.84,
+      "text": "listo",
+      "chunk": 6
+    },
+    {
+      "start": 5896.84,
+      "end": 5899.6,
+      "text": "seguimos",
+      "chunk": 6
+    },
+    {
+      "start": 5899.6,
+      "end": 5902.66,
+      "text": "es muy amplio el espacio que hay",
+      "chunk": 6
+    },
+    {
+      "start": 5902.66,
+      "end": 5903.96,
+      "text": "en esta tabla con la otra",
+      "chunk": 6
+    },
+    {
+      "start": 5903.96,
+      "end": 5908.36,
+      "text": "porque a veces la tabla de los subtemas es mucho más extensa",
+      "chunk": 6
+    },
+    {
+      "start": 5908.36,
+      "end": 5914.18,
+      "text": "y suele sobreponer, quedar sobrepuesta a la otra tabla.",
+      "chunk": 6
+    },
+    {
+      "start": 5915.06,
+      "end": 5917.88,
+      "text": "Entonces en esta tabla número 5, peticiones trasladadas,",
+      "chunk": 6
+    },
+    {
+      "start": 5917.88,
+      "end": 5921.32,
+      "text": "aquí enseguida hay a mano derecha un cuadro resumen.",
+      "chunk": 6
+    },
+    {
+      "start": 5921.78,
+      "end": 5923.68,
+      "text": "El cuadro resumen me dice total de peticiones,",
+      "chunk": 6
+    },
+    {
+      "start": 5923.86,
+      "end": 5925.74,
+      "text": "entonces primero me voy al total de la petición,",
+      "chunk": 6
+    },
+    {
+      "start": 5926.86,
+      "end": 5930.8,
+      "text": "pero veo que aquí hay un filtro del estado final de la petición.",
+      "chunk": 6
+    },
+    {
+      "start": 5930.8,
+      "end": 5932.48,
+      "text": "libero el filtro primero",
+      "chunk": 6
+    },
+    {
+      "start": 5932.48,
+      "end": 5936.68,
+      "text": "10.599",
+      "chunk": 6
+    },
+    {
+      "start": 5936.68,
+      "end": 5938.4,
+      "text": "esa es la cifra que voy a traer aquí",
+      "chunk": 6
+    },
+    {
+      "start": 5938.4,
+      "end": 5939.08,
+      "text": "la voy a colocar",
+      "chunk": 6
+    },
+    {
+      "start": 5939.08,
+      "end": 5944.76,
+      "text": "y luego nuevamente voy a aplicar",
+      "chunk": 6
+    },
+    {
+      "start": 5944.76,
+      "end": 5946.68,
+      "text": "el filtro que tenía que son todas",
+      "chunk": 6
+    },
+    {
+      "start": 5946.68,
+      "end": 5949.16,
+      "text": "las que hayan sido solucionadas por traslado",
+      "chunk": 6
+    },
+    {
+      "start": 5949.16,
+      "end": 5954.76,
+      "text": "cuando ya tengo todas",
+      "chunk": 6
+    },
+    {
+      "start": 5954.76,
+      "end": 5956.76,
+      "text": "las solucionadas y que aplico el filtro",
+      "chunk": 6
+    },
+    {
+      "start": 5956.76,
+      "end": 5958.92,
+      "text": "el porcentaje automáticamente se cambió",
+      "chunk": 6
+    },
+    {
+      "start": 5958.92,
+      "end": 5960.52,
+      "text": "solamente tuve que cambiar el total",
+      "chunk": 6
+    },
+    {
+      "start": 5960.52,
+      "end": 5962.78,
+      "text": "que fueron 10.599.",
+      "chunk": 6
+    },
+    {
+      "start": 5963.66,
+      "end": 5965.22,
+      "text": "Sigo mirando hacia abajo.",
+      "chunk": 6
+    },
+    {
+      "start": 5966.9,
+      "end": 5968.52,
+      "text": "Actualizando tablas dinámicas.",
+      "chunk": 6
+    },
+    {
+      "start": 5969.62,
+      "end": 5971.72,
+      "text": "Esos son subtemas para abedurías.",
+      "chunk": 6
+    },
+    {
+      "start": 5976.98,
+      "end": 5979.56,
+      "text": "Peticiones cerradas en el periodo actual,",
+      "chunk": 6
+    },
+    {
+      "start": 5979.84,
+      "end": 5982.36,
+      "text": "que tiene un cuadro enseguida para análisis.",
+      "chunk": 6
+    },
+    {
+      "start": 5987.44,
+      "end": 5989.64,
+      "text": "Lo actualizo y una vez lo actualizo",
+      "chunk": 6
+    },
+    {
+      "start": 5989.64,
+      "end": 5992.26,
+      "text": "me traigo toda la información de gestionados,",
+      "chunk": 6
+    },
+    {
+      "start": 5992.38,
+      "end": 5993.72,
+      "text": "columna de pendientes gestionados,",
+      "chunk": 6
+    },
+    {
+      "start": 5993.76,
+      "end": 5998.16,
+      "text": "hasta total de cuenta que incluya hasta un mes,",
+      "chunk": 6
+    },
+    {
+      "start": 5998.26,
+      "end": 5999.38,
+      "text": "es decir, las 20 filas,",
+      "chunk": 6
+    },
+    {
+      "start": 5999.44,
+      "end": 6002.32,
+      "text": "y esa información la voy a traer, la voy a pegar aquí enseguida.",
+      "chunk": 6
+    },
+    {
+      "start": 6005.18,
+      "end": 6009.28,
+      "text": "Tanto las tres últimas que corresponden a en blanco,",
+      "chunk": 6
+    },
+    {
+      "start": 6010.54,
+      "end": 6012.72,
+      "text": "que por lo general suelen ser las de nivel central,",
+      "chunk": 6
+    },
+    {
+      "start": 6013.14,
+      "end": 6014.76,
+      "text": "o todo lo que llamamos nivel central,",
+      "chunk": 6
+    },
+    {
+      "start": 6015.8,
+      "end": 6018.98,
+      "text": "está formulado, es decir, ya él lo trae.",
+      "chunk": 6
+    },
+    {
+      "start": 6019.64,
+      "end": 6027.42,
+      "text": "Entonces yo voy a traer aquí como nivel central, como lo teníamos en PQR localidades.",
+      "chunk": 6
+    },
+    {
+      "start": 6028.32,
+      "end": 6030.5,
+      "text": "Y en la tabla de seguida hago lo mismo.",
+      "chunk": 6
+    },
+    {
+      "start": 6030.88,
+      "end": 6032.26,
+      "text": "Esta es la de periodos anteriores.",
+      "chunk": 6
+    },
+    {
+      "start": 6035.02,
+      "end": 6035.66,
+      "text": "Actualizo.",
+      "chunk": 6
+    },
+    {
+      "start": 6037.0,
+      "end": 6038.1,
+      "text": "Selecciono todo.",
+      "chunk": 6
+    },
+    {
+      "start": 6039.4,
+      "end": 6040.22,
+      "text": "Hasta USME.",
+      "chunk": 6
+    },
+    {
+      "start": 6045.4,
+      "end": 6049.3,
+      "text": "Y aquello que me aparezca en cero simplemente va a decir que me lo reemplace.",
+      "chunk": 6
+    },
+    {
+      "start": 6049.64,
+      "end": 6052.7,
+      "text": "que me parezca vacío para que no me queden",
+      "chunk": 6
+    },
+    {
+      "start": 6052.7,
+      "end": 6053.3,
+      "text": "las cerzas",
+      "chunk": 6
+    },
+    {
+      "start": 6053.3,
+      "end": 6056.18,
+      "text": "la última como lo dije ya está",
+      "chunk": 6
+    },
+    {
+      "start": 6056.18,
+      "end": 6058.6,
+      "text": "mencionada entonces aquí lo que voy a hacer es",
+      "chunk": 6
+    },
+    {
+      "start": 6058.6,
+      "end": 6060.44,
+      "text": "colocarle",
+      "chunk": 6
+    },
+    {
+      "start": 6060.44,
+      "end": 6062.64,
+      "text": "el nombre nivel central",
+      "chunk": 6
+    },
+    {
+      "start": 6062.64,
+      "end": 6069.04,
+      "text": "seguimos a los días de gestión",
+      "chunk": 6
+    },
+    {
+      "start": 6069.04,
+      "end": 6084.62,
+      "text": "en d de gesti yo tengo resaltado en amarillo los que sobrepasan estos d de gesti Le quito el relleno ese resaltado y nuevamente hago la actualizaci Al hacer la actualizaci me pongo en el ejercicio de validar",
+      "chunk": 6
+    },
+    {
+      "start": 6085.18,
+      "end": 6088.74,
+      "text": "Entonces, por ejemplo, en consulta, que son 30 días, ¿cuáles superan los 30 días?",
+      "chunk": 6
+    },
+    {
+      "start": 6089.08,
+      "end": 6093.14,
+      "text": "En denuncias aptos de corrupción, ¿cuáles superan los 15 días?",
+      "chunk": 6
+    },
+    {
+      "start": 6093.22,
+      "end": 6095.12,
+      "text": "Y así sucesivamente por cada uno.",
+      "chunk": 6
+    },
+    {
+      "start": 6095.12,
+      "end": 6101.72,
+      "text": "resaltando cuáles son aquellos que están por encima del tiempo ley dados para ser respondidos.",
+      "chunk": 6
+    },
+    {
+      "start": 6102.14,
+      "end": 6103.96,
+      "text": "Derechos de petición de interés particular.",
+      "chunk": 6
+    },
+    {
+      "start": 6104.84,
+      "end": 6110.58,
+      "text": "Hago el mismo ejercicio, identifico aquellas que identifico que están por encima, las resalto.",
+      "chunk": 6
+    },
+    {
+      "start": 6112.08,
+      "end": 6113.84,
+      "text": "Y las voy teniendo en cuenta.",
+      "chunk": 6
+    },
+    {
+      "start": 6115.04,
+      "end": 6116.7,
+      "text": "Entonces tengo aquí quejas.",
+      "chunk": 6
+    },
+    {
+      "start": 6116.7,
+      "end": 6124.54,
+      "text": "ya sé que no puedo pasarme los 15 días",
+      "chunk": 6
+    },
+    {
+      "start": 6124.54,
+      "end": 6125.68,
+      "text": "lo que hago es resaltarlo",
+      "chunk": 6
+    },
+    {
+      "start": 6125.68,
+      "end": 6128.7,
+      "text": "lo mismo en reclamo",
+      "chunk": 6
+    },
+    {
+      "start": 6130.7,
+      "end": 6131.12,
+      "text": "a lo",
+      "chunk": 6
+    },
+    {
+      "start": 6131.12,
+      "end": 6136.96,
+      "text": "espérame",
+      "chunk": 6
+    },
+    {
+      "start": 6136.96,
+      "end": 6138.5,
+      "text": "espérame",
+      "chunk": 6
+    },
+    {
+      "start": 6138.5,
+      "end": 6139.12,
+      "text": "espérame",
+      "chunk": 6
+    },
+    {
+      "start": 6146.7,
+      "end": 6147.7,
+      "text": "Gracias.",
+      "chunk": 6
+    },
+    {
+      "start": 6176.7,
+      "end": 6177.7,
+      "text": "Gracias.",
+      "chunk": 6
+    },
+    {
+      "start": 6206.7,
+      "end": 6222.82,
+      "text": "Terminé de seleccionar todos los que superan los días de gestión definidos por ley, que están en la parte superior, escritos, para poder evidenciar cuáles son los que cedieron ese tiempo.",
+      "chunk": 6
+    },
+    {
+      "start": 6222.82,
+      "end": 6231.02,
+      "text": "Entonces podemos ver que para el primer mes de mayo lo que fueron solicitudes de copia, solicitudes de información, fueron los que más incumplimiento tuvieron.",
+      "chunk": 6
+    },
+    {
+      "start": 6231.02,
+      "end": 6236.74,
+      "text": "quejas, reclamos, derechos de inspección de interés particular.",
+      "chunk": 6
+    },
+    {
+      "start": 6237.2,
+      "end": 6241.94,
+      "text": "Y eso debe ser coherente con lo que la medición que hace la Secretaría de la Vida y la Existencia.",
+      "chunk": 6
+    },
+    {
+      "start": 6242.72,
+      "end": 6245.32,
+      "text": "En el siguiente, que es muy parecido al anterior,",
+      "chunk": 6
+    },
+    {
+      "start": 6245.9,
+      "end": 6251.52,
+      "text": "en el primero teníamos el número de días de gestión, promedio de días de gestión.",
+      "chunk": 6
+    },
+    {
+      "start": 6251.52,
+      "end": 6257.8,
+      "text": "Y en el siguiente lo que tengo es la cantidad de PQRs que tuvieron respuesta,",
+      "chunk": 6
+    },
+    {
+      "start": 6257.8,
+      "end": 6261.72,
+      "text": "que fueron gestionadas",
+      "chunk": 6
+    },
+    {
+      "start": 6261.72,
+      "end": 6264.96,
+      "text": "y que de acuerdo pues a lo que se resaltó",
+      "chunk": 6
+    },
+    {
+      "start": 6264.96,
+      "end": 6267.08,
+      "text": "de los días de gestión",
+      "chunk": 6
+    },
+    {
+      "start": 6267.08,
+      "end": 6269.1,
+      "text": "tendría como la misma coherencia",
+      "chunk": 6
+    },
+    {
+      "start": 6269.1,
+      "end": 6271.08,
+      "text": "el mismo resalte",
+      "chunk": 6
+    },
+    {
+      "start": 6271.08,
+      "end": 6273.22,
+      "text": "a la tabla superior",
+      "chunk": 6
+    },
+    {
+      "start": 6273.22,
+      "end": 6275.86,
+      "text": "entonces lo que hago es como copiar el formato",
+      "chunk": 6
+    },
+    {
+      "start": 6275.86,
+      "end": 6279.42,
+      "text": "y me lo llevo abajo",
+      "chunk": 6
+    },
+    {
+      "start": 6279.42,
+      "end": 6283.5,
+      "text": "entonces simplemente me trae los que yo ya había resaltado arriba",
+      "chunk": 6
+    },
+    {
+      "start": 6283.5,
+      "end": 6285.04,
+      "text": "en la misma ubicación y posición",
+      "chunk": 6
+    },
+    {
+      "start": 6285.04,
+      "end": 6286.98,
+      "text": "para la cantidad",
+      "chunk": 6
+    },
+    {
+      "start": 6286.98,
+      "end": 6298.98,
+      "text": "Entonces, recuerden, mientras arriba estoy viendo día de gestión, en la siguiente tabla estoy viendo cantidad de pecuarios. Eso está explicado en el título de cada una de las tablas.",
+      "chunk": 6
+    },
+    {
+      "start": 6300.0,
+      "end": 6307.0,
+      "text": "sigo bajando, esta tabla se sacó manualmente porque es algo que nos estaban pidiendo,",
+      "chunk": 7
+    },
+    {
+      "start": 6307.14,
+      "end": 6313.2,
+      "text": "entonces elimino el contenido, lo que voy a hacer es traerme los días promedio de gestión total,",
+      "chunk": 7
+    },
+    {
+      "start": 6313.2,
+      "end": 6320.68,
+      "text": "es decir, de esta primera tabla, me traigo este total, recuerden que los tres últimos no los tomo",
+      "chunk": 7
+    },
+    {
+      "start": 6320.68,
+      "end": 6326.7,
+      "text": "porque los tres últimos son tomados o calculados como, leídos como nivel central, perdón.",
+      "chunk": 7
+    },
+    {
+      "start": 6330.0,
+      "end": 6334.6,
+      "text": "Y lo voy a pegar acá en promedio de gestión.",
+      "chunk": 7
+    },
+    {
+      "start": 6335.82,
+      "end": 6336.46,
+      "text": "Listo.",
+      "chunk": 7
+    },
+    {
+      "start": 6339.0,
+      "end": 6341.4,
+      "text": "Y estos tres últimos.",
+      "chunk": 7
+    },
+    {
+      "start": 6343.78,
+      "end": 6348.76,
+      "text": "Si yo los tomo, aquí en la parte inferior me dice promedio, recuento y suma.",
+      "chunk": 7
+    },
+    {
+      "start": 6349.38,
+      "end": 6350.3,
+      "text": "Promedio me da 7.",
+      "chunk": 7
+    },
+    {
+      "start": 6350.3,
+      "end": 6354.1,
+      "text": "Entonces ese es el valor que voy a colocar en la tabla.",
+      "chunk": 7
+    },
+    {
+      "start": 6357.3,
+      "end": 6358.84,
+      "text": "Aquí voy a colocar 7.",
+      "chunk": 7
+    },
+    {
+      "start": 6358.84,
+      "end": 6361.84,
+      "text": "Este valor también se quita.",
+      "chunk": 7
+    },
+    {
+      "start": 6364.8,
+      "end": 6367.52,
+      "text": "Para traer el que me arroja la tabla que dice 5.",
+      "chunk": 7
+    },
+    {
+      "start": 6368.36,
+      "end": 6369.5,
+      "text": "Voy a resaltarlo aquí.",
+      "chunk": 7
+    },
+    {
+      "start": 6369.84,
+      "end": 6370.12,
+      "text": "Este.",
+      "chunk": 7
+    },
+    {
+      "start": 6370.78,
+      "end": 6371.84,
+      "text": "Espero que lo puedan ver.",
+      "chunk": 7
+    },
+    {
+      "start": 6373.68,
+      "end": 6375.52,
+      "text": "Ese es el que me llevó para allá para la tabla.",
+      "chunk": 7
+    },
+    {
+      "start": 6375.86,
+      "end": 6376.08,
+      "text": "¿Listo?",
+      "chunk": 7
+    },
+    {
+      "start": 6377.08,
+      "end": 6380.32,
+      "text": "Ya ahora, hecho eso, me devuelvo a los dos cuadros anteriores.",
+      "chunk": 7
+    },
+    {
+      "start": 6380.46,
+      "end": 6385.68,
+      "text": "El de peticiones cerradas en periodos anteriores y peticiones cerradas en periodo actual.",
+      "chunk": 7
+    },
+    {
+      "start": 6386.48,
+      "end": 6387.1,
+      "text": "¿Qué voy a hacer?",
+      "chunk": 7
+    },
+    {
+      "start": 6387.1,
+      "end": 6391.42,
+      "text": "Aquí llevo las tablas solamente para alimentar el cuadro que estoy haciendo.",
+      "chunk": 7
+    },
+    {
+      "start": 6392.38,
+      "end": 6392.96,
+      "text": "Están tal cual.",
+      "chunk": 7
+    },
+    {
+      "start": 6393.16,
+      "end": 6396.24,
+      "text": "Aquí voy a seleccionar solamente los que tuvieron respuesta definitiva.",
+      "chunk": 7
+    },
+    {
+      "start": 6397.46,
+      "end": 6404.2,
+      "text": "Y voy a arrastrar los que son gestionados para copiarlos en la parte inferior.",
+      "chunk": 7
+    },
+    {
+      "start": 6405.74,
+      "end": 6407.28,
+      "text": "¿Por qué en la parte inferior?",
+      "chunk": 7
+    },
+    {
+      "start": 6407.38,
+      "end": 6409.1,
+      "text": "Porque es donde estoy haciendo el comparativo.",
+      "chunk": 7
+    },
+    {
+      "start": 6409.98,
+      "end": 6411.94,
+      "text": "Entonces traigo periodo actual primero.",
+      "chunk": 7
+    },
+    {
+      "start": 6411.94,
+      "end": 6417.46,
+      "text": "miro cuántos son los de nivel central",
+      "chunk": 7
+    },
+    {
+      "start": 6417.46,
+      "end": 6419.2,
+      "text": "o los que se cuentan como nivel central",
+      "chunk": 7
+    },
+    {
+      "start": 6419.2,
+      "end": 6421.12,
+      "text": "me dice 3028 la suma",
+      "chunk": 7
+    },
+    {
+      "start": 6427.78,
+      "end": 6428.74,
+      "text": "listo",
+      "chunk": 7
+    },
+    {
+      "start": 6428.74,
+      "end": 6430.32,
+      "text": "y sigo trayendo información",
+      "chunk": 7
+    },
+    {
+      "start": 6430.32,
+      "end": 6433.54,
+      "text": "pero antes de traer la del periodo anterior",
+      "chunk": 7
+    },
+    {
+      "start": 6433.54,
+      "end": 6436.16,
+      "text": "libero el filtro que le hice",
+      "chunk": 7
+    },
+    {
+      "start": 6436.16,
+      "end": 6438.06,
+      "text": "al periodo actual",
+      "chunk": 7
+    },
+    {
+      "start": 6438.06,
+      "end": 6440.4,
+      "text": "traigame todas",
+      "chunk": 7
+    },
+    {
+      "start": 6440.4,
+      "end": 6443.24,
+      "text": "aquí nuevamente le digo traigame",
+      "chunk": 7
+    },
+    {
+      "start": 6443.24,
+      "end": 6445.22,
+      "text": "ya en el periodo anterior",
+      "chunk": 7
+    },
+    {
+      "start": 6445.22,
+      "end": 6445.68,
+      "text": "traigo",
+      "chunk": 7
+    },
+    {
+      "start": 6445.68,
+      "end": 6448.66,
+      "text": "las de respuesta definitiva",
+      "chunk": 7
+    },
+    {
+      "start": 6448.66,
+      "end": 6453.5,
+      "text": "y selecciono las gestionadas",
+      "chunk": 7
+    },
+    {
+      "start": 6453.5,
+      "end": 6461.46,
+      "text": "esto es para mostrar",
+      "chunk": 7
+    },
+    {
+      "start": 6461.46,
+      "end": 6463.76,
+      "text": "ese cierre que tuvo el mes de mayo",
+      "chunk": 7
+    },
+    {
+      "start": 6463.76,
+      "end": 6467.42,
+      "text": "en cuanto a las peticiones que pudieron ser",
+      "chunk": 7
+    },
+    {
+      "start": 6467.42,
+      "end": 6469.2,
+      "text": "del periodo actual y del periodo anterior",
+      "chunk": 7
+    },
+    {
+      "start": 6469.2,
+      "end": 6471.98,
+      "text": "nuevamente sumo las tres de nivel central",
+      "chunk": 7
+    },
+    {
+      "start": 6471.98,
+      "end": 6474.08,
+      "text": "me dice que da 458",
+      "chunk": 7
+    },
+    {
+      "start": 6474.08,
+      "end": 6475.92,
+      "text": "y ese es el valor que le voy a colocar aquí",
+      "chunk": 7
+    },
+    {
+      "start": 6475.92,
+      "end": 6484.18,
+      "text": "recuerden después de copiados",
+      "chunk": 7
+    },
+    {
+      "start": 6484.18,
+      "end": 6485.72,
+      "text": "libero el filtro",
+      "chunk": 7
+    },
+    {
+      "start": 6485.72,
+      "end": 6493.84,
+      "text": "y ya me ha quedado",
+      "chunk": 7
+    },
+    {
+      "start": 6493.84,
+      "end": 6495.64,
+      "text": "el cuadro inferior comparativo",
+      "chunk": 7
+    },
+    {
+      "start": 6495.64,
+      "end": 6497.2,
+      "text": "entonces",
+      "chunk": 7
+    },
+    {
+      "start": 6497.2,
+      "end": 6498.98,
+      "text": "en el mes de mayo",
+      "chunk": 7
+    },
+    {
+      "start": 6498.98,
+      "end": 6504.54,
+      "text": "se gestionaron 4.933 peticiones con respuesta definitiva.",
+      "chunk": 7
+    },
+    {
+      "start": 6505.02,
+      "end": 6511.14,
+      "text": "No trasladadas, no asignadas, no en pendientes, sino total respuesta definitiva.",
+      "chunk": 7
+    },
+    {
+      "start": 6511.34,
+      "end": 6513.18,
+      "text": "¿Qué pudo haber sido oportuna o extemporánea?",
+      "chunk": 7
+    },
+    {
+      "start": 6513.82,
+      "end": 6515.72,
+      "text": "Igual están aquí ya incluidas todas.",
+      "chunk": 7
+    },
+    {
+      "start": 6517.0,
+      "end": 6529.22,
+      "text": "Y lo que hago es diferenciar cu de esas PQR correspond al mes anterior o periodos anteriores y cu correspond al periodo vigente o al periodo actual es decir que se recibieron en mayo",
+      "chunk": 7
+    },
+    {
+      "start": 6530.3,
+      "end": 6536.14,
+      "text": "Una vez hecho esto, si vemos aquí enseguida tengo una pequeña suma,",
+      "chunk": 7
+    },
+    {
+      "start": 6536.18,
+      "end": 6540.62,
+      "text": "esa pequeña suma es del periodo anterior más el periodo actual.",
+      "chunk": 7
+    },
+    {
+      "start": 6541.94,
+      "end": 6545.08,
+      "text": "No la quito, la dejo ahí para información de mi compañera.",
+      "chunk": 7
+    },
+    {
+      "start": 6546.02,
+      "end": 6548.1,
+      "text": "Llego al cuadro resumen de lo que pasa en mayo.",
+      "chunk": 7
+    },
+    {
+      "start": 6548.1,
+      "end": 6567.54,
+      "text": "Entonces ya sabemos que en mayo fueron 7 días. Actualizo esta última tabla, esta tabla que está al frente, esta tabla dinámica, con la información que me arroje. Así que tengo 10.202 días. Eso lo voy a escribir aquí en la columna H.",
+      "chunk": 7
+    },
+    {
+      "start": 6567.54,
+      "end": 6574.6,
+      "text": "y entre peticiones del periodo actual y los PQR duplicados voy a traer la cifra de la primera tabla que vimos.",
+      "chunk": 7
+    },
+    {
+      "start": 6574.82,
+      "end": 6576.74,
+      "text": "¿Cuántos eran verdaderos? ¿Cuántos eran falsos?",
+      "chunk": 7
+    },
+    {
+      "start": 6577.5,
+      "end": 6583.04,
+      "text": "Entonces me dice que tengo 983 y 1636.",
+      "chunk": 7
+    },
+    {
+      "start": 6583.04,
+      "end": 6592.2,
+      "text": "Entonces escribo 983 y 1636.",
+      "chunk": 7
+    },
+    {
+      "start": 6592.5,
+      "end": 6593.34,
+      "text": "Ahí me equivoqué.",
+      "chunk": 7
+    },
+    {
+      "start": 6594.92,
+      "end": 6595.24,
+      "text": "Listo.",
+      "chunk": 7
+    },
+    {
+      "start": 6595.24,
+      "end": 6603.24,
+      "text": "Y ahí ya queda escrito para el mes de mayo lo que se tuvo en el movimiento de PQRs.",
+      "chunk": 7
+    },
+    {
+      "start": 6605.1,
+      "end": 6606.8,
+      "text": "Se me va a acabar la batería.",
+      "chunk": 7
+    },
+    {
+      "start": 6609.4,
+      "end": 6611.64,
+      "text": "Ya vamos para finalizar esta tabla.",
+      "chunk": 7
+    },
+    {
+      "start": 6612.74,
+      "end": 6615.24,
+      "text": "Actualizo nuevamente las siguientes tablas dinámicas.",
+      "chunk": 7
+    },
+    {
+      "start": 6617.04,
+      "end": 6620.78,
+      "text": "Saco la información netamente de las alcaldías para hacer un ranking.",
+      "chunk": 7
+    },
+    {
+      "start": 6620.78,
+      "end": 6625.86,
+      "text": "en este caso le digo que por favor",
+      "chunk": 7
+    },
+    {
+      "start": 6625.86,
+      "end": 6630.76,
+      "text": "me reemplace en el contenido de esta tabla",
+      "chunk": 7
+    },
+    {
+      "start": 6630.76,
+      "end": 6635.44,
+      "text": "lo que diga alcaldía local de me lo reemplace por nada",
+      "chunk": 7
+    },
+    {
+      "start": 6635.44,
+      "end": 6641.44,
+      "text": "y con eso de esta manera me quedan ya",
+      "chunk": 7
+    },
+    {
+      "start": 6641.44,
+      "end": 6643.2,
+      "text": "escrito solamente el nombre",
+      "chunk": 7
+    },
+    {
+      "start": 6643.2,
+      "end": 6644.92,
+      "text": "me voy a ordenar",
+      "chunk": 7
+    },
+    {
+      "start": 6644.92,
+      "end": 6646.62,
+      "text": "le digo que ordene por la columna E",
+      "chunk": 7
+    },
+    {
+      "start": 6646.62,
+      "end": 6648.38,
+      "text": "valores de celda de menor a mayor",
+      "chunk": 7
+    },
+    {
+      "start": 6648.38,
+      "end": 6653.3,
+      "text": "y ya tengo la gráfica para participación por localidad.",
+      "chunk": 7
+    },
+    {
+      "start": 6654.96,
+      "end": 6656.16,
+      "text": "Me voy a esta otra tabla.",
+      "chunk": 7
+    },
+    {
+      "start": 6656.66,
+      "end": 6661.88,
+      "text": "Tengo la tabla dinámica entre las columnas ABC y la que está en las columnas EFGHI.",
+      "chunk": 7
+    },
+    {
+      "start": 6662.62,
+      "end": 6665.26,
+      "text": "Esta información la voy a borrar el contenido.",
+      "chunk": 7
+    },
+    {
+      "start": 6666.02,
+      "end": 6670.48,
+      "text": "Este es un cuadro resumen muy parecido al que hicimos en el de PQR localidades.",
+      "chunk": 7
+    },
+    {
+      "start": 6670.48,
+      "end": 6673.3,
+      "text": "aquí lo que voy a hacer es simplemente",
+      "chunk": 7
+    },
+    {
+      "start": 6673.3,
+      "end": 6675.38,
+      "text": "tener presente",
+      "chunk": 7
+    },
+    {
+      "start": 6675.38,
+      "end": 6679.44,
+      "text": "la información que quiero mostrar",
+      "chunk": 7
+    },
+    {
+      "start": 6679.44,
+      "end": 6681.42,
+      "text": "y aquí va en ese detalle",
+      "chunk": 7
+    },
+    {
+      "start": 6681.42,
+      "end": 6682.6,
+      "text": "pues un poco más",
+      "chunk": 7
+    },
+    {
+      "start": 6682.6,
+      "end": 6684.12,
+      "text": "descrito",
+      "chunk": 7
+    },
+    {
+      "start": 6684.12,
+      "end": 6686.36,
+      "text": "lo que se quiera hacer",
+      "chunk": 7
+    },
+    {
+      "start": 6686.36,
+      "end": 6689.06,
+      "text": "voy a actualizar mis tablas dinámicas",
+      "chunk": 7
+    },
+    {
+      "start": 6689.06,
+      "end": 6691.12,
+      "text": "después de haber borrado el contenido",
+      "chunk": 7
+    },
+    {
+      "start": 6691.12,
+      "end": 6692.16,
+      "text": "de la tabla resumen",
+      "chunk": 7
+    },
+    {
+      "start": 6692.16,
+      "end": 6695.18,
+      "text": "y así lo hago",
+      "chunk": 7
+    },
+    {
+      "start": 6695.18,
+      "end": 6695.6,
+      "text": "para",
+      "chunk": 7
+    },
+    {
+      "start": 6695.6,
+      "end": 6698.22,
+      "text": "las dos siguientes",
+      "chunk": 7
+    },
+    {
+      "start": 6698.22,
+      "end": 6702.3,
+      "text": "se necesitan actualizar esas dos",
+      "chunk": 7
+    },
+    {
+      "start": 6702.3,
+      "end": 6704.0,
+      "text": "para poder sacar la información",
+      "chunk": 7
+    },
+    {
+      "start": 6704.0,
+      "end": 6705.62,
+      "text": "que corresponde a",
+      "chunk": 7
+    },
+    {
+      "start": 6705.62,
+      "end": 6708.86,
+      "text": "para el cuadro resumen",
+      "chunk": 7
+    },
+    {
+      "start": 6708.86,
+      "end": 6710.04,
+      "text": "listo",
+      "chunk": 7
+    },
+    {
+      "start": 6710.04,
+      "end": 6713.46,
+      "text": "entonces arranco con supercades",
+      "chunk": 7
+    },
+    {
+      "start": 6713.46,
+      "end": 6715.04,
+      "text": "me dice que en K30",
+      "chunk": 7
+    },
+    {
+      "start": 6715.04,
+      "end": 6719.5,
+      "text": "tengo 162 PQRs",
+      "chunk": 7
+    },
+    {
+      "start": 6719.5,
+      "end": 6721.28,
+      "text": "que en supercade K13 es 1",
+      "chunk": 7
+    },
+    {
+      "start": 6721.28,
+      "end": 6722.18,
+      "text": "eso no es nuestro",
+      "chunk": 7
+    },
+    {
+      "start": 6722.18,
+      "end": 6725.08,
+      "text": "y en supercade negativa tengo 1",
+      "chunk": 7
+    },
+    {
+      "start": 6725.08,
+      "end": 6727.74,
+      "text": "listo",
+      "chunk": 7
+    },
+    {
+      "start": 6727.74,
+      "end": 6734.88,
+      "text": "De resto no tengo más, así que el resto lo dejo con esa rayita o ese guión que me dicen que están vacíos.",
+      "chunk": 7
+    },
+    {
+      "start": 6736.08,
+      "end": 6741.86,
+      "text": "Y traigo tanto la cantidad como el porcentaje de todas y cada una de las localidades,",
+      "chunk": 7
+    },
+    {
+      "start": 6742.06,
+      "end": 6744.66,
+      "text": "incluido nivel central, a este cuadro.",
+      "chunk": 7
+    },
+    {
+      "start": 6745.46,
+      "end": 6757.48,
+      "text": "Ah lo que hice fue como copiarlo y pegarlo y lo tengo listo Y no me voy a ir a buscar uno por uno sino que va a traer la informaci que ya traje en el cuadro resumen de localidades para",
+      "chunk": 7
+    },
+    {
+      "start": 6757.48,
+      "end": 6763.3,
+      "text": "pegarlo en estas filas exactamente el mismo orden que cambia con el cuadro resumen que tanto",
+      "chunk": 7
+    },
+    {
+      "start": 6763.3,
+      "end": 6770.78,
+      "text": "orientaciones como encuestas si va a ir detallado la cantidad por supercar es eso eso es lo que",
+      "chunk": 7
+    },
+    {
+      "start": 6770.78,
+      "end": 6772.44,
+      "text": "que cambia un poco con este cuadro.",
+      "chunk": 7
+    },
+    {
+      "start": 6773.06,
+      "end": 6774.82,
+      "text": "Pero antes de quedarme en ese detalle,",
+      "chunk": 7
+    },
+    {
+      "start": 6774.96,
+      "end": 6777.3,
+      "text": "quiero actualizar las otras tablas dinámicas",
+      "chunk": 7
+    },
+    {
+      "start": 6777.3,
+      "end": 6782.54,
+      "text": "para que sea completo el ejercicio,",
+      "chunk": 7
+    },
+    {
+      "start": 6782.7,
+      "end": 6784.56,
+      "text": "porque se va a morir mi batería.",
+      "chunk": 7
+    },
+    {
+      "start": 6786.18,
+      "end": 6787.92,
+      "text": "Me traigo solamente el porcentaje,",
+      "chunk": 7
+    },
+    {
+      "start": 6787.92,
+      "end": 6789.36,
+      "text": "una vez ya lo actualizado.",
+      "chunk": 7
+    },
+    {
+      "start": 6790.74,
+      "end": 6793.34,
+      "text": "Listo, eso me cambia la gráfica,",
+      "chunk": 7
+    },
+    {
+      "start": 6793.38,
+      "end": 6794.12,
+      "text": "la dejo ahí,",
+      "chunk": 7
+    },
+    {
+      "start": 6795.08,
+      "end": 6796.36,
+      "text": "cambio esta otra tabla.",
+      "chunk": 7
+    },
+    {
+      "start": 6800.78,
+      "end": 6809.02,
+      "text": "Me traigo los tres primeros, no me traigo la que está en blanco porque esa no me da la representación que quiero mostrar en la gráfica.",
+      "chunk": 7
+    },
+    {
+      "start": 6810.46,
+      "end": 6814.9,
+      "text": "Y recuerdan cuando les hablé de documentos, estaban ya los entregados, entonces cambio el título.",
+      "chunk": 7
+    },
+    {
+      "start": 6817.9,
+      "end": 6823.32,
+      "text": "Mayo, y voy a escribir aquí cuánto fueron entregados a ciudadanos y cuánto fueron entregados a entidades.",
+      "chunk": 7
+    },
+    {
+      "start": 6823.32,
+      "end": 6828.36,
+      "text": "Y lo mismo lo de los grupos poblacionales de valor.",
+      "chunk": 7
+    },
+    {
+      "start": 6828.36,
+      "end": 6832.34,
+      "text": "entonces como yo tengo ya eso hecho en localidades",
+      "chunk": 7
+    },
+    {
+      "start": 6832.34,
+      "end": 6834.88,
+      "text": "me voy a traer el informe de PQRs",
+      "chunk": 7
+    },
+    {
+      "start": 6834.88,
+      "end": 6837.74,
+      "text": "localidades para ahorrar tiempo",
+      "chunk": 7
+    },
+    {
+      "start": 6837.74,
+      "end": 6845.24,
+      "text": "mientras copio y pego el resto de información",
+      "chunk": 7
+    },
+    {
+      "start": 6845.24,
+      "end": 6849.44,
+      "text": "entonces lo primero que me dice es el registro de documentos",
+      "chunk": 7
+    },
+    {
+      "start": 6849.44,
+      "end": 6852.8,
+      "text": "documentos, documentos",
+      "chunk": 7
+    },
+    {
+      "start": 6852.8,
+      "end": 6857.6,
+      "text": "el registro de atenciones y el registro de documentos",
+      "chunk": 7
+    },
+    {
+      "start": 6857.6,
+      "end": 6870.58,
+      "text": "Aquí en atenciones ya tengo este cuadro. Me lo voy a llevar tal cual para esta hoja.",
+      "chunk": 7
+    },
+    {
+      "start": 6872.94,
+      "end": 6877.2,
+      "text": "Dice que no debo superponerla. Olvidé que debo eliminarla primero.",
+      "chunk": 7
+    },
+    {
+      "start": 6880.24,
+      "end": 6885.86,
+      "text": "Ahora sí me traigo la información. Listo. Aquí lo que hice fue un copy y pegue.",
+      "chunk": 7
+    },
+    {
+      "start": 6885.86,
+      "end": 6892.16,
+      "text": "Ahora sí me voy a traer los de mayo. Entonces tengo mis atenciones de mayo.",
+      "chunk": 7
+    },
+    {
+      "start": 6899.0,
+      "end": 6902.58,
+      "text": "Perdón, no eran las atenciones de mayo, eran documentos estableados de mayo.",
+      "chunk": 7
+    },
+    {
+      "start": 6902.58,
+      "end": 6913.16,
+      "text": "y aquí me dice que tengo 23 entregados a la ciudadanía",
+      "chunk": 7
+    },
+    {
+      "start": 6913.16,
+      "end": 6917.68,
+      "text": "y 1.269 devueltos a las entidades.",
+      "chunk": 7
+    },
+    {
+      "start": 6917.68,
+      "end": 6921.62,
+      "text": "Entonces escribo 23 y 1.269.",
+      "chunk": 7
+    },
+    {
+      "start": 6922.18,
+      "end": 6926.12,
+      "text": "Esa cifra no la requiere detallada para el informe, solamente el total.",
+      "chunk": 7
+    },
+    {
+      "start": 6926.38,
+      "end": 6928.7,
+      "text": "Es como para un seguimiento, un control.",
+      "chunk": 7
+    },
+    {
+      "start": 6928.7,
+      "end": 6932.94,
+      "text": "hasta ahí hemos completado",
+      "chunk": 7
+    },
+    {
+      "start": 6932.94,
+      "end": 6934.82,
+      "text": "lo que corresponde a",
+      "chunk": 7
+    },
+    {
+      "start": 6934.82,
+      "end": 6937.46,
+      "text": "el informe de PQR",
+      "chunk": 7
+    },
+    {
+      "start": 6937.46,
+      "end": 6939.36,
+      "text": "salta empiezo a migrar todo lo de las hojas",
+      "chunk": 7
+    },
+    {
+      "start": 6939.36,
+      "end": 6941.86,
+      "text": "reporte para validación de la información",
+      "chunk": 7
+    },
+    {
+      "start": 6941.86,
+      "end": 6944.24,
+      "text": "y me voy a traer la información",
+      "chunk": 7
+    },
+    {
+      "start": 6944.24,
+      "end": 6945.88,
+      "text": "de certificados de residencia",
+      "chunk": 7
+    },
+    {
+      "start": 6945.88,
+      "end": 6947.56,
+      "text": "propio horizontal y orientaciones",
+      "chunk": 7
+    },
+    {
+      "start": 6947.56,
+      "end": 6950.46,
+      "text": "en el orden que corresponde a esta tabla",
+      "chunk": 7
+    },
+    {
+      "start": 6950.46,
+      "end": 6954.54,
+      "text": "voy a dejar de compartir un momento",
+      "chunk": 7
+    },
+    {
+      "start": 6954.54,
+      "end": 6956.66,
+      "text": "mientras pongo a cargar la batería",
+      "chunk": 7
+    },
+    {
+      "start": 6958.7,
+      "end": 6959.7,
+      "text": "Gracias.",
+      "chunk": 7
+    },
+    {
+      "start": 6970.0,
+      "end": 6970.62,
+      "text": "you",
+      "chunk": 7
+    },
+    {
+      "start": 7000.0,
+      "end": 7000.62,
+      "text": "you",
+      "chunk": 7
+    },
+    {
+      "start": 7030.0,
+      "end": 7030.62,
+      "text": "you",
+      "chunk": 7
+    },
+    {
+      "start": 7060.0,
+      "end": 7086.0,
+      "text": "So, let's go back.",
+      "chunk": 7
+    },
+    {
+      "start": 7086.0,
+      "end": 7105.0,
+      "text": "I have the information of the documents so as not to close the file without being copied in the PQRS.",
+      "chunk": 7
+    },
+    {
+      "start": 7105.0,
+      "end": 7114.0,
+      "text": "I am going to bring it to the file that corresponds to it in the PQRS report.",
+      "chunk": 7
+    },
+    {
+      "start": 7114.0,
+      "end": 7117.0,
+      "text": "I have registered and delivered.",
+      "chunk": 7
+    },
+    {
+      "start": 7117.0,
+      "end": 7121.0,
+      "text": "I am going to bring this delivery summary.",
+      "chunk": 7
+    },
+    {
+      "start": 7121.0,
+      "end": 7127.0,
+      "text": "I am going to copy it to the PQRS website.",
+      "chunk": 7
+    },
+    {
+      "start": 7127.0,
+      "end": 7139.0,
+      "text": "I'm going to put it where it says delivered.",
+      "chunk": 7
+    },
+    {
+      "start": 7139.0,
+      "end": 7148.0,
+      "text": "I create a copy, delete the previous one and change the name of the one that is in force.",
+      "chunk": 7
+    },
+    {
+      "start": 7148.0,
+      "end": 7155.0,
+      "text": "Here I don't put May, so there's no problem.",
+      "chunk": 7
+    },
+    {
+      "start": 7155.0,
+      "end": 7162.0,
+      "text": "I delete the one of registration and I take the one I just made.",
+      "chunk": 7
+    },
+    {
+      "start": 7162.0,
+      "end": 7169.0,
+      "text": "I always have a copy to leave as traceable.",
+      "chunk": 7
+    },
+    {
+      "start": 7169.0,
+      "end": 7173.0,
+      "text": "So, what have I done so far?",
+      "chunk": 7
+    },
+    {
+      "start": 7173.0,
+      "end": 7182.0,
+      "text": "Bring me the information from the PQR report, which is the support of these last figures that I placed as informative,",
+      "chunk": 7
+    },
+    {
+      "start": 7182.0,
+      "end": 7184.82,
+      "text": "as data in documents",
+      "chunk": 7
+    },
+    {
+      "start": 7184.82,
+      "end": 7186.38,
+      "text": "extradited May.",
+      "chunk": 7
+    },
+    {
+      "start": 7186.38,
+      "end": 7187.56,
+      "text": "And I'm going to update.",
+      "chunk": 7
+    },
+    {
+      "start": 7190.3,
+      "end": 7194.38,
+      "text": "The table. This table summarizes that it is on",
+      "chunk": 7
+    },
+    {
+      "start": 7194.38,
+      "end": 7197.38,
+      "text": "the website, so the order changes a little because",
+      "chunk": 7
+    },
+    {
+      "start": 7197.38,
+      "end": 7198.9,
+      "text": "here first the residence certificate,",
+      "chunk": 7
+    },
+    {
+      "start": 7198.9,
+      "end": 7199.9,
+      "text": "then the horizontal property,",
+      "chunk": 7
+    },
+    {
+      "start": 7200.0,
+      "end": 7206.18,
+      "text": "Yo les decía, yo tomo la información que ya está en el de localidades para no perder tiempo, para ganar tiempo.",
+      "chunk": 8
+    },
+    {
+      "start": 7207.34,
+      "end": 7209.86,
+      "text": "Entonces me traigo primero certificado de residencia.",
+      "chunk": 8
+    },
+    {
+      "start": 7215.44,
+      "end": 7222.1,
+      "text": "No están en el mismo orden aquí las alcaldías, entonces por esa razón lo copio a un lado.",
+      "chunk": 8
+    },
+    {
+      "start": 7230.0,
+      "end": 7234.68,
+      "text": "Listo, entonces ahora debo traerme propiedad horizontal.",
+      "chunk": 8
+    },
+    {
+      "start": 7242.84,
+      "end": 7246.28,
+      "text": "Luego las orientaciones.",
+      "chunk": 8
+    },
+    {
+      "start": 7246.28,
+      "end": 7256.08,
+      "text": "luego sigue las encuestas",
+      "chunk": 8
+    },
+    {
+      "start": 7256.08,
+      "end": 7258.32,
+      "text": "pero aquí no va a traer las encuestas del periodo",
+      "chunk": 8
+    },
+    {
+      "start": 7258.32,
+      "end": 7259.96,
+      "text": "sino las encuestas con respuestas",
+      "chunk": 8
+    },
+    {
+      "start": 7259.96,
+      "end": 7260.88,
+      "text": "completas",
+      "chunk": 8
+    },
+    {
+      "start": 7260.88,
+      "end": 7268.44,
+      "text": "y ahora si los documentos",
+      "chunk": 8
+    },
+    {
+      "start": 7268.44,
+      "end": 7270.34,
+      "text": "extraviados debería estar en el mismo",
+      "chunk": 8
+    },
+    {
+      "start": 7270.34,
+      "end": 7272.1,
+      "text": "orden se supone",
+      "chunk": 8
+    },
+    {
+      "start": 7272.1,
+      "end": 7274.26,
+      "text": "pero recuerden que uno",
+      "chunk": 8
+    },
+    {
+      "start": 7274.26,
+      "end": 7280.56,
+      "text": "el de la página web obedece a lo como está estructurado a la veeduría distrital y el de",
+      "chunk": 8
+    },
+    {
+      "start": 7280.56,
+      "end": 7285.88,
+      "text": "localidades está estructurado de acuerdo a como lo necesitan en cada una de las alcaldías locales",
+      "chunk": 8
+    },
+    {
+      "start": 7285.88,
+      "end": 7291.06,
+      "text": "listo entonces ya me traje la información recuerden que aquí tengo parte de los datos",
+      "chunk": 8
+    },
+    {
+      "start": 7291.06,
+      "end": 7297.28,
+      "text": "que debo llevarme allá al sitio web entonces por ejemplo que tengo en sitio web tengo el",
+      "chunk": 8
+    },
+    {
+      "start": 7297.28,
+      "end": 7301.3,
+      "text": "Propiedad horizontal, que ya puedo eliminar de la página web.",
+      "chunk": 8
+    },
+    {
+      "start": 7302.8,
+      "end": 7306.08,
+      "text": "Certificado de residencia, que ya puedo eliminar de la página web.",
+      "chunk": 8
+    },
+    {
+      "start": 7307.34,
+      "end": 7309.88,
+      "text": "Y me va a traer esos dos que los tengo aquí.",
+      "chunk": 8
+    },
+    {
+      "start": 7314.64,
+      "end": 7316.32,
+      "text": "Tal cual los voy a llevar.",
+      "chunk": 8
+    },
+    {
+      "start": 7316.32,
+      "end": 7323.3,
+      "text": "entonces en este caso",
+      "chunk": 8
+    },
+    {
+      "start": 7323.3,
+      "end": 7325.12,
+      "text": "muevo para que me quede",
+      "chunk": 8
+    },
+    {
+      "start": 7325.12,
+      "end": 7327.28,
+      "text": "certificado de residencia acerca tipo de trámite",
+      "chunk": 8
+    },
+    {
+      "start": 7327.28,
+      "end": 7329.38,
+      "text": "recuerden que tengo",
+      "chunk": 8
+    },
+    {
+      "start": 7329.38,
+      "end": 7331.42,
+      "text": "ya este lo puedo eliminar",
+      "chunk": 8
+    },
+    {
+      "start": 7331.42,
+      "end": 7333.6,
+      "text": "tengo el de certificado",
+      "chunk": 8
+    },
+    {
+      "start": 7333.6,
+      "end": 7335.54,
+      "text": "de residencia el Excel",
+      "chunk": 8
+    },
+    {
+      "start": 7335.54,
+      "end": 7341.18,
+      "text": "el que viene original",
+      "chunk": 8
+    },
+    {
+      "start": 7341.18,
+      "end": 7344.9,
+      "text": "para traerme",
+      "chunk": 8
+    },
+    {
+      "start": 7344.9,
+      "end": 7350.4,
+      "text": "el de la productividad por el tipo de CR, es decir, este.",
+      "chunk": 8
+    },
+    {
+      "start": 7351.4,
+      "end": 7352.84,
+      "text": "¿Para qué lo necesite?",
+      "chunk": 8
+    },
+    {
+      "start": 7353.94,
+      "end": 7357.3,
+      "text": "Entonces lo voy a copiar, me lo voy a llevar a PQR,",
+      "chunk": 8
+    },
+    {
+      "start": 7357.5,
+      "end": 7363.44,
+      "text": "lo coloco aquí en CR tipo trámite, copio, cambio el nombre",
+      "chunk": 8
+    },
+    {
+      "start": 7363.44,
+      "end": 7370.52,
+      "text": "y ya puedo eliminar este.",
+      "chunk": 8
+    },
+    {
+      "start": 7370.52,
+      "end": 7373.24,
+      "text": "listo, ya",
+      "chunk": 8
+    },
+    {
+      "start": 7373.24,
+      "end": 7375.64,
+      "text": "ya sé que se la actualiza, ahora me faltan",
+      "chunk": 8
+    },
+    {
+      "start": 7375.64,
+      "end": 7377.08,
+      "text": "indicadores",
+      "chunk": 8
+    },
+    {
+      "start": 7377.08,
+      "end": 7379.46,
+      "text": "calificaciones de las encuestas",
+      "chunk": 8
+    },
+    {
+      "start": 7379.46,
+      "end": 7380.72,
+      "text": "ya puedo cerrar",
+      "chunk": 8
+    },
+    {
+      "start": 7380.72,
+      "end": 7382.82,
+      "text": "este",
+      "chunk": 8
+    },
+    {
+      "start": 7382.82,
+      "end": 7384.62,
+      "text": "y me voy a ir al de",
+      "chunk": 8
+    },
+    {
+      "start": 7384.62,
+      "end": 7387.62,
+      "text": "localidades para traerme indicadores",
+      "chunk": 8
+    },
+    {
+      "start": 7387.62,
+      "end": 7389.44,
+      "text": "y calificaciones totales",
+      "chunk": 8
+    },
+    {
+      "start": 7390.36,
+      "end": 7391.68,
+      "text": "modelo copiar",
+      "chunk": 8
+    },
+    {
+      "start": 7391.68,
+      "end": 7393.38,
+      "text": "PQR",
+      "chunk": 8
+    },
+    {
+      "start": 7393.38,
+      "end": 7399.38,
+      "text": "eliminó los",
+      "chunk": 8
+    },
+    {
+      "start": 7399.38,
+      "end": 7400.32,
+      "text": "anteriores",
+      "chunk": 8
+    },
+    {
+      "start": 7400.52,
+      "end": 7410.64,
+      "text": "Y simplemente lo que hago es tener en cuenta.",
+      "chunk": 8
+    },
+    {
+      "start": 7410.64,
+      "end": 7415.64,
+      "text": "Los nombres.",
+      "chunk": 8
+    },
+    {
+      "start": 7415.64,
+      "end": 7434.04,
+      "text": "Se registr entregados pco rs info de abril seguimiento d a bueno quien seguimiento d yo les dec que tra la informaci Entonces en el informe web en el resumen de d de gesti recuerden que lo tomamos aqu en un cuadrito resumen lo voy a traer tal cual",
+      "chunk": 8
+    },
+    {
+      "start": 7434.04,
+      "end": 7437.76,
+      "text": "y lo voy a colocar aquí en el seguimiento",
+      "chunk": 8
+    },
+    {
+      "start": 7437.76,
+      "end": 7438.64,
+      "text": "días, mayo",
+      "chunk": 8
+    },
+    {
+      "start": 7438.64,
+      "end": 7441.52,
+      "text": "ah bueno, aquí",
+      "chunk": 8
+    },
+    {
+      "start": 7441.52,
+      "end": 7443.82,
+      "text": "una pequeña aclaración",
+      "chunk": 8
+    },
+    {
+      "start": 7443.82,
+      "end": 7445.48,
+      "text": "y es que dependencia de nivel central",
+      "chunk": 8
+    },
+    {
+      "start": 7445.48,
+      "end": 7446.46,
+      "text": "si debo traerla",
+      "chunk": 8
+    },
+    {
+      "start": 7446.46,
+      "end": 7449.9,
+      "text": "como está detallado",
+      "chunk": 8
+    },
+    {
+      "start": 7449.9,
+      "end": 7450.86,
+      "text": "en el cuadro",
+      "chunk": 8
+    },
+    {
+      "start": 7450.86,
+      "end": 7458.08,
+      "text": "entonces me traigo esto",
+      "chunk": 8
+    },
+    {
+      "start": 7458.08,
+      "end": 7460.46,
+      "text": "con el 5",
+      "chunk": 8
+    },
+    {
+      "start": 7460.46,
+      "end": 7471.28,
+      "text": "listo y",
+      "chunk": 8
+    },
+    {
+      "start": 7471.28,
+      "end": 7474.04,
+      "text": "de donde saco estos otros",
+      "chunk": 8
+    },
+    {
+      "start": 7474.04,
+      "end": 7476.12,
+      "text": "estos otros los saco de aquí",
+      "chunk": 8
+    },
+    {
+      "start": 7476.12,
+      "end": 7478.24,
+      "text": "en la parte superior de la hoja",
+      "chunk": 8
+    },
+    {
+      "start": 7478.24,
+      "end": 7479.5,
+      "text": "de informe de web de abril",
+      "chunk": 8
+    },
+    {
+      "start": 7479.5,
+      "end": 7481.36,
+      "text": "aquí a mano derecha",
+      "chunk": 8
+    },
+    {
+      "start": 7481.36,
+      "end": 7483.92,
+      "text": "tengo estos cuatro cuadros",
+      "chunk": 8
+    },
+    {
+      "start": 7483.92,
+      "end": 7486.1,
+      "text": "o tablas dinámicas y lo que hago",
+      "chunk": 8
+    },
+    {
+      "start": 7486.1,
+      "end": 7488.16,
+      "text": "simplemente actualizarlas",
+      "chunk": 8
+    },
+    {
+      "start": 7488.16,
+      "end": 7494.26,
+      "text": "las actualizo para poder llevar la cifra que necesito",
+      "chunk": 8
+    },
+    {
+      "start": 7494.26,
+      "end": 7498.78,
+      "text": "en ese cuadro resumen.",
+      "chunk": 8
+    },
+    {
+      "start": 7501.16,
+      "end": 7502.86,
+      "text": "Y me falta esta última.",
+      "chunk": 8
+    },
+    {
+      "start": 7511.46,
+      "end": 7513.54,
+      "text": "Entonces, lo que está resaltado en amarillito",
+      "chunk": 8
+    },
+    {
+      "start": 7513.54,
+      "end": 7514.7,
+      "text": "son los datos que me va a llevar.",
+      "chunk": 8
+    },
+    {
+      "start": 7514.88,
+      "end": 7516.94,
+      "text": "Aquí me dice, es temporáneas y oportunas.",
+      "chunk": 8
+    },
+    {
+      "start": 7516.94,
+      "end": 7519.2,
+      "text": "esto me lo llevo al seguimiento de días",
+      "chunk": 8
+    },
+    {
+      "start": 7519.2,
+      "end": 7523.34,
+      "text": "y lo mismo",
+      "chunk": 8
+    },
+    {
+      "start": 7523.34,
+      "end": 7526.24,
+      "text": "pendientes y en términos",
+      "chunk": 8
+    },
+    {
+      "start": 7526.24,
+      "end": 7529.32,
+      "text": "me lo llevo, esto lo hago para cada mes",
+      "chunk": 8
+    },
+    {
+      "start": 7529.32,
+      "end": 7533.1,
+      "text": "listo, y aquí ya lo copié",
+      "chunk": 8
+    },
+    {
+      "start": 7533.1,
+      "end": 7533.64,
+      "text": "ya lo tengo",
+      "chunk": 8
+    },
+    {
+      "start": 7533.64,
+      "end": 7539.4,
+      "text": "me arrojó las cifras de lo que quería ver",
+      "chunk": 8
+    },
+    {
+      "start": 7539.4,
+      "end": 7540.28,
+      "text": "grabo",
+      "chunk": 8
+    },
+    {
+      "start": 7540.28,
+      "end": 7542.66,
+      "text": "y ya me tiene la información total",
+      "chunk": 8
+    },
+    {
+      "start": 7542.66,
+      "end": 7544.32,
+      "text": "aquí me va haciendo un conteo",
+      "chunk": 8
+    },
+    {
+      "start": 7544.32,
+      "end": 7545.44,
+      "text": "o una operación",
+      "chunk": 8
+    },
+    {
+      "start": 7545.44,
+      "end": 7548.04,
+      "text": "de lo que es el recorrido del año.",
+      "chunk": 8
+    },
+    {
+      "start": 7549.6,
+      "end": 7552.62,
+      "text": "Listo, entonces tengo esta información aquí, esto es más estadístico",
+      "chunk": 8
+    },
+    {
+      "start": 7552.62,
+      "end": 7556.28,
+      "text": "y aquí tengo este comportamiento del porcentaje de descongestión",
+      "chunk": 8
+    },
+    {
+      "start": 7556.28,
+      "end": 7560.16,
+      "text": "que debe figurar hasta junio.",
+      "chunk": 8
+    },
+    {
+      "start": 7560.76,
+      "end": 7564.22,
+      "text": "Entonces aquí está hasta abril, miramos por qué no está hasta junio",
+      "chunk": 8
+    },
+    {
+      "start": 7564.22,
+      "end": 7566.62,
+      "text": "y lo que hacemos es actualizarlo.",
+      "chunk": 8
+    },
+    {
+      "start": 7566.62,
+      "end": 7575.72,
+      "text": "Efectivamente está a falta arrastrar.",
+      "chunk": 8
+    },
+    {
+      "start": 7576.42,
+      "end": 7577.38,
+      "text": "Perdón, está mayo.",
+      "chunk": 8
+    },
+    {
+      "start": 7578.8,
+      "end": 7580.42,
+      "text": "Y eso es lo que me muestra el comportamiento.",
+      "chunk": 8
+    },
+    {
+      "start": 7580.6,
+      "end": 7583.2,
+      "text": "Entonces debo agregar la etiqueta de este último punto.",
+      "chunk": 8
+    },
+    {
+      "start": 7596.62,
+      "end": 7605.0,
+      "text": "y ya me mostró el valor",
+      "chunk": 8
+    },
+    {
+      "start": 7605.0,
+      "end": 7609.02,
+      "text": "pero aquí se me duplican algunos",
+      "chunk": 8
+    },
+    {
+      "start": 7625.02,
+      "end": 7626.38,
+      "text": "listo",
+      "chunk": 8
+    },
+    {
+      "start": 7626.38,
+      "end": 7632.6,
+      "text": "es decir, porque",
+      "chunk": 8
+    },
+    {
+      "start": 7632.6,
+      "end": 7636.02,
+      "text": "pareciera el mismo de acá",
+      "chunk": 8
+    },
+    {
+      "start": 7636.02,
+      "end": 7637.8,
+      "text": "muy seguramente este",
+      "chunk": 8
+    },
+    {
+      "start": 7637.8,
+      "end": 7639.64,
+      "text": "este dato",
+      "chunk": 8
+    },
+    {
+      "start": 7639.64,
+      "end": 7642.84,
+      "text": "tenía decimales",
+      "chunk": 8
+    },
+    {
+      "start": 7642.84,
+      "end": 7652.52,
+      "text": "pero al redondearlo me parece como si fuera una sola cifra",
+      "chunk": 8
+    },
+    {
+      "start": 7675.0,
+      "end": 7695.14,
+      "text": "Esto es más algo de",
+      "chunk": 8
+    },
+    {
+      "start": 7695.14,
+      "end": 7697.82,
+      "text": "de forma",
+      "chunk": 8
+    },
+    {
+      "start": 7697.82,
+      "end": 7699.5,
+      "text": "que no de fondo.",
+      "chunk": 8
+    },
+    {
+      "start": 7699.5,
+      "end": 7705.6,
+      "text": "¿Qué está pasando en este punto?",
+      "chunk": 8
+    },
+    {
+      "start": 7705.74,
+      "end": 7707.4,
+      "text": "Muy seguramente necesito ampliar",
+      "chunk": 8
+    },
+    {
+      "start": 7707.4,
+      "end": 7709.32,
+      "text": "los decimales, lo que yo les estaba diciendo",
+      "chunk": 8
+    },
+    {
+      "start": 7709.32,
+      "end": 7711.3,
+      "text": "porque no es lo mismo",
+      "chunk": 8
+    },
+    {
+      "start": 7711.3,
+      "end": 7713.68,
+      "text": "el 90 que me dan",
+      "chunk": 8
+    },
+    {
+      "start": 7713.68,
+      "end": 7714.1,
+      "text": "abril",
+      "chunk": 8
+    },
+    {
+      "start": 7714.1,
+      "end": 7717.24,
+      "text": "al 90 que me dan mayo",
+      "chunk": 8
+    },
+    {
+      "start": 7717.24,
+      "end": 7721.24,
+      "text": "Si lo notan",
+      "chunk": 8
+    },
+    {
+      "start": 7721.24,
+      "end": 7723.56,
+      "text": "es 89.9, 89.6",
+      "chunk": 8
+    },
+    {
+      "start": 7723.56,
+      "end": 7727.26,
+      "text": "Y seguramente si yo a los otros",
+      "chunk": 8
+    },
+    {
+      "start": 7727.26,
+      "end": 7728.74,
+      "text": "les agrego también un decimal",
+      "chunk": 8
+    },
+    {
+      "start": 7728.74,
+      "end": 7730.08,
+      "text": "ahí voy a tener",
+      "chunk": 8
+    },
+    {
+      "start": 7730.08,
+      "end": 7732.9,
+      "text": "esa explicación",
+      "chunk": 8
+    },
+    {
+      "start": 7732.9,
+      "end": 7736.08,
+      "text": "listo entonces",
+      "chunk": 8
+    },
+    {
+      "start": 7736.08,
+      "end": 7737.52,
+      "text": "este es mi comportamiento",
+      "chunk": 8
+    },
+    {
+      "start": 7737.52,
+      "end": 7739.24,
+      "text": "el porcentaje de descongestión",
+      "chunk": 8
+    },
+    {
+      "start": 7739.24,
+      "end": 7741.8,
+      "text": "bueno ahí ya grabo",
+      "chunk": 8
+    },
+    {
+      "start": 7741.8,
+      "end": 7743.58,
+      "text": "y sigo en mi página",
+      "chunk": 8
+    },
+    {
+      "start": 7743.58,
+      "end": 7745.72,
+      "text": "de el informe web",
+      "chunk": 8
+    },
+    {
+      "start": 7745.72,
+      "end": 7747.48,
+      "text": "que es lo que trabaja",
+      "chunk": 8
+    },
+    {
+      "start": 7747.48,
+      "end": 7749.4,
+      "text": "la compañera para el informe",
+      "chunk": 8
+    },
+    {
+      "start": 7749.4,
+      "end": 7752.04,
+      "text": "escrito",
+      "chunk": 8
+    },
+    {
+      "start": 7752.04,
+      "end": 7752.54,
+      "text": "el web",
+      "chunk": 8
+    },
+    {
+      "start": 7752.54,
+      "end": 7753.34,
+      "text": "el PPT",
+      "chunk": 8
+    },
+    {
+      "start": 7753.34,
+      "end": 7757.8,
+      "text": "entonces una vez ya aquí",
+      "chunk": 8
+    },
+    {
+      "start": 7758.74,
+      "end": 7761.72,
+      "text": "que está en el orden que necesito,",
+      "chunk": 8
+    },
+    {
+      "start": 7763.54,
+      "end": 7765.22,
+      "text": "1, 2, 3, 4, 5,",
+      "chunk": 8
+    },
+    {
+      "start": 7766.22,
+      "end": 7767.2,
+      "text": "me llevo esto,",
+      "chunk": 8
+    },
+    {
+      "start": 7770.24,
+      "end": 7771.54,
+      "text": "el nombre de cada una,",
+      "chunk": 8
+    },
+    {
+      "start": 7775.64,
+      "end": 7778.46,
+      "text": "en el orden que lo traje de allá del resumen,",
+      "chunk": 8
+    },
+    {
+      "start": 7779.24,
+      "end": 7781.16,
+      "text": "para que me sea más fácil de ubicar.",
+      "chunk": 8
+    },
+    {
+      "start": 7781.16,
+      "end": 7789.76,
+      "text": "si habría una forma mucho más eficiente",
+      "chunk": 8
+    },
+    {
+      "start": 7789.76,
+      "end": 7792.64,
+      "text": "de hacerlo, claro que la hay",
+      "chunk": 8
+    },
+    {
+      "start": 7792.64,
+      "end": 7794.62,
+      "text": "y es que cada una",
+      "chunk": 8
+    },
+    {
+      "start": 7794.62,
+      "end": 7797.74,
+      "text": "sea simplemente buscar el valor y traerlo",
+      "chunk": 8
+    },
+    {
+      "start": 7797.74,
+      "end": 7801.2,
+      "text": "pero no me voy a poner a formular esto",
+      "chunk": 8
+    },
+    {
+      "start": 7801.2,
+      "end": 7831.18,
+      "text": "¿Qué pasa?",
+      "chunk": 8
+    },
+    {
+      "start": 7831.2,
+      "end": 7832.2,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 7861.2,
+      "end": 7862.2,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 7870.0,
+      "end": 7890.92,
+      "text": "Un momento.",
+      "chunk": 8
+    },
+    {
+      "start": 7900.0,
+      "end": 7901.0,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 7930.0,
+      "end": 7931.0,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 7960.0,
+      "end": 7961.0,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 7990.0,
+      "end": 7991.0,
+      "text": "Gracias.",
+      "chunk": 8
+    },
+    {
+      "start": 8020.0,
+      "end": 8030.54,
+      "text": "Bueno, seguimos mostrando una copia de la información.",
+      "chunk": 8
+    },
+    {
+      "start": 8031.98,
+      "end": 8033.24,
+      "text": "Vamos con San Cristóbal.",
+      "chunk": 8
+    },
+    {
+      "start": 8047.24,
+      "end": 8048.32,
+      "text": "Santa Fe.",
+      "chunk": 8
+    },
+    {
+      "start": 8050.0,
+      "end": 8064.88,
+      "text": "Su mapa.",
+      "chunk": 8
+    },
+    {
+      "start": 8064.88,
+      "end": 8064.94,
+      "text": "Su mapa.",
+      "chunk": 8
+    },
+    {
+      "start": 8064.94,
+      "end": 8074.78,
+      "text": "aquí yo",
+      "chunk": 8
+    },
+    {
+      "start": 8074.78,
+      "end": 8080.06,
+      "text": "un bolito",
+      "chunk": 8
+    },
+    {
+      "start": 8080.06,
+      "end": 8099.9,
+      "text": "¿Cómo se hace?",
+      "chunk": 8
+    },
+    {
+      "start": 8100.0,
+      "end": 8113.98,
+      "text": "y aquí es donde abrimos supercades",
+      "chunk": 9
+    },
+    {
+      "start": 8113.98,
+      "end": 8114.56,
+      "text": "y",
+      "chunk": 9
+    },
+    {
+      "start": 8114.56,
+      "end": 8119.82,
+      "text": "tanto para orientaciones como para",
+      "chunk": 9
+    },
+    {
+      "start": 8119.82,
+      "end": 8123.12,
+      "text": "como para",
+      "chunk": 9
+    },
+    {
+      "start": 8123.12,
+      "end": 8124.92,
+      "text": "encuestas",
+      "chunk": 9
+    },
+    {
+      "start": 8124.92,
+      "end": 8127.06,
+      "text": "es decir, estas dos",
+      "chunk": 9
+    },
+    {
+      "start": 8127.06,
+      "end": 8128.28,
+      "text": "listo",
+      "chunk": 9
+    },
+    {
+      "start": 8130.0,
+      "end": 8135.04,
+      "text": "me voy a orientaciones",
+      "chunk": 9
+    },
+    {
+      "start": 8135.04,
+      "end": 8139.76,
+      "text": "y me voy a traer supercabezas",
+      "chunk": 9
+    },
+    {
+      "start": 8139.76,
+      "end": 8141.96,
+      "text": "entonces 20 de julio dice 16",
+      "chunk": 9
+    },
+    {
+      "start": 8141.96,
+      "end": 8146.24,
+      "text": "16 orientaciones",
+      "chunk": 9
+    },
+    {
+      "start": 8146.24,
+      "end": 8149.78,
+      "text": "américas 40",
+      "chunk": 9
+    },
+    {
+      "start": 8149.78,
+      "end": 8153.74,
+      "text": "bolsa 70",
+      "chunk": 9
+    },
+    {
+      "start": 8160.0,
+      "end": 8165.52,
+      "text": "Busa 70",
+      "chunk": 9
+    },
+    {
+      "start": 8165.52,
+      "end": 8168.84,
+      "text": "K3013",
+      "chunk": 9
+    },
+    {
+      "start": 8168.84,
+      "end": 8172.0,
+      "text": "Negativa 11",
+      "chunk": 9
+    },
+    {
+      "start": 8172.0,
+      "end": 8175.96,
+      "text": "Manitas 143",
+      "chunk": 9
+    },
+    {
+      "start": 8175.96,
+      "end": 8180.5,
+      "text": "Suba 113",
+      "chunk": 9
+    },
+    {
+      "start": 8180.5,
+      "end": 8182.68,
+      "text": "Pues cae virtual 0",
+      "chunk": 9
+    },
+    {
+      "start": 8182.68,
+      "end": 8186.82,
+      "text": "Ahora hacemos lo mismo con encuestas",
+      "chunk": 9
+    },
+    {
+      "start": 8186.82,
+      "end": 8198.72,
+      "text": "Entonces nos vamos al total el total dice entonces",
+      "chunk": 9
+    },
+    {
+      "start": 8198.72,
+      "end": 8201.76,
+      "text": "20 de julio 4",
+      "chunk": 9
+    },
+    {
+      "start": 8201.76,
+      "end": 8205.34,
+      "text": "américa 11",
+      "chunk": 9
+    },
+    {
+      "start": 8205.34,
+      "end": 8208.08,
+      "text": "bosa 3",
+      "chunk": 9
+    },
+    {
+      "start": 8208.08,
+      "end": 8213.62,
+      "text": "k 30 31",
+      "chunk": 9
+    },
+    {
+      "start": 8213.62,
+      "end": 8217.22,
+      "text": "negativo a 12",
+      "chunk": 9
+    },
+    {
+      "start": 8217.22,
+      "end": 8219.58,
+      "text": "manitas",
+      "chunk": 9
+    },
+    {
+      "start": 8219.58,
+      "end": 8222.42,
+      "text": "78",
+      "chunk": 9
+    },
+    {
+      "start": 8222.42,
+      "end": 8225.04,
+      "text": "78",
+      "chunk": 9
+    },
+    {
+      "start": 8225.04,
+      "end": 8227.62,
+      "text": "subo a 0",
+      "chunk": 9
+    },
+    {
+      "start": 8227.62,
+      "end": 8229.94,
+      "text": "y visto al 0",
+      "chunk": 9
+    },
+    {
+      "start": 8229.94,
+      "end": 8232.44,
+      "text": "listo",
+      "chunk": 9
+    },
+    {
+      "start": 8232.44,
+      "end": 8235.06,
+      "text": "ha quedado totalmente",
+      "chunk": 9
+    },
+    {
+      "start": 8235.06,
+      "end": 8235.88,
+      "text": "diligenciado",
+      "chunk": 9
+    },
+    {
+      "start": 8235.88,
+      "end": 8239.12,
+      "text": "el informe de PQR",
+      "chunk": 9
+    },
+    {
+      "start": 8239.12,
+      "end": 8240.54,
+      "text": "localidades",
+      "chunk": 9
+    },
+    {
+      "start": 8243.62,
+      "end": 8253.34,
+      "text": "Aquí una pequeña verificación",
+      "chunk": 9
+    },
+    {
+      "start": 8253.34,
+      "end": 8255.5,
+      "text": "porque debería",
+      "chunk": 9
+    },
+    {
+      "start": 8255.5,
+      "end": 8257.1,
+      "text": "darme 3915.",
+      "chunk": 9
+    },
+    {
+      "start": 8261.6,
+      "end": 8263.26,
+      "text": "Entonces todo hasta",
+      "chunk": 9
+    },
+    {
+      "start": 8263.26,
+      "end": 8264.8,
+      "text": "un nivel central",
+      "chunk": 9
+    },
+    {
+      "start": 8264.8,
+      "end": 8267.42,
+      "text": "entre 1776.",
+      "chunk": 9
+    },
+    {
+      "start": 8271.46,
+      "end": 8272.52,
+      "text": "Muy bien.",
+      "chunk": 9
+    },
+    {
+      "start": 8273.62,
+      "end": 8278.22,
+      "text": "Y supercades media 124.",
+      "chunk": 9
+    },
+    {
+      "start": 8282.52,
+      "end": 8289.24,
+      "text": "Y son 139 entonces algo fall 4 11 3 31",
+      "chunk": 9
+    },
+    {
+      "start": 8289.24,
+      "end": 8292.86,
+      "text": "12, 7, 8",
+      "chunk": 9
+    },
+    {
+      "start": 8292.86,
+      "end": 8294.94,
+      "text": "0 y 0",
+      "chunk": 9
+    },
+    {
+      "start": 8294.94,
+      "end": 8299.44,
+      "text": "un número no me lo está contando",
+      "chunk": 9
+    },
+    {
+      "start": 8307.0,
+      "end": 8307.88,
+      "text": "124",
+      "chunk": 9
+    },
+    {
+      "start": 8307.88,
+      "end": 8308.16,
+      "text": "124",
+      "chunk": 9
+    },
+    {
+      "start": 8308.16,
+      "end": 8311.8,
+      "text": "entonces que pasa con",
+      "chunk": 9
+    },
+    {
+      "start": 8311.8,
+      "end": 8325.66,
+      "text": "si yo lo sumo solo",
+      "chunk": 9
+    },
+    {
+      "start": 8325.66,
+      "end": 8327.18,
+      "text": "me da 3900",
+      "chunk": 9
+    },
+    {
+      "start": 8327.18,
+      "end": 8330.56,
+      "text": "3776",
+      "chunk": 9
+    },
+    {
+      "start": 8330.56,
+      "end": 8331.76,
+      "text": "me da solamente",
+      "chunk": 9
+    },
+    {
+      "start": 8331.76,
+      "end": 8347.82,
+      "text": "3776",
+      "chunk": 9
+    },
+    {
+      "start": 8347.82,
+      "end": 8350.48,
+      "text": "3780",
+      "chunk": 9
+    },
+    {
+      "start": 8350.48,
+      "end": 8360.48,
+      "text": "3770",
+      "chunk": 9
+    },
+    {
+      "start": 8361.76,
+      "end": 8380.89,
+      "text": "Muy bien es algo en el formato 11 3 31",
+      "chunk": 9
+    },
+    {
+      "start": 8380.89,
+      "end": 8383.99,
+      "text": "12",
+      "chunk": 9
+    },
+    {
+      "start": 8383.99,
+      "end": 8387.97,
+      "text": "78",
+      "chunk": 9
+    },
+    {
+      "start": 8387.97,
+      "end": 8391.01,
+      "text": "ahora sí",
+      "chunk": 9
+    },
+    {
+      "start": 8391.01,
+      "end": 8392.81,
+      "text": "listo",
+      "chunk": 9
+    },
+    {
+      "start": 8392.81,
+      "end": 8394.93,
+      "text": "y para verificar orientaciones",
+      "chunk": 9
+    },
+    {
+      "start": 8394.93,
+      "end": 8395.75,
+      "text": "que esté ok",
+      "chunk": 9
+    },
+    {
+      "start": 8400.89,
+      "end": 8401.85,
+      "text": "me debe dar",
+      "chunk": 9
+    },
+    {
+      "start": 8404.11,
+      "end": 8409.85,
+      "text": "4.328 invitaciones me están dando 3.922",
+      "chunk": 9
+    },
+    {
+      "start": 8412.27,
+      "end": 8429.01,
+      "text": "lo mismo no está contando las cosas entonces aquí 16 40 70 13 11 143",
+      "chunk": 9
+    },
+    {
+      "start": 8430.89,
+      "end": 8432.27,
+      "text": "113.",
+      "chunk": 9
+    },
+    {
+      "start": 8433.81,
+      "end": 8434.61,
+      "text": "Perfecto.",
+      "chunk": 9
+    },
+    {
+      "start": 8434.79,
+      "end": 8436.47,
+      "text": "Ahora sí, ya me las contó.",
+      "chunk": 9
+    },
+    {
+      "start": 8437.07,
+      "end": 8438.67,
+      "text": "Este es un ejercicio de verificación.",
+      "chunk": 9
+    },
+    {
+      "start": 8440.07,
+      "end": 8442.89,
+      "text": "Solo por saber que todo está bien.",
+      "chunk": 9
+    },
+    {
+      "start": 8444.99,
+      "end": 8445.81,
+      "text": "¿Listo?",
+      "chunk": 9
+    },
+    {
+      "start": 8445.81,
+      "end": 8451.83,
+      "text": "Entonces, de esta manera se ha terminado el informe de PQRs página web.",
+      "chunk": 9
+    },
+    {
+      "start": 8453.01,
+      "end": 8453.83,
+      "text": "Grabamos.",
+      "chunk": 9
+    },
+    {
+      "start": 8453.83,
+      "end": 8461.05,
+      "text": "y lo tenemos listo para remitir a la compañera.",
+      "chunk": 9
+    }
+  ],
+  "total_segments": 1222
+}

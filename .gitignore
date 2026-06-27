@@ -1,0 +1,36 @@
+﻿# Entorno virtual
+sdg-localidades/venv/
+
+# Archivos fuente (cambian cada mes)
+sdg-localidades/input/
+sdg-localidades/output/*.xlsx
+
+# Logs de ejecucion
+sdg-localidades/app_*.log
+
+# Video fuente (698 MB)
+assets/video/
+
+# Excels originales (datos, no codigo)
+assets/excel/
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Audio extraido (135 MB)
+data/audio/*.mp3
+
+# Logs
+*.log
+
+# Cache de sistema
+.DS_Store
+Thumbs.db
+*.bak
+*.bak.xlsx

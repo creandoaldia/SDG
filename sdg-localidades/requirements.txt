@@ -1,0 +1,14 @@
+# SDG Localidades - Automatización de Informes PQRS
+# Core ETL
+pandas>=2.0.0
+openpyxl>=3.1.0
+numpy>=1.24.0
+
+# Web Interface
+flask>=3.0.0
+flask-cors>=4.0.0
+waitress>=2.1.0  # Production WSGI server (better than Flask dev server)
+
+# Utils
+python-dateutil>=2.8.0
+unidecode>=1.3.0  # Normalizar nombres con tildes
