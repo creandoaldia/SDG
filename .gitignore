@@ -26,8 +26,9 @@ build/
 # Audio extraido (135 MB)
 data/audio/*.mp3
 
-# Logs
+# Logs en cualquier nivel
 *.log
+**/*.log
 
 # Cache de sistema
 .DS_Store
