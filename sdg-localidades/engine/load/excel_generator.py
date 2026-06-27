@@ -284,12 +284,13 @@ class ExcelGenerator:
             name='Calibri', size=11, bold=True, color='1F4E79')
         row += 1
         secciones = [
-            'RESUMEN CIFRAS', 'INF Localidades PPT (Q1-Q6)',
-            'Reporte PQRS Mayo2026', 'INFORME WEB ABRIL',
-            'SEGUIMIENTO DIAS', 'SAC Atencion',
-            'CR Productividad', 'PH Propiedad Horizontal',
-            'SIDE Documentos', 'INDICADORES',
-            'Encuestas', 'VALIDACION'
+            'RESUMEN CIFRAS (11 indicadores)', 'INF WEB (Canal Web)',
+            'DIAS GESTION', 'SIDE GESTION',
+            'INF Localidades PPT (Q1-Q6)', 'Reporte PQRS Mayo2026',
+            'SAC Atencion', 'CR Productividad',
+            'PH Propiedad Horizontal', 'SIDE Documentos',
+            'INDICADORES', 'Encuestas',
+            'VALIDACION'
         ]
         for s in secciones:
             ws.cell(row=row, column=1, value=s).font = self.font_data
@@ -382,14 +383,14 @@ class ExcelGenerator:
                 if (ri - start_row) % 2 == 0:
                     cell.fill = self.fill_gray
 
-        # Ancho de columnas
+        # Ancho de columnas (max 60 para headers largos como calificaciones)
         for ci in range(1, min(len(df.columns) + 1, 50)):
             max_len = len(str(df.columns[ci - 1])) if ci - 1 < len(df.columns) else 10
             for ri in range(start_row, min(start_row + 50, len(df) + start_row + 1)):
                 cell_val = ws.cell(row=ri, column=ci).value
                 if cell_val:
                     max_len = max(max_len, len(str(cell_val)))
-            ws.column_dimensions[get_column_letter(ci)].width = min(max_len + 4, 45)
+            ws.column_dimensions[get_column_letter(ci)].width = min(max_len + 4, 60)
 
     def _is_date_string(self, s):
         """Detecta si un string parece fecha DD/MM/YYYY o YYYY-MM-DD."""

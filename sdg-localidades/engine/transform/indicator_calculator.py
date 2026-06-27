@@ -78,16 +78,28 @@ class IndicatorCalculator:
 
         return indicators
 
+    @staticmethod
+    def _try_float(val):
+        """Intenta convertir un valor a float. Retorna None si no es posible."""
+        if isinstance(val, (int, float)):
+            return float(val)
+        if isinstance(val, str):
+            val = val.strip().replace(',', '').replace(' ', '')
+            try:
+                return float(val)
+            except ValueError:
+                pass
+        return None
+
     def _cr_indicators(self, df: pd.DataFrame, sheet: str) -> dict:
         """Indicadores de Certificados de Residencia."""
         indicators = {}
-        # Buscar fila de total general
         total_row = df[df.iloc[:, 0].astype(str).str.contains('TOTAL', case=False, na=False)]
         if not total_row.empty:
-            # Extraer totales de columnas numéricas
             for i, val in enumerate(total_row.iloc[0]):
-                if isinstance(val, (int, float)) and val != 0:
-                    indicators[f'total_col_{i}'] = float(val)
+                fval = self._try_float(val)
+                if fval is not None and fval != 0:
+                    indicators[f'total_col_{i}'] = fval
         return indicators
 
     def _ph_indicators(self, df: pd.DataFrame, sheet: str) -> dict:
@@ -96,21 +108,22 @@ class IndicatorCalculator:
         total_row = df[df.iloc[:, 0].astype(str).str.contains('TOTAL', case=False, na=False)]
         if not total_row.empty:
             for i, val in enumerate(total_row.iloc[0]):
-                if isinstance(val, (int, float)) and val != 0:
-                    indicators[f'total_col_{i}'] = float(val)
+                fval = self._try_float(val)
+                if fval is not None and fval != 0:
+                    indicators[f'total_col_{i}'] = fval
         return indicators
 
     def _sac_indicators(self, df: pd.DataFrame, sheet: str) -> dict:
         """Indicadores de SAC."""
         indicators = {}
-        # Buscar total general en filas
         for _, row in df.iterrows():
             for cell in row:
-                if isinstance(cell, str) and 'TOTAL GENERAL' in cell.upper():
-                    # Encontrar el valor numérico en la misma fila
+                cell_str = str(cell).strip() if pd.notna(cell) else ''
+                if 'TOTAL GENERAL' in cell_str.upper():
                     for cell2 in row:
-                        if isinstance(cell2, (int, float)):
-                            indicators['total_atenciones'] = float(cell2)
+                        fval = self._try_float(cell2)
+                        if fval is not None:
+                            indicators['total_atenciones'] = fval
                             break
                     break
         return indicators
@@ -121,6 +134,7 @@ class IndicatorCalculator:
         total_row = df[df.iloc[:, 0].astype(str).str.contains('TOTAL', case=False, na=False)]
         if not total_row.empty:
             for i, val in enumerate(total_row.iloc[0]):
-                if isinstance(val, (int, float)) and val != 0:
-                    indicators[f'total_{i}'] = float(val)
+                fval = self._try_float(val)
+                if fval is not None and fval != 0:
+                    indicators[f'total_{i}'] = fval
         return indicators
