@@ -128,7 +128,14 @@ class DaysReport:
 
     @staticmethod
     def _to_pct(val):
+        """Convierte a valor decimal para formato % de Excel (0.xx = xx%).
+        El Excel con formato '0.00%' multiplica por 100 automaticamente.
+        """
         try:
-            return round(float(str(val).replace(',', '.')) * 100, 1)
+            v = float(str(val).replace(',', '.'))
+            # Si el valor ya es > 1, asumir que es % directo (8 = 8%) y convertir a decimal
+            if abs(v) > 1:
+                v = v / 100.0
+            return round(v, 4)
         except:
             return None

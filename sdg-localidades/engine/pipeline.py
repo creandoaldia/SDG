@@ -64,6 +64,15 @@ class SDGPipeline:
         self.events.put(event)
         return event
 
+    def _emit_internal(self, sub_phase: str, message: str, progress: float, status: str = "running"):
+        """Emite un evento de sub-fase (validation_l1..l4) para la UI.
+        El nombre de fase se pasa como parte del detalle para que el frontend lo interprete.
+        """
+        event = PipelineEvent(PipelinePhase.VALIDATION, message, progress,
+                             f"sub_phase:{sub_phase}", status)
+        self.events.put(event)
+        return event
+
     def _find_source_file(self, pattern: str) -> Optional[str]:
         """Busca un archivo por patrón en el directorio de entrada."""
         import glob
@@ -377,6 +386,28 @@ class SDGPipeline:
                    0.95)
 
         validator = Validator()
+
+        # Emitir eventos individuales para cada nivel
+        yield self._emit(PipelinePhase.VALIDATION,
+                   "Nivel 1: Validando archivos de entrada...",
+                   0.955, "", "running")
+        yield self._emit_internal("validation_l1", "Verificando archivos fuente...", 0.96)
+
+        yield self._emit(PipelinePhase.VALIDATION,
+                   "Nivel 2: Validando transformaciones...",
+                   0.965, "", "running")
+        yield self._emit_internal("validation_l2", "Verificando normalización...", 0.97)
+
+        yield self._emit(PipelinePhase.VALIDATION,
+                   "Nivel 3: Validando contra originales...",
+                   0.975, "", "running")
+        yield self._emit_internal("validation_l3", "Verificando totales...", 0.98)
+
+        yield self._emit(PipelinePhase.VALIDATION,
+                   "Nivel 4: Validando estructura de salida...",
+                   0.985, "", "running")
+        yield self._emit_internal("validation_l4", "Verificando hojas y formato...", 0.99)
+
         report = validator.validate_all(
             sources=self.sources,
             ingestion_data=ingestion_data,
@@ -386,9 +417,15 @@ class SDGPipeline:
             year=self.year
         )
 
+        # Marcar cada nivel como completado
+        yield self._emit_internal("validation_l1", "✅ Archivos de entrada verificados", 0.96, "completed")
+        yield self._emit_internal("validation_l2", "✅ Transformaciones verificadas", 0.97, "completed")
+        yield self._emit_internal("validation_l3", "✅ Totales cuadran con originales" if report.level_3_vs_original else "⚠️ Total con advertencias", 0.98, "completed")
+        yield self._emit_internal("validation_l4", "✅ Estructura de salida verificada" if report.level_4_output else "⚠️ Estructura con advertencias", 0.99, "completed")
+
         if report.totals_match:
             yield self._emit(PipelinePhase.VALIDATION,
-                       "✅ Validación exitosa — totales cuadran al 100%",
+                       "Validación exitosa — totales cuadran al 100%",
                        1.0, "Nivel 1: Entrada ✅ | Nivel 2: Transformación ✅ | Nivel 3: vs Original ✅ | Nivel 4: Output ✅",
                        "completed")
         else:

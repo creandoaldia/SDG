@@ -20,12 +20,12 @@ class PQRSReader(BaseReader):
     SHEETS_CONFIG = {
         "Reporte PQRS Mayo2026":     {"header": 9, "skiprows": None},   # 9 filas metadata
         "INFORME WEB ABRIL":          {"header": None, "skiprows": None},# estructura irregular
-        "SEGUIMIENTO DÍAS":           {"header": 0, "skiprows": None},   # header en fila 0
+        "SEGUIMIENTO DÍAS":           {"header": None, "skiprows": None},# auto-detectar + Etiquetas→Localidad
         "Tabla 10 indicadores_Ajusta": {"header": None, "skiprows": None},# multi-tabla
         "Calificaciones Totales":     {"header": None, "skiprows": None},# estructura irregular
-        "CERT RESIDENCIA PROD-MAYO":  {"header": 0, "skiprows": None},   # tabla dinámica
-        "CR-TIPO TRAMITE":            {"header": 3, "skiprows": None},   # header en fila 3
-        "CERT.P.HORIZONTAL MAYO":     {"header": 0, "skiprows": None},   # tabla dinámica
+        "CERT RESIDENCIA PROD-MAYO":  {"header": None, "skiprows": None},# auto-detectar header+renombrar
+        "CR-TIPO TRAMITE":            {"header": None, "skiprows": None},# auto-detectar header+renombrar
+        "CERT.P.HORIZONTAL MAYO":     {"header": None, "multi_table": True},# 2 tablas separadas por fila 26
         "REGISTRO ATENCIONES":        {"header": None, "skiprows": None},# estructura irregular
         "REGISTRADO SIDE":            {"header": 0, "skiprows": None},   # tabla dinámica
         "ENTREGADO SIDE":             {"header": 0, "skiprows": None},   # tabla dinámica
@@ -50,10 +50,20 @@ class PQRSReader(BaseReader):
                     result.warnings.append(f"Hoja '{sheet_name}' no encontrada en {self.filename}")
                     continue
 
-                df = self._read_sheet(xl, sheet_name, config)
-                if df is not None and not df.empty:
-                    result.sheets[sheet_name] = df
-                    result.row_count += len(df)
+                # Manejar hojas con múltiples tablas (ej: CERT.P.HORIZONTAL MAYO)
+                if config.get("multi_table"):
+                    df_raw = pd.read_excel(xl, sheet_name=sheet_name, header=None, dtype=str)
+                    tables = self.detect_tables(df_raw)
+                    for idx, table_df in enumerate(tables):
+                        if table_df is not None and not table_df.empty and len(table_df.columns) >= 2:
+                            sname = f"{sheet_name}" if idx == 0 else f"{sheet_name} ({idx+1})"
+                            result.sheets[sname] = table_df
+                            result.row_count += len(table_df)
+                else:
+                    df = self._read_sheet(xl, sheet_name, config)
+                    if df is not None and not df.empty:
+                        result.sheets[sheet_name] = df
+                        result.row_count += len(df)
 
             result.success = len(result.sheets) > 0
             if result.row_count == 0:
@@ -84,22 +94,25 @@ class PQRSReader(BaseReader):
             return None
 
     def _auto_read_sheet(self, xl: pd.ExcelFile, sheet_name: str) -> pd.DataFrame:
-        """Auto-detecta estructura para hojas con formato irregular."""
+        """Auto-detecta estructura para hojas con formato irregular.
+        Usa clean_sheet (BaseReader v2) y detect_tables.
+        """
         df_raw = pd.read_excel(xl, sheet_name=sheet_name, header=None, dtype=str)
 
-        # Buscar fila con más columnas (posible header)
-        best_row, best_count = 0, 0
-        for i in range(min(15, len(df_raw))):
-            count = df_raw.iloc[i].notna().sum()
-            if count > best_count:
-                best_count = count
-                best_row = i
+        # Estrategia 1: clean_sheet con auto-deteccion de headers
+        df = self.clean_sheet(df_raw)
+        if df is not None and not df.empty and len(df.columns) >= 2:
+            return df
 
-        if best_count >= 3:
-            df = pd.read_excel(xl, sheet_name=sheet_name, header=best_row, dtype=str)
-            df = self._clean_unnamed(df)
-            df = df.dropna(how='all').reset_index(drop=True)
-            return df if not df.empty else None
+        # Estrategia 2: Multi-tabla
+        tables = self.detect_tables(df_raw)
+        if tables:
+            best_table = max(tables, key=lambda t: len(t.columns))
+            return best_table if not best_table.empty else None
+
+        # Fallback
+        df = df_raw.dropna(how='all').reset_index(drop=True)
+        return df if not df.empty else None
 
         # Fallback: todo como datos crudos
         df = df_raw.dropna(how='all').reset_index(drop=True)

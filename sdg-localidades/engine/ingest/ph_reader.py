@@ -18,7 +18,8 @@ class PHReader(BaseReader):
             xl = pd.ExcelFile(self.file_path)
 
             for sheet_name in xl.sheet_names:
-                df = pd.read_excel(xl, sheet_name=sheet_name, header=None, dtype=str)
+                df_raw = pd.read_excel(xl, sheet_name=sheet_name, header=None, dtype=str)
+                df = self.clean_sheet(df_raw, sheet_name)
                 result.sheets[sheet_name] = df
                 data_rows = df.dropna(how='all')
                 result.row_count += len(data_rows)

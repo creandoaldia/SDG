@@ -27,7 +27,8 @@ class SACReader(BaseReader):
 
             # Hoja de tablas resumen (precalculadas)
             if "tablas" in xl.sheet_names:
-                df_tab = pd.read_excel(xl, sheet_name="tablas", header=None, dtype=str)
+                df_raw = pd.read_excel(xl, sheet_name="tablas", header=None, dtype=str)
+                df_tab = self.clean_sheet(df_raw, "tablas")
                 result.sheets["tablas"] = df_tab
                 result.row_count += len(df_tab)
 
