@@ -10,6 +10,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         * { font-family: 'Inter', sans-serif; }
+        :root { --bg-main: #F9FAFB; --bg-card: #FFFFFF; --bg-card2: #FFFFFF; --text-main: #374151; --text-muted: #6B7280; --border: #E5E7EB; --accent: #1F4E79; --shadow: 0 1px 3px rgba(0,0,0,0.1); --neon-glow: transparent; --neon-border: transparent; }
+        .dark-mode { --bg-main: #0F0F1A; --bg-card: #1A1A2E; --bg-card2: #16162A; --text-main: #E0E0F0; --text-muted: #9090B0; --border: #2A2A4A; --accent: #6C5CE7; --shadow: 0 1px 3px rgba(0,0,0,0.3); --neon-glow: 0 0 6px rgba(108,92,231,0.15); --neon-border: 1px solid rgba(108,92,231,0.1); }
+        body { background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.3s, color 0.3s; }
+        .bg-white, .bg-gray-50 { background-color: var(--bg-card) !important; }
+        .border-gray-200 { border-color: var(--border) !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500 { color: var(--text-main) !important; }
+        .text-gray-400 { color: var(--text-muted) !important; }
+        .shadow-sm { box-shadow: var(--shadow) !important; }
+        .dark-neon-border { box-shadow: var(--neon-glow); border: var(--neon-border); }
+        #dropZone { box-shadow: var(--neon-glow); }
+        .phase-item { box-shadow: var(--neon-glow); }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -32,11 +43,16 @@
                         <p class="text-sm text-blue-100 hidden sm:block">Sistema de Informes PQRS — Secretaría Distrital de Gobierno</p>
                     </div>
                 </div>
-                <div class="hidden sm:flex items-center space-x-2 text-sm">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-400/20 text-green-200">
-                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                        Local
-                    </span>
+                <div class="flex items-center space-x-3">
+                    <button id="darkModeToggle" class="relative w-10 h-5 rounded-full transition-colors duration-300 focus:outline-none" style="background-color:#CBD5E1">
+                        <span class="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform duration-300 flex items-center justify-center text-xs" id="darkModeKnob">☀️</span>
+                    </button>
+                    <div class="hidden sm:flex items-center space-x-2 text-sm">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-400/20 text-green-200">
+                            <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                            Local
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,28 +162,466 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- BOTÓN DE PROCESAR                                             -->
+        <!-- BOTÓN DE PROCESAR + MASCOTA                                   -->
         <!-- ============================================================ -->
         <div class="flex justify-center mb-6">
             <div class="flex flex-col sm:flex-row items-center gap-3">
+                <!-- Mascota: Elefante violeta claro estilo Pixar -->
+                <div id="mascotContainer" class="relative w-28 h-28 sm:w-36 sm:h-36 flex-shrink-0">
+                    <style>
+                        .mascot-state { display: none; }
+                        .mascot-idle #state-idle,.mascot-reading #state-reading,.mascot-analyzing #state-analyzing,
+                        .mascot-watching #state-watching,.mascot-repairing #state-repairing,.mascot-driving #state-driving,
+                        .mascot-dancing #state-dancing,.mascot-sleeping #state-sleeping { display:block; }
+                        @keyframes pk-bounce-in { 0%{transform:translateY(-140px) scale(0.3);opacity:0} 30%{transform:translateY(8px) scale(1.08);opacity:1} 50%{transform:translateY(-10px) scale(0.96)} 70%{transform:translateY(4px) scale(1.02)} 85%{transform:translateY(-3px) scale(0.99)} 100%{transform:translateY(0) scale(1);opacity:1} }
+                        @keyframes pk-bounce-wake { 0%{transform:translateY(0) scale(1)} 20%{transform:translateY(-80px) scale(1.1)} 40%{transform:translateY(6px) scale(0.95)} 60%{transform:translateY(-30px) scale(1.05)} 80%{transform:translateY(3px) scale(0.98)} 100%{transform:translateY(0) scale(1)} }
+                        @keyframes pk-blink { 0%,88%,92%,100%{opacity:0} 90%{opacity:1} }
+                        @keyframes pk-ear-twitch { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-4deg)} }
+                        @keyframes pk-whisker { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(2deg)} }
+                        @keyframes pk-book-float { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-5px) rotate(2deg)} }
+                        @keyframes pk-magnify { 0%{transform:translate(0,0) rotate(0deg)} 25%{transform:translate(4px,-2px) rotate(3deg)} 50%{transform:translate(0,-5px) rotate(0deg)} 75%{transform:translate(-4px,-2px) rotate(-3deg)} 100%{transform:translate(0,0) rotate(0deg)} }
+                        @keyframes pk-bino-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+                        @keyframes pk-hammer { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-25deg)} }
+                        @keyframes pk-spark { 0%,100%{opacity:0;transform:scale(0)} 50%{opacity:1;transform:scale(1.5)} }
+                        @keyframes pk-speed { 0%,100%{opacity:0.2} 50%{opacity:0.9} }
+                        @keyframes pk-jump { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(-2deg) scale(1.02)} }
+                        @keyframes pk-party-hat { 0%,100%{transform:rotate(0deg) translateY(0)} 50%{transform:rotate(6deg) translateY(-3px)} }
+                        @keyframes pk-glove { 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+                        @keyframes pk-confetti1 { 0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:1} 100%{transform:translateY(75px) rotate(400deg) scale(0.3);opacity:0} }
+                        @keyframes pk-confetti2 { 0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:1} 100%{transform:translateY(65px) translateX(35px) rotate(320deg);opacity:0} }
+                        @keyframes pk-zzz-float { 0%{opacity:0;transform:translateY(0) scale(0.5)} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0;transform:translateY(-35px) scale(1.3)} }
+                        .pk-bounce-in { animation:pk-bounce-in 1.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+                        .pk-bounce-wake { animation:pk-bounce-wake 1.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+                        .mascot-idle #pk-eyelid-l,.mascot-idle #pk-eyelid-r { animation:pk-blink 2.8s ease-in-out infinite; }
+                        .mascot-idle #pk-ear-l,.mascot-idle #pk-ear-r { animation:pk-ear-twitch 3.5s ease-in-out infinite; }
+                        .mascot-idle .pk-whisker-g { animation:pk-whisker 3s ease-in-out infinite; }
+                        .mascot-reading #pk-book { animation:pk-book-float 3.5s ease-in-out infinite; }
+                        .mascot-analyzing #pk-magnifier { animation:pk-magnify 2.8s ease-in-out infinite; }
+                        .mascot-watching #pk-binoculars { animation:pk-bino-bob 2s ease-in-out infinite; }
+                        .mascot-repairing #pk-hammer { animation:pk-hammer 0.9s ease-in-out infinite; transform-origin:104px 28px; }
+                        .mascot-repairing #pk-spark-1,.mascot-repairing #pk-spark-2 { animation:pk-spark 0.5s ease-in-out infinite; }
+                        .mascot-driving .pk-speed-line { animation:pk-speed 0.8s ease-in-out infinite; }
+                        .mascot-dancing #pk-dancer { animation:pk-jump 0.6s ease-in-out infinite; }
+                        .mascot-dancing #pk-party-hat { animation:pk-party-hat 0.5s ease-in-out infinite; }
+                        .mascot-dancing #pk-glove { animation:pk-glove 0.4s ease-in-out infinite; }
+                        .mascot-dancing .pk-confetti-1 { animation:pk-confetti1 1.8s ease-out infinite; }
+                        .mascot-dancing .pk-confetti-2 { animation:pk-confetti2 2.2s ease-out infinite; }
+                        .mascot-dancing .pk-confetti-3 { animation:pk-confetti1 2.5s ease-out infinite; animation-delay:0.3s; }
+                        .mascot-dancing .pk-confetti-4 { animation:pk-confetti2 1.6s ease-out infinite; animation-delay:0.5s; }
+                        .mascot-dancing .pk-confetti-5 { animation:pk-confetti1 2.8s ease-out infinite; animation-delay:0.8s; }
+                        .mascot-dancing .pk-confetti-6 { animation:pk-confetti2 1.4s ease-out infinite; animation-delay:0.2s; }
+                        .mascot-sleeping .pk-zzz-1 { animation:pk-zzz-float 2.5s ease-out infinite; }
+                        .mascot-sleeping .pk-zzz-2 { animation:pk-zzz-float 2.5s ease-out infinite; animation-delay:0.8s; }
+                        .mascot-sleeping .pk-zzz-3 { animation:pk-zzz-float 2.5s ease-out infinite; animation-delay:1.6s; }
+                    </style>
+                    <svg id="mascotSvg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="pk-head" cx="40%" cy="30%" r="65%">
+                                <stop offset="0%" stop-color="#FFD8E8"/>
+                                <stop offset="50%" stop-color="#F0B8D0"/>
+                                <stop offset="85%" stop-color="#E098B8"/>
+                                <stop offset="100%" stop-color="#D078A0"/>
+                            </radialGradient>
+                            <radialGradient id="pk-head-shadow" cx="50%" cy="60%" r="50%">
+                                <stop offset="0%" stop-color="#E098B8" stop-opacity="0"/>
+                                <stop offset="100%" stop-color="#B86088" stop-opacity="0.35"/>
+                            </radialGradient>
+                            <radialGradient id="pk-ear-outer" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#F8C8D8"/>
+                                <stop offset="100%" stop-color="#D8A0B8"/>
+                            </radialGradient>
+                            <radialGradient id="pk-ear-inner" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#FFE0EC"/>
+                                <stop offset="100%" stop-color="#F0B8D0"/>
+                            </radialGradient>
+                            <radialGradient id="pk-eye-iris" cx="35%" cy="30%" r="65%">
+                                <stop offset="0%" stop-color="#60D8FF"/>
+                                <stop offset="60%" stop-color="#30A0E0"/>
+                                <stop offset="100%" stop-color="#1870B0"/>
+                            </radialGradient>
+                            <radialGradient id="pk-nose" cx="40%" cy="30%" r="60%">
+                                <stop offset="0%" stop-color="#FFA0A8"/>
+                                <stop offset="100%" stop-color="#E86878"/>
+                            </radialGradient>
+                            <radialGradient id="pk-muzzle" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#FFF0F5"/>
+                                <stop offset="100%" stop-color="#FFE0E8"/>
+                            </radialGradient>
+                            <radialGradient id="pk-forehead" cx="50%" cy="30%" r="60%">
+                                <stop offset="0%" stop-color="#FFE8F0"/>
+                                <stop offset="100%" stop-color="#F8D0E0"/>
+                            </radialGradient>
+                            <filter id="pk-shadow"><feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#A06080" flood-opacity="0.2"/></filter>
+                            <filter id="pk-glow"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                        </defs>
+
+                        <!-- ═══════ IDLE: Elefante parpadea, orejas se mueven ═══════ -->
+                        <g id="state-idle" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <!-- Oreja izq -->
+                            <g filter="url(#pk-shadow)">
+                                <path id="pk-ear-l" d="M36 38 Q22 14 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 35 Q24 18 20 14 Q30 17 42 26 Z" fill="url(#pk-ear-inner)"/>
+                            </g>
+                            <!-- Oreja der -->
+                            <g filter="url(#pk-shadow)">
+                                <path id="pk-ear-r" d="M84 38 Q98 14 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 35 Q96 18 100 14 Q90 17 78 26 Z" fill="url(#pk-ear-inner)"/>
+                            </g>
+                            <!-- Cabeza elefante -->
+                            <g filter="url(#pk-shadow)">
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                                <ellipse cx="56" cy="36" rx="20" ry="12" fill="#E8DCF8" opacity="0.4"/>
+                            </g>
+                            <!-- Hocico + nariz + bigotes -->
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <g class="pk-whisker-g" stroke="#D0B8C0" stroke-width="1.2" fill="none" stroke-linecap="round">
+                                <line x1="40" y1="64" x2="10" y2="58"/>
+                                <line x1="40" y1="68" x2="8" y2="70"/>
+                                <line x1="40" y1="72" x2="12" y2="78"/>
+                                <line x1="80" y1="64" x2="110" y2="58"/>
+                                <line x1="80" y1="68" x2="112" y2="70"/>
+                                <line x1="80" y1="72" x2="108" y2="78"/>
+                            </g>
+                            <!-- Ojos expresivos -->
+                            <ellipse cx="44" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="44" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="76" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="76" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="45" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <ellipse cx="77" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <circle cx="45" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <circle cx="77" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <ellipse cx="47" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 47 45)"/>
+                            <ellipse cx="79" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 79 45)"/>
+                            <circle cx="43" cy="53" r="1.3" fill="rgba(255,255,255,0.5)"/>
+                            <circle cx="75" cy="53" r="1.3" fill="rgba(255,255,255,0.5)"/>
+                            <!-- Parpados -->
+                            <ellipse id="pk-eyelid-l" cx="44" cy="48" rx="9" ry="10" fill="#F0B8D0"/>
+                            <ellipse id="pk-eyelid-r" cx="76" cy="48" rx="9" ry="10" fill="#F0B8D0"/>
+                            <!-- Cejas -->
+                            <path d="M32 37 Q38 34 46 36" fill="none" stroke="#8068A8" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M74 36 Q82 34 88 37" fill="none" stroke="#8068A8" stroke-width="1.8" stroke-linecap="round"/>
+                            <!-- Sonrisa -->
+                            <path d="M48 60 Q56 66 72 60" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Arrugas trompa -->
+                            <path d="M56 72 Q62 74 58 76" fill="none" stroke="#A890C8" stroke-width="0.8" opacity="0.5"/>
+                            <path d="M52 82 Q58 84 54 86" fill="none" stroke="#A890C8" stroke-width="0.8" opacity="0.5"/>
+                            <!-- Cachetes -->
+                            <ellipse cx="32" cy="60" rx="6" ry="4" fill="rgba(200,160,240,0.15)"/>
+                            <ellipse cx="88" cy="60" rx="6" ry="4" fill="rgba(200,160,240,0.15)"/>
+                        </g>
+
+                        <!-- ═══════ READING: Gafas + libro ═══════ -->
+                        <g id="state-reading" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M36 38 Q22 14 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 35 Q24 18 20 14 Q30 17 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M84 38 Q98 14 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 35 Q96 18 100 14 Q90 17 78 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                                <ellipse cx="56" cy="36" rx="20" ry="12" fill="#E8DCF8" opacity="0.4"/>
+                            </g>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <g class="pk-whisker-g" stroke="#D0B8C0" stroke-width="1.2" fill="none" stroke-linecap="round">
+                                <line x1="40" y1="64" x2="10" y2="58"/>
+                                <line x1="40" y1="68" x2="8" y2="70"/>
+                                <line x1="80" y1="64" x2="110" y2="58"/>
+                                <line x1="80" y1="68" x2="112" y2="70"/>
+                            </g>
+                            <ellipse cx="44" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="44" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="76" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="76" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="45" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <ellipse cx="77" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <circle cx="45" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <circle cx="77" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <ellipse cx="47" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 47 45)"/>
+                            <ellipse cx="79" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 79 45)"/>
+                            <!-- Gafas -->
+                            <circle cx="44" cy="48" r="13" fill="none" stroke="#555" stroke-width="2.5"/>
+                            <circle cx="76" cy="48" r="13" fill="none" stroke="#555" stroke-width="2.5"/>
+                            <line x1="57" y1="48" x2="63" y2="48" stroke="#555" stroke-width="2.5"/>
+                            <line x1="31" y1="42" x2="18" y2="34" stroke="#555" stroke-width="2.5"/>
+                            <line x1="89" y1="42" x2="102" y2="34" stroke="#555" stroke-width="2.5"/>
+                            <ellipse cx="40" cy="43" rx="4" ry="2" fill="rgba(255,255,255,0.15)" transform="rotate(-20 40 43)"/>
+                            <ellipse cx="72" cy="43" rx="4" ry="2" fill="rgba(255,255,255,0.15)" transform="rotate(-20 72 43)"/>
+                            <path d="M48 60 Q56 66 72 60" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Libro -->
+                            <g id="pk-book" filter="url(#pk-shadow)">
+                                <rect x="38" y="84" width="44" height="30" rx="2" fill="#F5F0EA" stroke="#D0A0B8" stroke-width="1.5"/>
+                                <line x1="60" y1="84" x2="60" y2="114" stroke="#D0A0B8" stroke-width="1.5"/>
+                                <line x1="44" y1="92" x2="58" y2="92" stroke="#A890C8" stroke-width="1.5"/>
+                                <line x1="44" y1="98" x2="58" y2="98" stroke="#A890C8" stroke-width="1.5"/>
+                                <line x1="44" y1="104" x2="56" y2="104" stroke="#A890C8" stroke-width="1.5"/>
+                                <line x1="62" y1="92" x2="76" y2="92" stroke="#A890C8" stroke-width="1.5"/>
+                                <line x1="62" y1="98" x2="76" y2="98" stroke="#A890C8" stroke-width="1.5"/>
+                            </g>
+                        </g>
+
+                        <!-- ═══════ ANALYZING: Lupa + ojo entrecerrado ═══════ -->
+                        <g id="state-analyzing" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M36 38 Q22 14 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 35 Q24 18 20 14 Q30 17 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M84 38 Q98 14 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 35 Q96 18 100 14 Q90 17 78 26 Z" fill="url(#pk-ear-inner)"/>
+                            </g>
+                            <g transform="rotate(4 60 60)">
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                                <ellipse cx="56" cy="36" rx="20" ry="12" fill="#E8DCF8" opacity="0.4"/>
+                            </g>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <ellipse cx="44" cy="48" rx="8" ry="9" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="44" cy="48" rx="7.5" ry="8.5" fill="white"/>
+                            <ellipse cx="45" cy="49" rx="5" ry="6" fill="url(#pk-eye-iris)"/>
+                            <circle cx="45" cy="49" r="3.2" fill="#1a1a2e"/>
+                            <ellipse cx="47" cy="45" rx="2.2" ry="1.8" fill="white" transform="rotate(-15 47 45)"/>
+                            <path d="M66 46 Q72 41 78 46" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="66" y1="50" x2="78" y2="50" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M48 60 Q56 66 72 60" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <g class="pk-whisker-g" stroke="#D0B8C0" stroke-width="1.2" fill="none" stroke-linecap="round">
+                                <line x1="40" y1="64" x2="12" y2="58"/>
+                                <line x1="40" y1="68" x2="10" y2="70"/>
+                                <line x1="80" y1="64" x2="108" y2="58"/>
+                                <line x1="80" y1="68" x2="110" y2="70"/>
+                            </g>
+                            <g id="pk-magnifier" filter="url(#pk-shadow)">
+                                <circle cx="92" cy="48" r="15" fill="rgba(200,230,255,0.15)" stroke="#888" stroke-width="2.5"/>
+                                <line x1="104" y1="60" x2="116" y2="74" stroke="#8B7B6B" stroke-width="4.5" stroke-linecap="round"/>
+                                <ellipse cx="87" cy="43" rx="4" ry="2" fill="rgba(255,255,255,0.3)" transform="rotate(-30 87 43)"/>
+                            </g>
+                            <!-- Gorra -->
+                            <ellipse cx="60" cy="22" rx="30" ry="6" fill="#4A3A5A" stroke="#3A2A4A" stroke-width="1"/>
+                            <path d="M32 22 Q34 6 60 4 Q86 6 88 22" fill="#4A3A5A" stroke="#3A2A4A" stroke-width="1"/>
+                        </g>
+
+                        <!-- ═══════ WATCHING: Binoculares ═══════ -->
+                        <g id="state-watching" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M36 38 Q22 14 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 35 Q24 18 20 14 Q30 17 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M84 38 Q98 14 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 35 Q96 18 100 14 Q90 17 78 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                            </g>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <g id="pk-binoculars" filter="url(#pk-shadow)">
+                                <rect x="28" y="36" width="22" height="26" rx="8" fill="#4A4A5A" stroke="#333" stroke-width="1.5"/>
+                                <rect x="70" y="36" width="22" height="26" rx="8" fill="#4A4A5A" stroke="#333" stroke-width="1.5"/>
+                                <rect x="50" y="40" width="20" height="18" rx="4" fill="#5A5A6A" stroke="#444" stroke-width="1"/>
+                                <ellipse cx="39" cy="36" rx="13" ry="5" fill="#555" stroke="#333" stroke-width="1.5"/>
+                                <ellipse cx="81" cy="36" rx="13" ry="5" fill="#555" stroke="#333" stroke-width="1.5"/>
+                                <ellipse cx="39" cy="36" rx="6" ry="2.5" fill="#1a1a2e" opacity="0.7"/>
+                                <ellipse cx="81" cy="36" rx="6" ry="2.5" fill="#1a1a2e" opacity="0.7"/>
+                            </g>
+                            <path d="M48 62 Q56 68 72 62" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                        </g>
+
+                        <!-- ═══════ REPAIRING: Obrero con martillo y casco ═══════ -->
+                        <g id="state-repairing" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M36 38 Q22 14 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 35 Q24 18 20 14 Q30 17 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M84 38 Q98 14 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 35 Q96 18 100 14 Q90 17 78 26 Z" fill="url(#pk-ear-inner)"/>
+                            </g>
+                            <line x1="30" y1="36" x2="42" y2="40" stroke="#5C4A5A" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="78" y1="40" x2="90" y2="36" stroke="#5C4A5A" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                            <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M48 72 Q42 80 44 84 Q46 82 50 78" fill="#FFF5E0" stroke="#E0D0B0" stroke-width="0.5"/>
+                            <path d="M68 72 Q74 80 72 84 Q70 82 66 78" fill="#FFF5E0" stroke="#E0D0B0" stroke-width="0.5"/>
+                            <ellipse cx="44" cy="48" rx="8" ry="9" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="44" cy="48" rx="7.5" ry="8.5" fill="white"/>
+                            <ellipse cx="76" cy="48" rx="8" ry="9" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="76" cy="48" rx="7.5" ry="8.5" fill="white"/>
+                            <ellipse cx="45" cy="49" rx="5" ry="6" fill="url(#pk-eye-iris)"/>
+                            <ellipse cx="77" cy="49" rx="5" ry="6" fill="url(#pk-eye-iris)"/>
+                            <circle cx="45" cy="49" r="3.2" fill="#1a1a2e"/>
+                            <circle cx="77" cy="49" r="3.2" fill="#1a1a2e"/>
+                            <ellipse cx="47" cy="45" rx="2.2" ry="1.8" fill="white" transform="rotate(-15 47 45)"/>
+                            <ellipse cx="79" cy="45" rx="2.2" ry="1.8" fill="white" transform="rotate(-15 79 45)"/>
+                            <path d="M48 62 Q56 68 72 62" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Martillo -->
+                            <g id="pk-hammer" filter="url(#pk-shadow)">
+                                <rect x="98" y="14" width="8" height="28" rx="2" fill="#8B7B6B" stroke="#6B5B4B" stroke-width="1"/>
+                                <rect x="92" y="8" width="20" height="12" rx="3" fill="#888" stroke="#666" stroke-width="1.2"/>
+                                <rect x="92" y="8" width="20" height="4" rx="2" fill="#999"/>
+                            </g>
+                            <!-- Casco -->
+                            <ellipse cx="60" cy="22" rx="28" ry="7" fill="#FFC107" stroke="#DAA000" stroke-width="1.5"/>
+                            <path d="M34 22 L36 12 Q60 4 84 12 L86 22" fill="#FFC107" stroke="#DAA000" stroke-width="1.5"/>
+                            <ellipse cx="54" cy="18" rx="12" ry="4" fill="rgba(255,255,255,0.15)" transform="rotate(-20 54 18)"/>
+                            <!-- Chispas -->
+                            <ellipse id="pk-spark-1" cx="84" cy="76" rx="3" ry="3" fill="#FFC107" filter="url(#pk-glow)"/>
+                            <ellipse id="pk-spark-2" cx="38" cy="82" rx="2.5" ry="2.5" fill="#FFC107" filter="url(#pk-glow)"/>
+                        </g>
+
+                        <!-- ═══════ DRIVING: Viento + velocidad ═══════ -->
+                        <g id="state-driving" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M34 38 Q20 12 10 8 Q28 14 44 22 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M33 35 Q22 16 16 14 Q28 17 41 24 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M86 38 Q100 12 110 8 Q92 14 76 22 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M87 35 Q98 16 104 14 Q92 17 79 24 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                            </g>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <ellipse cx="44" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="44" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="76" cy="48" rx="9" ry="10" fill="#F8E8F0" stroke="#D0A0B8" stroke-width="0.8"/>
+                            <ellipse cx="76" cy="48" rx="8.5" ry="9.5" fill="white"/>
+                            <ellipse cx="45" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <ellipse cx="77" cy="49" rx="5.5" ry="6.5" fill="url(#pk-eye-iris)"/>
+                            <circle cx="45" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <circle cx="77" cy="49" r="3.5" fill="#1a1a2e"/>
+                            <ellipse cx="47" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 47 45)"/>
+                            <ellipse cx="79" cy="45" rx="2.5" ry="2" fill="white" transform="rotate(-15 79 45)"/>
+                            <path d="M46 64 Q56 70 74 64" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <line class="pk-speed-line" x1="2" y1="46" x2="22" y2="46" stroke="#B8B0C8" stroke-width="2.5" stroke-linecap="round"/>
+                            <line class="pk-speed-line" x1="4" y1="56" x2="20" y2="56" stroke="#B8B0C8" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.2s"/>
+                            <line class="pk-speed-line" x1="8" y1="66" x2="24" y2="66" stroke="#B8B0C8" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.4s"/>
+                            <line class="pk-speed-line" x1="98" y1="44" x2="118" y2="44" stroke="#B8B0C8" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.15s"/>
+                            <line class="pk-speed-line" x1="100" y1="54" x2="116" y2="54" stroke="#B8B0C8" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.35s"/>
+                        </g>
+
+                        <!-- ═══════ DANCING: EUFORICO! saltando, gorro fiesta, explota de alegria ═══════ -->
+                        <g id="state-dancing" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="36" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g id="pk-dancer">
+                                <g filter="url(#pk-shadow)">
+                                    <path d="M36 40 Q22 16 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                    <path d="M34 37 Q24 20 20 16 Q30 18 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                    <path d="M84 40 Q98 16 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                    <path d="M86 37 Q96 20 100 16 Q90 18 78 26 Z" fill="url(#pk-ear-inner)"/>
+                                    <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                    <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                                </g>
+                                <!-- Ojos felices en arco (^_^) -->
+                                <path d="M38 46 Q44 40 50 46" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M70 46 Q76 40 82 46" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                                <!-- Brisa de felicidad en ojos -->
+                                <path d="M36 44 Q38 42 40 44" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M80 44 Q82 42 84 44" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                                <!-- Hocico + nariz -->
+                                <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                                <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                                <!-- Sonrisa enorme -->
+                                        <path d="M48 70 Q60 84 72 70" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M52 74 Q60 84 68 74" fill="#E86070" stroke="none"/>
+                                <!-- Lengua -->
+                                <ellipse cx="60" cy="80" rx="6" ry="4" fill="#FF8A90"/>
+                                <!-- Cachetes sonrojados -->
+                                <ellipse cx="34" cy="62" rx="7" ry="5" fill="rgba(255,150,160,0.2)"/>
+                                <ellipse cx="86" cy="62" rx="7" ry="5" fill="rgba(255,150,160,0.2)"/>
+                                <!-- Bigotes -->
+                                <g class="pk-whisker-g" stroke="#D0B8C0" stroke-width="1.2" fill="none" stroke-linecap="round">
+                                    <line x1="40" y1="64" x2="12" y2="58"/>
+                                    <line x1="40" y1="68" x2="10" y2="70"/>
+                                    <line x1="80" y1="64" x2="108" y2="58"/>
+                                    <line x1="80" y1="68" x2="110" y2="70"/>
+                                </g>
+                                <!-- Estrellas de emocion -->
+                                <text x="18" y="14" font-size="10" fill="#FFD700" stroke="none" opacity="0.8">✦</text>
+                                <text x="96" y="14" font-size="10" fill="#FFD700" stroke="none" opacity="0.8">✦</text>
+
+                            </g>
+                            <!-- Confeti EXPLOSION! -->
+                            <rect class="pk-confetti-1" x="4" y="8" width="6" height="5" fill="#FFC107" rx="1.5" transform="rotate(25 7 10)"/>
+                            <rect class="pk-confetti-2" x="22" y="4" width="5" height="6" fill="#E53935" rx="1.5" transform="rotate(-40 24 7)"/>
+                            <rect class="pk-confetti-3" x="42" y="0" width="7" height="5" fill="#4CAF50" rx="1.5" transform="rotate(60 45 2)"/>
+                            <rect class="pk-confetti-4" x="62" y="2" width="5" height="7" fill="#2196F3" rx="1.5" transform="rotate(-20 64 5)"/>
+                            <rect class="pk-confetti-5" x="82" y="6" width="6" height="5" fill="#9C27B0" rx="1.5" transform="rotate(45 85 8)"/>
+                            <rect class="pk-confetti-6" x="100" y="12" width="5" height="6" fill="#FF9800" rx="1.5" transform="rotate(-60 102 15)"/>
+                            <circle class="pk-confetti-1" cx="116" cy="34" r="3.5" fill="#FFC107"/>
+                            <circle class="pk-confetti-3" cx="2" cy="30" r="3" fill="#4CAF50"/>
+                            <circle class="pk-confetti-5" cx="114" cy="54" r="2.5" fill="#9C27B0"/>
+                            <circle class="pk-confetti-6" cx="6" cy="58" r="3" fill="#00BCD4"/>
+                            <text x="26" y="12" class="pk-confetti-2" font-size="8" fill="#FFD700" stroke="none" opacity="0.7">✦</text>
+                            <text x="88" y="8" class="pk-confetti-4" font-size="8" fill="#FFD700" stroke="none" opacity="0.7">✦</text>
+                            <!-- Rayos de reflectores -->
+                            <polygon points="0,0 18,38 -16,38" fill="rgba(255,200,0,0.08)"/>
+                            <polygon points="120,0 136,38 104,38" fill="rgba(255,200,0,0.08)"/>
+                        </g>
+
+                        <!-- ═══════ SLEEPING: Dormido con Zzz ═══════ -->
+                        <g id="state-sleeping" class="mascot-state">
+                            <ellipse cx="60" cy="118" rx="32" ry="5" fill="rgba(0,0,0,0.1)"/>
+                            <g filter="url(#pk-shadow)">
+                                <path d="M36 40 Q22 16 14 10 Q30 14 46 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M34 37 Q24 20 20 16 Q30 18 42 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M84 40 Q98 16 106 10 Q90 14 74 24 Z" fill="url(#pk-ear-outer)" stroke="#D0A0B8" stroke-width="0.8"/>
+                                <path d="M86 37 Q96 20 100 16 Q90 18 78 26 Z" fill="url(#pk-ear-inner)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head)"/>
+                                <path d="M60 12 C84 12, 98 24, 98 46 C98 64, 86 78, 68 84 C62 86, 58 86, 54 84 C44 80, 30 70, 24 56 C20 44, 24 24, 60 12 Z" fill="url(#pk-head-shadow)"/>
+                            </g>
+                            <ellipse cx="60" cy="68" rx="14" ry="8" fill="url(#pk-muzzle)"/>
+                            <path d="M57 64 L63 64 L60 68 Z" fill="url(#pk-nose)" stroke="#D06070" stroke-width="0.5"/>
+                            <path d="M53 71 Q60 77 67 71" fill="none" stroke="#B8A090" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Ojos cerrados -->
+                            <path d="M36 50 Q44 56 52 50" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M68 50 Q76 56 84 50" fill="none" stroke="#D0A0B8" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M50 64 Q56 68 70 64" fill="none" stroke="#D0A0B8" stroke-width="1.5" stroke-linecap="round"/>
+                            <g class="pk-whisker-g" stroke="#D0B8C0" stroke-width="1.2" fill="none" stroke-linecap="round">
+                                <line x1="40" y1="64" x2="12" y2="58"/>
+                                <line x1="40" y1="68" x2="10" y2="70"/>
+                                <line x1="80" y1="64" x2="108" y2="58"/>
+                                <line x1="80" y1="68" x2="110" y2="70"/>
+                            </g>
+                            <!-- Zzz -->
+                            <text x="80" y="28" class="pk-zzz-1" font-family="sans-serif" font-size="14" font-weight="bold" fill="#A0B8D0">Z</text>
+                            <text x="90" y="16" class="pk-zzz-2" font-family="sans-serif" font-size="10" font-weight="bold" fill="#B0C8E0">z</text>
+                            <text x="96" y="6" class="pk-zzz-3" font-family="sans-serif" font-size="7" font-weight="bold" fill="#C0D8F0">z</text>
+                        </g>
+                    </svg>
+                    <div id="mascot-thought" class="absolute -top-6 -right-2 bg-white border border-gray-200 rounded-lg px-2 py-1 text-xs shadow-sm whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none z-10">
+                        <span id="mascot-thought-text">Listo!</span>
+                    </div>
+                </div>
+                </div>
                 <button id="processBtn"
-                        class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#1F4E79] to-[#2E75B6]
-                               text-white text-lg font-bold rounded-xl shadow-lg
-                               hover:shadow-xl hover:from-[#163b5e] hover:to-[#1F4E79]
+                        class="inline-flex items-center px-3 py-1 bg-gradient-to-r from-[#1F4E79] to-[#2E75B6]
+                               text-white text-xs font-semibold rounded shadow
+                               hover:shadow hover:from-[#163b5e] hover:to-[#1F4E79]
                                disabled:opacity-50 disabled:cursor-not-allowed
                                transform transition-all duration-300 ease-in-out
                                active:scale-95">
-                    <svg id="processIcon" class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="processIcon" class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
                     <span id="processBtnText">PROCESAR INFORME</span>
                 </button>
                 <button id="quickProcessBtn"
-                        class="inline-flex items-center px-4 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium
-                               hover:bg-gray-200 transition-all border border-gray-300"
+                        class="inline-flex items-center px-2 py-0.5 bg-gray-100 text-gray-400 rounded text-[11px] font-medium
+                               hover:bg-gray-200 transition-all border border-gray-200"
                         title="Procesa los archivos que ya están en la carpeta input/">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                     Modo rápido
@@ -199,9 +653,15 @@
                 </div>
             </div>
 
-            <!-- Timeline de fases -->
-            <div class="space-y-3" id="phasesTimeline">
-                <!-- Cada fase se renderiza dinámicamente desde JS -->
+            <!-- Timeline de fases: completadas + pendientes -->
+            <div id="completedPhases" class="space-y-2 mb-3">
+                <!-- Fases completadas se mueven aqui dinamicamente -->
+            </div>
+            <div id="pendingPhases" class="space-y-3">
+                <!-- Fases pendientes/actual se renderizan aqui -->
+            </div>
+            <div id="phasesTimeline" class="hidden">
+                <!-- Template interno para JS -->
             </div>
 
             <!-- Detalle del proceso -->
@@ -283,6 +743,25 @@
 
     </main>
 
+    <script>
+    // Modo oscuro/claro
+    (function() {
+        const toggle = document.getElementById('darkModeToggle');
+        const knob = document.getElementById('darkModeKnob');
+        if (!toggle || !knob) return;
+        const isDark = localStorage.getItem('sdg-dark-mode') === 'true';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const enable = isDark !== null ? isDark : prefersDark;
+        if (enable) { document.body.classList.add('dark-mode'); toggle.style.backgroundColor = '#6C5CE7'; knob.textContent = '🌙'; knob.style.transform = 'translateX(20px)'; }
+        toggle.addEventListener('click', () => {
+            const on = document.body.classList.toggle('dark-mode');
+            toggle.style.backgroundColor = on ? '#6C5CE7' : '#CBD5E1';
+            knob.textContent = on ? '🌙' : '☀️';
+            knob.style.transform = on ? 'translateX(20px)' : 'translateX(0)';
+            localStorage.setItem('sdg-dark-mode', on);
+        });
+    })();
+    </script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
