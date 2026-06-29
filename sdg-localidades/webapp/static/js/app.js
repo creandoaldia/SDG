@@ -128,8 +128,8 @@ function setupEyeTracking() {
     const svg = document.getElementById('mascotSvg');
     if (!svg) return;
     const pupils = [
-        { el: null, cx: 44, cy: 53, baseX: 44, baseY: 53, maxD: 2.5 },
-        { el: null, cx: 76, cy: 53, baseX: 76, baseY: 53, maxD: 2.5 }
+        { el: null, cx: 41, cy: 45, baseX: 41, baseY: 45, maxD: 1.8 },
+        { el: null, cx: 71, cy: 45, baseX: 71, baseY: 45, maxD: 1.8 }
     ];
     // Get the pupil AND iris elements
     const allPupils = svg.querySelectorAll('circle[fill="#1a1a2e"]');
@@ -184,22 +184,22 @@ function resetPupils() {
     const pupils = svg.querySelectorAll('circle[fill="#1a1a2e"]');
     const irises = svg.querySelectorAll('ellipse[fill="url(#pk-eye-iris)"]');
     if (pupils.length >= 4 && irises.length >= 4) {
-        [44, 76].forEach((cx, i) => {
+        [41, 71].forEach((cx, i) => {
             pupils[i].setAttribute('cx', cx);
-            pupils[i].setAttribute('cy', '53');
+            pupils[i].setAttribute('cy', '45');
             irises[i].setAttribute('cx', cx);
-            irises[i].setAttribute('cy', '53');
+            irises[i].setAttribute('cy', '45');
             if (i < 2) {
                 pupils[i+2].setAttribute('cx', cx + 2);
-                pupils[i+2].setAttribute('cy', '49');
+                pupils[i+2].setAttribute('cy', '41');
             }
         });
         // Also reset the shine circles
         if (pupils.length >= 6) {
-            pupils[4].setAttribute('cx', '42');
-            pupils[4].setAttribute('cy', '57');
-            pupils[5].setAttribute('cx', '74');
-            pupils[5].setAttribute('cy', '57');
+            pupils[4].setAttribute('cx', '39');
+            pupils[4].setAttribute('cy', '49');
+            pupils[5].setAttribute('cx', '69');
+            pupils[5].setAttribute('cy', '49');
         }
     }
 }
