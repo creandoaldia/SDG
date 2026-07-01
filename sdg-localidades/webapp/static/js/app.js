@@ -1141,22 +1141,30 @@ class TabManager {
             // Reconnect SSE if needed
             if (sseGuard) sseGuard.restore();
         } else {
-            // New tabs: mount from template or show cached container
+            // New tabs: mount from template, create from scratch, or show cached
             let existing = document.getElementById(`tab-${tabKey}`);
             if (!existing) {
-                // First mount: clone from template
+                // First mount: try template first, else create empty container
                 const template = document.getElementById(`tab-${tabKey}`);
                 if (template && template.content) {
                     const clone = template.content.cloneNode(true);
-                    // Find the .tab-panel inside the clone
                     const panel = clone.querySelector('.tab-panel');
                     if (panel) {
                         panel.id = `tab-${tabKey}`;
                         panel.classList.add('tab-panel-active');
-                        this._contentArea.insertBefore(panel, this._contentArea.querySelector('footer') || null);
+                        this._contentArea.appendChild(panel);
                         existing = panel;
                         this._mountedTabs.add(tabKey);
                     }
+                }
+                // If no template or panel found, create empty container for mount hook
+                if (!existing) {
+                    const container = document.createElement('div');
+                    container.id = `tab-${tabKey}`;
+                    container.className = 'tab-panel-active';
+                    this._contentArea.appendChild(container);
+                    existing = container;
+                    this._mountedTabs.add(tabKey);
                 }
             } else {
                 // Already mounted before: show
