@@ -196,3 +196,247 @@ input[type="checkbox"]:checked + label {
     border-bottom: 1px solid #e5e7eb;
     transform: rotate(45deg);
 }
+
+/* ============================================================
+   TAB BAR — Premium Navigation
+   ============================================================ */
+
+/* Tab bar items */
+.tab-bar-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.tab-bar-item:hover {
+    color: var(--text-main);
+    background: rgba(108, 92, 231, 0.06);
+}
+
+.tab-bar-item.active {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Slide underline indicator */
+#tabBarIndicator {
+    position: absolute;
+    bottom: 0;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    will-change: transform, width;
+}
+
+.dark-mode #tabBar {
+    background: rgba(15, 15, 26, 0.85) !important;
+}
+
+/* Tab icon colors per type */
+.tab-bar-item .tab-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   TAB CONTENT PANELS
+   ============================================================ */
+
+.tab-panel {
+    /* Visible by default (INFORME needs to show even without JS) */
+    /* Hidden via .tab-hide when JS switches away from INFORME */
+}
+
+.tab-panel-active {
+    /* Also visible by default, redundant with above but explicit */
+}
+
+@keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Show/hide classes for INFORME tab (never destroyed) */
+.tab-show {
+    display: block !important;
+    animation: tabFadeIn 0.35s ease-out forwards;
+}
+
+.tab-hide {
+    display: none !important;
+}
+
+/* ============================================================
+   DASHBOARD — Premium Cards
+   ============================================================ */
+
+/* Metric card */
+.dashboard-card {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.dashboard-card .card-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-card .card-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-card .card-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.125rem;
+}
+
+/* Mini bar chart (CSS-only) */
+.dashboard-minibar {
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.dashboard-minibar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dashboard accordion */
+.dashboard-accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.dashboard-accordion-header:hover {
+    border-color: var(--accent);
+    background: var(--bg-card);
+}
+
+.dashboard-accordion-header .accordion-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--text-muted);
+}
+
+.dashboard-accordion-header.open .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+.dashboard-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.dashboard-accordion-body.open {
+    max-height: 2000px;
+    opacity: 1;
+}
+
+/* Dashboard section grid */
+.dashboard-section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+}
+
+/* ============================================================
+   DARK MODE ADAPTATIONS
+   ============================================================ */
+
+.dark-mode .dashboard-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.dark-mode .dashboard-accordion-header.open {
+    border-color: var(--accent);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 640px) {
+    .tab-bar-item {
+        padding: 0.375rem 0.625rem;
+        font-size: 0.75rem;
+    }
+    .dashboard-card .card-value {
+        font-size: 1.25rem;
+    }
+    #dashboardCards {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .dashboard-section-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================================
+   PREFERS REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .tab-panel {
+        animation: none;
+    }
+    .tab-show {
+        animation: none;
+    }
+    #tabBarIndicator {
+        transition: none;
+    }
+    .dashboard-card:hover {
+        transform: none;
+    }
+    .dashboard-accordion-body {
+        transition: none;
+    }
+}

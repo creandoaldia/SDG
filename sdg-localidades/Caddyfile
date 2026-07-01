@@ -1,0 +1,41 @@
+# SDG Localidades — Caddy reverse proxy config
+# Replace sdg.example.com with your actual domain
+# For local-only deployment, comment the domain line
+
+sdg.example.com {
+    # Remove this line for local-only access
+    tls {
+        issuer acme
+    }
+
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Proxy to Flask app
+    reverse_proxy app:5000 {
+        # SSE requires buffering to be disabled
+        header_up X-Accel-Buffering "no"
+        flush_interval 100ms
+    }
+
+    # Disable buffering for SSE
+    @sse {
+        header Accept text/event-stream
+    }
+    reverse_proxy @sse app:5000 {
+        flush_interval -1
+    }
+
+    # Max upload size (same as Flask config)
+    request_body / 500MB
+
+    # Logs
+    log {
+        output file /data/access.log
+    }
+}

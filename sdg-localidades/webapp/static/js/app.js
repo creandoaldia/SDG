@@ -991,12 +991,488 @@ function showToast(message, type = 'info') {
 // ======================================================================
 // INICIALIZACION
 // ======================================================================
+// ======================================================================
+// TAB MANAGER — Premium Tab System with Lazy Loading
+// ======================================================================
+class TabManager {
+    constructor() {
+        this.tabs = [];
+        this.activeTab = 'informe';
+        this.containers = new Map();     // tabKey -> DOM container
+        this.stateMap = new Map();       // tabKey -> serialized state
+        this.mountHooks = new Map();     // tabKey -> fn(container, state)
+        this.destroyHooks = new Map();   // tabKey -> fn(container)
+        this._previousActive = 'informe';
+        this._abortControllers = new Map();
+        this._mountedTabs = new Set();
+
+        this._tabBarInner = document.getElementById('tabBarInner');
+        this._indicator = null;
+        this._contentArea = document.getElementById('tabContentArea');
+    }
+
+    defineTabs(tabDefs) {
+        // tabDefs: [{key, label, icon (svg path), iconColor}]
+        this.tabs = tabDefs;
+        this._renderTabBar();
+        this._createIndicator();
+        this._bindEvents();
+    }
+
+    _renderTabBar() {
+        this._tabBarInner.innerHTML = '';
+        this.tabs.forEach((tab, i) => {
+            const btn = document.createElement('button');
+            btn.className = `tab-bar-item${i === 0 ? ' active' : ''}`;
+            btn.dataset.tab = tab.key;
+            btn.innerHTML = `
+                <svg class="tab-icon" style="color:${tab.iconColor || 'currentColor'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${tab.icon}
+                </svg>
+                ${tab.label}
+            `;
+            this._tabBarInner.appendChild(btn);
+        });
+    }
+
+    _createIndicator() {
+        this._indicator = document.createElement('div');
+        this._indicator.id = 'tabBarIndicator';
+        this._tabBarInner.appendChild(this._indicator);
+        requestAnimationFrame(() => this._updateIndicator(true));
+    }
+
+    _bindEvents() {
+        this._tabBarInner.addEventListener('click', (e) => {
+            const btn = e.target.closest('.tab-bar-item');
+            if (!btn) return;
+            const key = btn.dataset.tab;
+            if (key !== this.activeTab) this.setActive(key);
+        });
+
+        // Resize observer for indicator
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(() => this._updateIndicator(true));
+            ro.observe(this._tabBarInner);
+        }
+    }
+
+    _updateIndicator(instant = false) {
+        const active = this._tabBarInner.querySelector('.tab-bar-item.active');
+        if (!active || !this._indicator) return;
+        const parent = this._tabBarInner;
+        const pRect = parent.getBoundingClientRect();
+        const aRect = active.getBoundingClientRect();
+        const left = aRect.left - pRect.left + parent.scrollLeft;
+        const width = aRect.width;
+
+        if (instant) {
+            this._indicator.style.transition = 'none';
+            this._indicator.style.transform = `translateX(${left}px)`;
+            this._indicator.style.width = `${width}px`;
+            requestAnimationFrame(() => { this._indicator.style.transition = ''; });
+        } else {
+            this._indicator.style.transform = `translateX(${left}px)`;
+            this._indicator.style.width = `${width}px`;
+        }
+    }
+
+    onMount(tabKey, fn) { this.mountHooks.set(tabKey, fn); }
+    onDestroy(tabKey, fn) { this.destroyHooks.set(tabKey, fn); }
+    saveState(tabKey, state) { this.stateMap.set(tabKey, state); }
+    restoreState(tabKey) { return this.stateMap.get(tabKey) || null; }
+    getActive() { return this.activeTab; }
+
+    setActive(tabKey) {
+        if (tabKey === this.activeTab) return;
+
+        // SSSSSSE Guard: save EventSource state before leaving INFORME
+        if (this.activeTab === 'informe' && sseGuard) {
+            sseGuard.save();
+        }
+
+        this._previousActive = this.activeTab;
+
+        // ── Destroy current tab ──
+        if (this._previousActive !== 'informe') {
+            // Save state before destroy
+            const prevContainer = document.getElementById(`tab-${this._previousActive}`);
+            if (prevContainer && !prevContainer.closest('template')) {
+                const inputs = prevContainer.querySelectorAll('input, textarea, select');
+                const state = {};
+                inputs.forEach(el => { if (el.name) state[el.name] = el.value; });
+                this.saveState(this._previousActive, state);
+                prevContainer.scrollTop = 0;
+            }
+
+            // Run destroy hooks
+            if (this.destroyHooks.has(this._previousActive)) {
+                this.destroyHooks.get(this._previousActive)(prevContainer);
+            }
+
+            // Abort pending operations
+            if (this._abortControllers.has(this._previousActive)) {
+                this._abortControllers.get(this._previousActive).abort();
+                this._abortControllers.delete(this._previousActive);
+            }
+
+            // Destroy DOM
+            const prevPanel = document.getElementById(`tab-${this._previousActive}`);
+            if (prevPanel && !prevPanel.closest('template')) {
+                prevPanel.remove();
+            }
+        } else {
+            // INFORME tab: hide (don't destroy)
+            const informePanel = document.getElementById('tab-informe');
+            if (informePanel) {
+                informePanel.classList.remove('tab-show');
+                informePanel.classList.add('tab-hide');
+            }
+        }
+
+        // ── Mount new tab ──
+        if (tabKey === 'informe') {
+            // INFORME: just show
+            const informePanel = document.getElementById('tab-informe');
+            if (informePanel) {
+                informePanel.classList.remove('tab-hide');
+                informePanel.classList.add('tab-show');
+            }
+            // Reconnect SSE if needed
+            if (sseGuard) sseGuard.restore();
+        } else {
+            // New tabs: mount from template or show cached container
+            let existing = document.getElementById(`tab-${tabKey}`);
+            if (!existing) {
+                // First mount: clone from template
+                const template = document.getElementById(`tab-${tabKey}`);
+                if (template && template.content) {
+                    const clone = template.content.cloneNode(true);
+                    // Find the .tab-panel inside the clone
+                    const panel = clone.querySelector('.tab-panel');
+                    if (panel) {
+                        panel.id = `tab-${tabKey}`;
+                        panel.classList.add('tab-panel-active');
+                        this._contentArea.insertBefore(panel, this._contentArea.querySelector('footer') || null);
+                        existing = panel;
+                        this._mountedTabs.add(tabKey);
+                    }
+                }
+            } else {
+                // Already mounted before: show
+                existing.classList.remove('tab-hide');
+                existing.classList.add('tab-panel-active');
+                // Restore state
+                const savedState = this.restoreState(tabKey);
+                if (savedState) {
+                    Object.entries(savedState).forEach(([name, value]) => {
+                        const el = existing.querySelector(`[name="${name}"]`);
+                        if (el) el.value = value;
+                    });
+                }
+            }
+
+            // Run mount hooks
+            if (existing && this.mountHooks.has(tabKey)) {
+                this.mountHooks.get(tabKey)(existing, this.restoreState(tabKey));
+            }
+
+            // Create AbortController for this tab cycle
+            this._abortControllers.set(tabKey, new AbortController());
+        }
+
+        // ── Update UI ──
+        this.activeTab = tabKey;
+        this._tabBarInner.querySelectorAll('.tab-bar-item').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabKey);
+        });
+        this._updateIndicator();
+
+        // Scroll to top of tab content
+        window.scrollTo({ top: this._contentArea.offsetTop - 80, behavior: 'smooth' });
+    }
+}
+
+// ======================================================================
+// SSE GUARD — Preserve EventSource across INFORME tab hide/show
+// ======================================================================
+const sseGuard = {
+    _eventSource: null,
+    _active: false,
+    _pipelineRunning: false,
+    _reconnectTimer: null,
+
+    save() {
+        // Keep reference to EventSource (don't close it)
+        this._active = true;
+    },
+
+    restore() {
+        if (!this._active) return;
+        this._active = false;
+
+        // If pipeline was running and EventSource exists, reconnect UI
+        // (The existing EventSource continues to receive messages)
+        if (state.eventSource && state.isProcessing) {
+            // UI elements are back in DOM, SSE will find them
+            console.debug('[SSE Guard] Reconnected to active EventSource');
+        }
+        // If pipeline completed, no need to reconnect
+    },
+
+    close() {
+        if (state.eventSource) {
+            state.eventSource.close();
+            state.eventSource = null;
+        }
+        this._eventSource = null;
+        this._active = false;
+        this._pipelineRunning = false;
+    },
+
+    isActive() { return this._active; }
+};
+
+// Patch existing EventSource creation to use the guard
+const _origConnectSSE = connectSSE;
+connectSSE = function() {
+    sseGuard._pipelineRunning = true;
+    _origConnectSSE();
+};
+
+const _origOnProcessingComplete = onProcessingComplete;
+onProcessingComplete = function(success) {
+    sseGuard._pipelineRunning = false;
+    if (!success) { sseGuard.close(); }
+    _origOnProcessingComplete(success);
+
+    // If successful, fetch dashboard data
+    if (success) {
+        setTimeout(() => fetchDashboard(), 1200);
+    }
+};
+
+// Hook into "Nuevo informe" to hide dashboard
+const _origNewProcess = dom.newProcessBtn?.click;
+if (dom.newProcessBtn) {
+    dom.newProcessBtn.addEventListener('click', function() {
+        hideDashboard();
+    });
+}
+
+// ======================================================================
+// DASHBOARD — Post-Informe Dashboard Rendering
+// ======================================================================
+async function fetchDashboard() {
+    const dashContainer = document.getElementById('dashboardContainer');
+    const dashLoading = document.getElementById('dashboardLoading');
+    const dashEmpty = document.getElementById('dashboardEmpty');
+    const dashData = document.getElementById('dashboardData');
+
+    if (!dashContainer) return;
+
+    // Show container + loading
+    dashContainer.classList.remove('hidden');
+    dashLoading.classList.remove('hidden');
+    dashEmpty.classList.add('hidden');
+    dashData.classList.add('hidden');
+
+    // Entrance animation
+    dashContainer.style.opacity = '0';
+    dashContainer.style.transform = 'translateY(20px)';
+    requestAnimationFrame(() => {
+        dashContainer.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+        dashContainer.style.opacity = '1';
+        dashContainer.style.transform = 'translateY(0)';
+    });
+
+    try {
+        const res = await fetch('/api/dashboard');
+        const data = await res.json();
+
+        dashLoading.classList.add('hidden');
+
+        if (!data.periodo) {
+            // Empty state
+            dashEmpty.classList.remove('hidden');
+            return;
+        }
+
+        // Render data
+        dashData.classList.remove('hidden');
+        renderDashboard(data);
+    } catch (e) {
+        dashLoading.classList.add('hidden');
+        dashEmpty.classList.remove('hidden');
+        dashEmpty.querySelector('p').textContent = 'Error al cargar dashboard';
+        console.error('Dashboard fetch error:', e);
+    }
+}
+
+function renderDashboard(data) {
+    const periodo = document.getElementById('dashboardPeriodo');
+    if (periodo) periodo.textContent = `${data.periodo.month} ${data.periodo.year}`;
+
+    // Render summary cards
+    const cardsContainer = document.getElementById('dashboardCards');
+    if (!cardsContainer || !data.resumen) return;
+    cardsContainer.innerHTML = '';
+
+    const metrics = [
+        { key: 'total_pqrs', label: 'PQRS Totales', value: data.resumen.total_pqrs, color: '#2E75B6', bg: '#EBF5FF', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
+        { key: 'doc_extraviados', label: 'Doc. Extraviados', value: data.resumen.doc_extraviados, color: '#DC3545', bg: '#FFF0F0', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>' },
+        { key: 'orientaciones', label: 'Orientaciones', value: data.resumen.orientaciones, color: '#10B981', bg: '#F0FFF4', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>' },
+        { key: 'cert_residencia', label: 'Cert. Residencia', value: data.resumen.cert_residencia, color: '#F59E0B', bg: '#FFFBEB', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438"/>' },
+        { key: 'calificacion', label: 'Calificacion', value: data.resumen.calificacion, color: '#8B5CF6', bg: '#F5F3FF', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>' },
+    ];
+
+    metrics.forEach(m => {
+        if (!m.value && m.value !== 0) return;
+        const val = typeof m.value === 'number' && !Number.isInteger(m.value) ? m.value.toFixed(1) : (m.value || 0).toLocaleString();
+        const card = document.createElement('div');
+        card.className = 'dashboard-card';
+        card.style.animationDelay = `${metrics.indexOf(m) * 0.08}s`;
+        card.innerHTML = `
+            <div class="card-icon" style="background:${m.bg};color:${m.color}">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">${m.icon}</svg>
+            </div>
+            <div class="card-value" style="color:${m.color}">${val}</div>
+            <div class="card-label">${m.label}</div>
+        `;
+        cardsContainer.appendChild(card);
+    });
+
+    // Render accordion sections
+    const accordionContainer = document.getElementById('dashboardAccordion');
+    if (!accordionContainer) return;
+    accordionContainer.innerHTML = '';
+
+    const tabData = data.tabs;
+    if (!tabData) return;
+
+    const sections = [
+        { key: 'pqrs', label: 'PQRS', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>', color: '#2E75B6', bg: '#EBF5FF' },
+        { key: 'atenciones', label: 'Atenciones SAC', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857"/>', color: '#10B981', bg: '#F0FFF4' },
+        { key: 'cert_residencia', label: 'Cert. Residencia', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138"/>', color: '#F59E0B', bg: '#FFFBEB' },
+        { key: 'prop_horizontal', label: 'Prop. Horizontal', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>', color: '#8B5CF6', bg: '#F5F3FF' },
+        { key: 'encuestas', label: 'Encuestas', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>', color: '#14B8A6', bg: '#F0FFFA' },
+        { key: 'doc_extraviados', label: 'Doc. Extraviados', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>', color: '#DC3545', bg: '#FFF0F0' },
+    ];
+
+    sections.forEach(section => {
+        const data = tabData[section.key];
+        if (!data) return;
+
+        const header = document.createElement('div');
+        header.className = 'dashboard-accordion-header';
+        header.innerHTML = `
+            <div class="flex items-center gap-2">
+                <div style="width:1.5rem;height:1.5rem;border-radius:0.375rem;background:${section.bg};color:${section.color};display:flex;align-items:center;justify-content:center">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">${section.icon}</svg>
+                </div>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">${section.label}</span>
+            </div>
+            <svg class="accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        `;
+
+        const body = document.createElement('div');
+        body.className = 'dashboard-accordion-body';
+
+        if (section.key === 'pqrs') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total PQRS</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.gestionadas || 0).toLocaleString()}</div><div class="card-label">Gestionadas</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(data.pendientes || 0).toLocaleString()}</div><div class="card-label">Pendientes</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#8B5CF6;font-size:1.25rem">${(data.trasladadas || 0).toLocaleString()}</div><div class="card-label">Trasladadas</div></div>
+            </div>`;
+        } else if (section.key === 'atenciones') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total_sac || 0).toLocaleString()}</div><div class="card-label">Total Atenciones</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#2E75B6;font-size:1.25rem">${(data.orientaciones || 0).toLocaleString()}</div><div class="card-label">Orientaciones</div></div>
+            </div>`;
+        } else if (section.key === 'cert_residencia') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total Solicitudes</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.aprobados || 0).toLocaleString()}</div><div class="card-label">Aprobados</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#DC3545;font-size:1.25rem">${(data.negados || 0).toLocaleString()}</div><div class="card-label">Negados</div></div>
+            </div>`;
+        } else if (section.key === 'prop_horizontal') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total Tramites</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.inscripciones || 0).toLocaleString()}</div><div class="card-label">Inscripciones</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#2E75B6;font-size:1.25rem">${(data.renovaciones || 0).toLocaleString()}</div><div class="card-label">Renovaciones</div></div>
+            </div>`;
+        } else if (section.key === 'encuestas') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total_periodo || 0).toLocaleString()}</div><div class="card-label">Total Periodo</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.completas || 0).toLocaleString()}</div><div class="card-label">Respuestas Completas</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(data.calificacion || 0).toFixed(1)}</div><div class="card-label">Calificacion</div></div>
+            </div>`;
+        } else if (section.key === 'doc_extraviados') {
+            body.innerHTML = `<div class="dashboard-section-grid">
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.registrados || 0).toLocaleString()}</div><div class="card-label">Registrados</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.resueltos || 0).toLocaleString()}</div><div class="card-label">Resueltos</div></div>
+            </div>`;
+        }
+
+        // Toggle accordion
+        header.addEventListener('click', () => {
+            const isOpen = header.classList.toggle('open');
+            body.classList.toggle('open', isOpen);
+        });
+
+        accordionContainer.appendChild(header);
+        accordionContainer.appendChild(body);
+    });
+}
+
+function hideDashboard() {
+    const dashContainer = document.getElementById('dashboardContainer');
+    if (dashContainer) {
+        dashContainer.classList.add('hidden');
+    }
+}
+
+// ======================================================================
+// INITIALIZATION
+// ======================================================================
 document.addEventListener('DOMContentLoaded', () => {
     setupDragDrop();
     setupMascotInteraction();
     setupEyeTracking();
     setupActivityListeners();
     updateProcessButton();
+
+    // ── Initialize Tab Manager ──
+    const tabManager = new TabManager();
+    window.tabManager = tabManager;
+
+    tabManager.defineTabs([
+        { key: 'informe', label: 'Informe', iconColor: '#1F4E79', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
+        { key: 'pqrs', label: 'PQRS', iconColor: '#2E75B6', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
+        { key: 'atenciones', label: 'Atenciones', iconColor: '#10B981', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857"/>' },
+        { key: 'cert-residencia', label: 'Cert.Residencia', iconColor: '#F59E0B', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438"/>' },
+        { key: 'prop-horizontal', label: 'Prop.Horizontal', iconColor: '#8B5CF6', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>' },
+        { key: 'encuestas', label: 'Encuestas', iconColor: '#14B8A6', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>' },
+        { key: 'doc-extraviados', label: 'Doc.Extraviados', iconColor: '#DC3545', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>' },
+    ]);
+
+    // Ensure INFORME tab is visible initially
+    const informePanel = document.getElementById('tab-informe');
+    if (informePanel) {
+        informePanel.classList.add('tab-show');
+        informePanel.classList.remove('tab-hide');
+    }
+
+    // Register mount hooks for tabs (future use)
+    tabManager.onMount('pqrs', (container, state) => {
+        console.debug('[TabManager] PQRS tab mounted');
+    });
+    tabManager.onMount('atenciones', (container, state) => {
+        console.debug('[TabManager] Atenciones tab mounted');
+    });
 
     // Bounce-in al cargar la pagina
     const container = dom.mascotContainer;

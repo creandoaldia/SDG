@@ -22,7 +22,7 @@ class PQRSReader(BaseReader):
         "INFORME WEB ABRIL":          {"header": None, "skiprows": None},# estructura irregular
         "SEGUIMIENTO DÍAS":           {"header": None, "skiprows": None},# auto-detectar + Etiquetas→Localidad
         "Tabla 10 indicadores_Ajusta": {"header": None, "skiprows": None},# multi-tabla
-        "Calificaciones Totales":     {"header": None, "skiprows": None},# estructura irregular
+        "Calificaciones Totales":     {"raw": True},                      # preservar estructura original con titulos y separadores
         "CERT RESIDENCIA PROD-MAYO":  {"header": None, "skiprows": None},# auto-detectar header+renombrar
         "CR-TIPO TRAMITE":            {"header": None, "skiprows": None},# auto-detectar header+renombrar
         "CERT.P.HORIZONTAL MAYO":     {"header": None, "multi_table": True},# 2 tablas separadas por fila 26
@@ -59,6 +59,13 @@ class PQRSReader(BaseReader):
                             sname = f"{sheet_name}" if idx == 0 else f"{sheet_name} ({idx+1})"
                             result.sheets[sname] = table_df
                             result.row_count += len(table_df)
+                elif config.get("raw"):
+                    # Preservar estructura original - solo trim leading/trailing empty rows
+                    df_raw = pd.read_excel(xl, sheet_name=sheet_name, header=None, dtype=str)
+                    df = self._raw_preserve(df_raw)
+                    if df is not None and not df.empty:
+                        result.sheets[sheet_name] = df
+                        result.row_count += len(df)
                 else:
                     df = self._read_sheet(xl, sheet_name, config)
                     if df is not None and not df.empty:
@@ -76,22 +83,25 @@ class PQRSReader(BaseReader):
 
     def _read_sheet(self, xl: pd.ExcelFile, sheet_name: str, config: dict) -> pd.DataFrame:
         """Lee una hoja según su configuración de header conocida."""
-        try:
-            header_row = config["header"]
-            if header_row is not None:
+        header_row = config.get("header")
+        if header_row is not None:
+            try:
                 # Header conocido — leer directamente
                 df = pd.read_excel(xl, sheet_name=sheet_name, header=header_row, dtype=str)
                 # Limpiar columnas Unnamed
                 df = self._clean_unnamed(df)
-                # Limpiar filas completamente vacías
-                df = df.dropna(how='all').reset_index(drop=True)
+                # Limpiar filas completamente vacías (solo iniciales/finales)
+                while len(df) > 0 and df.iloc[0].isna().all():
+                    df = df.iloc[1:].reset_index(drop=True)
+                while len(df) > 0 and df.iloc[-1].isna().all():
+                    df = df.iloc[:-1].reset_index(drop=True)
                 return df if not df.empty else None
-            else:
-                # Auto-detectar header para hojas irregulares
-                return self._auto_read_sheet(xl, sheet_name)
-        except Exception as e:
-            result.warnings.append(f"Error leyendo hoja '{sheet_name}': {str(e)}")
-            return None
+            except Exception as e:
+                print(f"  [WARN] Error leyendo hoja '{sheet_name}': {e}")
+                return None
+        else:
+            # Auto-detectar header para hojas irregulares
+            return self._auto_read_sheet(xl, sheet_name)
 
     def _auto_read_sheet(self, xl: pd.ExcelFile, sheet_name: str) -> pd.DataFrame:
         """Auto-detecta estructura para hojas con formato irregular.
@@ -117,6 +127,28 @@ class PQRSReader(BaseReader):
         # Fallback: todo como datos crudos
         df = df_raw.dropna(how='all').reset_index(drop=True)
         return df if not df.empty else None
+
+    def _raw_preserve(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Preserva la estructura original de una hoja multi-tabla.
+        Solo elimina filas vacias al inicio y final, mantiene
+        titulos, separadores y encabezados originales.
+        Columnas se nombran como 'C1', 'C2', ... para evitar
+        que _fix_numeric_headers las destruya.
+        """
+        if df is None or df.empty:
+            return df
+        df = df.copy()
+        # Solo trim leading/trailing empty rows
+        while len(df) > 0 and df.iloc[0].isna().all():
+            df = df.iloc[1:].reset_index(drop=True)
+        while len(df) > 0 and df.iloc[-1].isna().all():
+            df = df.iloc[:-1].reset_index(drop=True)
+        if df.empty:
+            return df
+        # Nombrar columnas C1, C2, ... para evitar fix_numeric_headers
+        df.columns = [f'C{i+1}' for i in range(len(df.columns))]
+        return df
 
     def _clean_unnamed(self, df: pd.DataFrame) -> pd.DataFrame:
         """Renombra columnas 'Unnamed: N' con el primer valor no-nulo de esa columna si es útil."""

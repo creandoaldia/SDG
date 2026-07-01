@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: sdg-app
+    restart: unless-stopped
+    expose:
+      - "5000"
+    volumes:
+      - input_data:/app/input
+      - output_data:/app/output
+    environment:
+      - TZ=America/Bogota
+    networks:
+      - sdg-network
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: sdg-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - sdg-network
+    depends_on:
+      - app
+
+volumes:
+  input_data:
+    driver: local
+  output_data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+
+networks:
+  sdg-network:
+    driver: bridge

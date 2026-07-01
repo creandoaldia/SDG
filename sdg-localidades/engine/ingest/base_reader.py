@@ -62,9 +62,15 @@ class BaseReader:
         df = df.copy()
 
         # ── 1. Eliminar filas/columnas vacias ──
-        df = df.dropna(how='all').reset_index(drop=True)
+        # Solo eliminar filas vacias al INICIO y FINAL, preservando
+        # las filas vacias INTERMEDIAS que separan multiples tablas.
+        while len(df) > 0 and df.iloc[0].isna().all():
+            df = df.iloc[1:].reset_index(drop=True)
+        while len(df) > 0 and df.iloc[-1].isna().all():
+            df = df.iloc[:-1].reset_index(drop=True)
         if df.empty:
             return df
+        # Conservar filas vacias intermedias (separadores de tablas)
         # Columnas totalmente vacias solo al inicio
         non_empty_cols = [c for c in df.columns if not df[c].dropna().empty]
         if non_empty_cols and len(non_empty_cols) < len(df.columns):
@@ -156,6 +162,17 @@ class BaseReader:
             if has_meaningful:
                 ndf = df.iloc[best_row + 1:].reset_index(drop=True)
                 ndf.columns = new_cols
+                # Post-fix: si col0 quedo como "Columna 1" pero sus datos
+                # son nombres de localidad -> renombrar a "Localidad"
+                if len(ndf) > 0 and len(new_cols) > 0 and 'localidad' not in new_cols[0].lower():
+                    first_vals = ndf.iloc[:10, 0].fillna('').astype(str).str.upper().tolist()
+                    localidad_count = sum(
+                        1 for v in first_vals
+                        if 'ALCALDIA' in v or 'OFICINA' in v or 'LOCALIDAD' in v
+                    )
+                    if localidad_count >= 2:
+                        new_cols[0] = 'Localidad'
+                        ndf.columns = new_cols
                 return ndf
 
         return df
