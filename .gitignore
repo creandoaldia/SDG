@@ -4,9 +4,15 @@ sdg-localidades/venv/
 # Archivos fuente (cambian cada mes)
 sdg-localidades/input/
 sdg-localidades/output/*.xlsx
+sdg-localidades/output/tabs/
 
 # Logs de ejecucion
 sdg-localidades/app_*.log
+sdg-localidades/server_*.log
+sdg-localidades/*.pid
+
+# Antiloop state
+sdg-localidades/.restart_count
 
 # Video fuente (698 MB)
 assets/video/
