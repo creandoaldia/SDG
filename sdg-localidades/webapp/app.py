@@ -24,8 +24,14 @@ from werkzeug.utils import secure_filename
 
 from engine.pipeline import SDGPipeline
 from engine.models import PipelinePhase
+from engine.tab_processors import (
+    process_tab, validate_tab_type, validate_file_content, ALLOWED_TAB_TYPES
+)
 
 app = Flask(__name__)
+
+# Directorios para uploads de tabs (separado del pipeline principal)
+TAB_UPLOAD_BASE = str(Path(__file__).parent.parent / 'input' / 'tabs')
 
 # Configuración
 BASE_DIR = Path(__file__).parent.parent
@@ -48,6 +54,10 @@ pipeline_state = {
 
 # Lock para acceso concurrente al estado
 state_lock = threading.Lock()
+
+# Estado individual por tab (separado del pipeline principal)
+tab_states = {}
+tab_state_lock = threading.Lock()
 
 
 def allowed_file(filename: str) -> bool:
@@ -218,6 +228,165 @@ def api_dashboard():
         })
 
     return jsonify(data)
+
+
+# ═══════════════════════════════════════════════════════════════
+# API: Procesamiento individual por Tab
+# ═══════════════════════════════════════════════════════════════
+
+TAB_DIR_NAMES = {
+    'pqrs': 'pqrs', 'atenciones': 'sac',
+    'cert-residencia': 'cr', 'prop-horizontal': 'ph',
+    'encuestas': 'encuestas', 'doc-extraviados': 'side'
+}
+
+
+def _get_tab_state(tab_type: str) -> dict:
+    """Obtiene o crea el estado para un tab."""
+    with tab_state_lock:
+        if tab_type not in tab_states:
+            tab_states[tab_type] = {
+                'phase': 'idle',
+                'progress': 0.0,
+                'message': '',
+                'file': None,
+                'output_file': None,
+                'error': None
+            }
+        return tab_states[tab_type]
+
+
+@app.route('/api/tabs/<tab_type>/upload', methods=['POST'])
+def api_tab_upload(tab_type):
+    """Sube un archivo para un tab especifico."""
+    if not validate_tab_type(tab_type):
+        return jsonify({'error': f'Tipo de tab invalido: {tab_type}'}), 400
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No se envio archivo'}), 400
+
+    file = request.files['file']
+    if not file or not file.filename:
+        return jsonify({'error': 'Archivo vacio'}), 400
+
+    ext = file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else ''
+    if ext not in app.config['ALLOWED_EXTENSIONS']:
+        return jsonify({'error': f'Extension no valida: .{ext}. Solo .xlsx y .xls'}), 400
+
+    # Validar tipo de tab y guardar en directorio separado
+    tab_dir = os.path.join(TAB_UPLOAD_BASE, tab_type)
+    os.makedirs(tab_dir, exist_ok=True)
+
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(tab_dir, filename)
+    file.save(filepath)
+
+    # Validar contenido contra el tipo de tab
+    validation_msg = validate_file_content(filepath, tab_type)
+    if validation_msg:
+        os.remove(filepath)
+        return jsonify({'error': validation_msg}), 400
+
+    state = _get_tab_state(tab_type)
+    with tab_state_lock:
+        state['phase'] = 'uploaded'
+        state['message'] = f'Archivo cargado: {filename}'
+        state['file'] = filepath
+        state['error'] = None
+
+    return jsonify({
+        'success': True,
+        'filename': filename,
+        'size': os.path.getsize(filepath),
+        'message': f'{filename} cargado correctamente'
+    })
+
+
+@app.route('/api/tabs/<tab_type>/process', methods=['POST'])
+def api_tab_process(tab_type):
+    """Procesa el archivo subido para un tab."""
+    if not validate_tab_type(tab_type):
+        return jsonify({'error': f'Tipo de tab invalido: {tab_type}'}), 400
+
+    state = _get_tab_state(tab_type)
+    if not state.get('file') or not os.path.exists(state['file']):
+        return jsonify({'error': 'No hay archivo cargado para procesar'}), 400
+
+    with tab_state_lock:
+        state['phase'] = 'processing'
+        state['progress'] = 0.0
+        state['message'] = 'Procesando...'
+        state['error'] = None
+
+    # Obtener mes y año (desde request o default)
+    data = request.get_json() or {}
+    month = data.get('month', 'MAYO')
+    year = data.get('year', '2026')
+
+    try:
+        output_dir = os.path.join(str(BASE_DIR / 'output'), 'tabs', tab_type)
+        result = process_tab(tab_type, state['file'], output_dir, month, year)
+
+        with tab_state_lock:
+            if result.get('success'):
+                state['phase'] = 'completed'
+                state['progress'] = 1.0
+                state['message'] = f'Procesamiento completado: {result.get("filename", "")}'
+                state['output_file'] = result.get('output_path')
+            else:
+                state['phase'] = 'error'
+                state['message'] = f'Error: {result.get("error", "Desconocido")}'
+                state['error'] = result.get('error')
+
+        # Construir respuesta JSON-safe
+        safe_result = {k: v for k, v in result.items() if not k.startswith('_')}
+        return jsonify(safe_result)
+
+    except Exception as e:
+        with tab_state_lock:
+            state['phase'] = 'error'
+            state['message'] = f'Error: {str(e)}'
+            state['error'] = str(e)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/tabs/<tab_type>/status')
+def api_tab_status(tab_type):
+    """Retorna el estado del procesamiento de un tab."""
+    if not validate_tab_type(tab_type):
+        return jsonify({'error': f'Tipo de tab invalido: {tab_type}'}), 400
+
+    state = _get_tab_state(tab_type)
+    with tab_state_lock:
+        return jsonify({
+            'phase': state.get('phase', 'idle'),
+            'progress': state.get('progress', 0.0),
+            'message': state.get('message', ''),
+            'file': os.path.basename(state['file']) if state.get('file') else None,
+            'output_file': os.path.basename(state['output_file']) if state.get('output_file') else None,
+            'error': state.get('error')
+        })
+
+
+@app.route('/api/tabs/<tab_type>/download')
+def api_tab_download(tab_type):
+    """Descarga el archivo generado por un tab."""
+    from flask import send_file
+
+    if not validate_tab_type(tab_type):
+        return jsonify({'error': f'Tipo de tab invalido: {tab_type}'}), 400
+
+    state = _get_tab_state(tab_type)
+    output_file = state.get('output_file')
+
+    if not output_file or not os.path.exists(output_file):
+        return jsonify({'error': 'No hay archivo generado para descargar'}), 404
+
+    return send_file(
+        output_file,
+        as_attachment=True,
+        download_name=os.path.basename(output_file)
+    )
 
 
 def _validate_input_files(input_dir: str) -> list:

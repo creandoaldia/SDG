@@ -1436,6 +1436,287 @@ function hideDashboard() {
 }
 
 // ======================================================================
+// TAB UPLOAD HANDLER — Genera upload areas con IDs unicos por tab
+// ======================================================================
+const TAB_CONFIG = {
+    'pqrs': {
+        icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+        color: '#2E75B6', bg: '#EBF5FF', label: 'PQRS',
+        desc: 'Peticiones, Quejas, Reclamos y Sugerencias',
+        fileHint: 'BD PQRS Bogota Te Escucha'
+    },
+    'atenciones': {
+        icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857',
+        color: '#10B981', bg: '#F0FFF4', label: 'Atenciones SAC',
+        desc: 'Servicio de Atencion al Ciudadano',
+        fileHint: 'SAC Atencion Mayo'
+    },
+    'cert-residencia': {
+        icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438',
+        color: '#F59E0B', bg: '#FFFBEB', label: 'Certificado de Residencia',
+        desc: 'Productividad de certificados',
+        fileHint: 'PRODUCTIVIDAD_CR'
+    },
+    'prop-horizontal': {
+        icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+        color: '#8B5CF6', bg: '#F5F3FF', label: 'Propiedad Horizontal',
+        desc: 'Productividad de PH',
+        fileHint: 'PRODUCTIVIDAD_PH'
+    },
+    'encuestas': {
+        icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+        color: '#14B8A6', bg: '#F0FFFA', label: 'Encuestas',
+        desc: 'Reporte de productividad de encuestas',
+        fileHint: 'PRODUCTIVIDAD ENCUESTAS'
+    },
+    'doc-extraviados': {
+        icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z',
+        color: '#DC3545', bg: '#FFF0F0', label: 'Documentos Extraviados',
+        desc: 'Reporte SIDE de documentos perdidos',
+        fileHint: 'Resumen SIDE'
+    }
+};
+
+class TabUploadHandler {
+    constructor(tabKey) {
+        this.tabKey = tabKey;
+        this.config = TAB_CONFIG[tabKey];
+        this.files = [];
+        this.container = null;
+    }
+
+    buildHTML() {
+        const k = this.tabKey;
+        const cfg = this.config;
+        return `
+        <div class="tab-panel">
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:${cfg.bg};color:${cfg.color}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${cfg.icon}"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200">${cfg.label}</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${cfg.desc}</p>
+                    </div>
+                </div>
+
+                <!-- Upload Area -->
+                <div id="dz-${k}" class="relative border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-6 mb-4 text-center cursor-pointer transition-all duration-300 hover:border-[${cfg.color}] hover:bg-[${cfg.bg}]" style="background:transparent">
+                    <div class="text-center">
+                        <svg class="mx-auto w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Arrastra el archivo ${cfg.label} aqui</p>
+                        <p class="text-xs text-gray-400 mb-3">o haz clic para seleccionarlo (.xlsx)</p>
+                        <p class="text-xs text-gray-400 italic">Archivo esperado: ${cfg.fileHint}</p>
+                        <input type="file" id="fi-${k}" accept=".xlsx,.xls" class="hidden">
+                        <button id="sf-${k}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-white transition-all" style="background:${cfg.color}">
+                            <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+                            Seleccionar archivo
+                        </button>
+                    </div>
+                    <div id="fp-${k}" class="hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div id="fl-${k}" class="space-y-1"></div>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span id="fc-${k}" class="text-xs text-gray-500">0 archivos</span>
+                            <button id="cf-${k}" class="text-xs text-red-500 hover:text-red-700 font-medium">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Button + Status -->
+                <div class="flex items-center gap-3 mb-4">
+                    <button id="pb-${k}" disabled class="inline-flex items-center px-4 py-2 rounded-lg text-xs font-bold text-white opacity-50 cursor-not-allowed transition-all" style="background:${cfg.color}">
+                        <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Procesar
+                    </button>
+                    <span id="st-${k}" class="text-xs text-gray-400"></span>
+                </div>
+
+                <!-- Result Area -->
+                <div id="ra-${k}" class="hidden p-4 bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span class="text-sm font-medium text-green-800 dark:text-green-300" id="rm-${k}">Informe generado</span>
+                        </div>
+                        <a id="dl-${k}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all" style="background:${cfg.color}" href="#" download>
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Descargar
+                        </a>
+                    </div>
+                    <p class="text-xs text-green-600 dark:text-green-400 mt-2" id="rd-${k}"></p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div id="pr-${k}" class="hidden mt-4">
+                    <div class="flex justify-between text-xs text-gray-500 mb-1">
+                        <span id="pl-${k}">Procesando...</span>
+                        <span id="pp-${k}">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div id="pb-${k}" class="h-full rounded-full transition-all duration-500 ease-out" style="width:0%;background:${cfg.color}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    setup(container) {
+        this.container = container;
+        const k = this.tabKey;
+
+        const dz = container.querySelector(`#dz-${k}`);
+        const fi = container.querySelector(`#fi-${k}`);
+        const sf = container.querySelector(`#sf-${k}`);
+        const cf = container.querySelector(`#cf-${k}`);
+        const pb = container.querySelector(`#pb-${k}`);
+        const dl = container.querySelector(`#dl-${k}`);
+
+        if (!dz) return;
+
+        // Select files button
+        sf.addEventListener('click', (e) => { e.stopPropagation(); fi.click(); });
+        dz.addEventListener('click', () => fi.click());
+
+        // Drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            dz.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+        dz.addEventListener('dragenter', () => dz.style.borderColor = this.config.color);
+        dz.addEventListener('dragover', () => dz.style.borderColor = this.config.color);
+        dz.addEventListener('dragleave', () => dz.style.borderColor = '');
+        dz.addEventListener('drop', (e) => {
+            dz.style.borderColor = '';
+            this.handleFiles(e.dataTransfer.files);
+        });
+
+        fi.addEventListener('change', (e) => this.handleFiles(e.target.files));
+        cf.addEventListener('click', () => this.clearFiles());
+        pb.addEventListener('click', () => this.process());
+    }
+
+    handleFiles(files) {
+        for (const file of files) {
+            if (!file.name.match(/\.xlsx?$/i)) continue;
+            if (!this.files.find(f => f.name === file.name)) {
+                this.files.push(file);
+            }
+        }
+        this.updateUI();
+    }
+
+    clearFiles() {
+        this.files = [];
+        const k = this.tabKey;
+        const fi = this.container.querySelector(`#fi-${k}`);
+        if (fi) fi.value = '';
+        const ra = this.container.querySelector(`#ra-${k}`);
+        if (ra) ra.classList.add('hidden');
+        this.updateUI();
+    }
+
+    updateUI() {
+        const k = this.tabKey;
+        const fp = this.container.querySelector(`#fp-${k}`);
+        const fl = this.container.querySelector(`#fl-${k}`);
+        const fc = this.container.querySelector(`#fc-${k}`);
+        const pb = this.container.querySelector(`#pb-${k}`);
+        const uploadIcon = this.container.querySelector(`#dz-${k} svg:first-of-type`);
+
+        if (this.files.length === 0) {
+            fp.classList.add('hidden');
+            pb.disabled = true;
+            pb.classList.add('opacity-50', 'cursor-not-allowed');
+            pb.classList.remove('opacity-100', 'cursor-pointer');
+            return;
+        }
+
+        fp.classList.remove('hidden');
+        fl.innerHTML = '';
+        fc.textContent = `${this.files.length} archivo(s)`;
+
+        this.files.forEach((file, idx) => {
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between p-1.5 rounded bg-gray-50 dark:bg-gray-800';
+            div.innerHTML = `
+                <span class="text-xs text-gray-600 dark:text-gray-400 truncate">${file.name}</span>
+                <span class="text-xs text-gray-400">${(file.size / 1024).toFixed(0)} KB</span>
+            `;
+            fl.appendChild(div);
+        });
+
+        pb.disabled = false;
+        pb.classList.remove('opacity-50', 'cursor-not-allowed');
+        pb.classList.add('opacity-100', 'cursor-pointer');
+    }
+
+    async process() {
+        const k = this.tabKey;
+        if (this.files.length === 0) return;
+
+        const pb = this.container.querySelector(`#pb-${k}`);
+        const st = this.container.querySelector(`#st-${k}`);
+        const pr = this.container.querySelector(`#pr-${k}`);
+        const pl = this.container.querySelector(`#pl-${k}`);
+        const pp = this.container.querySelector(`#pp-${k}`);
+        const pbar = this.container.querySelector(`#pb-${k}`);
+        const ra = this.container.querySelector(`#ra-${k}`);
+        const rm = this.container.querySelector(`#rm-${k}`);
+        const rd = this.container.querySelector(`#rd-${k}`);
+        const dl = this.container.querySelector(`#dl-${k}`);
+
+        // Show progress
+        pr.classList.remove('hidden');
+        pl.textContent = 'Subiendo archivo...';
+        pp.textContent = '10%';
+
+        try {
+            // Upload file
+            const formData = new FormData();
+            formData.append('file', this.files[0]);
+            const uploadRes = await fetch(`/api/tabs/${k}/upload`, { method: 'POST', body: formData });
+            const uploadData = await uploadRes.json();
+            if (!uploadRes.ok) throw new Error(uploadData.error || 'Error al subir');
+
+            pp.textContent = '30%';
+            pl.textContent = 'Procesando archivo...';
+
+            // Process
+            const processRes = await fetch(`/api/tabs/${k}/process`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ month: 'MAYO', year: '2026' })
+            });
+            const processData = await processRes.json();
+            if (!processRes.ok) throw new Error(processData.error || 'Error al procesar');
+
+            pp.textContent = '100%';
+            pl.textContent = 'Completado';
+
+            // Show result
+            setTimeout(() => {
+                pr.classList.add('hidden');
+                ra.classList.remove('hidden');
+                rm.textContent = processData.success ? `Informe generado: ${processData.filename || ''}` : 'Error';
+                rd.textContent = processData.success
+                    ? `${processData.rows || 0} registros en ${processData.sheets || 0} hoja(s)`
+                    : processData.error || 'Error desconocido';
+                dl.href = `/api/tabs/${k}/download`;
+                st.textContent = 'Completado';
+            }, 500);
+
+        } catch (err) {
+            pl.textContent = 'Error';
+            st.textContent = `Error: ${err.message}`;
+            st.style.color = '#DC3545';
+            setTimeout(() => pr.classList.add('hidden'), 3000);
+        }
+    }
+}
+
+// ======================================================================
 // INITIALIZATION
 // ======================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -1466,12 +1747,22 @@ document.addEventListener('DOMContentLoaded', () => {
         informePanel.classList.remove('tab-hide');
     }
 
-    // Register mount hooks for tabs (future use)
-    tabManager.onMount('pqrs', (container, state) => {
-        console.debug('[TabManager] PQRS tab mounted');
-    });
-    tabManager.onMount('atenciones', (container, state) => {
-        console.debug('[TabManager] Atenciones tab mounted');
+    // Register mount hooks for tabs — initialize upload handlers
+    const tabKeys = ['pqrs', 'atenciones', 'cert-residencia', 'prop-horizontal', 'encuestas', 'doc-extraviados'];
+    const tabHandlers = {};
+    tabKeys.forEach(key => {
+        tabManager.onMount(key, (container, state) => {
+            if (!tabHandlers[key]) {
+                container.innerHTML = '';
+                const handler = new TabUploadHandler(key);
+                container.innerHTML = handler.buildHTML();
+                handler.setup(container);
+                tabHandlers[key] = handler;
+            }
+        });
+        tabManager.onDestroy(key, (container) => {
+            delete tabHandlers[key];
+        });
     });
 
     // Bounce-in al cargar la pagina
