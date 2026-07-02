@@ -29,4 +29,4 @@ ENV SESSION_LIFETIME_HOURS="8"
 EXPOSE 5000
 
 # Run with waitress production server (single worker para tab_states thread safety)
-CMD ["python", "-m", "waitress", "--host=0.0.0.0", "--port=5000", "--workers=1", "webapp.app:app"]
+CMD ["python", "-m", "waitress", "--host=0.0.0.0", "--port=5000", "--threads=2", "webapp.app:app"]
