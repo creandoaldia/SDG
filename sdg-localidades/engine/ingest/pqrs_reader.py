@@ -39,16 +39,32 @@ class PQRSReader(BaseReader):
         "INSC", "ACT", "EXT",
     }
 
+    def _resolve_sheet_name(self, config_key: str, available: set) -> str:
+        """Resuelve nombre real de hoja con fallback por coincidencia parcial.
+        Primero intenta exact match, luego busca substring del config_key en nombres disponibles."""
+        if config_key in available:
+            return config_key
+        # Fallback: buscar hoja que contenga parte significativa del nombre
+        key_parts = [p.upper() for p in config_key.replace('_', ' ').split() if len(p) > 3]
+        for avail in available:
+            avail_up = avail.upper()
+            matches = sum(1 for p in key_parts if p in avail_up)
+            if matches >= 2 or (matches == 1 and len(key_parts) <= 2):
+                return avail
+        return config_key  # fallback al nombre original (generara warning)
+
     def read(self) -> IngestionResult:
         result = IngestionResult(source_key="pqrs", success=False)
         try:
             xl = pd.ExcelFile(self.file_path)
             available = set(xl.sheet_names)
 
-            for sheet_name, config in self.SHEETS_CONFIG.items():
-                if sheet_name not in available:
-                    result.warnings.append(f"Hoja '{sheet_name}' no encontrada en {self.filename}")
+            for config_key, config in self.SHEETS_CONFIG.items():
+                actual_name = self._resolve_sheet_name(config_key, available)
+                if actual_name not in available:
+                    result.warnings.append(f"Hoja '{config_key}' no encontrada en {self.filename}")
                     continue
+                sheet_name = actual_name  # usar nombre real de la hoja
 
                 # Manejar hojas con múltiples tablas (ej: CERT.P.HORIZONTAL MAYO)
                 if config.get("multi_table"):

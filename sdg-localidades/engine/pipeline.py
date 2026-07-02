@@ -57,6 +57,28 @@ class SDGPipeline:
         ]
 
         self.output_path = os.path.join(output_dir, f"INFORME PQRS LOCALIDADES {month.upper()} {year}.xlsx")
+        # Almacenamiento para dashboard (se llena durante run())
+        self.resumen_df = None
+        self.indicators = {}
+        self.ingestion_data = {}
+        self.normalized = {}
+        self.pivots = {}
+
+    def _find_sheet(self, source_key: str, *patterns: str) -> Optional[str]:
+        """Busca una hoja por patron en los datos normalizados de una fuente.
+        Retorna el nombre real de la hoja o None si no encuentra."""
+        if source_key not in self.normalized:
+            return None
+        sheets = self.normalized[source_key]
+        for pattern in patterns:
+            pl = pattern.lower()
+            for sname in sheets:
+                if pl in sname.lower():
+                    return sname
+        # Fallback: primera hoja
+        if sheets:
+            return list(sheets.keys())[0]
+        return None
 
     def _emit(self, phase: PipelinePhase, message: str, progress: float, detail: str = "", status: str = "running"):
         """Crea un evento y lo retorna para que run() lo yield inmediatamente."""
@@ -78,10 +100,13 @@ class SDGPipeline:
         import glob
         matches = glob.glob(os.path.join(self.input_dir, pattern))
         if not matches:
-            # Intentar sin glob (nombre exacto)
-            for f in os.listdir(self.input_dir):
-                if pattern.replace("*", "") in f:
-                    matches.append(os.path.join(self.input_dir, f))
+            try:
+                for f in os.listdir(self.input_dir):
+                    if pattern.replace("*", "") in f:
+                        matches.append(os.path.join(self.input_dir, f))
+                        break
+            except (FileNotFoundError, NotADirectoryError, PermissionError):
+                pass
         return matches[0] if matches else None
 
     def run(self) -> Generator[PipelineEvent, None, None]:
@@ -99,13 +124,13 @@ class SDGPipeline:
         yield self._emit(PipelinePhase.INGESTION, "Buscando archivos fuente...", 0.05,
                    "Escaneando directorio de entrada...")
 
-        ingestion_data = {}
+        self.ingestion_data = {}
         missing_files = []
 
-        for source in self.sources:
+        for idx, source in enumerate(self.sources):
             yield self._emit(PipelinePhase.INGESTION,
                        f"Buscando: {source.label}...",
-                       0.05 + (0.20 * self.sources.index(source) / len(self.sources)),
+                       0.05 + (0.20 * idx / len(self.sources)),
                        f"Patrón: {source.filename_pattern}")
 
             file_path = self._find_source_file(source.filename_pattern)
@@ -143,9 +168,11 @@ class SDGPipeline:
                     reader = PHReader(file_path)
                 elif source.key == "encuestas":
                     reader = EncuestasReader(file_path)
+                else:
+                    raise ValueError(f"Tipo de fuente desconocido: {source.key}")
 
                 result = reader.read()
-                ingestion_data[source.key] = result
+                self.ingestion_data[source.key] = result
                 source.sheets = list(result.sheets.keys())
                 source.row_count = result.row_count
 
@@ -168,7 +195,6 @@ class SDGPipeline:
         if missing_files:
             error_msg = f"Archivos requeridos faltantes: {', '.join(missing_files)}"
             yield self._emit(PipelinePhase.ERROR, error_msg, 0.0, "", "error")
-            yield self.events.get()
             return
 
         yield self._emit(PipelinePhase.INGESTION,
@@ -184,20 +210,19 @@ class SDGPipeline:
                    0.30)
 
         normalizer = Normalizer()
-        normalized = {}
+        self.normalized = {}
         total_normalized = 0
 
-        for key, data in ingestion_data.items():
+        for idx, (key, data) in enumerate(self.ingestion_data.items()):
             normalized_sheets = {}
             for sheet_name, df in data.sheets.items():
                 ndf = normalizer.normalize(df, source=key, sheet=sheet_name)
                 normalized_sheets[sheet_name] = ndf
                 total_normalized += len(ndf)
-            normalized[key] = normalized_sheets
-
+            self.normalized[key] = normalized_sheets
             yield self._emit(PipelinePhase.NORMALIZATION,
                        f"   {key}: {sum(len(df) for df in normalized_sheets.values())} registros normalizados",
-                       0.30 + (0.10 * list(ingestion_data.keys()).index(key) / len(ingestion_data)),
+                       0.30 + (0.10 * idx / len(self.ingestion_data)),
                        "", "completed")
 
         yield self._emit(PipelinePhase.NORMALIZATION,
@@ -214,13 +239,14 @@ class SDGPipeline:
 
         deduplicator = Deduplicator()
         dedup_result = None
-        if 'pqrs' in normalized and 'Reporte PQRS Mayo2026' in normalized['pqrs']:
+        pqrs_sheet = self._find_sheet('pqrs', 'Reporte PQRS', 'PQRS')
+        if pqrs_sheet:
             dedup_result = deduplicator.find_duplicates(
-                normalized['pqrs']['Reporte PQRS Mayo2026'],
+                self.normalized['pqrs'][pqrs_sheet],
                 id_column="Número petición"
             )
             if dedup_result is not None:
-                normalized['pqrs']['Reporte PQRS Mayo2026'] = dedup_result
+                self.normalized['pqrs'][pqrs_sheet] = dedup_result
                 duplicate_count = dedup_result['_duplicado'].sum() if '_duplicado' in dedup_result.columns else 0
                 yield self._emit(PipelinePhase.DEDUPLICATION,
                            f"✅ Duplicados detectados: {int(duplicate_count)} peticiones duplicadas",
@@ -242,13 +268,14 @@ class SDGPipeline:
                    0.50)
 
         pivot_gen = PivotGenerator()
-        pivots = {}
-        if 'pqrs' in normalized:
-            pqrs_df = normalized['pqrs'].get('Reporte PQRS Mayo2026')
+        self.pivots = {}
+        if 'pqrs' in self.normalized:
+            pqrs_sheet = self._find_sheet('pqrs', 'Reporte PQRS', 'PQRS')
+            pqrs_df = self.normalized['pqrs'].get(pqrs_sheet) if pqrs_sheet else None
             if pqrs_df is not None:
-                pivots = pivot_gen.generate_all(pqrs_df)
+                self.pivots = pivot_gen.generate_all(pqrs_df)
                 yield self._emit(PipelinePhase.PIVOT_GENERATION,
-                           f"✅ {len(pivots)} tablas dinámicas generadas (Q1-Q6)",
+                           f"✅ {len(self.pivots)} tablas dinámicas generadas (Q1-Q6)",
                            0.60, "Incluye: gestionadas, pendientes, trasladadas, cerradas, negadas, tiempos",
                            "completed")
         else:
@@ -264,15 +291,15 @@ class SDGPipeline:
                    0.65)
 
         calc = IndicatorCalculator()
-        indicators = {}
-        for key, sheets in normalized.items():
+        self.indicators = {}
+        for key, sheets in self.normalized.items():
             for sheet_name, df in sheets.items():
                 result = calc.calculate(key, sheet_name, df)
                 if result:
-                    indicators[f"{key}/{sheet_name}"] = result
+                    self.indicators[f"{key}/{sheet_name}"] = result
 
         yield self._emit(PipelinePhase.INDICATOR_CALCULATION,
-                   f"✅ Indicadores calculados: {len(indicators)} tablas de indicadores",
+                   f"✅ Indicadores calculados: {len(self.indicators)} tablas de indicadores",
                    0.75, "Incluye: % participación, calificación proporcional, promedios",
                    "completed")
 
@@ -284,10 +311,10 @@ class SDGPipeline:
                    0.78)
 
         resumen = ResumenCifras()
-        resumen_df = resumen.build(ingestion_data, normalized, indicators, pivots)
+        self.resumen_df = resumen.build(self.ingestion_data, self.normalized, self.indicators, self.pivots)
 
         yield self._emit(PipelinePhase.RESUMEN_CIFRAS,
-                   f"✅ RESUMEN CIFRAS generado: {len(resumen_df)} localidades",
+                   f"✅ RESUMEN CIFRAS generado: {len(self.resumen_df)} localidades",
                    0.85, "Datos consolidados para PowerPoint y Power BI", "completed")
 
         # ──────────────────────────────────────────────
@@ -298,7 +325,7 @@ class SDGPipeline:
                    0.86)
 
         web_reporter = WebReport()
-        web_report_data = web_reporter.generate(ingestion_data)
+        web_report_data = web_reporter.generate(self.ingestion_data)
 
         web_sections = len(web_report_data)
         if web_sections > 0:
@@ -319,7 +346,7 @@ class SDGPipeline:
                    0.875)
 
         days_reporter = DaysReport()
-        days_report_data = days_reporter.generate(ingestion_data)
+        days_report_data = days_reporter.generate(self.ingestion_data)
 
         days_sections = len(days_report_data)
         if days_sections > 0:
@@ -339,7 +366,7 @@ class SDGPipeline:
                    0.882)
 
         side_reporter = SideReport()
-        side_report_data = side_reporter.generate(ingestion_data)
+        side_report_data = side_reporter.generate(self.ingestion_data)
 
         side_sections = len(side_report_data)
         if side_sections > 0:
@@ -363,12 +390,12 @@ class SDGPipeline:
             output_path=self.output_path,
             month=self.month,
             year=self.year,
-            ingestion_data=ingestion_data,
-            normalized=normalized,
+            ingestion_data=self.ingestion_data,
+            normalized=self.normalized,
             dedup_result=dedup_result,
-            pivots=pivots,
-            indicators=indicators,
-            resumen_df=resumen_df,
+            pivots=self.pivots,
+            indicators=self.indicators,
+            resumen_df=self.resumen_df,
             web_report_data=web_report_data,
             days_report_data=days_report_data,
             side_report_data=side_report_data
@@ -410,8 +437,8 @@ class SDGPipeline:
 
         report = validator.validate_all(
             sources=self.sources,
-            ingestion_data=ingestion_data,
-            normalized=normalized,
+            ingestion_data=self.ingestion_data,
+            normalized=self.normalized,
             output_path=self.output_path,
             month=self.month,
             year=self.year
