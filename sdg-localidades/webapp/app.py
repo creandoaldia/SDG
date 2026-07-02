@@ -8,12 +8,14 @@ Arquitectura:
   - El pipeline ETL corre en un hilo separado
   - La UI recibe eventos SSE (Server-Sent Events) para mostrar progreso en vivo
   - Tailwind CSS para una interfaz moderna y responsiva
+  - Autenticación via Flask session + cookies (SSE-compatible)
 """
 import os
 import sys
 import json
 import threading
 import time
+import hmac
 import pandas as pd
 import unidecode
 from pathlib import Path
@@ -21,16 +23,39 @@ from pathlib import Path
 # Asegurar que el directorio raíz del proyecto está en el path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from flask import Flask, render_template, request, jsonify, Response, stream_with_context
+from flask import Flask, render_template, request, jsonify, Response, stream_with_context, redirect, url_for, session as flask_session
 from werkzeug.utils import secure_filename
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from engine.pipeline import SDGPipeline
 from engine.models import PipelinePhase
 from engine.tab_processors import (
     process_tab, validate_tab_type, validate_file_content, ALLOWED_TAB_TYPES
 )
+from webapp.auth import auth_bp, login_required
 
 app = Flask(__name__)
+
+# ── Config del proxy (Traefik/Caddy detrás de /sdg/) ──
+# Aplica ProxyFix para que url_for() genere rutas correctas con SCRIPT_NAME
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
+# ── Session config para subruta /sdg/ (Juicio: CRÍTICO #1) ──
+app.config['APPLICATION_ROOT'] = os.environ.get('APPLICATION_ROOT', '/')
+app.config['SESSION_COOKIE_PATH'] = os.environ.get('SESSION_COOKIE_PATH', '/')
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['PERMANENT_SESSION_LIFETIME'] = int(os.environ.get('SESSION_LIFETIME_HOURS', '8')) * 3600
+app.config['SESSION_COOKIE_SECURE'] = os.environ.get('HTTPS', 'false').lower() == 'true'
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', '')
+if not app.secret_key:
+    raise RuntimeError(
+        "FLASK_SECRET_KEY no configurada. "
+        "Establece la variable de entorno FLASK_SECRET_KEY en docker-compose.yml o .env"
+    )
+
+# Registrar blueprint de autenticación
+app.register_blueprint(auth_bp)
 
 # Directorios para uploads de tabs (separado del pipeline principal)
 TAB_UPLOAD_BASE = str(Path(__file__).parent.parent / 'input' / 'tabs')
@@ -54,6 +79,11 @@ pipeline_state = {
     'dashboard_data': None       # Datos para el dashboard post-informe
 }
 
+# ── Rutas whitelisted (no requieren auth) ──
+AUTH_WHITELIST = {'/api/login', '/api/auth/status', '/login', '/static'}
+# SSE endpoint NO debe usar @login_required — el auth check va dentro del generator
+# para evitar que EventSource reciba un 302/401 en lugar de SSE.
+
 # Lock para acceso concurrente al estado
 state_lock = threading.Lock()
 
@@ -70,11 +100,14 @@ def allowed_file(filename: str) -> bool:
 
 @app.route('/')
 def index():
-    """Página principal."""
+    """Página principal. Redirige a /login si no autenticado."""
+    if not flask_session.get('authenticated'):
+        return redirect(url_for('auth.login_page', next=request.url))
     return render_template('index.html')
 
 
 @app.route('/api/status')
+@login_required
 def api_status():
     """Retorna el estado actual del pipeline."""
     with state_lock:
@@ -82,6 +115,7 @@ def api_status():
 
 
 @app.route('/api/upload', methods=['POST'])
+@login_required
 def api_upload():
     """
     Recibe los archivos fuente y los guarda en la carpeta input/.
@@ -115,6 +149,7 @@ def api_upload():
 
 
 @app.route('/api/process', methods=['POST'])
+@login_required
 def api_process():
     """
     Inicia el procesamiento del pipeline ETL.
@@ -154,9 +189,16 @@ def api_process():
 def api_events():
     """
     SSE (Server-Sent Events) endpoint.
-    La UI se suscribe a este stream para recibir actualizaciones en vivo.
+    NO usa @login_required — el auth check va DENTRO del generator
+    para que EventSource reciba un mensaje SSE en lugar de un 302/401.
     """
     def generate():
+        # Auth check inside generator (Juicio: CRÍTICO #3)
+        if not flask_session.get('authenticated'):
+            yield f"data: {json.dumps({'type': 'error', 'message': 'No autorizado', 'auth_required': True})}\n\n"
+            yield f"retry: 60000\n\n"  # Reducir frecuencia de reconexión
+            return
+
         last_index = 0
         last_heartbeat = time.time()
         while True:
@@ -188,14 +230,13 @@ def api_events():
         mimetype='text/event-stream',
         headers={
             'Cache-Control': 'no-cache',
-            # NOTA: 'Connection' es hop-by-hop (PEP 3333), Waitress lo rechaza.
-            # Waitress maneja keep-alive automáticamente para HTTP/1.1.
             'X-Accel-Buffering': 'no'
         }
     )
 
 
 @app.route('/api/download')
+@login_required
 def api_download():
     """Descarga el archivo de salida generado."""
     from flask import send_file
@@ -214,9 +255,10 @@ def api_download():
 
 
 @app.route('/api/dashboard')
+@login_required
 def api_dashboard():
     """Retorna datos estructurados del ultimo informe generado para el dashboard.
-    Siempre retorna 200 — si no hay informe, devuelve empty state."""
+    Solo usa datos REALES de resumen_df — NO aproximaciones (Juicio: DASH-002)."""
     with state_lock:
         data = pipeline_state.get('dashboard_data')
 
@@ -236,10 +278,10 @@ def api_dashboard():
 # Helpers: Tab dashboard data
 # ═══════════════════════════════════════════════════════════════
 
-def _build_tab_dashboard(tab_type: str, filepath: str, result: dict) -> dict:
-    """Construye datos de dashboard RICOS para un tab individual.
-    Escanea el Excel procesado para extraer metadatos, desgloses y porcentajes."""
-    # Mapping de tipos de tab a dashboard summary keys
+def _build_tab_dashboard(tab_type: str, filepath: str, result: dict, real_data: dict = None) -> dict:
+    """Construye datos de dashboard para un tab individual.
+    Usa real_data si está disponible (datos reales del procesamiento).
+    Si no, retorna empty state — NO aproximaciones (Juicio: DASH-002)."""
     DASHBOARD_LABELS = {
         'pqrs': {'title': 'PQRS', 'metric': 'Registros PQRS', 'secondary_label': 'Duplicados',
                  'chart_type': 'bar', 'chart_labels': ['Gestionadas', 'Pendientes'],
@@ -258,81 +300,92 @@ def _build_tab_dashboard(tab_type: str, filepath: str, result: dict) -> dict:
     }
 
     info = DASHBOARD_LABELS.get(tab_type, {})
-    rows = result.get('rows', 0)
-    extra = result.get('extra', {})
-    sheets = result.get('sheets', 0)
 
-    # Extraer metricas segun tipo
+    # Si tenemos datos reales, usarlos
+    if real_data:
+        rows = real_data.get('total', 0)
+        sheets = real_data.get('sheets', 0)
+        extra = real_data.get('extra', {})
+        summary = real_data.get('summary', {})
+        filename = real_data.get('filename', '')
+        output_path = real_data.get('output_path', '')
+    else:
+        # Empty state — NO aproximaciones
+        return {
+            'tab_type': tab_type,
+            'title': info.get('title', tab_type),
+            'metric_label': info.get('metric', 'Registros'),
+            'metric_value': 0,
+            'secondary_label': None,
+            'secondary_value': None,
+            'sheets': 0,
+            'actual_sheets': [],
+            'filename': '',
+            'breakdown': {},
+            'chart_data': [],
+            'chart_type': info.get('chart_type'),
+            'chart_labels': info.get('chart_labels', []),
+            'chart_colors': info.get('chart_colors', []),
+        }
+
+    # Extraer metricas segun tipo con datos REALES
     breakdown = {}
     chart_data = []
     secondary_val = None
 
-    try:
-        # Escanear el archivo de salida para sheet names reales
-        import os as _os
-        output_path = result.get('output_path', '')
-        actual_sheets = []
-        if output_path and _os.path.exists(output_path):
-            try:
-                xl = pd.ExcelFile(output_path)
-                actual_sheets = xl.sheet_names
-            except Exception:
-                pass
-    except Exception:
-        actual_sheets = []
+    # Escanear el archivo de salida para sheet names
+    actual_sheets = []
+    if output_path:
+        try:
+            xl = pd.ExcelFile(output_path)
+            actual_sheets = xl.sheet_names
+        except Exception:
+            pass
 
     if tab_type == 'pqrs':
-        if 'duplicates' in extra:
-            secondary_val = int(extra['duplicates'])
-        if 'pivot_count' in extra:
-            pivot_count = int(extra['pivot_count'])
-        else:
-            pivot_count = 0
-        # Proporcion estimada gestionadas/pendientes (70/30 default hasta tener datos reales)
-        gestionadas_pct = 70
-        pendientes_pct = 30
+        secondary_val = summary.get('duplicados', 0)
         breakdown = {
-            'gestionadas': max(1, int(rows * gestionadas_pct / 100)),
-            'pendientes': max(0, int(rows * pendientes_pct / 100)),
-            'duplicados': secondary_val or 0,
-            'pivot_tables': pivot_count,
+            'gestionadas': summary.get('gestionadas', 0),
+            'pendientes': summary.get('pendientes', 0),
+            'duplicados': summary.get('duplicados', 0),
+            'pivot_tables': summary.get('pivot_count', 0),
         }
-        chart_data = [
-            {'label': 'Gestionadas', 'value': breakdown['gestionadas'], 'color': '#10B981'},
-            {'label': 'Pendientes', 'value': breakdown['pendientes'], 'color': '#F59E0B'},
-        ]
+        if breakdown['gestionadas'] > 0 or breakdown['pendientes'] > 0:
+            chart_data = [
+                {'label': 'Gestionadas', 'value': breakdown['gestionadas'], 'color': '#10B981'},
+                {'label': 'Pendientes', 'value': breakdown['pendientes'], 'color': '#F59E0B'},
+            ]
 
     elif tab_type == 'encuestas':
-        # Encuestas: asumir tasa de completitud de ~85%
-        completas = max(1, int(rows * 0.85))
-        incompletas = max(0, rows - completas)
-        tasa = round(completas / rows * 100, 1) if rows > 0 else 0
+        total = summary.get('total', rows)
+        completas = summary.get('completas', 0)
+        incompletas = max(0, total - completas)
+        tasa = round(completas / total * 100, 1) if total > 0 else 0
         secondary_val = f"{tasa}%"
         breakdown = {
-            'total': rows,
+            'total': total,
             'completas': completas,
             'incompletas': incompletas,
             'tasa_completitud': tasa,
         }
-        chart_data = [
-            {'label': 'Completas', 'value': completas, 'color': '#10B981'},
-            {'label': 'Incompletas', 'value': incompletas, 'color': '#FCA5A5'},
-        ]
+        if completas > 0 or incompletas > 0:
+            chart_data = [
+                {'label': 'Completas', 'value': completas, 'color': '#10B981'},
+                {'label': 'Incompletas', 'value': incompletas, 'color': '#FCA5A5'},
+            ]
 
     elif tab_type == 'doc-extraviados':
-        if extra and 'section_count' in extra:
-            section_count = int(extra['section_count'])
-        else:
-            section_count = 0
         breakdown = {
-            'total': rows,
-            'categorias': section_count or 1,
+            'stock': summary.get('stock', 0),
+            'registrados': summary.get('registrados', 0),
+            'entregados': summary.get('entregados', 0),
+            'secciones': summary.get('secciones', 0),
         }
 
     elif tab_type in ('atenciones', 'cert-residencia', 'prop-horizontal'):
         breakdown = {'total': rows}
 
-    dashboard = {
+    return {
         'tab_type': tab_type,
         'title': info.get('title', tab_type),
         'metric_label': info.get('metric', 'Registros'),
@@ -341,14 +394,13 @@ def _build_tab_dashboard(tab_type: str, filepath: str, result: dict) -> dict:
         'secondary_value': secondary_val,
         'sheets': sheets,
         'actual_sheets': actual_sheets,
-        'filename': result.get('filename', ''),
+        'filename': filename,
         'breakdown': breakdown,
         'chart_data': chart_data,
         'chart_type': info.get('chart_type'),
         'chart_labels': info.get('chart_labels', []),
         'chart_colors': info.get('chart_colors', []),
     }
-    return dashboard
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -378,6 +430,7 @@ def _get_tab_state(tab_type: str) -> dict:
 
 
 @app.route('/api/tabs/<tab_type>/upload', methods=['POST'])
+@login_required
 def api_tab_upload(tab_type):
     """Sube un archivo para un tab especifico."""
     if not validate_tab_type(tab_type):
@@ -424,60 +477,113 @@ def api_tab_upload(tab_type):
 
 
 @app.route('/api/tabs/<tab_type>/process', methods=['POST'])
+@login_required
 def api_tab_process(tab_type):
-    """Procesa el archivo subido para un tab."""
+    """Procesa el archivo subido para un tab en un hilo separado.
+    El progreso se consulta vía GET /api/tabs/<tab_type>/status (polling cada 2s).
+    Incluye: guard contra doble procesamiento, thread lifecycle cleanup con timeout."""
     if not validate_tab_type(tab_type):
         return jsonify({'error': f'Tipo de tab invalido: {tab_type}'}), 400
 
     state = _get_tab_state(tab_type)
+
+    # ── Guard contra doble procesamiento (Judgment Day fix) ──
+    with tab_state_lock:
+        if state.get('phase') == 'processing':
+            return jsonify({'error': 'Ya hay un procesamiento en curso para este tab'}), 409
+
     if not state.get('file') or not os.path.exists(state['file']):
         return jsonify({'error': 'No hay archivo cargado para procesar'}), 400
+
+    # Obtener mes y año dinámicos
+    data = request.get_json() or {}
+    month = data.get('month', time.strftime('%B').upper()[:5])
+    year = data.get('year', str(time.localtime().tm_year))
+    start_time = time.time()
+    PROCESS_TIMEOUT = 1800  # 30 minutos máximo
 
     with tab_state_lock:
         state['phase'] = 'processing'
         state['progress'] = 0.0
         state['message'] = 'Procesando...'
         state['error'] = None
+        state['month'] = month
+        state['year'] = year
+        state['started_at'] = start_time
 
-    # Obtener mes y año (desde request o default)
-    data = request.get_json() or {}
-    month = data.get('month', 'MAYO')
-    year = data.get('year', '2026')
-
-    try:
-        output_dir = os.path.join(str(BASE_DIR / 'output'), 'tabs', tab_type)
-        result = process_tab(tab_type, state['file'], output_dir, month, year)
-
+    def _progress_callback(progress: float, message: str = ''):
+        """Callback para actualizar progreso desde el thread (thread-safe)."""
         with tab_state_lock:
-            if result.get('success'):
-                state['phase'] = 'completed'
-                state['progress'] = 1.0
-                state['message'] = f'Procesamiento completado: {result.get("filename", "")}'
-                state['output_file'] = result.get('output_path')
-            else:
-                state['phase'] = 'error'
-                state['message'] = f'Error: {result.get("error", "Desconocido")}'
-                state['error'] = result.get('error')
+            if tab_type in tab_states:
+                tab_states[tab_type]['progress'] = progress
+                if message:
+                    tab_states[tab_type]['message'] = message
 
-        # Construir respuesta JSON-safe
-        safe_result = {k: v for k, v in result.items() if not k.startswith('_')}
+    def _process_thread():
+        """Ejecuta process_tab en un hilo separado y actualiza estado.
+        Con timeout y cleanup automático."""
+        try:
+            # Verificar timeout
+            if time.time() - start_time > PROCESS_TIMEOUT:
+                raise TimeoutError("Tiempo de procesamiento excedido (30 min)")
 
-        # Store dashboard data for tab
-        tab_dashboard = _build_tab_dashboard(tab_type, state.get('file'), result)
-        with tab_state_lock:
-            state['dashboard_data'] = tab_dashboard
+            output_dir = os.path.join(str(BASE_DIR / 'output'), 'tabs', tab_type)
+            os.makedirs(output_dir, exist_ok=True)
 
-        return jsonify(safe_result)
+            _progress_callback(0.1, 'Iniciando procesamiento...')
+            result = process_tab(
+                tab_type, state.get('file'), output_dir,
+                month, year, progress_callback=_progress_callback
+            )
 
-    except Exception as e:
-        with tab_state_lock:
-            state['phase'] = 'error'
-            state['message'] = f'Error: {str(e)}'
-            state['error'] = str(e)
-        return jsonify({'success': False, 'error': str(e)}), 500
+            with tab_state_lock:
+                if tab_type not in tab_states:
+                    return  # State was cleaned up
+                if result.get('success'):
+                    tab_states[tab_type]['phase'] = 'completed'
+                    tab_states[tab_type]['progress'] = 1.0
+                    tab_states[tab_type]['message'] = f'Completado: {result.get("filename", "")}'
+                    tab_states[tab_type]['output_file'] = result.get('output_path')
+
+                    # Extraer summary real para dashboard
+                    safe_result = {k: v for k, v in result.items() if not k.startswith('_')}
+                    summary = result.get('summary', {})
+                    rows = result.get('rows', 0)
+
+                    # Construir real_data con métricas reales del procesamiento
+                    real_data = {
+                        'total': rows,
+                        'sheets': result.get('sheets', 0),
+                        'extra': result.get('extra', {}),
+                        'summary': summary,
+                        'filename': result.get('filename', ''),
+                        'output_path': result.get('output_path', ''),
+                    }
+                    tab_states[tab_type]['dashboard_data'] = _build_tab_dashboard(
+                        tab_type, state.get('file'), result, real_data=real_data
+                    )
+                    tab_states[tab_type]['last_result'] = safe_result
+                else:
+                    tab_states[tab_type]['phase'] = 'error'
+                    tab_states[tab_type]['message'] = f'Error: {result.get("error", "Desconocido")}'
+                    tab_states[tab_type]['error'] = result.get('error')
+
+        except Exception as e:
+            with tab_state_lock:
+                if tab_type in tab_states:
+                    tab_states[tab_type]['phase'] = 'error'
+                    tab_states[tab_type]['message'] = f'Error: {str(e)}'
+                    tab_states[tab_type]['error'] = str(e)
+
+    # Iniciar hilo de procesamiento
+    thread = threading.Thread(target=_process_thread, daemon=True)
+    thread.start()
+
+    return jsonify({'status': 'processing', 'message': 'Procesamiento iniciado en segundo plano'})
 
 
 @app.route('/api/tabs/<tab_type>/status')
+@login_required
 def api_tab_status(tab_type):
     """Retorna el estado del procesamiento de un tab."""
     if not validate_tab_type(tab_type):
@@ -496,6 +602,7 @@ def api_tab_status(tab_type):
 
 
 @app.route('/api/tabs/<tab_type>/dashboard')
+@login_required
 def api_tab_dashboard(tab_type):
     """Retorna datos de dashboard para un tab especifico."""
     if not validate_tab_type(tab_type):
@@ -516,6 +623,7 @@ def api_tab_dashboard(tab_type):
 
 
 @app.route('/api/tabs/<tab_type>/download')
+@login_required
 def api_tab_download(tab_type):
     """Descarga el archivo generado por un tab."""
     from flask import send_file
@@ -683,32 +791,19 @@ def _run_pipeline(month: str, year: str):
                 }
             }
         else:
-            # Fallback: datos desde source_stats (básico, sin aproximaciones falsas)
-            source_stats = {s.key: {'label': s.label, 'loaded': s.loaded, 'rows': s.row_count} for s in pipeline.sources}
-            pqrs_rows = source_stats.get('pqrs', {}).get('rows', 0)
+            # Path B ELIMINADO (Juicio: DASH-002). NO más aproximaciones.
+            # Si no hay resumen_df, se retorna empty state.
             dashboard_data = {
                 'periodo': {'month': month_name, 'year': year},
-                'resumen': {
-                    'total_pqrs': pqrs_rows,
-                    'gestionadas': pqrs_rows,
-                    'pendientes': 0,
-                    'doc_extraviados': source_stats.get('side', {}).get('rows', 0),
-                    'orientaciones': source_stats.get('sac', {}).get('rows', 0),
-                    'cert_residencia': source_stats.get('cr', {}).get('rows', 0),
-                    'prop_horizontal': source_stats.get('ph', {}).get('rows', 0),
-                    'encuestas_total': source_stats.get('encuestas', {}).get('rows', 0),
-                    'encuestas_completas': source_stats.get('encuestas', {}).get('rows', 0),
-                    'calificacion': 0.0,
-                    'satisfaccion': 0.0
-                },
+                'resumen': None,
                 'localidades': [],
                 'tabs': {
-                    'pqrs': {'total': pqrs_rows, 'gestionadas': pqrs_rows, 'pendientes': 0},
-                    'atenciones': {'total_sac': source_stats.get('sac', {}).get('rows', 0), 'orientaciones': source_stats.get('sac', {}).get('rows', 0)},
-                    'cert_residencia': {'total': source_stats.get('cr', {}).get('rows', 0)},
-                    'prop_horizontal': {'total': source_stats.get('ph', {}).get('rows', 0)},
-                    'encuestas': {'total_periodo': source_stats.get('encuestas', {}).get('rows', 0), 'completas': source_stats.get('encuestas', {}).get('rows', 0), 'calificacion': 0.0},
-                    'doc_extraviados': {'registrados': source_stats.get('side', {}).get('rows', 0)}
+                    'pqrs': {'total': 0, 'gestionadas': 0, 'pendientes': 0},
+                    'atenciones': {'total_sac': 0},
+                    'cert_residencia': {'total': 0},
+                    'prop_horizontal': {'total': 0},
+                    'encuestas': {'total_periodo': 0, 'completas': 0},
+                    'doc_extraviados': {'registrados': 0}
                 }
             }
 

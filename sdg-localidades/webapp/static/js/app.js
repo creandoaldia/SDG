@@ -2309,11 +2309,26 @@ class TabUploadHandler {
         this.config = TAB_CONFIG[tabKey];
         this.files = [];
         this.container = null;
+        this._pollTimer = null;
+    }
+
+    getDefaultMonth() {
+        const months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+        const now = new Date();
+        return months[now.getMonth()];
+    }
+
+    getDefaultYear() {
+        return String(new Date().getFullYear());
     }
 
     buildHTML() {
         const k = this.tabKey;
         const cfg = this.config;
+        const defMonth = this.getDefaultMonth();
+        const defYear = this.getDefaultYear();
+        const months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+        const monthOptions = months.map(m => `<option value="${m}" ${m === defMonth ? 'selected' : ''}>${m.charAt(0) + m.slice(1).toLowerCase()}</option>`).join('');
         return `
         <div class="tab-panel">
             <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
@@ -2325,6 +2340,21 @@ class TabUploadHandler {
                         <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200">${cfg.label}</h2>
                         <p class="text-sm text-gray-500 dark:text-gray-400">${cfg.desc}</p>
                     </div>
+                </div>
+
+                <!-- Month/Year Selectors (Feature 3: TAB-001) -->
+                <div class="flex items-center gap-4 mb-4 p-3 rounded-lg" style="background:var(--bg-card2);border:1px solid var(--border)">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4" style="color:${cfg.color}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Periodo:</span>
+                    </div>
+                    <select id="sm-${k}" class="text-xs rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 py-1.5 px-2 focus:ring-2" style="focus:border-[${cfg.color}]">
+                        ${monthOptions}
+                    </select>
+                    <input type="number" id="sy-${k}" value="${defYear}" min="2020" max="2100"
+                           class="text-xs rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 py-1.5 px-2 w-20 focus:ring-2">
                 </div>
 
                 <!-- Upload Area -->
@@ -2375,18 +2405,52 @@ class TabUploadHandler {
                     <p class="text-xs text-green-600 dark:text-green-400 mt-2" id="rd-${k}"></p>
                 </div>
 
-                <!-- Progress Bar -->
+                <!-- Progress Bar (renamed pg-${k} para evitar conflicto con process button pb-${k}) -->
                 <div id="pr-${k}" class="hidden mt-4">
                     <div class="flex justify-between text-xs text-gray-500 mb-1">
                         <span id="pl-${k}">Procesando...</span>
                         <span id="pp-${k}">0%</span>
                     </div>
                     <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-                        <div id="pb-${k}" class="h-full rounded-full transition-all duration-500 ease-out" style="width:0%;background:${cfg.color}"></div>
+                        <div id="pg-${k}" class="h-full rounded-full transition-all duration-500 ease-out" style="width:0%;background:${cfg.color}"></div>
                     </div>
                 </div>
             </div>
         </div>`;
+    }
+
+    setup(container) {
+        this.container = container;
+        const k = this.tabKey;
+
+        const dz = container.querySelector(`#dz-${k}`);
+        const fi = container.querySelector(`#fi-${k}`);
+        const sf = container.querySelector(`#sf-${k}`);
+        const cf = container.querySelector(`#cf-${k}`);
+        const pb = container.querySelector(`#pb-${k}`);
+        const dl = container.querySelector(`#dl-${k}`);
+
+        if (!dz) return;
+
+        // Select files button
+        sf.addEventListener('click', (e) => { e.stopPropagation(); fi.click(); });
+        dz.addEventListener('click', () => fi.click());
+
+        // Drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            dz.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+        dz.addEventListener('dragenter', () => dz.style.borderColor = this.config.color);
+        dz.addEventListener('dragover', () => dz.style.borderColor = this.config.color);
+        dz.addEventListener('dragleave', () => dz.style.borderColor = '');
+        dz.addEventListener('drop', (e) => {
+            dz.style.borderColor = '';
+            this.handleFiles(e.dataTransfer.files);
+        });
+
+        fi.addEventListener('change', (e) => this.handleFiles(e.target.files));
+        cf.addEventListener('click', () => this.clearFiles());
+        pb.addEventListener('click', () => this.process());
     }
 
     setup(container) {
@@ -2482,21 +2546,29 @@ class TabUploadHandler {
         const k = this.tabKey;
         if (this.files.length === 0) return;
 
-        const pb = this.container.querySelector(`#pb-${k}`);
+        const pbBtn = this.container.querySelector(`#pb-${k}`);
         const st = this.container.querySelector(`#st-${k}`);
         const pr = this.container.querySelector(`#pr-${k}`);
         const pl = this.container.querySelector(`#pl-${k}`);
         const pp = this.container.querySelector(`#pp-${k}`);
-        const pbar = this.container.querySelector(`#pb-${k}`);
+        const pg = this.container.querySelector(`#pg-${k}`);
         const ra = this.container.querySelector(`#ra-${k}`);
         const rm = this.container.querySelector(`#rm-${k}`);
         const rd = this.container.querySelector(`#rd-${k}`);
         const dl = this.container.querySelector(`#dl-${k}`);
 
+        // Get dynamic month/year from selectors (Feature 3: TAB-001)
+        const monthSel = this.container.querySelector(`#sm-${k}`);
+        const yearSel = this.container.querySelector(`#sy-${k}`);
+        const month = monthSel ? monthSel.value : this.getDefaultMonth();
+        const year = yearSel ? yearSel.value : this.getDefaultYear();
+
         // Show progress
         pr.classList.remove('hidden');
         pl.textContent = 'Subiendo archivo...';
         pp.textContent = '10%';
+        if (pg) pg.style.width = '10%';
+        pbBtn.disabled = true;
 
         try {
             // Upload file
@@ -2508,50 +2580,121 @@ class TabUploadHandler {
 
             pp.textContent = '30%';
             pl.textContent = 'Procesando archivo...';
+            if (pg) pg.style.width = '30%';
 
-            // Process
+            // Start processing (async/threaded)
             const processRes = await fetch(`/api/tabs/${k}/process`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ month: 'MAYO', year: '2026' })
+                body: JSON.stringify({ month, year })
             });
-            const processData = await processRes.json();
-            if (!processRes.ok) throw new Error(processData.error || 'Error al procesar');
+            if (!processRes.ok) {
+                const errData = await processRes.json().catch(() => ({}));
+                throw new Error(errData.error || 'Error al iniciar procesamiento');
+            }
+
+            // Poll for progress (Feature 3: TAB-003)
+            pl.textContent = 'Procesando...';
+            const result = await this._pollProgress(k, pg, pp, pl, st);
+
+            if (result.error) {
+                throw new Error(result.error);
+            }
 
             pp.textContent = '100%';
             pl.textContent = 'Completado';
+            if (pg) pg.style.width = '100%';
 
             // Show result
-            setTimeout(async () => {
-                pr.classList.add('hidden');
-                ra.classList.remove('hidden');
-                rm.textContent = processData.success ? `Informe generado: ${processData.filename || ''}` : 'Error';
-                rd.textContent = processData.success
-                    ? `${processData.rows || 0} registros en ${processData.sheets || 0} hoja(s)`
-                    : processData.error || 'Error desconocido';
-                dl.href = `/api/tabs/${k}/download`;
-                st.textContent = 'Completado';
+            pr.classList.add('hidden');
+            ra.classList.remove('hidden');
+            rm.textContent = result.success
+                ? `Informe generado: ${result.filename || ''}`
+                : 'Error al procesar';
+            rd.textContent = result.success
+                ? `${result.rows || 0} registros en ${result.sheets || 0} hoja(s)`
+                : result.error || 'Error desconocido';
+            dl.href = `/api/tabs/${k}/download`;
+            st.textContent = 'Completado';
 
-                // Fetch and render tab dashboard
-                if (processData.success) {
-                    try {
-                        const dashRes = await fetch(`/api/tabs/${k}/dashboard`);
-                        const dashData = await dashRes.json();
-                        if (dashData && dashData.metric_value !== undefined) {
-                            renderTabDashboard(k, this.container, dashData);
-                        }
-                    } catch (dashErr) {
-                        console.warn('Tab dashboard error:', dashErr);
+            // Fetch and render tab dashboard with REAL data (Feature 2: DASH-003)
+            if (result.success) {
+                try {
+                    const dashRes = await fetch(`/api/tabs/${k}/dashboard`);
+                    const dashData = await dashRes.json();
+                    if (dashData && dashData.metric_value !== undefined) {
+                        renderTabDashboard(k, this.container, dashData);
                     }
+                } catch (dashErr) {
+                    console.warn('Tab dashboard error:', dashErr);
                 }
-            }, 500);
+            }
 
         } catch (err) {
             pl.textContent = 'Error';
             st.textContent = `Error: ${err.message}`;
             st.style.color = '#DC3545';
-            setTimeout(() => pr.classList.add('hidden'), 3000);
+            // Re-enable process button on error (Juicio fix)
+            pbBtn.disabled = false;
+            pbBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            pbBtn.classList.add('opacity-100', 'cursor-pointer');
+            setTimeout(() => pr.classList.add('hidden'), 5000);
         }
+    }
+
+    async _pollProgress(k, pg, pp, pl, st) {
+        // Poll /api/tabs/${k}/status every 2s until terminal state
+        const pollInterval = 2000;
+        const maxPolls = 900; // 30 min max
+        let polls = 0;
+
+        return new Promise((resolve) => {
+            const timer = setInterval(async () => {
+                polls++;
+                try {
+                    const res = await fetch(`/api/tabs/${k}/status`);
+                    const status = await res.json();
+
+                    if (pg && status.progress !== undefined) {
+                        const pct = Math.round(status.progress * 100);
+                        pg.style.width = `${pct}%`;
+                        if (pp) pp.textContent = `${pct}%`;
+                    }
+                    if (status.message && pl) {
+                        pl.textContent = status.message;
+                    }
+
+                    // Terminal states
+                    if (status.phase === 'completed') {
+                        clearInterval(timer);
+                        // Fetch final result
+                        const dashRes = await fetch(`/api/tabs/${k}/dashboard`);
+                        const dashData = await dashRes.json();
+                        resolve({
+                            success: true,
+                            filename: status.output_file,
+                            rows: dashData.metric_value || 0,
+                            sheets: dashData.sheets || 0,
+                            error: null
+                        });
+                    } else if (status.phase === 'error') {
+                        clearInterval(timer);
+                        resolve({ success: false, error: status.error || 'Error en procesamiento' });
+                    }
+
+                    if (polls >= maxPolls) {
+                        clearInterval(timer);
+                        resolve({ success: false, error: 'Tiempo de espera agotado' });
+                    }
+                } catch (pollErr) {
+                    // Ignore poll errors, keep trying
+                    if (polls >= maxPolls) {
+                        clearInterval(timer);
+                        resolve({ success: false, error: 'Error de conexión durante procesamiento' });
+                    }
+                }
+            }, pollInterval);
+        });
     }
 }
 
