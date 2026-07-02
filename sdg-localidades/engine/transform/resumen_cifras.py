@@ -220,46 +220,63 @@ class ResumenCifras:
     # ═══════════════════════════════════════════════════════════════
 
     def _count_side_all(self, ingestion_data: dict) -> dict:
-        """Cuenta documentos SIDE por localidad desde datos crudos.
-        Busca 'LOCALIDAD' en los datos y suma TOTAL por localidad.
-        Solo procesa filas de sub-total (col0=tipo documento), saltando
-        filas de detalle (col0=NaN) y la fila 'Total general'.
+        """Cuenta documentos SIDE por localidad.
+        Deteccion dual: primero busca LOCALIDAD/TOTAL por nombre de columna,
+        fallback a busqueda en valores de celda (legacy).
+        Solo procesa hojas REGISTRADO SIDE (stock/devuelto no tienen localidad).
         """
         if 'side' not in ingestion_data:
             return {}
         sheets = ingestion_data['side'].sheets
-        result = {}
+        side_result = {}
 
-        # Palabras a ignorar en columna 0
         SKIP_WORDS = {'TOTAL GENERAL', 'TOTAL', 'STOCK', 'TIPO DE DOCUMENTO',
                       'NAN', 'REGISTRADO SIDE', 'ENTREGADO SIDE'}
 
         for sname in sheets:
+            # Saltar DEVUELTO (no cuenta como entregado) y STOCK (sin localidad)
+            if 'devuelto' in sname.lower() or 'stock' in sname.lower():
+                continue
+
             df = sheets[sname].copy()
             if df is None or df.empty:
                 continue
 
             rows_data = df.values.tolist()
 
-            # Encontrar LOCALIDAD y TOTAL en filas
+            # ── PASO 1: Detectar LOCALIDAD por NOMBRE DE COLUMNA ──
             loc_col_idx = None
             total_col_idx = None
-            for i, row in enumerate(rows_data):
-                for j, cell in enumerate(row):
-                    cell_str = str(cell).strip().upper() if pd.notna(cell) else ''
-                    if cell_str == 'LOCALIDAD':
-                        loc_col_idx = j
-                    if cell_str == 'TOTAL':
-                        total_col_idx = j
+
+            for j, col in enumerate(df.columns):
+                col_str = str(col).strip().upper()
+                if col_str == 'LOCALIDAD':
+                    loc_col_idx = j
+                    break
+
+            for j, col in enumerate(df.columns):
+                col_str = str(col).strip().upper()
+                if 'TOTAL' in col_str:
+                    total_col_idx = j
+                    break
+
+            # ── PASO 2: Fallback a busqueda en VALORES de celda ──
+            if loc_col_idx is None:
+                for i, row in enumerate(rows_data):
+                    for j, cell in enumerate(row):
+                        cell_str = str(cell).strip().upper() if pd.notna(cell) else ''
+                        if cell_str == 'LOCALIDAD':
+                            loc_col_idx = j
+                        if cell_str == 'TOTAL' and total_col_idx is None:
+                            total_col_idx = j
 
             if loc_col_idx is None:
                 continue
 
-            # Contar: solo filas con tipo documento en col0 y localidad valida
+            # ── PASO 3: Contar por localidad ──
             for row in rows_data:
                 if loc_col_idx >= len(row):
                     continue
-                # col0 debe tener un valor (tipo de documento), no NaN
                 col0 = str(row[0]).strip().upper() if len(row) > 0 and pd.notna(row[0]) else ''
                 if not col0 or col0 in SKIP_WORDS:
                     continue
@@ -273,17 +290,16 @@ class ResumenCifras:
                 if matched is None:
                     continue
 
-                # Sumar valor de columna TOTAL si existe
                 if total_col_idx is not None and total_col_idx < len(row):
                     cell_total = row[total_col_idx]
                     if pd.notna(cell_total):
                         val = pd.to_numeric(cell_total, errors='coerce')
                         if pd.notna(val) and val > 0:
-                            result[matched] = result.get(matched, 0) + int(val)
+                            side_result[matched] = side_result.get(matched, 0) + int(val)
                             continue
-                result[matched] = result.get(matched, 0) + 1
+                side_result[matched] = side_result.get(matched, 0) + 1
 
-        return result
+        return side_result
 
     # ═══════════════════════════════════════════════════════════════
     # SAC: ORIENTACIONES

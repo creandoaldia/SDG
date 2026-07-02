@@ -18,7 +18,6 @@ from engine.ingest.encuestas_reader import EncuestasReader
 from engine.transform.normalizer import Normalizer
 from engine.transform.deduplicator import Deduplicator
 from engine.transform.pivot_generator import PivotGenerator
-from engine.transform.side_report import SideReport
 from engine.load.tab_excel_writer import TabExcelWriter
 
 
@@ -38,8 +37,8 @@ ALLOWED_TAB_TYPES = set(READER_MAP.keys())
 EXPECTED_SHEETS = {
     "pqrs": ["Reporte PQRS"],
     "atenciones": ["SAC_atencion", "tablas"],
-    "cert-residencia": ["CERT RESIDENCIA PROD", "CR-TIPO TRAMITE"],
-    "prop-horizontal": ["CERT.P.HORIZONTAL"],
+    "cert-residencia": ["Productividad-CR", "PROD. TIPO T"],
+    "prop-horizontal": ["INS", "ACT", "RESUMEN"],
     "encuestas": ["Encuesta", "Nuevo Formato"],
     "doc-extraviados": ["STOCK", "REGISTRADO", "ENTREGADO"],
 }
@@ -142,32 +141,38 @@ def process_tab(tab_type: str, filepath: str, output_dir: str,
                     break
 
         elif tab_type == "doc-extraviados":
-            _progress(0.5, 'Generando reporte SIDE...')
-            side = SideReport()
-            side_data = side.generate({"side": result})
-            extra_data["side_report"] = side_data
-            extra_data["section_count"] = len(side_data)
-            # Extraer métricas reales del SideReport
-            summary['secciones'] = len(side_data)
+            _progress(0.5, 'Extrayendo metricas SIDE...')
+            summary['secciones'] = len(result.sheets)
             summary['stock'] = 0
             summary['registrados'] = 0
             summary['entregados'] = 0
-            for section in side_data:
-                if 'stock' in str(section).lower():
-                    summary['stock'] += 1
-                if 'registrado' in str(section).lower():
-                    summary['registrados'] += 1
-                if 'entregado' in str(section).lower():
-                    summary['entregados'] += 1
-            # Si no hay breakdown por nombre, usar counts reales
-            for sname, ndf in normalized.items():
+
+            for sname, df in result.sheets.items():
                 sname_lower = sname.lower()
-                if 'stock' in sname_lower:
-                    summary['stock'] = len(ndf)
+                if 'devuelto' in sname_lower:
+                    continue  # DEVUELTO no cuenta como entregado
+                if 'stock' in sname_lower and 'Total' in df.columns:
+                    total_row = df.loc[
+                        df.iloc[:, 0].astype(str).str.contains('TOTAL GENERAL', case=False, na=False),
+                        'Total'
+                    ]
+                    summary['stock'] = int(pd.to_numeric(total_row, errors='coerce').sum()) if not total_row.empty else 0
+
                 elif 'registrado' in sname_lower:
-                    summary['registrados'] = len(ndf)
+                    total_col = None
+                    for c in df.columns:
+                        if 'TOTAL' in str(c).upper():
+                            total_col = c
+                            break
+                    if total_col:
+                        vals = pd.to_numeric(df[total_col], errors='coerce').dropna()
+                        summary['registrados'] = int(vals.iloc[-1]) if not vals.empty else 0
+
                 elif 'entregado' in sname_lower:
-                    summary['entregados'] = len(ndf)
+                    total_mask = df.iloc[:, 0].astype(str).str.contains('^TOTAL$', case=False, na=False)
+                    if total_mask.any():
+                        total_val = pd.to_numeric(df[total_mask].iloc[0, 1], errors='coerce')
+                        summary['entregados'] = int(total_val) if pd.notna(total_val) else 0
 
         elif tab_type == "encuestas":
             _progress(0.5, 'Analizando encuestas...')
