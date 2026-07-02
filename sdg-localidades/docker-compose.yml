@@ -12,6 +12,12 @@ services:
       - output_data:/app/output
     environment:
       - TZ=America/Bogota
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:-cambia_esta_clave_en_produccion}
+      - APP_PASSWORD=${APP_PASSWORD:-sdg2024}
+      - APPLICATION_ROOT=/sdg/
+      - SESSION_COOKIE_PATH=/sdg/
+      - HTTPS=false
+      - SESSION_LIFETIME_HOURS=8
     networks:
       - sdg-network
 

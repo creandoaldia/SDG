@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG Localidades — Acceso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        :root { --bg-main: #F9FAFB; --bg-card: #FFFFFF; --text-main: #374151; --text-muted: #6B7280; --border: #E5E7EB; --accent: #1F4E79; }
+        .dark-mode { --bg-main: #0F0F1A; --bg-card: #1A1A2E; --text-main: #E0E0F0; --text-muted: #9090B0; --border: #2A2A4A; --accent: #6C5CE7; }
+        body { background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.3s, color 0.3s; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-card { background-color: var(--bg-card); border: 1px solid var(--border); }
+        .login-input { background-color: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); }
+        .login-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31,78,121,0.1); }
+        .dark-mode .login-input:focus { box-shadow: 0 0 0 3px rgba(108,92,231,0.15); }
+        #darkModeToggle { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="w-full max-w-md px-4">
+        <!-- Logo / Brand -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1F4E79] to-[#2E75B6] dark:from-[#6C5CE7] dark:to-[#a29bfe] mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+            </div>
+            <h1 class="text-2xl font-bold" style="color:var(--text-main)">SDG Localidades</h1>
+            <p class="text-sm mt-1" style="color:var(--text-muted)">Sistema de Informes PQRS</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card rounded-2xl shadow-sm p-8">
+            <h2 class="text-lg font-semibold mb-6" style="color:var(--text-main)">Acceso al sistema</h2>
+
+            <form id="loginForm" class="space-y-5">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <div>
+                    <label for="password" class="block text-sm font-medium mb-1.5" style="color:var(--text-muted)">Contraseña</label>
+                    <input type="password" id="password" name="password" required autofocus
+                           class="login-input w-full rounded-xl px-4 py-2.5 text-sm focus:ring-2 transition-all"
+                           placeholder="Ingresa la contraseña">
+                </div>
+
+                <div id="loginError" class="hidden p-3 rounded-xl text-sm bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400">
+                </div>
+
+                <button type="submit" id="loginBtn"
+                        class="w-full py-2.5 px-4 rounded-xl text-sm font-bold text-white transition-all duration-200 bg-gradient-to-r from-[#1F4E79] to-[#2E75B6] hover:from-[#1a3d5e] hover:to-[#2563a0] dark:from-[#6C5CE7] dark:to-[#a29bfe] dark:hover:from-[#5a4bd1] dark:hover:to-[#8b7cf5] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1F4E79] dark:focus:ring-[#6C5CE7]">
+                    <span id="loginBtnText">Ingresar</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-xs mt-6" style="color:var(--text-muted)">
+            Secretaría Distrital de Gobierno
+        </p>
+    </div>
+
+    <script>
+        // Dark mode from localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const btnText = document.getElementById('loginBtnText');
+            const error = document.getElementById('loginError');
+            const password = document.getElementById('password').value;
+            const csrf = document.querySelector('input[name="csrf_token"]').value;
+
+            btn.disabled = true;
+            btnText.textContent = 'Ingresando...';
+            error.classList.add('hidden');
+
+            // Get next from URL params
+            const params = new URLSearchParams(window.location.search);
+            const next = params.get('next') || '';
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password, csrf_token: csrf, next })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    window.location.href = data.redirect || '/';
+                } else {
+                    error.textContent = data.error || 'Error al iniciar sesión';
+                    error.classList.remove('hidden');
+                    btn.disabled = false;
+                    btnText.textContent = 'Ingresar';
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
+            } catch (err) {
+                error.textContent = 'Error de conexión. Verifica que el servidor esté corriendo.';
+                error.classList.remove('hidden');
+                btn.disabled = false;
+                btnText.textContent = 'Ingresar';
+            }
+        });
+
+        // Enter key submits form
+        document.getElementById('password').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        });
+    </script>
+</body>
+</html>
