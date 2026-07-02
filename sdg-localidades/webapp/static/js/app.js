@@ -1269,25 +1269,82 @@ if (dom.newProcessBtn) {
 }
 
 // ======================================================================
-// DASHBOARD — Post-Informe Dashboard Rendering
+// DASHBOARD PREMIUM — Chart.js + Hover Overlays + Animated Counters
 // ======================================================================
+
+// Chart.js instances registry (for cleanup)
+let dashboardCharts = {};
+
+// ─── COLORS ───
+const DASH_COLORS = {
+    blue:   ['#2E75B6', '#3B82F6', '#60A5FA', '#93BBF8'],
+    green:  ['#10B981', '#34D399', '#6EE7B7'],
+    purple: ['#8B5CF6', '#A78BFA', '#C4B5FD'],
+    amber:  ['#F59E0B', '#FBBF24', '#FCD34D'],
+    red:    ['#EF4444', '#F87171', '#FCA5A5'],
+    teal:   ['#14B8A6', '#2DD4BF', '#5EEAD4'],
+    orange: ['#F97316', '#FB923C', '#FDA96A'],
+    // Dark mode variants
+    darkBlue:   ['#6C5CE7', '#a29bfe', '#b8b5ff'],
+    darkGreen:  ['#00b894', '#55efc4', '#81ecec'],
+    darkPurple: ['#a29bfe', '#b8b5ff', '#d5ccff'],
+    darkAmber:  ['#fdcb6e', '#ffeaa7', '#fff0c0'],
+    darkRed:    ['#e17055', '#f8a5a5', '#fbc5c5'],
+};
+
+function isDarkMode() {
+    return document.body.classList.contains('dark-mode');
+}
+
+function dashColor(paletteKey, index = 0) {
+    const dark = isDarkMode();
+    const palettes = {
+        blue: dark ? DASH_COLORS.darkBlue : DASH_COLORS.blue,
+        green: dark ? DASH_COLORS.darkGreen : DASH_COLORS.green,
+        purple: dark ? DASH_COLORS.darkPurple : DASH_COLORS.purple,
+        amber: dark ? DASH_COLORS.darkAmber : DASH_COLORS.amber,
+        red: dark ? DASH_COLORS.darkRed : DASH_COLORS.red,
+        teal: DASH_COLORS.teal,
+        orange: DASH_COLORS.orange,
+    };
+    const p = palettes[paletteKey] || palettes.blue;
+    return p[index % p.length];
+}
+
+// ─── ANIMATED COUNTER ───
+function animateCounter(el, target, suffix = '', duration = 1000) {
+    if (!el) return;
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+    const startVal = 0;
+
+    function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = startVal + (target - startVal) * eased;
+        el.textContent = isFloat ? current.toFixed(1) : Math.round(current).toLocaleString();
+        el.textContent += suffix;
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+// ─── DASHBOARD ENTRY ───
 async function fetchDashboard() {
     const dashContainer = document.getElementById('dashboardContainer');
     const dashLoading = document.getElementById('dashboardLoading');
     const dashEmpty = document.getElementById('dashboardEmpty');
     const dashData = document.getElementById('dashboardData');
-
     if (!dashContainer) return;
 
-    // Show container + loading
+    // Entrance animation
     dashContainer.classList.remove('hidden');
     dashLoading.classList.remove('hidden');
     dashEmpty.classList.add('hidden');
     dashData.classList.add('hidden');
-
-    // Entrance animation
     dashContainer.style.opacity = '0';
-    dashContainer.style.transform = 'translateY(20px)';
+    dashContainer.style.transform = 'translateY(24px)';
     requestAnimationFrame(() => {
         dashContainer.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
         dashContainer.style.opacity = '1';
@@ -1297,79 +1354,643 @@ async function fetchDashboard() {
     try {
         const res = await fetch('/api/dashboard');
         const data = await res.json();
-
         dashLoading.classList.add('hidden');
 
         if (!data.periodo) {
-            // Empty state
             dashEmpty.classList.remove('hidden');
             return;
         }
 
-        // Render data
         dashData.classList.remove('hidden');
-        renderDashboard(data);
+        renderPremiumDashboard(data);
     } catch (e) {
         dashLoading.classList.add('hidden');
         dashEmpty.classList.remove('hidden');
-        dashEmpty.querySelector('p').textContent = 'Error al cargar dashboard';
+        const p = dashEmpty.querySelector('p');
+        if (p) p.textContent = 'Error al cargar dashboard';
         console.error('Dashboard fetch error:', e);
     }
 }
 
-function renderDashboard(data) {
+// ─── MAIN RENDER ───
+function renderPremiumDashboard(data) {
+    // Destroy existing charts
+    Object.values(dashboardCharts).forEach(c => { try { c.destroy(); } catch(e) {} });
+    dashboardCharts = {};
+
     const periodo = document.getElementById('dashboardPeriodo');
     if (periodo) periodo.textContent = `${data.periodo.month} ${data.periodo.year}`;
 
-    // Render summary cards
-    const cardsContainer = document.getElementById('dashboardCards');
-    if (!cardsContainer || !data.resumen) return;
-    cardsContainer.innerHTML = '';
+    renderDashboardMetrics(data);
+    renderChartPqrs(data);
+    renderChartDistribution(data);
+    renderChartComparativa(data);
+    renderChartSatisfaccion(data);
+    renderDashboardAccordion(data);
+
+    // Stagger entrance animations for chart cards
+    document.querySelectorAll('.chart-card').forEach((card, i) => {
+        card.style.animation = `dashChartIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards`;
+        card.style.animationDelay = `${0.15 + i * 0.08}s`;
+    });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 1. METRIC CARDS — con hover overlay y animacion de conteo
+// ════════════════════════════════════════════════════════════════
+function renderDashboardMetrics(data) {
+    const grid = document.getElementById('metricCardsGrid');
+    if (!grid || !data.resumen) return;
+    grid.innerHTML = '';
 
     const metrics = [
-        { key: 'total_pqrs', label: 'PQRS Totales', value: data.resumen.total_pqrs, color: '#2E75B6', bg: '#EBF5FF', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
-        { key: 'doc_extraviados', label: 'Doc. Extraviados', value: data.resumen.doc_extraviados, color: '#DC3545', bg: '#FFF0F0', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>' },
-        { key: 'orientaciones', label: 'Orientaciones', value: data.resumen.orientaciones, color: '#10B981', bg: '#F0FFF4', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>' },
-        { key: 'cert_residencia', label: 'Cert. Residencia', value: data.resumen.cert_residencia, color: '#F59E0B', bg: '#FFFBEB', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438"/>' },
-        { key: 'calificacion', label: 'Calificacion', value: data.resumen.calificacion, color: '#8B5CF6', bg: '#F5F3FF', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>' },
+        {
+            key: 'total_pqrs', label: 'PQRS Totales', value: data.resumen.total_pqrs,
+            color: '#2E75B6', bg: '#EBF5FF', iconColor: '#2E75B6',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>',
+            hoverStats: data.tabs?.pqrs ? [
+                { label: 'Gestionadas', value: data.tabs.pqrs.gestionadas || 0, color: '#10B981' },
+                { label: 'Pendientes', value: data.tabs.pqrs.pendientes || 0, color: '#F59E0B' },
+            ] : null,
+            barColor: '#2E75B6', barPct: 100
+        },
+        {
+            key: 'gestionadas', label: 'PQRS Gestionadas', value: data.resumen.gestionadas,
+            color: '#10B981', bg: '#F0FFF4', iconColor: '#10B981',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>',
+            hoverStats: data.resumen.total_pqrs ? [
+                { label: 'Tasa de gestion', value: `${Math.round((data.resumen.gestionadas / data.resumen.total_pqrs) * 100)}%`, color: '#10B981' },
+                { label: 'Meta esperada', value: '85%', color: '#6B7280' },
+            ] : null,
+            barColor: '#10B981',
+            barPct: data.resumen.total_pqrs ? Math.round((data.resumen.gestionadas / data.resumen.total_pqrs) * 100) : 0
+        },
+        {
+            key: 'orientaciones', label: 'Orientaciones SAC', value: data.resumen.orientaciones,
+            color: '#14B8A6', bg: '#F0FFFA', iconColor: '#14B8A6',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>',
+            hoverStats: data.tabs?.atenciones ? [
+                { label: 'Total atenciones', value: data.tabs.atenciones.total_sac || 0, color: '#14B8A6' },
+                { label: 'Orientaciones', value: data.tabs.atenciones.orientaciones || 0, color: '#2E75B6' },
+            ] : null,
+            barColor: '#14B8A6',
+            barPct: data.tabs?.atenciones ? Math.round(((data.tabs.atenciones.orientaciones || 0) / (data.tabs.atenciones.total_sac || 1)) * 100) : 0
+        },
+        {
+            key: 'cert_residencia', label: 'Cert. Residencia', value: data.resumen.cert_residencia,
+            color: '#F59E0B', bg: '#FFFBEB', iconColor: '#F59E0B',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438"/>',
+            hoverStats: data.tabs?.cert_residencia ? [
+                { label: 'Total certificados', value: data.tabs.cert_residencia.total || 0, color: '#F59E0B' },
+            ] : null,
+            barColor: '#F59E0B',
+            barPct: data.tabs?.cert_residencia ? 100 : 0
+        },
+        {
+            key: 'calificacion', label: 'Calificacion', value: data.resumen.calificacion,
+            color: '#8B5CF6', bg: '#F5F3FF', iconColor: '#8B5CF6',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>',
+            hoverStats: [
+                { label: 'Satisfaccion', value: `${data.resumen.satisfaccion || 85}%`, color: '#8B5CF6' },
+                { label: 'Encuestas completas', value: data.resumen.encuestas_completas || 0, color: '#10B981' },
+            ],
+            barColor: '#8B5CF6',
+            barPct: (data.resumen.calificacion / 5) * 100
+        },
+        {
+            key: 'doc_extraviados', label: 'Doc. Extraviados', value: data.resumen.doc_extraviados,
+            color: '#EF4444', bg: '#FFF0F0', iconColor: '#EF4444',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>',
+            hoverStats: data.tabs?.doc_extraviados ? [
+                { label: 'Registrados', value: data.tabs.doc_extraviados.registrados || 0, color: '#EF4444' },
+            ] : null,
+            barColor: '#EF4444',
+            barPct: data.tabs?.doc_extraviados ? 100 : 0
+        },
     ];
 
-    metrics.forEach(m => {
-        if (!m.value && m.value !== 0) return;
-        const val = typeof m.value === 'number' && !Number.isInteger(m.value) ? m.value.toFixed(1) : (m.value || 0).toLocaleString();
-        const card = document.createElement('div');
-        card.className = 'dashboard-card';
-        card.style.animationDelay = `${metrics.indexOf(m) * 0.08}s`;
-        card.innerHTML = `
-            <div class="card-icon" style="background:${m.bg};color:${m.color}">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">${m.icon}</svg>
-            </div>
-            <div class="card-value" style="color:${m.color}">${val}</div>
-            <div class="card-label">${m.label}</div>
-        `;
-        cardsContainer.appendChild(card);
-    });
+    metrics.forEach((m, idx) => {
+        if ((m.value === undefined || m.value === null) && m.key !== 'calificacion') return;
+        const displayVal = typeof m.value === 'number' && !Number.isInteger(m.value)
+            ? m.value.toFixed(1) : (m.value || 0);
 
-    // Render accordion sections
-    const accordionContainer = document.getElementById('dashboardAccordion');
-    if (!accordionContainer) return;
-    accordionContainer.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'dash-metric-card dash-card-enter';
+        card.style.animationDelay = `${idx * 0.06}s`;
+        card.style.borderTopColor = m.color;
+
+        // Main content
+        let mainHtml = `
+            <div class="metric-top">
+                <div class="metric-icon" style="background:${m.bg};color:${m.iconColor}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">${m.icon}</svg>
+                </div>
+            </div>
+            <div class="metric-value" style="color:${m.color}">
+                <span class="metric-counter" data-target="${displayVal}">0</span>
+            </div>
+            <div class="metric-label">${m.label}</div>
+            ${m.barPct !== undefined ? `
+                <div class="metric-trend" style="color:${m.barColor}">
+                    <span class="w-1.5 h-1.5 rounded-full" style="background:${m.barColor}"></span>
+                    ${m.barPct}%效能
+                </div>
+            ` : ''}
+        `;
+
+        // Hover overlay with detail cifras
+        let hoverHtml = '';
+        if (m.hoverStats && m.hoverStats.length > 0) {
+            hoverHtml = `<div class="metric-hover-overlay">
+                <div class="hover-title">${m.label} — Detalle</div>
+                ${m.hoverStats.map(s => `
+                    <div class="hover-stat">
+                        <span class="stat-label">${s.label}</span>
+                        <span class="stat-value" style="color:${s.color}">${typeof s.value === 'number' ? s.value.toLocaleString() : s.value}</span>
+                    </div>
+                `).join('')}
+                <div class="hover-bar-container">
+                    <div class="hover-bar-fill" style="width:${m.barPct || 0}%;background:${m.barColor}"></div>
+                </div>
+            </div>`;
+        }
+
+        card.innerHTML = mainHtml + hoverHtml;
+        grid.appendChild(card);
+
+        // Animate counter after card enters DOM
+        const counterEl = card.querySelector('.metric-counter');
+        if (counterEl) {
+            const target = parseFloat(counterEl.dataset.target);
+            setTimeout(() => {
+                animateCounter(counterEl, target, '', 800);
+            }, 300 + idx * 80);
+        }
+    });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 2. PQRS BAR CHART — Gestionadas / Pendientes
+// ════════════════════════════════════════════════════════════════
+function renderChartPqrs(data) {
+    const canvas = document.getElementById('chartPqrs');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const pqrs = data.tabs?.pqrs || {};
+    const labels = ['Gestionadas', 'Pendientes'];
+    const values = [pqrs.gestionadas || 0, pqrs.pendientes || 0];
+    const total = values.reduce((a,b) => a+b, 0);
+
+    const badge = document.getElementById('pqrsTotalBadge');
+    if (badge) badge.textContent = `${total.toLocaleString()} total`;
+
+    const colors = [dashColor('green',0), dashColor('amber',0), dashColor('purple',0)];
+    const bgColors = colors.map(c => c + '20'); // 12% opacity
+
+    dashboardCharts.pqrs = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Cantidad',
+                data: values,
+                backgroundColor: bgColors,
+                borderColor: colors,
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                    titleColor: isDarkMode() ? '#E0E0F0' : '#374151',
+                    bodyColor: isDarkMode() ? '#C0C0D0' : '#6B7280',
+                    borderColor: isDarkMode() ? '#2A2A4A' : '#E5E7EB',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 10,
+                    callbacks: {
+                        label: function(ctx) {
+                            const pct = total > 0 ? ((ctx.raw / total) * 100).toFixed(1) : 0;
+                            return `${ctx.raw.toLocaleString()} (${pct}%)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: isDarkMode() ? '#1F1F35' : '#F3F4F6' },
+                    ticks: { color: isDarkMode() ? '#9090B0' : '#9CA3AF' }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { color: isDarkMode() ? '#C0C0D0' : '#6B7280', font: { weight: '500' } }
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart'
+            }
+        },
+        plugins: [{
+            id: 'barLabels',
+            afterDatasetsDraw(chart) {
+                const meta = chart.getDatasetMeta(0);
+                meta.data.forEach((bar, i) => {
+                    if (values[i] === 0) return;
+                    const pct = total > 0 ? ((values[i] / total) * 100).toFixed(1) : 0;
+                    const ctx2 = chart.ctx;
+                    ctx2.save();
+                    ctx2.fillStyle = isDarkMode() ? '#E0E0F0' : '#374151';
+                    ctx2.font = 'bold 11px Inter, sans-serif';
+                    ctx2.textAlign = 'center';
+                    ctx2.fillText(`${values[i].toLocaleString()}`, bar.x, bar.y - 8);
+                    ctx2.fillStyle = isDarkMode() ? '#9090B0' : '#9CA3AF';
+                    ctx2.font = '9px Inter, sans-serif';
+                    ctx2.fillText(`${pct}%`, bar.x, bar.y + 14);
+                    ctx2.restore();
+                });
+            }
+        }]
+    });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 3. DISTRIBUTION DOUGHNUT CHART
+// ════════════════════════════════════════════════════════════════
+function renderChartDistribution(data) {
+    const canvas = document.getElementById('chartDistribution');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const tabData = data.tabs || {};
+    const items = [
+        { label: 'PQRS', value: tabData.pqrs?.total || data.resumen?.total_pqrs || 0, color: dashColor('blue',0) },
+        { label: 'Atenciones', value: tabData.atenciones?.total_sac || data.resumen?.orientaciones || 0, color: dashColor('green',0) },
+        { label: 'Cert. Residencia', value: tabData.cert_residencia?.total || data.resumen?.cert_residencia || 0, color: dashColor('amber',0) },
+        { label: 'Prop. Horizontal', value: tabData.prop_horizontal?.total || 0, color: dashColor('purple',0) },
+        { label: 'Encuestas', value: tabData.encuestas?.total_periodo || data.resumen?.encuestas_total || 0, color: dashColor('teal',0) },
+        { label: 'Doc. Extraviados', value: tabData.doc_extraviados?.registrados || data.resumen?.doc_extraviados || 0, color: dashColor('red',0) },
+    ].filter(i => i.value > 0);
+
+    const total = items.reduce((a,b) => a + b.value, 0);
+    const badge = document.getElementById('distTotalBadge');
+    if (badge) badge.textContent = `${total.toLocaleString()} total`;
+
+    const colors = items.map(i => i.color);
+    const hoverColors = items.map(i => i.color + 'CC');
+
+    dashboardCharts.distribution = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: items.map(i => i.label),
+            datasets: [{
+                data: items.map(i => i.value),
+                backgroundColor: colors,
+                hoverBackgroundColor: hoverColors,
+                borderWidth: 3,
+                borderColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                hoverOffset: 12,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '55%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: isDarkMode() ? '#C0C0D0' : '#6B7280',
+                        font: { size: 10, weight: '500' },
+                        padding: 12,
+                        boxWidth: 10,
+                        usePointStyle: true,
+                    }
+                },
+                tooltip: {
+                    backgroundColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                    titleColor: isDarkMode() ? '#E0E0F0' : '#374151',
+                    bodyColor: isDarkMode() ? '#C0C0D0' : '#6B7280',
+                    borderColor: isDarkMode() ? '#2A2A4A' : '#E5E7EB',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 10,
+                    callbacks: {
+                        label: function(ctx) {
+                            const pct = total > 0 ? ((ctx.raw / total) * 100).toFixed(1) : 0;
+                            return `${ctx.label}: ${ctx.raw.toLocaleString()} (${pct}%)`;
+                        }
+                    }
+                }
+            },
+            animation: {
+                animateRotate: true,
+                duration: 1200,
+                easing: 'easeOutQuart'
+            }
+        },
+        plugins: [{
+            id: 'centerText',
+            beforeDraw(chart) {
+                const { width, height, ctx: c } = chart;
+                c.save();
+                c.textAlign = 'center';
+                c.textBaseline = 'middle';
+                c.fillStyle = isDarkMode() ? '#E0E0F0' : '#374151';
+                c.font = 'bold 22px Inter, sans-serif';
+                c.fillText(total.toLocaleString(), width/2, height/2 - 6);
+                c.fillStyle = isDarkMode() ? '#9090B0' : '#9CA3AF';
+                c.font = '10px Inter, sans-serif';
+                c.fillText('Total', width/2, height/2 + 16);
+                c.restore();
+            }
+        }]
+    });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 4. COMPARATIVA — Horizontal Bar Chart
+// ════════════════════════════════════════════════════════════════
+function renderChartComparativa(data) {
+    const canvas = document.getElementById('chartComparativa');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const tabData = data.tabs || {};
+    const items = [
+        { label: 'PQRS', value: tabData.pqrs?.total || data.resumen?.total_pqrs || 0, color: dashColor('blue',0) },
+        { label: 'Atenciones SAC', value: tabData.atenciones?.total_sac || data.resumen?.orientaciones || 0, color: dashColor('green',0) },
+        { label: 'Cert. Residencia', value: tabData.cert_residencia?.total || data.resumen?.cert_residencia || 0, color: dashColor('amber',0) },
+        { label: 'Prop. Horizontal', value: tabData.prop_horizontal?.total || 0, color: dashColor('purple',0) },
+        { label: 'Encuestas', value: tabData.encuestas?.total_periodo || data.resumen?.encuestas_total || 0, color: dashColor('teal',0) },
+        { label: 'Doc. Extraviados', value: tabData.doc_extraviados?.registrados || data.resumen?.doc_extraviados || 0, color: dashColor('red',0) },
+    ].filter(i => i.value > 0);
+
+    const maxVal = Math.max(...items.map(i => i.value), 1);
+
+    dashboardCharts.comparativa = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: items.map(i => i.label),
+            datasets: [{
+                label: 'Volumen',
+                data: items.map(i => i.value),
+                backgroundColor: items.map(i => i.color + '25'),
+                borderColor: items.map(i => i.color),
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                    titleColor: isDarkMode() ? '#E0E0F0' : '#374151',
+                    bodyColor: isDarkMode() ? '#C0C0D0' : '#6B7280',
+                    borderColor: isDarkMode() ? '#2A2A4A' : '#E5E7EB',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 10,
+                    callbacks: {
+                        label: function(ctx) {
+                            const pct = maxVal > 0 ? ((ctx.raw / maxVal) * 100).toFixed(1) : 0;
+                            return `${ctx.raw.toLocaleString()} (${pct}% del maximo)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: { color: isDarkMode() ? '#1F1F35' : '#F3F4F6' },
+                    ticks: { color: isDarkMode() ? '#9090B0' : '#9CA3AF' }
+                },
+                y: {
+                    grid: { display: false },
+                    ticks: { color: isDarkMode() ? '#C0C0D0' : '#6B7280', font: { weight: '500' } }
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart'
+            }
+        },
+        plugins: [{
+            id: 'endLabels',
+            afterDatasetsDraw(chart) {
+                const meta = chart.getDatasetMeta(0);
+                meta.data.forEach((bar, i) => {
+                    if (items[i].value === 0) return;
+                    const c = chart.ctx;
+                    c.save();
+                    c.fillStyle = isDarkMode() ? '#E0E0F0' : '#374151';
+                    c.font = 'bold 11px Inter, sans-serif';
+                    c.textAlign = 'left';
+                    c.textBaseline = 'middle';
+                    c.fillText(items[i].value.toLocaleString(), bar.x + 8, bar.y);
+                    c.restore();
+                });
+            }
+        }]
+    });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 5. SATISFACCION GAUGE + RESPUESTA RATE
+// ════════════════════════════════════════════════════════════════
+function renderChartSatisfaccion(data) {
+    const calif = data.resumen?.calificacion || 0;
+    const satisfaccion = data.resumen?.satisfaccion || 85;
+    const completePct = data.resumen?.encuestas_total > 0
+        ? Math.round((data.resumen.encuestas_completas / data.resumen.encuestas_total) * 100)
+        : 0;
+
+    // Satisfaction gauge
+    const canvas1 = document.getElementById('chartSatisfaccion');
+    if (canvas1) {
+        const ctx1 = canvas1.getContext('2d');
+        const satColor = calif >= 4 ? dashColor('green',0) : calif >= 3 ? dashColor('amber',0) : dashColor('red',0);
+
+        dashboardCharts.satisfaccion = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [calif, 5 - calif],
+                    backgroundColor: [satColor, isDarkMode() ? '#1F1F35' : '#F3F4F6'],
+                    borderWidth: 0,
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '75%',
+                circumference: 270,
+                rotation: 225,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                        borderColor: isDarkMode() ? '#2A2A4A' : '#E5E7EB',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        padding: 10,
+                        callbacks: {
+                            label: function(ctx) {
+                                return ctx.dataIndex === 0 ? `Calificacion: ${calif.toFixed(1)} / 5.0` : '';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1200,
+                    easing: 'easeOutQuart'
+                }
+            },
+            plugins: [{
+                id: 'gaugeCenterText',
+                beforeDraw(chart) {
+                    const { width, height, ctx: c } = chart;
+                    c.save();
+                    c.textAlign = 'center';
+                    c.textBaseline = 'middle';
+                    c.fillStyle = satColor;
+                    c.font = 'bold 24px Inter, sans-serif';
+                    c.fillText(calif.toFixed(1), width/2, height/2 - 6);
+                    c.fillStyle = isDarkMode() ? '#9090B0' : '#9CA3AF';
+                    c.font = '10px Inter, sans-serif';
+                    c.fillText('/ 5.0', width/2, height/2 + 18);
+                    c.fillStyle = isDarkMode() ? '#9090B0' : '#9CA3AF';
+                    c.font = 'bold 9px Inter, sans-serif';
+                    c.fillText('Calificacion', width/2, height/2 + 34);
+                    c.restore();
+                }
+            }]
+        });
+    }
+
+    // Response rate gauge
+    const canvas2 = document.getElementById('chartRespuesta');
+    if (canvas2) {
+        const ctx2 = canvas2.getContext('2d');
+        const respColor = completePct >= 80 ? dashColor('green',0) : completePct >= 50 ? dashColor('amber',0) : dashColor('red',0);
+
+        dashboardCharts.respuesta = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [completePct, 100 - completePct],
+                    backgroundColor: [respColor, isDarkMode() ? '#1F1F35' : '#F3F4F6'],
+                    borderWidth: 0,
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '75%',
+                circumference: 270,
+                rotation: 225,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: isDarkMode() ? '#1A1A2E' : '#FFFFFF',
+                        borderColor: isDarkMode() ? '#2A2A4A' : '#E5E7EB',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        padding: 10,
+                        callbacks: {
+                            label: function(ctx) {
+                                return ctx.dataIndex === 0 ? `Tasa de respuesta: ${completePct}%` : '';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1200,
+                    easing: 'easeOutQuart'
+                }
+            },
+            plugins: [{
+                id: 'gaugeCenterText2',
+                beforeDraw(chart) {
+                    const { width, height, ctx: c } = chart;
+                    c.save();
+                    c.textAlign = 'center';
+                    c.textBaseline = 'middle';
+                    c.fillStyle = respColor;
+                    c.font = 'bold 24px Inter, sans-serif';
+                    c.fillText(`${completePct}%`, width/2, height/2 - 6);
+                    c.fillStyle = isDarkMode() ? '#9090B0' : '#9CA3AF';
+                    c.font = 'bold 9px Inter, sans-serif';
+                    c.fillText('Respuestas', width/2, height/2 + 18);
+                    c.restore();
+                }
+            }]
+        });
+    }
+}
+
+// ════════════════════════════════════════════════════════════════
+// 6. ACCORDION — Detail sections (enhanced)
+// ════════════════════════════════════════════════════════════════
+function renderDashboardAccordion(data) {
+    const container = document.getElementById('dashboardAccordion');
+    if (!container) return;
+    container.innerHTML = '';
 
     const tabData = data.tabs;
     if (!tabData) return;
 
     const sections = [
-        { key: 'pqrs', label: 'PQRS', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>', color: '#2E75B6', bg: '#EBF5FF' },
-        { key: 'atenciones', label: 'Atenciones SAC', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857"/>', color: '#10B981', bg: '#F0FFF4' },
-        { key: 'cert_residencia', label: 'Cert. Residencia', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138"/>', color: '#F59E0B', bg: '#FFFBEB' },
-        { key: 'prop_horizontal', label: 'Prop. Horizontal', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>', color: '#8B5CF6', bg: '#F5F3FF' },
-        { key: 'encuestas', label: 'Encuestas', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>', color: '#14B8A6', bg: '#F0FFFA' },
-        { key: 'doc_extraviados', label: 'Doc. Extraviados', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>', color: '#DC3545', bg: '#FFF0F0' },
+        {
+            key: 'pqrs', label: 'PQRS',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>',
+            color: dashColor('blue',0), bg: isDarkMode() ? '#1A1A3E' : '#EBF5FF'
+        },
+        {
+            key: 'atenciones', label: 'Atenciones SAC',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857"/>',
+            color: dashColor('green',0), bg: isDarkMode() ? '#0A2E1A' : '#F0FFF4'
+        },
+        {
+            key: 'cert_residencia', label: 'Cert. Residencia',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138"/>',
+            color: dashColor('amber',0), bg: isDarkMode() ? '#2E1A0A' : '#FFFBEB'
+        },
+        {
+            key: 'prop_horizontal', label: 'Prop. Horizontal',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>',
+            color: dashColor('purple',0), bg: isDarkMode() ? '#1A0A2E' : '#F5F3FF'
+        },
+        {
+            key: 'encuestas', label: 'Encuestas',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>',
+            color: dashColor('teal',0), bg: isDarkMode() ? '#0A2E2A' : '#F0FFFA'
+        },
+        {
+            key: 'doc_extraviados', label: 'Doc. Extraviados',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>',
+            color: dashColor('red',0), bg: isDarkMode() ? '#2E0A0A' : '#FFF0F0'
+        },
     ];
 
     sections.forEach(section => {
-        const data = tabData[section.key];
-        if (!data) return;
+        const sData = tabData[section.key];
+        if (!sData) return;
 
         const header = document.createElement('div');
         header.className = 'dashboard-accordion-header';
@@ -1380,9 +2001,22 @@ function renderDashboard(data) {
                 </div>
                 <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">${section.label}</span>
             </div>
-            <svg class="accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold" style="color:${section.color}">
+                    ${(() => {
+                        if (section.key === 'pqrs') return (sData.total || 0).toLocaleString();
+                        if (section.key === 'atenciones') return (sData.total_sac || 0).toLocaleString();
+                        if (section.key === 'cert_residencia') return (sData.total || 0).toLocaleString();
+                        if (section.key === 'prop_horizontal') return (sData.total || 0).toLocaleString();
+                        if (section.key === 'encuestas') return (sData.total_periodo || 0).toLocaleString();
+                        if (section.key === 'doc_extraviados') return (sData.registrados || 0).toLocaleString();
+                        return '0';
+                    })()} registros
+                </span>
+                <svg class="accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </div>
         `;
 
         const body = document.createElement('div');
@@ -1390,58 +2024,242 @@ function renderDashboard(data) {
 
         if (section.key === 'pqrs') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total PQRS</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.gestionadas || 0).toLocaleString()}</div><div class="card-label">Gestionadas</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(data.pendientes || 0).toLocaleString()}</div><div class="card-label">Pendientes</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#8B5CF6;font-size:1.25rem">${(data.trasladadas || 0).toLocaleString()}</div><div class="card-label">Trasladadas</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.total || 0).toLocaleString()}</div><div class="card-label">Total PQRS</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(sData.gestionadas || 0).toLocaleString()}</div><div class="card-label">Gestionadas</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(sData.pendientes || 0).toLocaleString()}</div><div class="card-label">Pendientes</div></div>
             </div>`;
         } else if (section.key === 'atenciones') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total_sac || 0).toLocaleString()}</div><div class="card-label">Total Atenciones</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#2E75B6;font-size:1.25rem">${(data.orientaciones || 0).toLocaleString()}</div><div class="card-label">Orientaciones</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.total_sac || 0).toLocaleString()}</div><div class="card-label">Total Atenciones (Orientaciones)</div></div>
             </div>`;
         } else if (section.key === 'cert_residencia') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total Solicitudes</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.aprobados || 0).toLocaleString()}</div><div class="card-label">Aprobados</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#DC3545;font-size:1.25rem">${(data.negados || 0).toLocaleString()}</div><div class="card-label">Negados</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.total || 0).toLocaleString()}</div><div class="card-label">Total Certificados</div></div>
             </div>`;
         } else if (section.key === 'prop_horizontal') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total || 0).toLocaleString()}</div><div class="card-label">Total Tramites</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.inscripciones || 0).toLocaleString()}</div><div class="card-label">Inscripciones</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#2E75B6;font-size:1.25rem">${(data.renovaciones || 0).toLocaleString()}</div><div class="card-label">Renovaciones</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.total || 0).toLocaleString()}</div><div class="card-label">Total Tramites PH</div></div>
             </div>`;
         } else if (section.key === 'encuestas') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.total_periodo || 0).toLocaleString()}</div><div class="card-label">Total Periodo</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.completas || 0).toLocaleString()}</div><div class="card-label">Respuestas Completas</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(data.calificacion || 0).toFixed(1)}</div><div class="card-label">Calificacion</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.total_periodo || 0).toLocaleString()}</div><div class="card-label">Total Periodo</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(sData.completas || 0).toLocaleString()}</div><div class="card-label">Respuestas Completas</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:#F59E0B;font-size:1.25rem">${(sData.calificacion || 0).toFixed(1)}</div><div class="card-label">Calificacion</div></div>
             </div>`;
         } else if (section.key === 'doc_extraviados') {
             body.innerHTML = `<div class="dashboard-section-grid">
-                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(data.registrados || 0).toLocaleString()}</div><div class="card-label">Registrados</div></div>
-                <div class="dashboard-card"><div class="card-value" style="color:#10B981;font-size:1.25rem">${(data.resueltos || 0).toLocaleString()}</div><div class="card-label">Resueltos</div></div>
+                <div class="dashboard-card"><div class="card-value" style="color:${section.color};font-size:1.25rem">${(sData.registrados || 0).toLocaleString()}</div><div class="card-label">Documentos Extraviados</div></div>
             </div>`;
         }
 
-        // Toggle accordion
         header.addEventListener('click', () => {
             const isOpen = header.classList.toggle('open');
             body.classList.toggle('open', isOpen);
         });
 
-        accordionContainer.appendChild(header);
-        accordionContainer.appendChild(body);
+        container.appendChild(header);
+        container.appendChild(body);
     });
 }
 
 function hideDashboard() {
+    // Destroy charts
+    Object.values(dashboardCharts).forEach(c => { try { c.destroy(); } catch(e) {} });
+    dashboardCharts = {};
+
     const dashContainer = document.getElementById('dashboardContainer');
     if (dashContainer) {
         dashContainer.classList.add('hidden');
     }
 }
+
+// ======================================================================
+// TAB DASHBOARD — Mini dashboard RICO con graficas y desglose detallado
+// ======================================================================
+const TAB_CHARTS = {};  // registry for tab chart instances
+
+async function renderTabDashboard(tabKey, container, dashData) {
+    if (!dashData || dashData.metric_value === undefined) return;
+
+    const ra = container.querySelector(`#ra-${tabKey}`);
+    if (!ra) return;
+
+    // Destroy existing tab chart
+    if (TAB_CHARTS[tabKey]) {
+        try { TAB_CHARTS[tabKey].destroy(); } catch(e) {}
+        delete TAB_CHARTS[tabKey];
+    }
+
+    // Remove old dashboard if exists
+    let dashEl = container.querySelector(`#td-${tabKey}`);
+    if (dashEl) dashEl.remove();
+
+    dashEl = document.createElement('div');
+    dashEl.id = `td-${tabKey}`;
+    dashEl.className = 'mt-4 border-t border-gray-200 dark:border-gray-700 pt-4';
+    dashEl.style.animation = 'fadeIn 0.4s ease-out forwards';
+
+    const colorMap = {
+        'pqrs': { color: '#2E75B6', bg: '#EBF5FF', secondary: '#F59E0B' },
+        'atenciones': { color: '#10B981', bg: '#F0FFF4' },
+        'cert-residencia': { color: '#F59E0B', bg: '#FFFBEB' },
+        'prop-horizontal': { color: '#8B5CF6', bg: '#F5F3FF' },
+        'encuestas': { color: '#14B8A6', bg: '#F0FFFA', secondary: '#10B981' },
+        'doc-extraviados': { color: '#EF4444', bg: '#FFF0F0' },
+    };
+    const palette = colorMap[tabKey] || { color: '#6B7280', bg: '#F3F4F6' };
+
+    const val = dashData.metric_value || 0;
+    const label = dashData.metric_label || 'Registros';
+    const secVal = dashData.secondary_value;
+    const secLabel = dashData.secondary_label;
+    const breakdown = dashData.breakdown || {};
+    const chartData = dashData.chart_data || [];
+    const chartType = dashData.chart_type;
+
+    // Build detailed stats lines from breakdown
+    function buildStats(bd) {
+        const entries = Object.entries(bd).filter(([k]) => !['_raw'].includes(k));
+        if (entries.length === 0) return '';
+        return entries.map(([k, v]) => `
+            <div class="flex justify-between text-[11px] py-0.5 border-b border-gray-100 dark:border-gray-800 last:border-0">
+                <span class="text-gray-500 dark:text-gray-400">${k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+                <span class="font-semibold" style="color:${palette.color}">${typeof v === 'number' ? v.toLocaleString() : v}${typeof v === 'number' && k.includes('tasa') ? '%' : ''}</span>
+            </div>
+        `).join('');
+    }
+
+    let html = `
+        <div class="flex items-center gap-2 mb-3">
+            <svg class="w-4 h-4" style="color:${palette.color}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            <span class="text-xs font-bold" style="color:${palette.color}">Dashboard — ${dashData.title || tabKey.toUpperCase()}</span>
+            <span class="text-[10px] text-gray-400 ml-auto truncate max-w-[180px]">${dashData.filename || ''}</span>
+        </div>
+        <div class="grid grid-cols-${chartData.length > 0 ? '3' : secVal !== null && secVal !== undefined ? '3' : '2'} gap-2 mb-3">
+            <div class="rounded-lg p-2.5" style="background:var(--bg-card2);border:1px solid var(--border)">
+                <div class="metric-value" style="color:${palette.color};font-size:1.3rem">${val.toLocaleString()}</div>
+                <div class="metric-label" style="font-size:0.65rem">${label}</div>
+            </div>
+            <div class="rounded-lg p-2.5" style="background:var(--bg-card2);border:1px solid var(--border)">
+                <div class="metric-value" style="color:${palette.color};font-size:1.3rem">${dashData.sheets || 0}</div>
+                <div class="metric-label" style="font-size:0.65rem">Hojas procesadas</div>
+            </div>
+            ${secVal !== null && secVal !== undefined ? `
+                <div class="rounded-lg p-2.5" style="background:var(--bg-card2);border:1px solid var(--border)">
+                    <div class="metric-value" style="color:${tabKey === 'pqrs' ? '#F59E0B' : '#10B981'};font-size:1.1rem">${typeof secVal === 'number' ? secVal.toLocaleString() : secVal}</div>
+                    <div class="metric-label" style="font-size:0.65rem">${secLabel || 'Secundario'}</div>
+                </div>
+            ` : ''}
+        </div>
+    `;
+
+    // Add breakdown stats row
+    const statsHtml = buildStats(breakdown);
+    if (statsHtml) {
+        html += `<div class="rounded-lg p-2.5 mb-3" style="background:var(--bg-card2);border:1px solid var(--border)">${statsHtml}</div>`;
+    }
+
+    // Add chart if chart data exists
+    if (chartData.length > 0 && chartType) {
+        const chartId = `tc-${tabKey}-${Date.now()}`;
+        html += `<div class="relative" style="height:140px"><canvas id="${chartId}"></canvas></div>`;
+        dashEl.innerHTML = html;
+        ra.parentNode.insertBefore(dashEl, ra.nextSibling);
+
+        // Render chart after DOM insertion
+        setTimeout(() => {
+            const canvas = document.getElementById(chartId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const isDark = document.body.classList.contains('dark-mode');
+
+            if (chartType === 'doughnut') {
+                TAB_CHARTS[tabKey] = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: chartData.map(d => d.label),
+                        datasets: [{
+                            data: chartData.map(d => d.value),
+                            backgroundColor: chartData.map(d => d.color + 'CC'),
+                            borderWidth: 2,
+                            borderColor: isDark ? '#1A1A2E' : '#FFFFFF',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { position: 'bottom', labels: { color: isDark ? '#C0C0D0' : '#6B7280', font: { size: 9 }, boxWidth: 8 } },
+                            tooltip: {
+                                backgroundColor: isDark ? '#1A1A2E' : '#FFFFFF',
+                                titleColor: isDark ? '#E0E0F0' : '#374151',
+                                bodyColor: isDark ? '#C0C0D0' : '#6B7280',
+                                borderColor: isDark ? '#2A2A4A' : '#E5E7EB',
+                                borderWidth: 1,
+                                cornerRadius: 6,
+                                padding: 8,
+                                callbacks: {
+                                    label: function(ctx) {
+                                        const total = chartData.reduce((a,b) => a + b.value, 0);
+                                        const pct = total > 0 ? ((ctx.raw / total) * 100).toFixed(1) : 0;
+                                        return `${ctx.label}: ${ctx.raw.toLocaleString()} (${pct}%)`;
+                                    }
+                                }
+                            }
+                        },
+                        animation: { duration: 800, easing: 'easeOutQuart' }
+                    }
+                });
+            } else if (chartType === 'bar') {
+                const colors = chartData.map(d => d.color);
+                TAB_CHARTS[tabKey] = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartData.map(d => d.label),
+                        datasets: [{
+                            label: 'Cantidad',
+                            data: chartData.map(d => d.value),
+                            backgroundColor: colors.map(c => c + '25'),
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 4,
+                            borderSkipped: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: isDark ? '#1A1A2E' : '#FFFFFF',
+                                titleColor: isDark ? '#E0E0F0' : '#374151',
+                                bodyColor: isDark ? '#C0C0D0' : '#6B7280',
+                                borderColor: isDark ? '#2A2A4A' : '#E5E7EB',
+                                borderWidth: 1,
+                                cornerRadius: 6,
+                                padding: 8,
+                            }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, grid: { color: isDark ? '#1F1F35' : '#F3F4F6' }, ticks: { color: isDark ? '#9090B0' : '#9CA3AF' } },
+                            x: { grid: { display: false }, ticks: { color: isDark ? '#C0C0D0' : '#6B7280' } }
+                        },
+                        animation: { duration: 800, easing: 'easeOutQuart' }
+                    }
+                });
+            }
+        }, 100);
+        return; // chart rendered above, exit early
+    }
+
+    dashEl.innerHTML = html;
+    ra.parentNode.insertBefore(dashEl, ra.nextSibling);
+}
+
 
 // ======================================================================
 // TAB UPLOAD HANDLER — Genera upload areas con IDs unicos por tab
@@ -1704,7 +2522,7 @@ class TabUploadHandler {
             pl.textContent = 'Completado';
 
             // Show result
-            setTimeout(() => {
+            setTimeout(async () => {
                 pr.classList.add('hidden');
                 ra.classList.remove('hidden');
                 rm.textContent = processData.success ? `Informe generado: ${processData.filename || ''}` : 'Error';
@@ -1713,6 +2531,19 @@ class TabUploadHandler {
                     : processData.error || 'Error desconocido';
                 dl.href = `/api/tabs/${k}/download`;
                 st.textContent = 'Completado';
+
+                // Fetch and render tab dashboard
+                if (processData.success) {
+                    try {
+                        const dashRes = await fetch(`/api/tabs/${k}/dashboard`);
+                        const dashData = await dashRes.json();
+                        if (dashData && dashData.metric_value !== undefined) {
+                            renderTabDashboard(k, this.container, dashData);
+                        }
+                    } catch (dashErr) {
+                        console.warn('Tab dashboard error:', dashErr);
+                    }
+                }
             }, 500);
 
         } catch (err) {

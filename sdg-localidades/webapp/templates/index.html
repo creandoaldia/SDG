@@ -6,6 +6,10 @@
     <title>SDG Localidades — Sistema de Informes PQRS</title>
     <script src="https://cdn.tailwindcss.com">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js">
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -721,44 +725,169 @@
         </div>
 
             <!-- ════════════════════════════════════════════════════════ -->
-            <!-- DASHBOARD POST-INFORME (aparece tras generar)        -->
+            <!-- DASHBOARD PREMIUM — Gráficas interactivas             -->
             <!-- ════════════════════════════════════════════════════════ -->
-            <div id="dashboardContainer" class="hidden mt-8 border-t border-gray-200 pt-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-                        <svg class="w-6 h-6 text-[#1F4E79]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        Dashboard del Informe
-                    </h3>
-                    <span id="dashboardPeriodo" class="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"></span>
-                </div>
+            <div id="dashboardContainer" class="hidden mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
 
-                <!-- Estado: Cargando -->
-                <div id="dashboardLoading" class="hidden text-center py-8">
-                    <div class="inline-block w-8 h-8 border-4 border-[#1F4E79] border-t-transparent rounded-full animate-spin mb-3"></div>
-                    <p class="text-sm text-gray-500">Cargando datos del dashboard...</p>
-                </div>
-
-                <!-- Estado: Empty (sin informe) -->
-                <div id="dashboardEmpty" class="text-center py-8">
-                    <div class="mx-auto w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
+                <!-- Loading State -->
+                <div id="dashboardLoading" class="text-center py-12">
+                    <div class="inline-flex flex-col items-center gap-3">
+                        <div class="relative w-12 h-12">
+                            <div class="absolute inset-0 border-4 border-[#1F4E79]/20 rounded-full"></div>
+                            <div class="absolute inset-0 border-4 border-transparent border-t-[#1F4E79] rounded-full animate-spin"></div>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 font-medium animate-pulse">Cargando dashboard...</p>
                     </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Genere un informe para ver el dashboard</p>
                 </div>
 
-                <!-- Estado: Data -->
+                <!-- Empty State -->
+                <div id="dashboardEmpty" class="text-center py-16">
+                    <div class="max-w-sm mx-auto">
+                        <div class="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center mb-5 shadow-inner">
+                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-1">Sin datos disponibles</h4>
+                        <p class="text-sm text-gray-400 dark:text-gray-500">Genere un informe para visualizar estadísticas y gráficas interactivas</p>
+                    </div>
+                </div>
+
+                <!-- Dashboard Data -->
                 <div id="dashboardData" class="hidden">
-                    <!-- Tarjetas de resumen -->
-                    <div id="dashboardCards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6"></div>
 
-                    <!-- Acordeones por tipo de dato -->
-                    <div id="dashboardAccordion" class="space-y-2"></div>
-                </div>
-            </div>
+                    <!-- ═══ HEADER: Period + Stats Snapshot ═══ -->
+                    <div class="dashboard-header mb-6">
+                        <div class="flex items-center justify-between flex-wrap gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="dash-header-icon">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                                        Dashboard del Informe
+                                    </h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        Resumen ejecutivo — <span id="dashboardPeriodo" class="font-semibold text-[#1F4E79] dark:text-[#6C5CE7]"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="dash-badge dash-badge-success">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                    Datos en tiempo real
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═══ METRIC CARDS ROW — Hover reveals detailed cifras ═══ -->
+                    <div id="metricCardsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+                        <!-- Generated by JS renderDashboardMetrics() -->
+                    </div>
+
+                    <!-- ═══ CHARTS ROW 1 — Bar + Doughnut ═══ -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+                        <div class="chart-card" id="chartCard-pqrs">
+                            <div class="chart-card-header">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200">Rendimiento PQRS</h4>
+                                        <p class="text-[11px] text-gray-400 dark:text-gray-500">Gestionadas vs Pendientes vs Trasladadas</p>
+                                    </div>
+                                </div>
+                                <div class="chart-legend-badge" id="pqrsTotalBadge">0 total</div>
+                            </div>
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="chartPqrs"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card" id="chartCard-distribution">
+                            <div class="chart-card-header">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200">Distribución General</h4>
+                                        <p class="text-[11px] text-gray-400 dark:text-gray-500">Volumen por categoría de servicio</p>
+                                    </div>
+                                </div>
+                                <div class="chart-legend-badge chart-legend-badge-purple" id="distTotalBadge">0 total</div>
+                            </div>
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="chartDistribution"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═══ CHARTS ROW 2 — Horizontal Bar + Satisfaction ═══ -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+                        <div class="chart-card" id="chartCard-comparativa">
+                            <div class="chart-card-header">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200">Comparativa por Servicio</h4>
+                                        <p class="text-[11px] text-gray-400 dark:text-gray-500">Volumen total de cada tipo de trámite</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="chartComparativa"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card" id="chartCard-satisfaccion">
+                            <div class="chart-card-header">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200">Satisfacción y Calidad</h4>
+                                        <p class="text-[11px] text-gray-400 dark:text-gray-500">Percepción ciudadana y tasa de respuesta</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-canvas-wrapper flex items-center justify-center">
+                                <div class="grid grid-cols-2 gap-4 w-full">
+                                    <canvas id="chartSatisfaccion" class="max-h-[160px]"></canvas>
+                                    <canvas id="chartRespuesta" class="max-h-[160px]"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═══ ACCORDION — Detail by tab type ═══ -->
+                    <div class="mt-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">Desglose detallado por servicio</span>
+                        </div>
+                        <div id="dashboardAccordion" class="space-y-2"></div>
+                    </div>
+
+                </div><!-- /dashboardData -->
+            </div><!-- /dashboardContainer -->
         </div><!-- /tab-informe -->
 
         <!-- Los templates de tabs se generan via JS en TabUploadHandler -->

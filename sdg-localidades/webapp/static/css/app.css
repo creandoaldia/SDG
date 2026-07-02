@@ -281,7 +281,305 @@ input[type="checkbox"]:checked + label {
 }
 
 /* ============================================================
-   DASHBOARD — Premium Cards
+   DASHBOARD PREMIUM — Charts, Hover Cards, Animations
+   ============================================================ */
+
+/* Dashboard Header */
+.dashboard-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+.dashboard-header:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.dash-header-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #1F4E79, #2E75B6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(31,78,121,0.25);
+}
+.dark-mode .dash-header-icon {
+    background: linear-gradient(135deg, #6C5CE7, #a29bfe);
+    box-shadow: 0 4px 12px rgba(108,92,231,0.3);
+}
+.dash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+.dash-badge-success {
+    background: rgba(16,185,129,0.1);
+    color: #059669;
+    border: 1px solid rgba(16,185,129,0.2);
+}
+.dark-mode .dash-badge-success {
+    background: rgba(16,185,129,0.15);
+    color: #34D399;
+    border-color: rgba(16,185,129,0.25);
+}
+
+/* ═══ PREMIUM METRIC CARDS — con hover overlay ═══ */
+.dash-metric-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 0.875rem;
+    padding: 1rem 1.125rem;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: default;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.dash-metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 0.875rem 0.875rem 0 0;
+    transition: height 0.3s ease;
+}
+.dash-metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.dark-mode .dash-metric-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+.dash-metric-card:hover::before {
+    height: 4px;
+}
+.dash-metric-card .metric-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.dash-metric-card .metric-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+.dash-metric-card:hover .metric-icon {
+    transform: scale(1.1);
+}
+.dash-metric-card .metric-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    transition: all 0.3s ease;
+}
+.dash-metric-card .metric-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+    font-weight: 500;
+}
+.dash-metric-card .metric-trend {
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 0.3rem;
+}
+
+/* ── HOVER OVERLAY — detalles ocultos que aparecen al hacer hover ── */
+.dash-metric-card .metric-hover-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.875rem;
+    background: var(--bg-card);
+    padding: 1rem 1.125rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+.dash-metric-card:hover .metric-hover-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+.dark-mode .dash-metric-card .metric-hover-overlay {
+    background: var(--bg-card2);
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.metric-hover-overlay .hover-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.4rem;
+}
+.metric-hover-overlay .hover-stat {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.15rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.metric-hover-overlay .hover-stat:last-child {
+    border-bottom: none;
+}
+.metric-hover-overlay .hover-stat .stat-label { color: var(--text-muted); }
+.metric-hover-overlay .hover-stat .stat-value { font-weight: 700; color: var(--text-main); }
+.metric-hover-overlay .hover-bar-container {
+    margin-top: 0.4rem;
+    height: 0.25rem;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.metric-hover-overlay .hover-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.8s ease;
+}
+
+/* ═══ CHART CARDS ═══ */
+.chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.chart-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+}
+.dark-mode .chart-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+}
+.chart-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.chart-legend-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(46,117,182,0.08);
+    color: #2E75B6;
+    border: 1px solid rgba(46,117,182,0.15);
+}
+.dark-mode .chart-legend-badge {
+    background: rgba(108,92,231,0.12);
+    color: #a29bfe;
+    border-color: rgba(108,92,231,0.2);
+}
+.chart-legend-badge-purple {
+    background: rgba(139,92,246,0.08);
+    color: #7C3AED;
+    border-color: rgba(139,92,246,0.15);
+}
+.dark-mode .chart-legend-badge-purple {
+    background: rgba(139,92,246,0.12);
+    color: #a78bfa;
+    border-color: rgba(139,92,246,0.2);
+}
+.chart-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+}
+.chart-canvas-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 220px;
+}
+
+/* ═══ ENTRANCE ANIMATIONS ═══ */
+@keyframes dashCardIn {
+    0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dashChartIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes dashCountUp {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+@keyframes dashGlowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46,117,182,0.15); }
+    50% { box-shadow: 0 0 0 8px rgba(46,117,182,0); }
+}
+.dash-card-enter {
+    animation: dashCardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+}
+.dash-chart-enter {
+    animation: dashChartIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+}
+.dash-glow-pulse {
+    animation: dashGlowPulse 2.5s ease-in-out infinite;
+}
+
+/* ═══ DARK MODE SPECIFIC ═══ */
+.dark-mode .chart-card {
+    background: var(--bg-card2);
+    border-color: var(--border);
+}
+.dark-mode .dash-metric-card {
+    background: var(--bg-card2);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 640px) {
+    .dash-metric-card .metric-value {
+        font-size: 1.3rem;
+    }
+    #metricCardsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .chart-card {
+        padding: 0.875rem;
+    }
+    .chart-canvas-wrapper {
+        min-height: 160px;
+    }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+    #metricCardsGrid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+/* ============================================================
+   DASHBOARD — Premium Cards (legacy styles preserved)
    ============================================================ */
 
 /* Metric card */
